@@ -338,8 +338,39 @@ html body .hud,html body #mini{transition:opacity .2s ease}html body:has(#menu:n
 .svRow .svS{font-size:12px;opacity:.6;min-width:70px}
 .rgBtn.off{opacity:.45;cursor:not-allowed}
 .rgBtn.off .rgMs{color:var(--tx2)!important}
+/* ---- v3 ---- */
+#cdown{top:42%!important}
+#cdown .n{font:800 68px/1 system-ui,sans-serif!important;text-shadow:0 2px 14px rgba(0,0,0,.55)}
+#menu .panel h1{padding-right:0!important}
+#menu>#meChip{position:fixed!important;top:16px!important;right:16px!important;left:auto;max-width:240px;z-index:3;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);background:rgba(12,14,18,.75)!important}
+/* finish */
+#finFx{position:fixed;left:50%;top:38%;transform:translate(-50%,-50%);z-index:45;pointer-events:none;text-align:center;color:#fff;opacity:0}
+#finFx.on{animation:finIn 4.2s ease-out forwards}
+#finFx .fP{font:900 104px/1 system-ui,sans-serif;letter-spacing:-2px;text-shadow:0 6px 30px rgba(0,0,0,.55)}
+#finFx .fP.g1{color:#ffd54a;text-shadow:0 0 34px rgba(255,200,40,.55),0 6px 30px rgba(0,0,0,.5)}
+#finFx .fP.g2{color:#dfe6ee;text-shadow:0 0 30px rgba(220,230,240,.45),0 6px 30px rgba(0,0,0,.5)}
+#finFx .fP.g3{color:#e3a06a;text-shadow:0 0 30px rgba(220,140,80,.45),0 6px 30px rgba(0,0,0,.5)}
+#finFx .fS{font:700 16px/1.2 system-ui,sans-serif;letter-spacing:6px;margin-top:6px;opacity:.9;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+#finFx .fT{font:600 15px/1.2 ui-monospace,Consolas,monospace;margin-top:6px;opacity:.75}
+@keyframes finIn{0%{opacity:0;transform:translate(-50%,-50%) scale(.55)}12%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}20%{transform:translate(-50%,-50%) scale(1)}80%{opacity:1}100%{opacity:0;transform:translate(-50%,-56%) scale(1)}}
+/* spectating */
+#specBar{position:fixed;left:50%;top:14px;transform:translateX(-50%);z-index:36;text-align:center;color:#fff;pointer-events:none;text-shadow:0 2px 10px rgba(0,0,0,.65)}
+#specBar .spT{font:800 15px/1.2 system-ui,sans-serif;letter-spacing:5px}
+#specBar .spI{font:600 13px/1.3 system-ui,sans-serif;margin-top:4px;opacity:.9;font-variant-numeric:tabular-nums}
+#specBar .spI b{font-weight:800}
+#specBar .spB{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:8px;pointer-events:auto}
+#specBar .spB button{background:rgba(25,25,25,.72);border:1px solid rgba(255,255,255,.14);color:#fff;border-radius:999px;padding:4px 12px;font:600 12px/18px system-ui,sans-serif;cursor:pointer;text-shadow:none}
+#specBar .spB button:hover{border-color:rgba(255,255,255,.4)}
+#specBar .spB button.on{background:#fff;color:#111;border-color:#fff}
+/* minecraft skin suggestion */
+.mcSug{display:flex;align-items:center;gap:12px;margin:10px 0;padding:10px 12px;border:1px solid rgba(94,159,232,.35);background:rgba(94,159,232,.1);border-radius:10px}
+.mcSug canvas{width:40px;height:40px;image-rendering:pixelated;border-radius:6px;flex:none}
+.mcSug .mcT{flex:1;font-size:13px;line-height:1.35}
+.mcSug .mcX{background:none;border:0;color:inherit;opacity:.5;cursor:pointer;font-size:16px;padding:4px}
+/* popups: match the dark glass UI */
+html body #toast{top:132px!important;transform:translateX(-50%)!important;font:600 14px/1.3 system-ui,-apple-system,'Segoe UI',sans-serif!important;letter-spacing:.01em!important;color:#e8eef5!important;background:rgba(18,20,26,.86)!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:9px 16px;box-shadow:0 8px 24px rgba(0,0,0,.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);filter:none!important;text-shadow:none!important;max-width:80vw;z-index:70}
 </style>
-<meta name="ibr-build" content="2026-10-05T13:09:06.267Z">
+<meta name="ibr-build" content="2026-10-05T13:11:49.499Z">
 <script type="application/json" id="webSite">{"tracks":"tracks/index.json","sb":{"url":"https://dbyqswlvmequszujpwaj.supabase.co","key":"sb_publishable_-Av4-QPspUOMHAUtM5Jksw_amiBfwpy"}}</script>
 </head>
 <body>
@@ -378,7 +409,7 @@ html body .hud,html body #mini{transition:opacity .2s ease}html body:has(#menu:n
     <div class="sub">Minecraft-style ice boat physics · 20 ticks/s</div>
     <button id="meChip" class="hide" aria-label="Account"></button>
     <div id="webTabs" class="hide" role="tablist"><button data-tab="tracks" class="on">Time Trial</button><button type="button" class="mpSoon" aria-disabled="true" data-tip="Coming soon">Multiplayer</button><button data-tab="wrs">WRs</button><button data-tab="acct">Account</button></div>
-    <div class="track"><b id="trackName">Frozen Loop</b><span id="trackInfo">Built-in track</span></div>
+    <div class="track"><b id="trackName">Glacier Sweep</b><span id="trackInfo">Built-in track</span></div>
     <div class="row"><button class="b primary" id="playBtn">Race</button><button type="button" class="b mpSoon" aria-disabled="true" data-tip="Coming soon">Multiplayer</button></div>
     <div class="help">Need help? Message <b>particle0325</b> on Discord <button type="button" class="b" id="dcCopy">Copy username</button></div>
     <div class="row dev"><button class="b primary" id="ddOpen" style="flex:1">🛠 Developer dashboard</button></div>
@@ -932,16 +963,17 @@ function computeLine(m) {
 
 /* ---------- built-in track ---------- */
 function buildDefaultTrack() {
-  const W = 200, H = 130, N = 1600, HW = 3.6, WW = 1.15;
+  const W = 270, H = 184, N = 2000, HW = 6.5, WW = 1.2;
   const sx = new Float32Array(N), sz = new Float32Array(N), ang = new Float32Array(N);
   for (let i = 0; i < N; i++) {
     const t = i / N * Math.PI * 2;
-    sx[i] = 100 + 76 * Math.cos(t) + 9 * Math.cos(3 * t) - 6 * Math.sin(2 * t);
-    sz[i] = 65 + 40 * Math.sin(t) - 13 * Math.sin(2 * t) + 5 * Math.cos(3 * t);
+    sx[i] = 135 + 102 * Math.cos(t) + 14 * Math.cos(3 * t) - 10 * Math.sin(2 * t);
+    sz[i] = 88 + 56 * Math.sin(t) - 11 * Math.sin(2 * t) + 5 * Math.cos(3 * t);
   }
   for (let i = 0; i < N; i++) { const a = (i + 1) % N, b = (i - 1 + N) % N; ang[i] = Math.atan2(sz[a] - sz[b], sx[a] - sx[b]); }
-  const curv = new Float32Array(N);
-  for (let i = 0; i < N; i++) curv[i] = Math.abs(wrapDegrees((ang[(i + 30) % N] - ang[(i - 30 + N) % N]) * 180 / Math.PI));
+  const curv = new Float32Array(N), sgn = new Float32Array(N);
+  for (let i = 0; i < N; i++) { const dd = wrapDegrees((ang[(i + 36) % N] - ang[(i - 36 + N) % N]) * 180 / Math.PI); curv[i] = Math.abs(dd); sgn[i] = Math.sign(dd); }
+  const side = (k, i) => { const ox = k % W + 0.5 - sx[i], oz = Math.floor(k / W) + 0.5 - sz[i]; return Math.cos(ang[i]) * oz - Math.sin(ang[i]) * ox; };
   const dist = new Float32Array(W * H).fill(99), near = new Int32Array(W * H).fill(-1);
   const R = Math.ceil(HW + WW + 1);
   for (let i = 0; i < N; i++) {
@@ -952,7 +984,7 @@ function buildDefaultTrack() {
       if (d < dist[k]) { dist[k] = d; near[k] = i; }
     }
   }
-  const m = { W, H, mat: new Uint8Array(W * H), wall: new Uint8Array(W * H), col: new Uint32Array(W * H), name: 'Frozen Loop', info: 'Built-in track · blue ice on the straights', id: 'builtin-frozen-loop-v1' };
+  const m = { W, H, mat: new Uint8Array(W * H), wall: new Uint8Array(W * H), col: new Uint32Array(W * H), name: 'Glacier Sweep', info: 'Built-in track · wide blue-ice straights, open run-off', id: 'builtin-glacier-sweep-v1' };
   m.ft = new Uint16Array(W * H); m.wt = new Uint16Array(W * H);
   const tB = tId('blue_ice', 0x6f9ff0), tI = tId('ice', 0xa9c9f4), tP = tId('packed_ice', 0x8db3ea), tSn = tId('snow_block', 0xeef2f6), tSb = tId('stone_bricks', 0x7d8188), tRc = tId('red_concrete', 0xd84a3b), tWc = tId('white_concrete', 0xf2f2f2);
   let bestI = 0, bestC = 1e9;
@@ -963,12 +995,12 @@ function buildDefaultTrack() {
       if (c < 22) { m.mat[k] = MAT_BLUE; m.col[k] = 0x6f9ff0; m.ft[k] = tB; }
       else if (c < 55) { m.mat[k] = MAT_ICE; m.col[k] = 0xa9c9f4; m.ft[k] = tI; }
       else { m.mat[k] = MAT_PACKED; m.col[k] = 0x8db3ea; m.ft[k] = tP; }
-    } else if (d < HW + WW) {
+    } else if (d < HW + WW && curv[i] >= 38 && side(k, i) * sgn[i] < 0) {
       m.wall[k] = 1; m.mat[k] = MAT_GROUND;
       m.col[k] = curv[i] >= 55 ? ((Math.floor(i / 10) & 1) ? 0xd84a3b : 0xf2f2f2) : 0x7d8188; m.wt[k] = curv[i] >= 55 ? ((Math.floor(i / 10) & 1) ? tRc : tWc) : tSb; m.ft[k] = tSn;
     } else { m.mat[k] = MAT_GROUND; m.col[k] = 0xeef2f6; m.ft[k] = tSn; }
   }
-  for (let i = 0; i < N; i++) if (curv[i] < bestC && sx[i] > 100 && sz[i] > 65) { bestC = curv[i]; bestI = i; }
+  for (let i = 0; i < N; i++) if (curv[i] < bestC && sx[i] > 135 && sz[i] > 88) { bestC = curv[i]; bestI = i; }
   const ta = ang[bestI];
   m.defaultStart = { x: sx[bestI], z: sz[bestI], yaw: Math.atan2(Math.cos(ta), -Math.sin(ta)) * 180 / Math.PI };
   // yaw from tangent (tx,tz): yaw = atan2(tx, -tz)
@@ -1284,7 +1316,7 @@ function resetRun() {
   copyState(st, makeState(s.x, s.z, s.yaw)); st.y = env.groundAt(s.x, s.z); copyState(prev, st);
   race = { racing: false, armed: false, lapStartT: 0, lapNo: 0, last: race ? race.last : null, rec: [], off0: 0, cp: 0, resp: null, done: false };
   cam.yaw = cam.pyaw = s.yaw; trailN = 0; trailI = 0; bcEnable(); paddle.ph[0] = paddle.ph[1] = 0; paddle.mv[0] = paddle.mv[1] = false;
-  toast(map.starts && map.starts.length ? 'Drive through the start region to begin' : map.start.blk ? 'Go when ready' : 'Cross the line to start', 1400);
+  
 }
 function saveTime(t, label) {
   race.last = t; netOnTime(t); const spNew = spFinish(t);
@@ -2086,11 +2118,11 @@ function panCtr() {
 }
 function draw3D(a) {
   const W = cv3.width, H = cv3.height;
-  const bx = lerp(prev.x, st.x, a), bz = lerp(prev.z, st.z, a), byaw = lerpAngle(prev.yaw, st.yaw, a), by = lerp(prev.y || 0, st.y || 0, a); boatY = by;
+  let bx = lerp(prev.x, st.x, a), bz = lerp(prev.z, st.z, a), byaw = lerpAngle(prev.yaw, st.yaw, a), by = lerp(prev.y || 0, st.y || 0, a); const SPc = specPos(); if (SPc) { bx = SPc.x; bz = SPc.z; byaw = SPc.yaw; by = SPc.y; } boatY = by;
   const bcOn = settings.camera === 'boatcam', edM = placing === 3 && ed3;
-  const cyaw = lerpAngle(cam.pyaw, cam.yaw, a);
+  const cyaw = SPc ? SPc.yaw : lerpAngle(cam.pyaw, cam.yaw, a);
   // BoatCam: first person unless looking behind (the mod switches to third-person-front for look-behind)
-  const fp = !edM && bcOn && bcCfg.perspective === 'FIRST_PERSON' && !bcHeld.lookBehind;
+  const fp = !SPc && !edM && bcOn && bcCfg.perspective === 'FIRST_PERSON' && !bcHeld.lookBehind;
   const pitchDeg = bcOn && bcCfg.fixedPitch ? bcCfg.pitch : +settings.pitch3;
   let pr = (edM ? ec.pitch : pitchDeg) * Math.PI / 180, yr = (edM ? ec.yaw : cyaw) * Math.PI / 180, cp = Math.cos(pr);
   let dx = Math.sin(yr) * cp, dy = -Math.sin(pr), dz = -Math.cos(yr) * cp;
@@ -2164,13 +2196,13 @@ function draw3D(a) {
   const ghostOff = (U) => { gl.depthMask(true); gl.disable(gl.BLEND); gl.uniform4f(U.u.uTint, 1, 1, 1, 1); };
   if (gp) { setModel(gp[0], gp[1], gp[2]); gl.uniformMatrix4fv(B.u.uM, false, modM); ghostOn(B); drawMesh(G.hull.b, G.hull.n); drawOars(B, a, true); ghostOff(B); }
   const mpPeers = MPP;
-  for (const q of mpPeers) { setModel(q.sx, q.sz, q.syaw, q.sy); gl.uniformMatrix4fv(B.u.uM, false, modM); drawMesh(G.hull.b, G.hull.n); }
+  for (const q of mpPeers) { if (SPc && q.sx === SPc.x && q.sz === SPc.z) continue; setModel(q.sx, q.sz, q.syaw, q.sy); gl.uniformMatrix4fv(B.u.uM, false, modM); drawMesh(G.hull.b, G.hull.n); }
   if (G.skin && G.defSkin && G.skinMesh) {
     const S = G.skin; gl.useProgram(S.p); gl.uniformMatrix4fv(S.u.uVP, false, vpM); gl.uniform3f(S.u.uEye, ex, ey, ez); gl.uniform3f(S.u.uFog, SKY[0], SKY[1], SKY[2]); gl.uniform2f(S.u.uFogR, fogA, fogB);
     gl.uniform4f(S.u.uTint, 1, 1, 1, 1); gl.activeTexture(gl.TEXTURE0); gl.uniform1i(S.u.uSkin, 0);
     const one = (tex, hy) => { gl.bindTexture(gl.TEXTURE_2D, tex); gl.uniformMatrix4fv(S.u.uM, false, modM); drawMesh(G.skinMesh.b, G.skinMesh.n); if (G.skinHead) { headM(hy); gl.uniformMatrix4fv(S.u.uM, false, modM); drawMesh(G.skinHead.b, G.skinHead.n); } };
-    if (!fp) { setModel(bx, bz, byaw); one(G.skinOn && G.skinTex ? G.skinTex : G.defSkin, headYaw(byaw, cyaw)); }
-    for (const q of mpPeers) { setModel(q.sx, q.sz, q.syaw, q.sy); one(G.defSkin, q.syaw + (+q.hr || 0)); }
+    if (!fp) { setModel(bx, bz, byaw); one(!SPc && G.skinOn && G.skinTex ? G.skinTex : G.defSkin, SPc ? SPc.yaw + (+SPc.q.hr || 0) : headYaw(byaw, cyaw)); }
+    for (const q of mpPeers) { if (SPc && q.sx === SPc.x && q.sz === SPc.z) continue; setModel(q.sx, q.sz, q.syaw, q.sy); one(G.defSkin, q.syaw + (+q.hr || 0)); }
     if (gp) { setModel(gp[0], gp[1], gp[2]); ghostOn(S); one(G.defSkin); ghostOff(S); }
     gl.useProgram(P.p);
   } else {
@@ -2182,7 +2214,7 @@ function draw3D(a) {
       drawMesh(G.skinMesh.b, G.skinMesh.n); if (G.skinHead) { headM(headYaw(byaw, cyaw)); gl.uniformMatrix4fv(S.u.uM, false, modM); drawMesh(G.skinHead.b, G.skinHead.n); } gl.useProgram(P.p);
     } else { gl.uniformMatrix4fv(P.u.uM, false, modM); drawMesh(G.rider.b, G.rider.n); } }
   if (gp) { setModel(gp[0], gp[1], gp[2]); gl.uniformMatrix4fv(P.u.uM, false, modM); ghostOn(P); drawMesh(G.rider.b, G.rider.n); ghostOff(P); }
-  for (const q of mpPeers) { setModel(q.sx, q.sz, q.syaw, q.sy); gl.uniformMatrix4fv(P.u.uM, false, modM); drawMesh(G.rider.b, G.rider.n); }
+  for (const q of mpPeers) { if (SPc && q.sx === SPc.x && q.sz === SPc.z) continue; setModel(q.sx, q.sz, q.syaw, q.sy); gl.uniformMatrix4fv(P.u.uM, false, modM); drawMesh(G.rider.b, G.rider.n); }
   }
   if (settings.hitbox) {
     modM.set(idM); modM[12] = bx; modM[13] = by; modM[14] = bz; gl.uniformMatrix4fv(P.u.uM, false, modM); gl.uniform4f(P.u.uTint, 1, 1, 1, 1);
@@ -3660,13 +3692,13 @@ function rcGrid(idx) {
   return { x: (g.x0 + g.x1) / 2 - f.x * 3 * row, z: (g.z0 + g.z1) / 2 - f.z * 3 * row, yaw: g.yaw };
 }
 async function rcOnPhase() {
-  const S = RACE.S, me = MP.myId(), inRace = S.ids && S.ids.includes(me);
+  const S = RACE.S, me = MP.myId(), inRace = S.ids && rcIn(S);
   if (S.ph === 'vote') { RACE.myVote = ''; RACE.freeze = false; RACE.fin = false; RACE.slot = null; }
   else if (S.ph === 'count' && inRace) {
     RACE.fin = false; RACE.freeze = true; RACE.slot = null; chatSys('lobby', 'Next race: ' + rcName(S.track) + ' · ' + S.laps + ' lap' + (S.laps === 1 ? '' : 's'));
     if (!(await rcLoad(S.track))) return; if (RACE.S !== S) return;
     try { if (typeof placing !== 'undefined' && placing) cancelPlacing(); } catch (e) {}
-    resetRun(); RACE.slot = rcGrid(S.ids.indexOf(me)); RACE.T(); if (paused) resume();
+    resetRun(); RACE.slot = rcGrid(rcIdx(S)); RACE.T(); if (paused) resume();
   }
   else if (S.ph === 'race' && inRace) { RACE.freeze = false; RACE.t0 = performance.now(); if (race) { race.racing = false; race.armed = false; race.lapNo = 0; race.cp = 0; race.done = false; race.resp = null; race.inS = undefined; race.sp = []; } RACE.lap0 = 0; if (paused) try { resume(); } catch (e) {} cdGo(); }
   else if (S.ph === 'res') { RACE.freeze = false; if (inRace && RACE.awarded !== S.seq) { RACE.awarded = S.seq; rcAward(); } }
@@ -3674,12 +3706,12 @@ async function rcOnPhase() {
 RACE.T = function () {
   const S = RACE.S; if (!S || !MP.joined || typeof st === 'undefined') return;
   if (RACE.freeze && !RACE.slot) { st.vx = st.vz = st.omega = 0; copyState(prev, st); return; }
-  if (RACE.freeze && RACE.slot) { const g = RACE.slot; copyState(st, makeState(g.x, g.z, g.yaw)); st.y = env.groundAt(g.x, g.z); copyState(prev, st); cam.yaw = cam.pyaw = g.yaw; return; }
-  if (S.ph === 'race' && !RACE.fin && race && S.ids.includes(MP.myId())) {
+  if (RACE.freeze && RACE.slot) { const g = RACE.slot; copyState(st, makeState(g.x, g.z, g.yaw)); st.y = env.groundAt(g.x, g.z); copyState(prev, st); bc.yaw = bc.previousYaw = g.yaw; bc.prevX = g.x; bc.prevZ = g.z; cam.yaw = cam.pyaw = g.yaw; return; }
+  if (S.ph === 'race' && !RACE.fin && race && rcIn(S)) {
     const laps = race.lapNo - Math.max(RACE.lap0, 1);
     if (laps >= S.laps || (map.fins && map.fins.length && race.done)) {
       RACE.fin = true; const d = { id: MP.myId(), n: (ME && ME.name) || 'Guest', ms: Math.round(performance.now() - RACE.t0) };
-      rcSend('fin', d); RACE_EV.fin(d); toast('Finished! ' + rcFmt(d.ms), 2500);
+      rcSend('fin', d); RACE_EV.fin(d); try { finFx(d.ms); } catch (e) {}
     }
   }
 };
@@ -3691,7 +3723,7 @@ function iceBal() { return +store.get(iceKey()) || 0; }
 async function rcAward() {
   let bal = iceBal() + 2;
   if (NET.online && MY_KEY) { try { const v = await sbRpc('ibr_race_reward', { p_key: MY_KEY }); if (typeof v === 'number') bal = v; } catch (e) { console.warn('reward', e); } }
-  store.set(iceKey(), bal); toast('+2 \U0001f9ca icetokens', 2200); rcUi();
+  store.set(iceKey(), bal); toast('+2 \u{1F9CA} icetokens', 2200); rcUi();
 }
 const RACE_EV = {
   hi: d => { if (d.id) RACE.mem[d.id] = { n: d.n, at: Date.now() }; },
@@ -3703,7 +3735,7 @@ const RACE_EV = {
 function rcVote(o) { RACE.myVote = o; const d = { id: MP.myId(), opt: o }; rcSend('vote', d); if (rcAmHost()) RACE_EV.vote(d); else if (RACE.S) RACE.S.votes[d.id] = o; rcUi(); }
 function rcUi() {
   const box = el('raceBox'); if (!box) return; const S = RACE.S, ice = el('rcIce');
-  if (ice) ice.textContent = '\U0001f9ca ' + iceBal() + ' icetokens · cosmetics shop coming soon';
+  if (ice) ice.textContent = '\u{1F9CA} ' + iceBal() + ' icetokens · cosmetics shop coming soon';
   if (!MP.joined) { box.classList.add('hide'); return; }
   box.classList.remove('hide');
   const left = S ? Math.max(0, Math.ceil((S.end - Date.now()) / 1000)) : 0, me = MP.myId(), n = rcMembers().length;
@@ -3713,12 +3745,12 @@ function rcUi() {
     const c = {}; for (const k in S.votes) c[S.votes[k]] = (c[S.votes[k]] || 0) + 1;
     h = '<div><b>Vote for the next track</b> · ' + left + 's · ' + S.laps + ' lap' + (S.laps === 1 ? '' : 's') + '</div><div class="rv">' + S.opts.map(o => '<button data-o="' + escH(o) + '" class="' + (RACE.myVote === o ? 'on' : '') + '">' + escH(rcName(o)) + ' (' + (c[o] || 0) + ')</button>').join('') + '</div>';
   }
-  else if (S.ph === 'count') h = '<div>' + escH(rcName(S.track)) + ' · ' + S.laps + ' lap' + (S.laps === 1 ? '' : 's') + '</div><div class="big">' + (S.ids.includes(me) ? 'Starting in ' + left : 'Race starting — you’ll join the next one') + '</div>';
+  else if (S.ph === 'count') h = '<div>' + escH(rcName(S.track)) + ' · ' + S.laps + ' lap' + (S.laps === 1 ? '' : 's') + '</div><div class="big">' + (rcIn(S) ? 'Starting in ' + left : 'Race starting — you’ll join the next one') + '</div>';
   else if (S.ph === 'race') {
     const lap = race ? Math.min(S.laps, Math.max(1, race.lapNo - Math.max(RACE.lap0, 1) + 1)) : 1;
-    h = '<div>' + escH(rcName(S.track)) + '</div><div class="big">' + (S.ids.includes(me) ? (RACE.fin ? 'Finished' : 'Lap ' + lap + '/' + S.laps + ' · ' + rcFmt(performance.now() - RACE.t0)) : 'Spectating') + '</div>' + (S.res.length ? '<div class="keys">' + S.res.map((r, i) => (i + 1) + '. ' + escH(r.n) + ' ' + rcFmt(r.ms)).join(' · ') + (S.grace ? ' · ends in ' + left + 's' : '') + '</div>' : '');
+    h = '<div>' + escH(rcName(S.track)) + '</div><div class="big">' + (rcIn(S) ? (RACE.fin ? 'Finished' : 'Lap ' + lap + '/' + S.laps + ' · ' + rcFmt(performance.now() - RACE.t0)) : 'Spectating') + '</div>' + (S.res.length ? '<div class="keys">' + S.res.map((r, i) => (i + 1) + '. ' + escH(r.n) + ' ' + rcFmt(r.ms)).join(' · ') + (S.grace ? ' · ends in ' + left + 's' : '') + '</div>' : '');
   }
-  else if (S.ph === 'res') h = '<div><b>Results — ' + escH(rcName(S.track)) + '</b></div>' + S.res.map((r, i) => '<div>' + (['\U0001f947', '\U0001f948', '\U0001f949'][i] || (i + 1) + '.') + ' ' + escH(r.n) + tagHtml(r.id) + ' · ' + rcFmt(r.ms) + '</div>').join('') + (S.res.length ? '' : '<div class="keys">Nobody finished</div>') + (S.ids.includes(me) ? '<div>+2 \U0001f9ca icetokens</div>' : '') + '<div class="keys">Next vote in ' + left + 's</div>';
+  else if (S.ph === 'res') h = '<div><b>Results — ' + escH(rcName(S.track)) + '</b></div>' + S.res.map((r, i) => '<div>' + (['\U0001f947', '\U0001f948', '\U0001f949'][i] || (i + 1) + '.') + ' ' + escH(r.n) + tagHtml(r.id) + ' · ' + rcFmt(r.ms) + '</div>').join('') + (S.res.length ? '' : '<div class="keys">Nobody finished</div>') + (rcIn(S) ? '<div>+2 \u{1F9CA} icetokens</div>' : '') + '<div class="keys">Next vote in ' + left + 's</div>';
   box.innerHTML = h;
   box.querySelectorAll('[data-o]').forEach(b => b.addEventListener('click', () => rcVote(b.dataset.o)));
 }
@@ -3823,7 +3855,7 @@ const LOBBY = { open: false, key: '', lastSeq: -1 };
 const lobbyEl = document.createElement('div'); lobbyEl.id = 'lobby'; lobbyEl.className = 'hide'; document.body.appendChild(lobbyEl);
 const cdEl = document.createElement('div'); cdEl.id = 'cdown'; document.body.appendChild(cdEl);
 function rcTrack(id) { return (RACE.tracks || []).find(t => t.id === id) || (id === '__here' ? { id, name: (map && map.name) || 'This track' } : { id, name: rcName(id) }); }
-function rcPlayerName(id) { if (id === MP.myId()) return ((ME && ME.name) || 'You') + ' (you)'; const m = RACE.mem[id] || (MP.peers && MP.peers[id]) || {}; return m.n || m.name || 'Guest'; }
+function rcPlayerName(id) { if (rcSame(id)) return ((ME && ME.name) || 'You') + ' (you)'; const m = RACE.mem[id] || (MP.peers && MP.peers[id]) || {}; return m.n || m.name || 'Guest'; }
 function lobbyUi() {
   const S = RACE.S, me = MP.myId ? MP.myId() : '';
   if (S && S.ph === 'vote' && S.seq !== LOBBY.lastSeq) { LOBBY.lastSeq = S.seq; if (MP.ws) LOBBY.open = true; }
@@ -3858,12 +3890,12 @@ lobbyEl.addEventListener('pointerdown', e => {
 let cdLast = '';
 function cdSet(html, key) { if (key === cdLast) return; cdLast = key; cdEl.innerHTML = html; }
 let cdGoT = 0;
-function cdGo() { cdGoT = performance.now(); cdSet('<div class="n go pop">GO</div>', 'go'); }
+function cdGo() { cdGoT = 0; cdSet('', ''); }
 setInterval(() => {
   try {
-    const S = RACE.S, me = MP.myId(), inR = MP.joined && S && S.ids && S.ids.includes(me);
+    const S = RACE.S, me = MP.myId(), inR = MP.joined && S && S.ids && rcIn(S);
     if (inR && S.ph === 'count') { const left = (S.end - rcNow()) / 1000;
-      if (left > 5) cdSet('<div class="s pop">ON THE GRID</div><div class="s" style="font-size:15px;opacity:.7;margin-top:8px">' + escH(rcTrack(S.track).name || '') + ' · ' + (S.laps || 1) + ' laps</div>', 'grid' + S.seq);
+      if (left > 5) cdSet('', 'grid' + S.seq);
       else { const n = Math.max(1, Math.ceil(left)); cdSet('<div class="n pop">' + n + '</div>', 'n' + n + S.seq); } }
     else if (performance.now() - cdGoT < 800) {} else cdSet('', '');
     lobbyTimer();
@@ -3871,7 +3903,7 @@ setInterval(() => {
 }, 100);
 rcUi = function () {
   const box = el('raceBox'); if (!box) return; try { const ic = el('rcIce'); if (ic) ic.textContent = '🧊 ' + iceBal() + ' icetokens · cosmetics shop coming soon'; } catch (e) {}
-  const S = RACE.S, me = MP.myId(), inR = S && S.ids && S.ids.includes(me);
+  const S = RACE.S, me = MP.myId(), inR = S && S.ids && rcIn(S);
   if (!MP.joined || !S || (S.ph !== 'count' && S.ph !== 'race')) { box.classList.add('hide'); lobbyUi(); return; }
   const tn = escH(rcTrack(S.track).name || '');
   let h = '<b>' + tn + '</b> · ' + (S.laps || 1) + ' laps';
@@ -4091,8 +4123,8 @@ const SBD = { h: {}, best: 0, fl: { id: null, ms: 0 }, flT: 0, t0: 0, myP: -1, m
 function sbN() { return ((map && map.cps) || []).length + 1; }
 function sbLap() { return race ? Math.max(1, (race.lapNo || 0) - Math.max(RACE.lap0 || 0, 1) + 1) : 1; }
 function sbMine() {
-  const S = RACE.S, me = MP.myId();
-  if (!MP.joined || !S || S.ph !== 'race' || !S.ids || !S.ids.includes(me) || !race || !RACE.t0) return null;
+  const S = RACE.S, me = rcMe(S);
+  if (!MP.joined || !S || S.ph !== 'race' || !S.ids || !rcIn(S) || !race || !RACE.t0) return null;
   const n = sbN(); const p = RACE.fin ? (S.laps || 1) * n : (race.racing ? (sbLap() - 1) * n + (race.cp || 0) : 0);
   if (p !== SBD.myP) { SBD.myP = p; SBD.myAt = Math.round(performance.now() - RACE.t0); const H = SBD.h[me] || (SBD.h[me] = {}); if (H[p] == null) H[p] = SBD.myAt; }
   return [p, SBD.myAt];
@@ -4100,7 +4132,7 @@ function sbMine() {
 function sbEl() { let b = el('sboard'); if (!b) { b = document.createElement('div'); b.id = 'sboard'; b.className = 'hide'; document.body.appendChild(b); } return b; }
 function sbName(id) { return String(rcPlayerName(id) || 'Guest').replace(/ \(you\)$/, ''); }
 function sbStand() {
-  const S = RACE.S, ids = (S && S.ids) || [], n = sbN(), me = MP.myId();
+  const S = RACE.S, ids = (S && S.ids) || [], n = sbN(), me = rcMe(S);
   const rows = ids.map((id, o) => { const H = SBD.h[id] || {}; let p = 0, t = 0; for (const k in H) if (+k > p || (+k === p && !t)) { p = +k; t = H[k]; }
     const q = (MP.peers || {})[id] || {}; return { id, o, p, t, fl: id === me ? SBD.best : (+q.fl || 0), fin: p >= (S.laps || 1) * n }; });
   rows.sort((a, b) => b.p - a.p || a.t - b.t || a.o - b.o);
@@ -4111,13 +4143,13 @@ function sbStand() {
   return rows;
 }
 function sbUi() {
-  const S = RACE.S, me = MP.myId(), line = el('rcLine'), bd = sbEl();
+  const S = RACE.S, me = rcMe(S), line = el('rcLine'), bd = sbEl();
   const on = MP.joined && S && (S.ph === 'count' || S.ph === 'race');
   if (!on) { if (line) line.classList.add('hide'); bd.classList.add('hide'); return; }
-  const inR = S.ids && S.ids.includes(me), tn = escH(rcName(S.track) || ''), laps = S.laps || 1, n = sbN();
+  const inR = S.ids && rcIn(S), tn = escH(rcName(S.track) || ''), laps = S.laps || 1, n = sbN();
   const rows = sbStand(), myPos = rows.findIndex(x => x.id === me) + 1;
   let L;
-  if (!inR) L = '<b>SPECTATING</b> · ' + tn;
+  if (!inR) L = '<b>' + tn + '</b>';
   else if (S.ph === 'count') L = '<b>ON THE GRID</b> · ' + tn + ' · ' + laps + ' lap' + (laps === 1 ? '' : 's');
   else L = '<b>' + (RACE.fin ? 'FINISHED' : 'LAP ' + Math.min(laps, sbLap()) + '/' + laps) + '</b> · P' + myPos + '/' + rows.length + ' · ' + tn;
   if (line && L !== SBD.line) { SBD.line = L; line.innerHTML = L; } if (line) line.classList.remove('hide');
@@ -4146,6 +4178,123 @@ rcUi = function () {
   try { const ic = el('rcIce'); if (ic) ic.textContent = '🧊 ' + iceBal() + ' icetokens · cosmetics shop coming soon'; } catch (e) {}
   const b = el('raceBox'); if (b) b.classList.add('hide'); lobbyUi(); try { sbUi(); } catch (e) {}
 };
+
+// ==================== v3 additions ====================
+// ---- robust "is this me" (id can change between guest id and account id) ----
+function rcMyIds() { return [MP.myId(), MP.id, ME && ME.id].filter(x => x != null && x !== '').map(String); }
+function rcSame(id) { return id != null && rcMyIds().includes(String(id)); }
+function rcMe(S) { const ids = (S && S.ids) || []; for (const x of ids) if (rcSame(x)) return x; return MP.myId(); }
+function rcIn(S) { return !!(S && S.ids && S.ids.some(rcSame)); }
+function rcIdx(S) { return S && S.ids ? S.ids.findIndex(rcSame) : -1; }
+
+// ---- finish animation ----
+function finFx(ms) {
+  let e = el('finFx'); if (!e) { e = document.createElement('div'); e.id = 'finFx'; document.body.appendChild(e); }
+  const S = RACE.S || {}; let pos = (S.res || []).findIndex(r => rcSame(r.id)) + 1;
+  if (!pos) { try { pos = sbStand().findIndex(r => rcSame(r.id)) + 1; } catch (er) {} }
+  if (!pos) pos = 1;
+  e.innerHTML = '<div class="fP' + (pos <= 3 ? ' g' + pos : '') + '">P' + pos + '</div><div class="fS">FINISHED</div><div class="fT">' + rcFmt(ms) + '</div>';
+  e.classList.remove('on'); void e.offsetWidth; e.classList.add('on');
+}
+
+// ---- spectating ----
+const SPEC = { id: null, seq: -1, key: '' };
+function specOn() { const S = RACE.S; return !!(MP.joined && S && (S.ph === 'count' || S.ph === 'race') && !rcIn(S)); }
+function specPos() {
+  try {
+    if (!specOn()) return null; const ids = RACE.S.ids || [];
+    if (!ids.includes(SPEC.id) || !MP.peers[SPEC.id]) SPEC.id = ids.find(i => MP.peers[i] && MP.peers[i].sx != null) || null;
+    const q = SPEC.id && MP.peers[SPEC.id]; if (!q || q.sx == null) return null;
+    return { x: q.sx, z: q.sz, yaw: q.syaw, y: q.sy || 0, q };
+  } catch (e) { return null; }
+}
+function specUi() {
+  let b = el('specBar'); if (!b) { b = document.createElement('div'); b.id = 'specBar'; b.className = 'hide'; b.innerHTML = '<div class="spT">SPECTATING RACE</div><div class="spI"></div><div class="spB"></div>'; document.body.appendChild(b);
+    b.querySelector('.spB').addEventListener('click', e => { const t = e.target.closest('button[data-id]'); if (t) { SPEC.id = t.dataset.id; SPEC.key = ''; } }); }
+  if (!specOn()) { b.classList.add('hide'); return; }
+  const S = RACE.S;
+  if (S.ph === 'race' && SPEC.seq !== S.seq) { SPEC.seq = S.seq; RACE.t0 = performance.now(); }
+  specPos();
+  const ids = S.ids || [], key = ids.join(',') + '|' + SPEC.id + '|' + ids.map(sbName).join(',');
+  if (key !== SPEC.key) { SPEC.key = key; b.querySelector('.spB').innerHTML = ids.map(id => '<button type="button" data-id="' + escH(id) + '" class="' + (id === SPEC.id ? 'on' : '') + '">' + escH(sbName(id)) + '</button>').join(''); }
+  let info;
+  if (S.ph === 'count') info = '<b>' + escH(rcName(S.track) || '') + '</b> · starting in ' + Math.max(0, Math.ceil((S.end - rcNow()) / 1000)) + 's';
+  else {
+    const rows = sbStand(), i = rows.findIndex(r => r.id === SPEC.id), r = rows[i], n = sbN(), laps = S.laps || 1;
+    const tm = RACE.t0 ? rcFmt(performance.now() - RACE.t0) : '–';
+    info = SPEC.id ? '<b>' + escH(sbName(SPEC.id)) + '</b>' + (r ? ' · P' + (i + 1) + (r.fin ? ' · Finished' : ' · Lap ' + Math.min(laps, Math.floor(r.p / n) + 1) + '/' + laps) : '') + ' · ' + tm : 'Waiting for racers… · ' + tm;
+  }
+  const I = b.querySelector('.spI'); if (I.innerHTML !== info) I.innerHTML = info;
+  b.classList.remove('hide');
+}
+setInterval(() => { try { specUi(); } catch (e) {} }, 100);
+
+// ---- account chip: top right of the menu screen ----
+try { el('menu').appendChild(el('meChip')); } catch (e) {}
+
+// ---- Minecraft skin suggestion ----
+const MC = { cache: {}, busy: '' };
+async function mcLookup(name) {
+  if (name in MC.cache) return MC.cache[name];
+  let res = null;
+  try {
+    const r = await fetch('https://api.ashcon.app/mojang/v2/user/' + encodeURIComponent(name), { cache: 'force-cache' });
+    if (r.ok) { const j = await r.json(); const d = j && j.textures && j.textures.skin && j.textures.skin.data;
+      if (d) res = { name: j.username || name, blob: await (await fetch('data:image/png;base64,' + d)).blob() }; }
+  } catch (e) {}
+  if (!res) try {
+    const r = await fetch('https://playerdb.co/api/player/minecraft/' + encodeURIComponent(name));
+    if (r.ok) { const j = await r.json(); const p = j && j.success && j.data && j.data.player;
+      if (p && p.id) { const s = await fetch('https://mc-heads.net/skin/' + p.id); if (s.ok) res = { name: p.username || name, blob: await s.blob() }; } }
+  } catch (e) {}
+  MC.cache[name] = res; return res;
+}
+async function mcSuggest() {
+  const box = el('acctIn'); if (!box) return; let c = el('mcSug');
+  const hide = () => { if (c) c.remove(); };
+  if (!ME || !ME.name || !/^[A-Za-z0-9_]{3,16}$/.test(ME.name)) return hide();
+  const nm = ME.name, lk = nm.toLowerCase();
+  if (store.get('mcNo:' + lk) || store.get('mcUsed:' + ME.id) === lk) return hide();
+  if (MC.busy === lk) return; MC.busy = lk;
+  const r = await mcLookup(lk); MC.busy = '';
+  if (!r || !ME || ME.name.toLowerCase() !== lk) return hide();
+  if (!c) { c = document.createElement('div'); c.id = 'mcSug'; c.className = 'mcSug'; const mb = box.querySelector('.mebox'); mb.parentNode.insertBefore(c, mb.nextSibling); }
+  c.innerHTML = '<canvas width="8" height="8"></canvas><div class="mcT"><b>Use your Minecraft skin?</b><br><span class="keys">“' + escH(r.name) + '” is a Minecraft account — we can use its skin for your rider.</span></div><button class="b primary" id="mcUse">Use skin</button><button class="mcX" id="mcNo" title="Dismiss">✕</button>';
+  try { const u = URL.createObjectURL(r.blob), im = new Image(); im.src = u; await im.decode(); const x = c.querySelector('canvas').getContext('2d'); x.imageSmoothingEnabled = false; x.drawImage(im, 8, 8, 8, 8, 0, 0, 8, 8); x.drawImage(im, 40, 8, 8, 8, 0, 0, 8, 8); URL.revokeObjectURL(u); } catch (e) {}
+  el('mcNo').onclick = () => { store.set('mcNo:' + lk, 1); hide(); };
+  el('mcUse').onclick = async () => {
+    try { acStat('Saving skin…'); const f = new File([r.blob], 'skin.png', { type: 'image/png' });
+      const face = await skinFace(f), full = await skinFull(f); if (full) store.set('skin:' + ME.id, full);
+      store.set('mcUsed:' + ME.id, lk); setMe(await NET.update(MY_KEY, ME.name, face), MY_KEY); acStat('✓ Minecraft skin applied', 'ok'); hide();
+    } catch (err) { acStat(err.message, 'err'); }
+  };
+}
+{ const _st = setTab; setTab = function (t) { const r = _st.apply(this, arguments); if (t === 'acct') mcSuggest(); return r; }; }
+{ const _rm = renderMe; renderMe = function () { _rm(); try { if (!el('acctSec').classList.contains('hide')) mcSuggest(); } catch (e) {} }; }
+
+// ---- checkpoint delta: total (cumulative) time vs best run, stays on screen ----
+function dltClear() { const e = el('dlt'); if (!e) return; e.className = ''; e.textContent = ''; e.parentElement.classList.remove('hasD'); }
+function dltShow(d) {
+  const e = el('dlt'); if (!e || d == null || !isFinite(d)) return; clearTimeout(dltTmr);
+  const a = Math.abs(d), z = a < 0.0005;
+  e.className = 'on ' + (z ? 'y' : d > 0 ? 'r' : 'g'); e.textContent = (z ? '=' : d > 0 ? '+' : '-') + a.toFixed(3);
+  e.parentElement.classList.add('hasD');
+}
+function dltSec(t) { const e = el('dlt'); if (!e) return; clearTimeout(dltTmr); e.className = 'on n'; e.textContent = fmtT(t); e.parentElement.classList.add('hasD'); }
+function cpSplit(i, t) {
+  if (!race) return; const sp = race.sp = race.sp || []; sp[i] = t;
+  const b = spBest()[i]; if (b != null) dltShow(t - b); else dltSec(t);
+  try { sbMine(); } catch (e) {}
+}
+function spFinish(t) {
+  const n = (map.cps || []).length, sp = ((race && race.sp) || []).slice(); sp[n] = t;
+  const b = spBest()[n] != null ? spBest()[n] : best && best.t; if (b != null) dltShow(t - b); else dltSec(t);
+  if (race) race.sp = [];
+  try { if (MP.joined && RACE.S && RACE.S.ph === 'race') { const ms = Math.round(t * 1000); if (!SBD.best || ms < SBD.best) SBD.best = ms; } } catch (e) {}
+  setTimeout(() => { try { sbMine(); } catch (e) {} }, 0);
+  return sp;
+}
+{ const _rr = resetRun; resetRun = function () { const r = _rr.apply(this, arguments); dltClear(); return r; }; }
 
 // ---------- chat: lobby / track / whole-game, filtered ----------
 const CHAT = { log: { lobby: [], track: [], global: [] }, tab: 'lobby', feed: [], open: false, g: null, gTopic: 'realtime:ibr-global' };
