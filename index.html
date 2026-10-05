@@ -182,8 +182,126 @@ html body #menu .b.primary{background:linear-gradient(135deg,#7dd3fc 0%,#a5b4fc 
 html body #menu .b.primary:hover:not(:disabled){background:linear-gradient(135deg,#7dd3fc 0%,#a5b4fc 100%);filter:brightness(1.08);box-shadow:0 10px 30px rgba(125,211,252,.38)}
 html body #menu .panel>*{position:relative}
 html body .hud,html body #mini{transition:opacity .2s ease}html body:has(#menu:not(.hide)) .hud,html body:has(#menu:not(.hide)) #mini{opacity:0}
+
+/* ===== v-next: timer delta, regions, lobby, countdown, dev dashboard ===== */
+#hudL .box{position:relative}
+#hudL .box.hasD{border-top-right-radius:0;border-bottom-right-radius:0}
+#dlt{position:absolute;left:100%;top:-1px;bottom:-1px;display:none;align-items:center;padding:0 12px;border-radius:0 10px 10px 0;color:#fff;font:700 15px/1 ui-monospace,Consolas,monospace;letter-spacing:.3px;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+#dlt.on{display:flex;animation:dltIn .14s ease-out}
+#dlt.r{background:#d63c3c}#dlt.y{background:#c99a12}#dlt.g{background:#22a35a}
+@keyframes dltIn{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:none}}
+#time{font-variant-numeric:tabular-nums}
+
+#rgGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:4px 0 8px}
+.rgBtn{display:flex;flex-direction:column;align-items:center;gap:4px;padding:14px 6px 11px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:inherit;font:inherit;cursor:pointer;transition:background .15s,border-color .15s,transform .1s}
+.rgBtn:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.3)}
+.rgBtn:active{transform:scale(.97)}
+.rgBtn.on{border-color:#5aa9ff;background:rgba(90,169,255,.18)}
+.rgT{font-size:15px;white-space:nowrap}.rgT b{font-weight:800;letter-spacing:.5px}
+.rgMs{font-weight:600;opacity:.75;font-variant-numeric:tabular-nums}
+.rgMs.good{color:#5fd68a;opacity:1}.rgMs.mid{color:#f1c44d;opacity:1}.rgMs.bad{color:#ff7676;opacity:1}
+.rgN{font-size:11px;opacity:.6}
+
+.tag.ti{position:relative;justify-content:center;min-width:16px;padding:1px 4px;cursor:default}
+.tag.ti:hover::after{content:attr(data-tag);position:absolute;left:50%;bottom:calc(100% + 5px);transform:translateX(-50%);background:#000;color:#fff;padding:4px 8px;border-radius:6px;font:600 11px/1.2 system-ui,sans-serif;white-space:nowrap;z-index:99;pointer-events:none;box-shadow:0 4px 12px rgba(0,0,0,.4)}
+
+#lobby{position:fixed;inset:0;z-index:45;display:flex;align-items:center;justify-content:center;background:rgba(8,12,20,.72);backdrop-filter:blur(6px);color:#fff;font-family:inherit}
+#lobby.hide{display:none}
+.lbWin{width:min(860px,94vw);max-height:92vh;overflow:auto;background:#151a22;border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:20px 22px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.lbTop{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.lbReg{font-size:18px;font-weight:800}.lbSub{font-size:12px;opacity:.6}
+.lbTimer{font:800 20px/1 ui-monospace,Consolas,monospace;background:rgba(255,255,255,.08);padding:8px 12px;border-radius:10px;font-variant-numeric:tabular-nums}
+.lbBtn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:#fff;border-radius:9px;padding:8px 12px;font:600 13px inherit;font-family:inherit;cursor:pointer}
+.lbBtn:hover{background:rgba(255,255,255,.16)}
+#lobby h2{margin:4px 0 12px;font-size:16px;font-weight:700;opacity:.9}
+.vcGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:640px){.vcGrid{grid-template-columns:1fr}}
+.vc{position:relative;display:flex;flex-direction:column;text-align:left;padding:0;border-radius:14px;overflow:hidden;border:2px solid rgba(255,255,255,.1);background:#1d2430;color:#fff;font:inherit;cursor:pointer;transition:transform .12s,border-color .15s,box-shadow .15s}
+.vc:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.3)}
+.vc.on{border-color:#5aa9ff;box-shadow:0 0 0 3px rgba(90,169,255,.35),0 10px 30px rgba(0,0,0,.4)}
+.vc .thumb{aspect-ratio:16/9;width:100%;border-radius:0}
+.vc b{display:block;font-size:15px;font-weight:800;padding:10px 12px 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vc small{display:block;padding:0 12px 12px;font-size:12px;opacity:.65}
+.vc .vn{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.65);padding:3px 9px;border-radius:999px;font:700 12px inherit;font-family:inherit}
+.vc .chk{position:absolute;top:8px;left:8px;background:#5aa9ff;color:#fff;padding:3px 9px;border-radius:999px;font:700 12px inherit;font-family:inherit}
+.thumb{position:relative;display:flex;align-items:center;justify-content:center;background-size:cover;background-position:center;border-radius:8px;color:rgba(255,255,255,.9);font-weight:900;font-size:28px;text-shadow:0 2px 8px rgba(0,0,0,.4);overflow:hidden;flex:none}
+.thumb.sm{width:72px;height:40px;font-size:15px}.thumb.xs{width:48px;height:27px;font-size:11px;border-radius:5px}
+.lbPl{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.lbPl span.p{background:rgba(255,255,255,.07);padding:4px 10px;border-radius:999px;font-size:12px}
+.lbWait{padding:30px 10px;text-align:center;opacity:.8}
+.lbRes{display:flex;flex-direction:column;gap:6px}
+.lbRes div{display:flex;gap:10px;padding:8px 12px;border-radius:9px;background:rgba(255,255,255,.05);font-variant-numeric:tabular-nums}
+.lbRes div:first-child{background:rgba(255,200,40,.15)}
+
+#cdown{position:fixed;left:50%;top:38%;transform:translate(-50%,-50%);z-index:44;pointer-events:none;text-align:center;color:#fff;text-shadow:0 4px 24px rgba(0,0,0,.6)}
+#cdown .n{font:900 140px/1 system-ui,sans-serif}
+#cdown .s{font:800 22px/1.2 system-ui,sans-serif;letter-spacing:3px;opacity:.9}
+#cdown .pop{animation:cdPop .35s ease-out}
+#cdown .go{color:#5fd68a}
+@keyframes cdPop{from{transform:scale(1.6);opacity:0}to{transform:scale(1);opacity:1}}
+
+#devDash{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;background:rgba(5,8,14,.6);backdrop-filter:blur(5px);color:#e9edf3;font-family:inherit}
+#devDash.hide{display:none!important}
+#devDash .ddWin{display:flex;width:min(1180px,96vw);height:min(820px,92vh);background:#12161d;border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.55)}
+#devDash .ddSide{display:flex;flex-direction:column;gap:2px;width:220px;flex:none;padding:16px 10px;background:#0d1015;border-right:1px solid rgba(255,255,255,.06)}
+#devDash .ddBrand{font-weight:800;font-size:16px;padding:4px 10px 14px}
+#devDash .ddPill{font-size:10px;background:#5aa9ff;color:#fff;padding:2px 6px;border-radius:5px;vertical-align:middle;margin-left:4px}
+#devDash .ddSide button{display:flex;align-items:center;gap:9px;text-align:left;background:none;border:0;color:#b8c0cc;padding:9px 10px;border-radius:8px;font:600 13px inherit;font-family:inherit;cursor:pointer}
+#devDash .ddSide button span{width:20px;text-align:center}
+#devDash .ddSide button:hover{background:rgba(255,255,255,.05);color:#fff}
+#devDash .ddSide button.on{background:rgba(90,169,255,.16);color:#fff}
+#devDash .ddMain{flex:1;min-width:0;overflow:auto;padding:22px 26px 60px;position:relative}
+#devDash .ddPane{display:none}#devDash .ddPane.on{display:block}
+#devDash header h2{margin:0;font-size:20px;font-weight:800}
+#devDash header p{margin:4px 0 16px;font-size:13px;opacity:.6}
+#devDash .ddGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-bottom:14px}
+#devDash .ddCard{background:#181d26;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:14px 16px;margin-bottom:14px}
+#devDash .ddGrid .ddCard{margin-bottom:0}
+#devDash .ddCard h3{margin:0 0 10px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;opacity:.75}
+#devDash .ddBar,#devDash .ddBtns{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+#devDash .ddBtns{margin:12px 0 0}
+#devDash .field{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:7px 0;font-size:13px}
+#devDash .field.col{flex-direction:column;align-items:stretch}
+#devDash .field label{opacity:.8}
+#devDash .row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:7px 0}
+#devDash input[type=text],#devDash input[type=password],#devDash input[type=number],#devDash select,#devDash textarea{background:#0f131a;color:#e9edf3;border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:7px 9px;font:inherit;font-size:13px;outline:none}
+#devDash input:focus,#devDash select:focus,#devDash textarea:focus{border-color:#5aa9ff}
+#devDash .field input[type=text],#devDash .field input[type=password]{width:220px}
+#devDash .b{background:#232a36;color:#e9edf3;border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 13px;font:600 13px inherit;font-family:inherit;cursor:pointer;transition:background .12s}
+#devDash .b:hover{background:#2c3544}
+#devDash .b.primary{background:#2f7de1;border-color:#2f7de1;color:#fff}#devDash .b.primary:hover{background:#3b8cf2}
+#devDash .b.danger{background:rgba(220,60,60,.15);border-color:rgba(220,60,60,.4);color:#ff8f8f}
+#devDash .keys{font-size:12px;opacity:.65}
+#devDash .ddStat{position:sticky;bottom:-60px;margin:10px -26px -60px;padding:10px 26px;background:#0d1015;border-top:1px solid rgba(255,255,255,.06);opacity:1;color:#b8c0cc;min-height:16px}
+#devDash .ddStat:empty{display:none}
+#devDash .admList{display:flex;flex-direction:column;gap:8px}
+#devDash .adm{background:#181d26;border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:10px 12px}
+#devDash .ck{margin-top:6px}
+.rcList{display:flex;flex-direction:column;gap:6px}
+.rcRow{display:flex;align-items:center;gap:12px;padding:8px 10px;border-radius:10px;background:#12161d;border:1px solid rgba(255,255,255,.06);opacity:.6;transition:opacity .15s}
+.rcRow.in{opacity:1;border-color:rgba(90,169,255,.35)}
+.rcRow input[type=checkbox]{width:17px;height:17px;accent-color:#2f7de1}
+.rcN{flex:1;min-width:0}.rcN b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rcN small{font-size:11px;opacity:.6}
+.rcL{font-size:12px;opacity:.85;display:flex;align-items:center;gap:6px}
+.rcL input{width:58px}
+.tkCombo{position:relative;flex:1;min-width:0}
+.tkCombo input{width:100%;box-sizing:border-box;font-size:14px!important;padding:10px 12px!important}
+#tkDrop{position:absolute;left:0;right:0;top:calc(100% + 4px);max-height:320px;overflow:auto;background:#0f131a;border:1px solid rgba(255,255,255,.14);border-radius:10px;z-index:5;box-shadow:0 12px 30px rgba(0,0,0,.5);padding:4px}
+#tkDrop.hide{display:none}
+#tkDrop button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;color:#e9edf3;padding:7px 8px;border-radius:7px;cursor:pointer;font:inherit}
+#tkDrop button:hover,#tkDrop button.on{background:rgba(90,169,255,.16)}
+#tkDrop b{display:block;font-size:13px}#tkDrop small{font-size:11px;opacity:.55}
+.tkHead{display:flex;gap:14px;align-items:flex-start}
+#tkImg .thumb{width:160px;height:90px}
+.tkTitle{font-size:18px;font-weight:800}
+.tmRow{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:8px;background:#12161d}
+.tmRow .rk{width:24px;opacity:.6;font-weight:700}
+.tmRow .tmIn{width:96px;font-family:ui-monospace,Consolas,monospace}
+#devDash .tkCombo{flex:1 1 auto;min-width:0}
+#devDash .tkCombo input{width:100%!important;display:block}
+#devDash #tkReload{flex:none;width:auto;padding:9px 13px}
 </style>
-<meta name="ibr-build" content="2026-10-05T11:35:08.470Z">
+<meta name="ibr-build" content="2026-10-05T12:40:17.383Z">
 <script type="application/json" id="webSite">{"tracks":"tracks/index.json","sb":{"url":"https://dbyqswlvmequszujpwaj.supabase.co","key":"sb_publishable_-Av4-QPspUOMHAUtM5Jksw_amiBfwpy"}}</script>
 </head>
 <body>
@@ -195,7 +313,7 @@ html body .hud,html body #mini{transition:opacity .2s ease}html body:has(#menu:n
   <button id="resetBtn" aria-label="Reset to start" title="Reset to start (R)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"></path><path d="M3 4v5h5"></path></svg></button>
   <div class="box">
     <div class="lbl" id="lapLbl">Lap –</div>
-    <div id="time">0:00.00</div>
+    <div id="time">0.000</div><div id="dlt" aria-live="polite"></div>
     <div id="times">Last –:–– · Best –:––</div>
   </div>
 </div>
@@ -224,16 +342,14 @@ html body .hud,html body #mini{transition:opacity .2s ease}html body:has(#menu:n
     <div class="track"><b id="trackName">Frozen Loop</b><span id="trackInfo">Built-in track</span></div>
     <div class="row"><button class="b primary" id="playBtn">Race</button><button type="button" class="b mpSoon" aria-disabled="true" data-tip="Coming soon">Multiplayer</button></div>
     <div class="help">Need help? Message <b>particle0325</b> on Discord <button type="button" class="b" id="dcCopy">Copy username</button></div>
-    <div class="row dev">
-      <button class="b" id="importBtn">Import .litematic</button>
-      <button class="b" id="defaultBtn">Built-in track</button>
-    </div>
+    <div class="row dev"><button class="b primary" id="ddOpen" style="flex:1">🛠 Developer dashboard</button></div>
     <input type="file" id="file" accept=".litematic" class="hide">
     <div id="status"></div>
     <div class="sec hide" id="webSec"><h2>Time Trial</h2><div id="webList" class="tlist"></div></div>
     <div class="sec hide" id="mpSec"><h2>Multiplayer <span class="pill">TESTERS</span></h2>
-      <div class="field"><label for="mpPRegion">Server region</label><select id="mpPRegion"><option value="eu">🇪🇺 EU</option><option value="us">🇺🇸 NA</option><option value="asia">🌏 ASIA</option></select></div>
-      <div class="row"><button class="b primary" id="mpPConn">Join</button></div>
+      <div id="rgGrid"><button type="button" class="rgBtn" data-r="eu"><span class="rgT"><b>EU</b> <span class="rgMs">[0ms]</span></span><small class="rgN">0 active</small></button><button type="button" class="rgBtn" data-r="us"><span class="rgT"><b>NA</b> <span class="rgMs">[0ms]</span></span><small class="rgN">0 active</small></button><button type="button" class="rgBtn" data-r="asia"><span class="rgT"><b>ASIA</b> <span class="rgMs">[0ms]</span></span><small class="rgN">0 active</small></button></div>
+      <div class="row hide" id="rgLeaveRow"><button class="b" id="mpPConn">Leave lobby</button><button class="b" id="rgShow">Open lobby</button></div>
+      <div class="row dev" style="margin-top:6px"><button class="b" id="mpBack">← Back</button></div>
       <div class="keys" id="mpPStat" style="margin:6px 0">Join a lobby to race: everyone votes on 3 tracks, then races. Finishing a race earns 2 🧊 icetokens.</div>
       <div id="mpPList" class="admList"></div>
       <div class="keys" id="rcIce" style="margin-top:6px"></div>
@@ -273,76 +389,143 @@ html body .hud,html body #mini{transition:opacity .2s ease}html body:has(#menu:n
       <div class="keys" id="acMode"></div>
     </div>
 
-    <div class="sec hide dev" id="litSec">
-      <h2>Track import</h2>
-      <div class="field"><label for="floorSel">Floor layer</label><select id="floorSel"></select></div>
-      <div class="field"><label for="gapChk">Gaps act as walls</label><input type="checkbox" id="gapChk" checked=""></div>
-    </div>
-    <div class="row" style="margin-top:8px"><button class="b dev" id="startBtn">Set start line</button></div>
-    <div class="sec dev" id="edSec">
-      <h2>Track editor <span class="pill">DEV</span></h2>
-      <div class="row"><button class="b" id="regBtn">Edit regions</button><button class="b primary" id="pubBtn">Publish track</button></div>
-      <div class="keys" id="regStat" style="margin:4px 0 6px"></div>
-      <div class="field"><label for="pubName">Published track name</label><input type="text" id="pubName"></div>
-      <h2 style="margin-top:10px">GitHub auto-publish</h2>
-      <div class="field"><label for="ghWeb">Play site repo → /play</label><input type="text" id="ghWeb" placeholder="IBRonline/play" spellcheck="false"></div>
-      <div class="field"><label for="ghDev">Dev site repo → /dev (locked)</label><input type="text" id="ghDev" placeholder="IBRonline/dev" spellcheck="false"></div>
-      <div class="field"><label for="ghSrc">Source backup (private)</label><input type="text" id="ghSrc" placeholder="IBRonline/IBR-Dev" spellcheck="false"></div>
-      <div class="field"><label for="ghCode">Dev access code</label><input type="password" id="ghCode" autocomplete="new-password" placeholder="6+ characters"></div>
-      <div class="field"><label for="ghTok">Access token</label><input type="password" id="ghTok" placeholder="github_pat_…" autocomplete="off"></div>
-      <div class="field"><label for="sbUrl">Accounts server URL (Supabase)</label><input type="text" id="sbUrl" placeholder="https://xxxx.supabase.co" spellcheck="false"></div>
-      <div class="field"><label for="sbKey">Accounts publishable key</label><input type="text" id="sbKey" placeholder="sb_publishable_… or anon key" spellcheck="false"></div>
-      <div class="field"><label for="ghOn">Update the site when I press Publish</label><input type="checkbox" id="ghOn"></div>
-      <div class="row"><button class="b" id="ghTest">Test connection</button><button class="b primary" id="ghSaveDev">Update site</button></div>
-      <div class="keys" id="ghStat" style="margin:4px 0 6px;word-break:break-all"></div>
-      <h2 style="margin-top:10px">OpenBoatUtils</h2>
-      <div class="field"><label for="obuChk">Enable OpenBoatUtils</label><input type="checkbox" id="obuChk"></div>
-      <div class="field"><label for="obuMode">Mode</label><select id="obuMode"></select></div>
-      <div class="row" style="margin-bottom:6px"><button class="b" id="obuApply">Apply mode</button><button class="b" id="obuExcl">Exclusive</button><button class="b" id="obuReset">Reset</button></div>
-      <div class="keys" style="margin:6px 0 2px">Add a setting or group to this track:</div>
-      <div class="row"><select id="obuAdd" style="flex:1;min-width:0"></select></div>
-      <div class="row"><input type="text" id="obuAddBlk" list="obuBlkList" placeholder="block(s), e.g. packed_ice, blue_ice" spellcheck="false" style="flex:1;min-width:0"><input type="text" id="obuAddVal" placeholder="value" style="width:80px"><button class="b primary" id="obuAddBtn">Add</button></div>
-      <datalist id="obuBlkList"></datalist>
-      <div class="keys" id="obuAddHint" style="margin:2px 0 6px"></div>
-      <div class="keys" style="margin:4px 0 2px"><b>Current configuration</b></div>
-      <div id="obuCfg" class="admList"></div>
-      <div class="keys" style="margin:8px 0 2px">All values:</div>
-      <div id="obuFields"></div>
-      <div class="field"><label for="obuStack">Accel stacking</label><input type="checkbox" id="obuStack"></div>
-      <textarea id="obuCmd" rows="4" spellcheck="false" placeholder="OBU commands, one per line, e.g.
+    <div id="devDash" class="dev hide" role="dialog" aria-label="Developer dashboard"><div class="ddWin">
+     <nav class="ddSide">
+      <div class="ddBrand">ibronline <span class="ddPill">DEV</span></div>
+      <button type="button" data-p="players" class="on"><span>👤</span>Player moderation</button>
+      <button type="button" data-p="tracks"><span>🧱</span>Track import &amp; regions</button>
+      <button type="button" data-p="race"><span>🏁</span>Race settings</button>
+      <button type="button" data-p="tset"><span>🗂️</span>Track settings</button>
+      <button type="button" data-p="phys"><span>⚙️</span>Physics (OpenBoatUtils)</button>
+      <button type="button" data-p="site"><span>🌐</span>Website &amp; servers</button>
+      <div style="flex:1"></div>
+      <button type="button" id="ddClose" class="ddX"><span>✕</span>Close (Esc)</button>
+     </nav>
+     <div class="ddMain" id="edSec">
+
+      <section class="ddPane on" data-p="players">
+       <header><h2>Player moderation</h2><p>Find players, rename, reset or set login keys, manage tags.</p></header>
+       <div class="ddCard">
+        <div class="field"><label for="admSecret">Admin secret</label><input type="password" id="admSecret" autocomplete="off" placeholder="set in ibronline-dev-setup.sql"></div>
+        <div class="row"><input type="text" id="admQ" placeholder="Search player name (blank = everyone)" spellcheck="false" style="flex:1;min-width:0"><button class="b primary" id="admFind">Find players</button></div>
+       </div>
+       <div class="admList" id="admList"></div>
+      </section>
+
+      <section class="ddPane" data-p="tracks">
+       <header><h2>Track import &amp; regions</h2><p>Import a .litematic, set the start line, draw checkpoints / grids, then upload.</p></header>
+       <div class="ddGrid">
+        <div class="ddCard"><h3>1 · Import</h3>
+         <div class="row"><button class="b primary" id="importBtn">Import .litematic</button><button class="b" id="defaultBtn">Built-in track</button></div>
+         <div class="hide" id="litSec">
+          <div class="field"><label for="floorSel">Floor layer</label><select id="floorSel"></select></div>
+          <div class="field"><label for="gapChk">Gaps act as walls</label><input type="checkbox" id="gapChk" checked=""></div>
+         </div>
+        </div>
+        <div class="ddCard"><h3>2 · Regions</h3>
+         <div class="row"><button class="b" id="startBtn">Set start line</button><button class="b primary" id="regBtn">Edit regions &amp; grid</button></div>
+         <div class="keys" id="regStat"></div>
+        </div>
+        <div class="ddCard"><h3>3 · Upload</h3>
+         <div class="field"><label for="pubName">Track name</label><input type="text" id="pubName"></div>
+         <div class="row"><button class="b primary" id="pubBtn">⬆ Upload track</button></div>
+         <div class="row"><span class="keys" id="tkEditing" style="flex:1"></span><button class="b hide" id="tkDetach">Stop editing</button></div>
+        </div>
+       </div>
+      </section>
+
+      <section class="ddPane" data-p="race">
+       <header><h2>Race settings</h2><p>Lobby rules and the race lobby track list. Changes save locally — publish to make them live.</p></header>
+       <div class="ddBar"><button class="b primary" id="ddUpd">🌐 Update website</button><button class="b" id="ddUp">⬆ Upload track</button><button class="b" id="mpPublish">📡 Publish multiplayer settings</button></div>
+       <div class="ddGrid">
+        <div class="ddCard"><h3>Lobby rules</h3>
+         <div class="field"><label for="rcLaps">Default laps</label><input type="number" id="rcLaps" min="1" max="99" value="3"></div>
+         <div class="field"><label for="rcInter">Vote time (s)</label><input type="number" id="rcInter" min="5" max="300" value="20"></div>
+         <div class="field"><label for="mpColl">Boat collisions</label><input type="checkbox" id="mpColl"></div>
+         <div class="field"><label for="mpOpen">Who can join</label><select id="mpOpen"><option value="off">Nobody (coming soon)</option><option value="testers">Testers only</option><option value="all">Everyone</option></select></div>
+         <div class="field col"><label for="mpMuted">Muted players (names / ids, comma separated)</label><input type="text" id="mpMuted" spellcheck="false"></div>
+        </div>
+        <div class="ddCard"><h3>Testing</h3>
+         <div class="row"><button class="b" id="mptBtn">🧪 Split-screen test (2 players)</button></div>
+         <div class="keys" id="mpStat">Not connected</div>
+        </div>
+       </div>
+       <div class="ddCard"><h3 style="display:flex;align-items:center">Race lobbies <span style="flex:1"></span><button class="b" id="rcPoolLoad">↻ Refresh</button></h3>
+        <div class="keys" style="margin-bottom:6px">Ticked tracks go in the vote (3 random each round). Set laps per track and edit each track's grid.</div>
+        <div id="rcPool" class="rcList"></div>
+       </div>
+      </section>
+
+      <section class="ddPane" data-p="tset">
+       <header><h2>Track settings</h2><p>Pick a published track to edit its grid, image, laps and times, or close it.</p></header>
+       <div class="ddCard">
+        <div class="row"><div class="tkCombo"><input type="text" id="tkSearch" placeholder="🔎 Search tracks…" autocomplete="off" spellcheck="false"><div id="tkDrop" class="hide"></div></div><button class="b" id="tkReload" title="Reload track list">↻</button></div>
+        <select id="tkPick" class="hide"></select>
+       </div>
+       <div class="ddCard" id="tkCard">
+        <div class="tkHead"><div id="tkImg" class="thumb"></div><div style="flex:1;min-width:0"><div id="tkTitle" class="tkTitle">No track selected</div><div class="keys" id="tkMeta"></div>
+         <div class="row" style="margin-top:6px"><label class="keys" for="tkLaps">Laps</label><input type="number" id="tkLaps" min="1" max="99" style="width:70px"><button class="b" id="tkImgBtn">🖼 Set image…</button><button class="b" id="tkImgGen" title="Uses the track currently loaded in the editor">Image from loaded track</button><input type="file" id="tkImgFile" accept="image/*" class="hide"></div></div></div>
+        <div class="ddBtns"><button class="b primary" id="tkEdit">✏️ Open in editor</button><button class="b" id="tkGrid">🏁 Edit grids</button><button class="b" id="tkTimesBtn">⏱ Edit times</button><button class="b" id="tkWipe">Clear all times</button><button class="b" id="tkClose">Close track</button><button class="b danger" id="tkDel">Delete track</button></div>
+        <div class="admList" id="tkTimes"></div>
+       </div>
+      </section>
+
+      <section class="ddPane" data-p="phys">
+       <header><h2>Physics · OpenBoatUtils</h2><p>Per-track boat physics. Saved with the track when you upload it.</p></header>
+       <div class="ddGrid">
+        <div class="ddCard"><h3>Mode</h3>
+         <div class="field"><label for="obuChk">Enable OpenBoatUtils</label><input type="checkbox" id="obuChk"></div>
+         <div class="field"><label for="obuMode">Mode</label><select id="obuMode"></select></div>
+         <div class="row"><button class="b" id="obuApply">Apply mode</button><button class="b" id="obuExcl">Exclusive</button><button class="b" id="obuReset">Reset</button></div>
+         <div class="field"><label for="obuStack">Accel stacking</label><input type="checkbox" id="obuStack"></div>
+        </div>
+        <div class="ddCard"><h3>Add a setting</h3>
+         <div class="row"><select id="obuAdd" style="flex:1;min-width:0"></select></div>
+         <div class="row"><input type="text" id="obuAddBlk" list="obuBlkList" placeholder="block(s), e.g. packed_ice, blue_ice" spellcheck="false" style="flex:1;min-width:0"><input type="text" id="obuAddVal" placeholder="value" style="width:80px"><button class="b primary" id="obuAddBtn">Add</button></div>
+         <datalist id="obuBlkList"></datalist>
+         <div class="keys" id="obuAddHint"></div>
+        </div>
+       </div>
+       <div class="ddCard"><h3>Current configuration</h3><div id="obuCfg" class="admList"></div></div>
+       <div class="ddCard"><h3>All values</h3><div id="obuFields"></div></div>
+       <div class="ddCard"><h3>Commands</h3>
+        <textarea id="obuCmd" rows="4" spellcheck="false" placeholder="OBU commands, one per line, e.g.
 /blockslipperiness 0.989 minecraft:packed_ice
 /setblocksetting FORWARDS_ACCEL 0.08 magenta_glazed_terracotta
 /boatmode RALLY_BLUE"></textarea>
-      <div class="row" style="margin-top:6px"><button class="b" id="obuRun">Run commands</button></div>
-      <pre id="obuSum"></pre>
-      <h2 style="margin-top:10px">Player admin <span class="pill">DEV</span></h2>
-      <div class="field"><label for="admSecret">Admin secret (accounts server)</label><input type="password" id="admSecret" autocomplete="off" placeholder="set in ibronline-dev-setup.sql"></div>
-      <div class="row"><input type="text" id="admQ" placeholder="Player name (blank = all)" spellcheck="false" style="flex:1;min-width:0"><button class="b" id="admFind">Find players</button></div>
-      <div class="admList" id="admList"></div>
-      <h2 style="margin-top:10px">Track admin <span class="pill">DEV</span></h2>
-      <div class="row"><select id="tkPick" style="flex:1;min-width:0"></select><button class="b" id="tkReload">↻</button></div>
-      <div class="row"><button class="b" id="tkEdit">Open in editor</button><button class="b" id="tkTimesBtn">Show times</button><button class="b" id="tkWipe">Clear all times</button><button class="b" id="tkClose">Close track</button><button class="b" id="tkDel" style="color:var(--red)">Delete track</button></div>
-      <div class="row"><span class="keys" id="tkEditing" style="flex:1"></span><button class="b hide" id="tkDetach">Stop editing</button></div>
-      <div class="admList" id="tkTimes"></div>
-      <div class="keys" id="admStat" style="margin:4px 0 6px;word-break:break-all"></div>
-      <h2 style="margin-top:10px">Multiplayer (experimental) <span class="pill">DEV</span></h2>
-      <div class="field"><label for="mpRegion">Server region</label><select id="mpRegion"><option value="eu">🇪🇺 EU</option><option value="us">🇺🇸 NA</option><option value="asia">🌏 ASIA</option></select></div>
-      <div class="field"><label for="mpUrl">Region server URL (Supabase)</label><input type="text" id="mpUrl" spellcheck="false" placeholder="https://xxxx.supabase.co"></div>
-      <div class="field"><label for="mpKey">Region publishable key</label><input type="text" id="mpKey" spellcheck="false" placeholder="sb_publishable_…"></div>
-      <div class="field"><label for="mpColl">Boat collisions</label><input type="checkbox" id="mpColl"></div>
-      <div class="field"><label for="mpOpen">Who can join (public site)</label><select id="mpOpen"><option value="off">Nobody (coming soon)</option><option value="testers">Testers only</option><option value="all">Everyone</option></select></div>
-      <h2 style="margin-top:10px">Race settings</h2>
-      <div class="field"><label for="rcLaps">Laps per race</label><input type="number" id="rcLaps" min="1" max="99" value="3"></div>
-      <div class="field"><label for="rcInter">Intermission / vote time (seconds)</label><input type="number" id="rcInter" min="5" max="300" value="20"></div>
-      <div class="keys" style="margin:4px 0 2px">Race pool — each intermission offers 3 random tracks from these:</div>
-      <div id="rcPool" class="admList"></div>
-      <div class="row"><button class="b" id="rcPoolLoad">Refresh track list</button></div>
-      <div class="field"><label for="mpMuted">Muted players (names or ids, comma separated)</label><input type="text" id="mpMuted" spellcheck="false"></div>
-      <div class="row"><button class="b" id="mpPublish">Publish multiplayer settings</button></div>
-      <div class="row"><button class="b" id="mptBtn">🧪 Split-screen test (2 players)</button></div>
-      <div class="row"><button class="b primary" id="mpConn">Connect</button><button class="b" id="mpPing">Ping all regions</button></div>
-      <div class="keys" id="mpStat" style="margin:4px 0 6px;word-break:break-all">Not connected</div>
-    </div>
+        <div class="row"><button class="b" id="obuRun">Run commands</button></div>
+        <pre id="obuSum"></pre>
+       </div>
+      </section>
+
+      <section class="ddPane" data-p="site">
+       <header><h2>Website &amp; servers</h2><p>GitHub publishing, accounts server and multiplayer region servers.</p></header>
+       <div class="ddBar"><button class="b primary" id="ghSaveDev">🌐 Update website</button><button class="b" id="ghTest">Test connection</button></div>
+       <div class="keys" id="ghStat" style="word-break:break-all;margin-bottom:8px"></div>
+       <div class="ddGrid">
+        <div class="ddCard"><h3>GitHub</h3>
+         <div class="field"><label for="ghWeb">Play site repo</label><input type="text" id="ghWeb" placeholder="IBRonline/play" spellcheck="false"></div>
+         <div class="field"><label for="ghDev">Dev site repo (locked)</label><input type="text" id="ghDev" placeholder="IBRonline/dev" spellcheck="false"></div>
+         <div class="field"><label for="ghSrc">Source backup (private)</label><input type="text" id="ghSrc" placeholder="IBRonline/IBR-Dev" spellcheck="false"></div>
+         <div class="field"><label for="ghCode">Dev access code</label><input type="password" id="ghCode" autocomplete="new-password" placeholder="6+ characters"></div>
+         <div class="field"><label for="ghTok">Access token</label><input type="password" id="ghTok" placeholder="github_pat_…" autocomplete="off"></div>
+         <div class="field"><label for="ghOn">Update site on upload</label><input type="checkbox" id="ghOn"></div>
+        </div>
+        <div class="ddCard"><h3>Accounts server</h3>
+         <div class="field"><label for="sbUrl">Supabase URL</label><input type="text" id="sbUrl" placeholder="https://xxxx.supabase.co" spellcheck="false"></div>
+         <div class="field"><label for="sbKey">Publishable key</label><input type="text" id="sbKey" placeholder="sb_publishable_… or anon key" spellcheck="false"></div>
+         <h3 style="margin-top:14px">Multiplayer region servers</h3>
+         <div class="field"><label for="mpRegion">Region</label><select id="mpRegion"><option value="eu">🇪🇺 EU</option><option value="us">🇺🇸 NA</option><option value="asia">🌏 ASIA</option></select></div>
+         <div class="field"><label for="mpUrl">Server URL</label><input type="text" id="mpUrl" spellcheck="false" placeholder="https://xxxx.supabase.co"></div>
+         <div class="field"><label for="mpKey">Publishable key</label><input type="text" id="mpKey" spellcheck="false" placeholder="sb_publishable_…"></div>
+         <div class="row"><button class="b" id="mpConn">Connect</button><button class="b" id="mpPing">Ping all regions</button></div>
+        </div>
+       </div>
+      </section>
+
+      <div class="ddStat keys" id="admStat"></div>
+     </div>
+    </div></div>
     <div class="sec hide" id="obuInfo"><h2>OpenBoatUtils</h2><pre id="obuInfoT"></pre></div>
 
     <div class="sec">
@@ -1058,8 +1241,9 @@ function resetRun() {
   toast(map.starts && map.starts.length ? 'Drive through the start region to begin' : map.start.blk ? 'Go when ready' : 'Cross the line to start', 1400);
 }
 function saveTime(t, label) {
-  race.last = t; netOnTime(t);
+  race.last = t; netOnTime(t); const spNew = spFinish(t);
   if (!best || t < best.t) {
+    store.set('splits:' + map.id, spNew);
     best = { t, off0: race.off0, d: Float32Array.from(race.rec) };
     store.set('best:' + map.id, { t, off0: race.off0, d: Array.from(race.rec, v => Math.round(v * 1000) / 1000) });
     toast('NEW BEST  ' + fmt(t), 1800);
@@ -1085,7 +1269,7 @@ function regionLogic() {
   const n = m.cps.length;
   if (race.cp < n && hit(m.cps[race.cp])) {
     race.resp = { x: st.x, z: st.z, yaw: st.yaw }; race.cp++;
-    toast('CP ' + race.cp + '/' + n + '  ' + fmt((st.tick - race.lapStartT) / TICK_RATE), 900);
+    cpSplit(race.cp - 1, (st.tick - race.lapStartT) / TICK_RATE);
   }
   if (m.fins.length && race.cp >= n) for (const r of m.fins) if (hit(r)) {
     race.racing = false; race.done = true; saveTime((st.tick - race.lapStartT) / TICK_RATE, 'Finish  '); break;
@@ -1096,7 +1280,7 @@ function startRegionLogic() {
   const m = map, inS = m.starts.some(regHit), was = race.inS; race.inS = inS;
   if (was === undefined) return recordTick();
   if (!race.racing) {
-    if (!race.done && was !== inS) { race.racing = true; race.lapNo = 1; race.cp = 0; race.resp = null; race.lapStartT = st.tick; race.rec = []; race.off0 = 0; race.far = 0; toast('GO!', 700); }
+    if (!race.done && was !== inS) { race.racing = true; race.lapNo = 1; race.cp = 0; race.resp = null; race.lapStartT = st.tick; race.rec = []; race.off0 = 0; race.far = 0; }
   } else if (!m.fins.length && inS && !was) {
     if (race.cp >= m.cps.length && (m.cps.length || race.far > 24)) {
       saveTime((st.tick - race.lapStartT) / TICK_RATE, 'Lap '); race.lapNo++;
@@ -1108,7 +1292,7 @@ function startRegionLogic() {
 }
 function lapLogic() {
   if (map.starts && map.starts.length) return startRegionLogic();
-  if (map.start.blk && !race.racing && !race.done && Math.hypot(st.x - map.spawn.x, st.z - map.spawn.z) > 0.05) { race.racing = true; race.lapNo = 1; race.cp = 0; race.resp = null; race.lapStartT = st.tick; race.armed = false; race.rec = []; race.off0 = 0; toast('GO!', 700); }
+  if (map.start.blk && !race.racing && !race.done && Math.hypot(st.x - map.spawn.x, st.z - map.spawn.z) > 0.05) { race.racing = true; race.lapNo = 1; race.cp = 0; race.resp = null; race.lapStartT = st.tick; race.armed = false; race.rec = []; race.off0 = 0; }
   const S = map.start, h = forward(S.yaw);
   const dPrev = (prev.x - S.x) * h.x + (prev.z - S.z) * h.z;
   const dCur = (st.x - S.x) * h.x + (st.z - S.z) * h.z;
@@ -1121,7 +1305,7 @@ function lapLogic() {
     const f = dPrev / (dPrev - dCur);
     if (lateralOK(f)) {
       const crossT = st.tick - 1 + f;
-      if (!race.racing) { race.racing = true; race.done = false; race.lapNo = 1; race.cp = 0; race.resp = null; toast('GO!', 700); }
+      if (!race.racing) { race.racing = true; race.done = false; race.lapNo = 1; race.cp = 0; race.resp = null; }
       else if (map.fins.length) return recordTick();     // sprint track: the finish region ends the run
       else if (race.armed && !cpMissing()) {
         const t = (crossT - race.lapStartT) / TICK_RATE;
@@ -2013,12 +2197,13 @@ function drawMini() {
    ===================================================================== */
 const el = (id) => document.getElementById(id);
 const hud = { time: el('time'), times: el('times'), lap: el('lapLbl'), speed: el('speed'), surf: el('surf') };
-function fmt(t) { if (t == null) return '–:––'; const m = Math.floor(t / 60), s = t - m * 60; return m + ':' + (s < 10 ? '0' : '') + s.toFixed(2); }
+function fmt(t) { if (t == null) return '–:––'; const m = Math.floor(t / 60), s = t - m * 60; return m + ':' + (s < 10 ? '0' : '') + s.toFixed(3); }
+function fmtT(t) { t = Math.max(0, t || 0); if (t < 60) return t.toFixed(3); const m = Math.floor(t / 60), s = t - m * 60; return m + ':' + (s < 10 ? '0' : '') + s.toFixed(3); }
 let hudT = 0;
 function updateHud(a, now) {
-  if (now - hudT < 0.1) return; hudT = now;
+  if (now - hudT < 0.03) return; hudT = now;
   const cur = race.racing ? Math.max(0, ((prev.tick + a) - race.lapStartT) / TICK_RATE) : race.done ? race.last : 0;
-  hud.time.textContent = fmt(cur);
+  hud.time.textContent = fmtT(cur);
   const ncp = map.cps.length, sprint = map.fins.length > 0;
   hud.lap.textContent = race.done ? 'Finished' : race.racing ? (sprint ? 'Sprint' : 'Lap ' + race.lapNo) + (ncp ? ' · CP ' + race.cp + '/' + ncp : '') : (sprint ? 'Sprint –' : 'Lap –');
   hud.times.textContent = 'Last ' + fmt(race.last) + ' · Best ' + fmt(best && best.t);
@@ -2819,7 +3004,7 @@ el('acCreate').addEventListener('click', async () => {
 el('acKey').addEventListener('keydown', e => { if (e.key === 'Enter') el('acLoginGo').click(); });
 el('acName').addEventListener('keydown', e => { if (e.key === 'Enter') el('acCreate').click(); });
 el('acLoginGo').addEventListener('click', async () => {
-  const key = keyNorm(el('acKey').value); if (!key) return acStat('Keys look like IBR-XXXXX-XXXXX-XXXXX-XXXXX', 'err');
+  const key = keyNorm(el('acKey').value) || customKey(el('acKey').value); if (!key) return acStat('Keys look like IBR-XXXXX-XXXXX-XXXXX-XXXXX (or the custom key you were given)', 'err');
   acStat('Logging in…');
   try { setMe(await NET.login(key), key); el('acKey').value = ''; el('acLogin').classList.add('hide'); acStat('✓ Logged in as ' + ME.name, 'ok'); } catch (e) { acStat(e.message, 'err'); }
 });
@@ -2955,8 +3140,9 @@ async function ghPublish() {
   ghStat('Updating track list…');
   let list = []; try { list = JSON.parse(ghText(await ghGet(gh.web, 'tracks/index.json')) || '[]'); } catch (e) { list = []; }
   const cps = d.regions.filter(r => r.t === 'cp').length;
-  const entry = { id: slug, name: d.name, file: slug + '.json', info: (cps ? cps + ' checkpoints · ' : '') + (d.regions.some(r => r.t === 'fin') ? 'sprint · ' : '') + (d.obu && d.obu.on ? 'OpenBoatUtils (' + ((d.obu.modes || []).join(', ') || 'custom') + ') · ' : '') + d.W + '×' + d.H + ' blocks', updated: new Date().toISOString() };
-  const i = list.findIndex(t => t.id === slug); if (i >= 0) { if (list[i].closed) entry.closed = true; list[i] = entry; } else list.push(entry);
+  const entry = { id: slug, name: d.name, file: slug + '.json', info: (cps ? cps + ' checkpoints · ' : '') + (d.regions.some(r => r.t === 'fin') ? 'sprint · ' : '') + (d.obu && d.obu.on ? 'OpenBoatUtils (' + ((d.obu.modes || []).join(', ') || 'custom') + ') · ' : '') + d.W + '×' + d.H + ' blocks', updated: new Date().toISOString(), grids: d.regions.filter(r => r.t === 'grid').length };
+  const i = list.findIndex(t => t.id === slug); if (i >= 0) { for (const k of ['closed', 'img']) if (list[i][k]) entry[k] = list[i][k]; list[i] = entry; } else list.push(entry);
+  if (!entry.img) { try { entry.img = trackThumb(); } catch (e) {} }
   await ghPut(gh.web, 'tracks/index.json', JSON.stringify(list, null, 1) + '\n', 'Update track list (' + d.name + ')');
   let extra = '';
   if (gh.src) { try { ghStat('Backing up track source…'); await ghPut(gh.src, 'tracks/' + slug + '.json', json, 'Track source: ' + slug); } catch (e) { extra = ' · track backup failed: ' + e.message; } }
@@ -3265,7 +3451,7 @@ function mpGate() {
   if (ok) { b.classList.remove('mpSoon'); b.removeAttribute('aria-disabled'); b.dataset.tab = 'mp'; b.title = open === 'all' ? '' : 'Testers only'; }
   else { b.classList.add('mpSoon'); b.setAttribute('aria-disabled', 'true'); delete b.dataset.tab; if (MP.ws) MP.close(); const pn = el('menu').querySelector('.panel'); if (pn && pn.dataset.tab === 'mp') setTab('tracks'); }
 }
-function mpPSync() { if (!MP.cfg) MP.load(); el('mpPRegion').value = MP.cfg.region; mpBtn(); MP.statLoop(); }
+function mpPSync() { if (!MP.cfg) MP.load(); mpBtn(); MP.statLoop(); try { rgUi(); } catch (e) {} }
 function mpPList() { const box = el('mpPList'); if (!box) return; const L = MP.ws ? MP.list() : []; box.innerHTML = MP.joined ? '<div class="keys">On this server:</div>' + ['<div><span class="pl">' + (ME ? avHtml(ME) + escH(ME.name) + tagHtml(ME.id) : 'You') + '</span> (you)</div>'].concat(L.map(q => '<div><span class="pl">' + escH(q.n || 'Guest') + tagHtml(q.id) + '</span></div>')).join('') : ''; }
 async function mpPubLoad() {
   let j = null;
@@ -3274,13 +3460,12 @@ async function mpPubLoad() {
   MP_PUB = j; MP.load(); if (el('mpMuted')) el('mpMuted').value = ((j && j.muted) || []).join(', '); try { rcPoolRender(); } catch (e) {} if (el('mpOpen')) { el('mpOpen').value = (j && j.open) || 'off'; try { mpSync(); } catch (e) {} } mpGate();
 }
 if (el('mpPConn')) {
-  el('mpPRegion').addEventListener('change', () => { MP.cfg.region = el('mpPRegion').value; MP.save(); if (MP.ws) MP.connect(); });
   el('mpPConn').addEventListener('click', () => { try { if (!MP.cfg) MP.load(); if (MP.ws) { MP.close(); MP.stat('Left the room'); } else { MP.stat('Connecting…'); MP.connect(); } } catch (e) { console.error(e); MP.msg = 'Error: ' + e.message; for (const id of ['mpStat', 'mpPStat']) if (el(id)) el(id).textContent = MP.msg; } mpBtn(); });
 }
 if (el('mpPublish')) el('mpPublish').addEventListener('click', async () => {
   try {
     if (!gh.tok || !gh.web) throw new Error('add a GitHub token + play repo first');
-    const cfg = { open: el('mpOpen').value, coll: !!MP.cfg.coll, srv: MP.cfg.srv, race: Object.assign(rcCfg(), { pool: rcPool(RACE.tracks) }), muted: (el('mpMuted').value || '').split(/[,\n]+/).map(x => x.trim()).filter(Boolean), updated: new Date().toISOString() };
+    const cfg = { open: el('mpOpen').value, coll: !!MP.cfg.coll, srv: MP.cfg.srv, race: Object.assign(rcCfg(), { pool: rcPool(RACE.tracks), lapsBy: (MP.cfg.race && MP.cfg.race.lapsBy) || rcCfg().lapsBy || {} }), muted: (el('mpMuted').value || '').split(/[,\n]+/).map(x => x.trim()).filter(Boolean), updated: new Date().toISOString() };
     MP.stat('Publishing…'); await ghPut(gh.web, 'mp.json', JSON.stringify(cfg, null, 1) + '\n', 'Update multiplayer settings'); MP_PUB = cfg;
     MP.stat('✓ Multiplayer: ' + ({ off: 'closed', testers: 'testers only', all: 'everyone' })[cfg.open] + ' · collisions ' + (cfg.coll ? 'on' : 'off') + ' — live in about a minute');
   } catch (e) { MP.stat('Error: ' + e.message); }
@@ -3367,7 +3552,7 @@ if (el('tkClose')) {
 
 // ---------- races: lobby → vote (3 random pool tracks) → countdown on the grid → race N laps → results ----------
 const RACE = { S: null, mem: {}, slot: null, freeze: false, t0: 0, lap0: 0, fin: false, myVote: '', awarded: -1, tracks: [], joinedAt: 0, hi: 0, lastB: 0 };
-function rcCfg() { const c = Object.assign({ pool: [], laps: 3, inter: 20 }, (IS_DEV && MP.cfg && MP.cfg.race) || (MP_PUB && MP_PUB.race) || {}); c.laps = Math.max(1, Math.round(+c.laps || 3)); c.inter = Math.max(5, Math.round(+c.inter || 20)); return c; }
+function rcCfg() { const c = Object.assign({ pool: [], laps: 3, inter: 20, lapsBy: {} }, (IS_DEV && MP.cfg && MP.cfg.race) || (MP_PUB && MP_PUB.race) || {}); c.laps = Math.max(1, Math.round(+c.laps || 3)); c.inter = Math.max(5, Math.round(+c.inter || 20)); return c; }
 function rcPool(L) { const p = rcCfg().pool || []; if (p.length) return p.slice(); const f = (L || []).find(t => /frozen\s*lake/i.test(t.name || '') || /frozen-?lake/i.test(t.id || '')); return [f ? f.id : 'frozen-lake']; }
 async function raceTracks() {
   if (typeof WEB_LIST !== 'undefined' && WEB_LIST && WEB_LIST.length) return (RACE.tracks = WEB_LIST);
@@ -3383,7 +3568,19 @@ const rcAmHost = () => rcMembers()[0] === MP.myId();
 function rcBroadcast() { if (!RACE.S) return; const d = Object.assign({}, RACE.S, { rem: RACE.S.end - Date.now(), from: MP.myId() }); delete d.end; rcSend('state', d); }
 function rcSet(ph, extra, dur) { const o = RACE.S || { seq: 0 }; RACE.S = Object.assign({}, o, extra, { ph, seq: (o.seq || 0) + 1, end: Date.now() + dur }); rcOnPhase(); rcBroadcast(); rcUi(); }
 function rcShuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
-async function rcNewVote() { const L = await raceTracks(), pool = rcPool(L).filter(id => !L.length || L.some(t => t.id === id)); const opts = rcShuffle(pool.length ? pool : rcPool(L)).slice(0, 3); if (!opts.length) opts.push((WEB_CUR && WEB_CUR.id) || '__here'); rcSet('vote', { opts, votes: {}, track: '', res: [], ids: [], grace: 0, laps: rcCfg().laps }, rcCfg().inter * 1000); }
+async function rcNewVote() {
+  if (RACE.busy) return; RACE.busy = true;
+  try {
+    const L = await raceTracks(), open = L.filter(t => !t.closed), pool = rcPool(L).filter(id => L.some(t => t.id === id));
+    let opts = rcShuffle(pool).slice(0, 3);
+    if (opts.length < 3) opts = opts.concat(rcShuffle(open.map(t => t.id).filter(id => !opts.includes(id)))).slice(0, 3);
+    if (!opts.length) opts.push((WEB_CUR && WEB_CUR.id) || '__here');
+    if (!MP.joined || !rcAmHost() || (RACE.S && RACE.S.ph !== 'res')) return;
+    const lapsBy = {}; for (const o of opts) lapsBy[o] = rcLapsFor(o);
+    rcSet('vote', { opts, votes: {}, track: '', res: [], ids: [], grace: 0, laps: rcCfg().laps, lapsBy }, rcCfg().inter * 1000);
+  } finally { RACE.busy = false; }
+}
+function rcLapsFor(id) { const c = rcCfg(); return Math.max(1, Math.min(99, Math.round(+(c.lapsBy || {})[id] || c.laps))); }
 function rcTally() { const S = RACE.S, n = {}; for (const k in S.votes) if (S.opts.includes(S.votes[k])) n[S.votes[k]] = (n[S.votes[k]] || 0) + 1; const max = Math.max(0, ...Object.values(n)); const top = max ? S.opts.filter(o => n[o] === max) : S.opts; return top[Math.floor(Math.random() * top.length)]; }
 function rcHost() {
   if (!MP.joined) return; const now = Date.now();
@@ -3393,7 +3590,7 @@ function rcHost() {
   const S = RACE.S;
   if (!S) { rcNewVote(); return; }
   if (now - RACE.lastB > 1000) { RACE.lastB = now; rcBroadcast(); }
-  if (S.ph === 'vote' && now >= S.end) rcSet('count', { track: rcTally(), laps: rcCfg().laps, ids: rcMembers(), res: [], grace: 0 }, 8000);
+  if (S.ph === 'vote' && now >= S.end) { const tr = rcTally(); rcSet('count', { track: tr, laps: rcLapsFor(tr), ids: rcMembers(), res: [], grace: 0 }, 8000); }
   else if (S.ph === 'count' && now >= S.end) rcSet('race', {}, 15 * 60000);
   else if (S.ph === 'race') {
     const live = rcMembers(), left = S.ids.filter(id => live.includes(id) && !S.res.some(r => r.id === id));
@@ -3401,7 +3598,7 @@ function rcHost() {
     else if (S.res.length && !S.grace) { S.grace = 1; S.end = Math.min(S.end, now + 60000); rcBroadcast(); }
   } else if (S.ph === 'res' && now >= S.end) rcNewVote();
 }
-function rcApply(d) { const old = RACE.S; if (old && d.seq < old.seq) return; const S = Object.assign({}, d, { end: Date.now() + (d.rem || 0) }); delete S.rem; delete S.from; RACE.S = S; if (!old || old.seq !== S.seq) rcOnPhase(); rcUi(); }
+function rcApply(d) { const old = RACE.S; if (old && d.seq < old.seq && d.from !== rcMembers()[0]) return; if (d.from && d.from !== MP.myId() && rcAmHost() && d.from > MP.myId()) return; const S = Object.assign({}, d, { end: Date.now() + (d.rem || 0) }); delete S.rem; delete S.from; RACE.S = S; if (!old || old.seq !== S.seq) rcOnPhase(); rcUi(); }
 async function rcLoad(id) {
   if (id === '__here' || (WEB_CUR && WEB_CUR.id === id)) return true; const L = await raceTracks(), t = L.find(x => x.id === id); if (!t) { toast('Track ' + id + ' not found', 2000); return false; }
   try {
@@ -3424,11 +3621,12 @@ async function rcOnPhase() {
     try { if (typeof placing !== 'undefined' && placing) cancelPlacing(); } catch (e) {}
     resetRun(); RACE.slot = rcGrid(S.ids.indexOf(me)); RACE.T(); if (paused) resume();
   }
-  else if (S.ph === 'race' && inRace) { RACE.freeze = false; RACE.t0 = performance.now(); RACE.lap0 = race ? race.lapNo : 0; toast('GO!', 900); }
+  else if (S.ph === 'race' && inRace) { RACE.freeze = false; RACE.t0 = performance.now(); if (race) { race.racing = false; race.armed = false; race.lapNo = 0; race.cp = 0; race.done = false; race.resp = null; race.inS = undefined; race.sp = []; } RACE.lap0 = 0; if (paused) try { resume(); } catch (e) {} cdGo(); }
   else if (S.ph === 'res') { RACE.freeze = false; if (inRace && RACE.awarded !== S.seq) { RACE.awarded = S.seq; rcAward(); } }
 }
 RACE.T = function () {
   const S = RACE.S; if (!S || !MP.joined || typeof st === 'undefined') return;
+  if (RACE.freeze && !RACE.slot) { st.vx = st.vz = st.omega = 0; copyState(prev, st); return; }
   if (RACE.freeze && RACE.slot) { const g = RACE.slot; copyState(st, makeState(g.x, g.z, g.yaw)); st.y = env.groundAt(g.x, g.z); copyState(prev, st); cam.yaw = cam.pyaw = g.yaw; return; }
   if (S.ph === 'race' && !RACE.fin && race && S.ids.includes(MP.myId())) {
     const laps = race.lapNo - Math.max(RACE.lap0, 1);
@@ -3487,6 +3685,265 @@ async function rcPoolRender() {
 }
 function rcPoolSave() { const box = el('rcPool'), pool = [...box.querySelectorAll('input:checked')].map(i => i.dataset.id); MP.cfg.race = { pool, laps: Math.max(1, +el('rcLaps').value || 3), inter: Math.max(5, +el('rcInter').value || 20) }; MP.save(); MP.stat('Race settings saved — press Publish multiplayer settings to go live'); }
 if (el('rcPool')) { el('rcLaps').addEventListener('change', rcPoolSave); el('rcInter').addEventListener('change', rcPoolSave); el('rcPoolLoad').addEventListener('click', () => { RACE.tracks = []; rcPoolRender(); }); }
+
+// ======================= v-next additions =======================
+// ---- time trial splits + delta box ----
+function spBest() { try { return (map && store.get('splits:' + map.id)) || []; } catch (e) { return []; } }
+let dltTmr = 0;
+function dltShow(d) {
+  const e = el('dlt'); if (!e || d == null || !isFinite(d)) return;
+  const a = Math.abs(d), z = a < 0.0005;
+  e.className = 'on ' + (z ? 'y' : d > 0 ? 'r' : 'g');
+  e.textContent = (z ? '=' : d > 0 ? '+' : '-') + a.toFixed(3);
+  e.parentElement.classList.add('hasD');
+  clearTimeout(dltTmr); dltTmr = setTimeout(() => { e.className = ''; e.parentElement.classList.remove('hasD'); }, 3000);
+}
+function cpSplit(i, t) { if (!race) return; (race.sp = race.sp || [])[i] = t; const b = spBest()[i]; if (b != null) dltShow(t - b); }
+function spFinish(t) { const sp = ((race && race.sp) || []).slice(); sp[(map.cps || []).length] = t; if (race) race.sp = []; if (best) dltShow(t - best.t); return sp; }
+function customKey(v) { const s = String(v || '').trim(); return s.length >= 6 && s.length <= 64 && !/\s/.test(s) ? s : ''; }
+
+// ---- thumbnails ----
+function trackThumb() {
+  const s = tex || miniTex; if (!s) return '';
+  const c = document.createElement('canvas'); c.width = 320; c.height = 180; const g = c.getContext('2d');
+  g.fillStyle = '#1b2230'; g.fillRect(0, 0, 320, 180);
+  const k = Math.min(320 / s.width, 180 / s.height) * 0.94, w = s.width * k, h = s.height * k;
+  g.imageSmoothingQuality = 'high'; g.drawImage(s, (320 - w) / 2, (180 - h) / 2, w, h);
+  return c.toDataURL('image/jpeg', 0.72);
+}
+function thumbHtml(t, cls) {
+  const nm = (t && (t.name || t.id)) || '?';
+  if (t && t.img) return '<div class="thumb ' + (cls || '') + '" style="background-image:url(\'' + String(t.img).replace(/'/g, '%27') + '\')"></div>';
+  let h = 0; for (const ch of nm) h = (h * 31 + ch.charCodeAt(0)) % 360;
+  const ini = nm.split(/[\s_-]+/).filter(Boolean).slice(0, 2).map(w => w[0]).join('').toUpperCase();
+  return '<div class="thumb ' + (cls || '') + '" style="background:linear-gradient(135deg,hsl(' + h + ',55%,38%),hsl(' + ((h + 50) % 360) + ',65%,20%))">' + escH(ini) + '</div>';
+}
+function imgToThumb(file) {
+  return new Promise((ok, no) => { const r = new FileReader(); r.onerror = () => no(new Error('could not read image')); r.onload = () => { const im = new Image(); im.onerror = () => no(new Error('not an image')); im.onload = () => {
+    const c = document.createElement('canvas'); c.width = 320; c.height = 180; const g = c.getContext('2d'); const k = Math.max(320 / im.width, 180 / im.height), w = im.width * k, h = im.height * k;
+    g.drawImage(im, (320 - w) / 2, (180 - h) / 2, w, h); ok(c.toDataURL('image/jpeg', 0.75)); }; im.src = r.result; }; r.readAsDataURL(file); });
+}
+
+// ---- compact icon tags with hover names ----
+{ const _tagHtml = tagHtml; tagHtml = function (pid) {
+  const h = _tagHtml(pid); if (!h) return h; const d = document.createElement('div'); d.innerHTML = h;
+  d.querySelectorAll('.tag').forEach(t => {
+    const L = TAGS[pid] || [], full = (t.getAttribute('title') || t.textContent || '').trim(), src = L.find(x => x.t === full) || {};
+    const ic = src.i || Array.from(full)[0] || '•';
+    t.classList.add('ti'); t.setAttribute('data-tag', full || ic); t.setAttribute('aria-label', full || ic); t.removeAttribute('title'); t.textContent = ic;
+  });
+  return d.innerHTML;
+}; }
+
+// ---- multiplayer tab: region buttons with live ping + active players ----
+const PROBE = { s: {}, ping: {}, ids: {} };
+function probeOpen(r) {
+  if (PROBE.s[r]) return; const S = MP.cfg && MP.cfg.srv && MP.cfg.srv[r]; if (!S || !S.url || !S.key) return;
+  let ws; try { ws = new WebSocket(S.url.replace(/^http/, 'ws').replace(/\/+$/, '') + '/realtime/v1/websocket?apikey=' + encodeURIComponent(S.key) + '&vsn=1.0.0'); } catch (e) { return; }
+  const P = { ws, ref: 0, sent: {}, hb: 0 }; PROBE.s[r] = P; PROBE.ids[r] = PROBE.ids[r] || {};
+  const send = (topic, event, payload) => { const ref = String(++P.ref); if (ws.readyState === 1) ws.send(JSON.stringify({ topic, event, payload, ref })); return ref; };
+  ws.onopen = () => { send('realtime:ibr-' + r + '-races', 'phx_join', { config: { broadcast: { self: false, ack: false }, presence: { key: '' }, private: false } }); const hb = () => { P.sent[send('phoenix', 'heartbeat', {})] = performance.now(); }; hb(); P.hb = setInterval(hb, 2500); };
+  ws.onmessage = ev => { let m; try { m = JSON.parse(ev.data); } catch (e) { return; }
+    if (m.event === 'phx_reply' && P.sent[m.ref]) { PROBE.ping[r] = Math.max(1, Math.round(performance.now() - P.sent[m.ref])); delete P.sent[m.ref]; rgUi(); }
+    else if (m.event === 'broadcast' && m.payload) { const d = m.payload.payload || {}, id = d.id || d.from; if (id) PROBE.ids[r][id] = Date.now(); } };
+  ws.onclose = () => { clearInterval(P.hb); if (PROBE.s[r] === P) delete PROBE.s[r]; };
+}
+function probeClose() { for (const r in PROBE.s) { try { PROBE.s[r].ws.close(); } catch (e) {} clearInterval(PROBE.s[r].hb); delete PROBE.s[r]; } }
+function rgActive(r) { const now = Date.now(), I = PROBE.ids[r] || {}; let n = 0; for (const k in I) if (now - I[k] < 6000) n++; if (MP.joined && MP.cfg.region === r) n = Math.max(n, rcMembers().length); return n; }
+function rgUi() {
+  if (!MP.cfg) return;
+  document.querySelectorAll('.rgBtn').forEach(b => { const r = b.dataset.r, p = PROBE.ping[r] || (MP.joined && MP.cfg.region === r ? MP.ping : 0) || 0, n = rgActive(r);
+    const ms = b.querySelector('.rgMs'); ms.textContent = '[' + p + 'ms]'; ms.className = 'rgMs' + (p ? p < 80 ? ' good' : p < 180 ? ' mid' : ' bad' : '');
+    b.querySelector('.rgN').textContent = n + ' active'; b.classList.toggle('on', !!MP.ws && MP.cfg.region === r); });
+  const lr = el('rgLeaveRow'); if (lr) lr.classList.toggle('hide', !MP.ws);
+}
+setInterval(() => { try { const pn = document.querySelector('#menu .panel'), on = pn && pn.dataset.tab === 'mp' && !el('menu').classList.contains('hide'); if (on) { if (!MP.cfg) MP.load(); for (const r in MP_REG) probeOpen(r); rgUi(); } else probeClose(); } catch (e) {} }, 1000);
+function rgJoin(r) {
+  if (!MP.cfg) MP.load(); const same = MP.ws && MP.cfg.region === r;
+  MP.cfg.region = r; MP.save(); try { if (el('mpRegion')) { el('mpRegion').value = r; mpSync(); } } catch (e) {}
+  if (!same) MP.connect(); LOBBY.open = true; el('menu').classList.add('hide'); lobbyUi(); mpBtn();
+}
+document.querySelectorAll('.rgBtn').forEach(b => b.addEventListener('click', () => rgJoin(b.dataset.r)));
+if (el('rgShow')) el('rgShow').addEventListener('click', () => { LOBBY.open = true; el('menu').classList.add('hide'); lobbyUi(); });
+if (el('mpBack')) el('mpBack').addEventListener('click', () => setTab('tracks'));
+{ const _mpBtn = mpBtn; mpBtn = function () { _mpBtn(); const p = el('mpPConn'); if (p) p.textContent = 'Leave lobby'; if (!MP.ws) { LOBBY.open = false; try { lobbyUi(); } catch (e) {} } try { rgUi(); } catch (e) {} }; }
+{ const _setTab = setTab; setTab = function (t) { _setTab(t); try { rgUi(); } catch (e) {} }; }
+{ const _mpGate = mpGate; mpGate = function () { _mpGate(); const w = document.querySelector('#webTabs [data-mp]'), ok = IS_DEV || (w && !w.classList.contains('mpSoon'));
+  document.querySelectorAll('#menu .row .mpSoon, #menu .row [data-mprow]').forEach(b => { if (b.closest('#webTabs')) return; b.dataset.mprow = '1'; b.classList.toggle('mpSoon', !ok); if (!b.dataset.mpb) { b.dataset.mpb = '1'; b.addEventListener('click', () => { if (!b.classList.contains('mpSoon')) setTab('mp'); }); } }); }; }
+
+// ---- lobby overlay (vote) + grid countdown ----
+const LOBBY = { open: false, key: '', lastSeq: -1 };
+const lobbyEl = document.createElement('div'); lobbyEl.id = 'lobby'; lobbyEl.className = 'hide'; document.body.appendChild(lobbyEl);
+const cdEl = document.createElement('div'); cdEl.id = 'cdown'; document.body.appendChild(cdEl);
+function rcTrack(id) { return (RACE.tracks || []).find(t => t.id === id) || (id === '__here' ? { id, name: (map && map.name) || 'This track' } : { id, name: rcName(id) }); }
+function rcPlayerName(id) { if (id === MP.myId()) return ((ME && ME.name) || 'You') + ' (you)'; const m = RACE.mem[id] || (MP.peers && MP.peers[id]) || {}; return m.n || m.name || 'Guest'; }
+function lobbyUi() {
+  const S = RACE.S, me = MP.myId ? MP.myId() : '';
+  if (S && S.ph === 'vote' && S.seq !== LOBBY.lastSeq) { LOBBY.lastSeq = S.seq; if (MP.ws) LOBBY.open = true; }
+  const inRaceNow = S && (S.ph === 'count' || S.ph === 'race');
+  const show = !!MP.ws && LOBBY.open && !inRaceNow && !placing;
+  lobbyEl.classList.toggle('hide', !show); if (!show) { LOBBY.key = ''; return; }
+  const reg = { eu: 'EU', us: 'NA', asia: 'ASIA' }[MP.cfg.region] || MP.cfg.region, mem = MP.joined ? rcMembers() : [];
+  let body = '', title = '';
+  if (!MP.joined) { title = 'Connecting…'; body = '<div class="lbWait">' + escH(MP.msg || 'Connecting to the ' + reg + ' server…') + '</div>'; }
+  else if (!S || !S.ph) { title = 'Waiting for the vote'; body = '<div class="lbWait">The track vote starts in a moment…</div>'; }
+  else if (S.ph === 'vote') {
+    title = 'Vote for the next track'; const cnt = {}; for (const k in (S.votes || {})) cnt[S.votes[k]] = (cnt[S.votes[k]] || 0) + 1;
+    body = '<div class="vcGrid">' + (S.opts || []).map(o => { const t = rcTrack(o), c = cnt[o] || 0, on = RACE.myVote === o || (S.votes || {})[me] === o, laps = (S.lapsBy && S.lapsBy[o]) || S.laps || rcCfg().laps;
+      return '<button type="button" class="vc' + (on ? ' on' : '') + '" data-o="' + escH(o) + '">' + thumbHtml(t) + (c ? '<span class="vn">' + c + ' vote' + (c > 1 ? 's' : '') + '</span>' : '') + (on ? '<span class="chk">✓ Your vote</span>' : '') + '<b>' + escH(t.name || o) + '</b><small>' + laps + ' lap' + (laps > 1 ? 's' : '') + (t.closed ? ' · closed' : '') + '</small></button>'; }).join('') + '</div>';
+  } else if (S.ph === 'res') {
+    title = 'Results — ' + escH(rcTrack(S.track).name || '');
+    body = '<div class="lbRes">' + ((S.res || []).length ? S.res.map((r, i) => '<div><b>' + (i + 1) + '.</b><span style="flex:1">' + escH(r.n || rcPlayerName(r.id)) + '</span><span>' + (r.ms != null ? rcFmt(r.ms) : 'DNF') + '</span></div>').join('') : '<div>No finishers</div>') + '</div><div class="lbWait" style="padding:14px">Next vote starting soon…</div>';
+  }
+  const pl = '<div class="lbPl">' + mem.map(id => '<span class="p">' + escH(rcPlayerName(id)) + tagHtml(id) + '</span>').join('') + '</div>';
+  const html = '<div class="lbWin"><div class="lbTop"><div><div class="lbReg">' + reg + ' lobby</div><div class="lbSub">' + mem.length + ' player' + (mem.length === 1 ? '' : 's') + ' connected</div></div><span style="flex:1"></span><span class="lbTimer" id="lbTimer"></span><button class="lbBtn" data-a="hide">Hide</button><button class="lbBtn" data-a="leave">Leave</button></div><h2>' + title + '</h2>' + body + pl + '</div>';
+  if (html !== LOBBY.key) { LOBBY.key = html; lobbyEl.innerHTML = html; }
+  lobbyTimer();
+}
+function lobbyTimer() { const e = el('lbTimer'), S = RACE.S; if (!e) return; const left = S && S.end && (S.ph === 'vote' || S.ph === 'res') ? Math.max(0, Math.ceil((S.end - rcNow()) / 1000)) : null; e.textContent = left == null ? '' : left + 's'; e.style.display = left == null ? 'none' : ''; }
+function rcNow() { return typeof RACE.now === 'function' ? RACE.now() : Date.now(); }
+lobbyEl.addEventListener('pointerdown', e => {
+  const v = e.target.closest('.vc'); if (v) { e.preventDefault(); rcVote(v.dataset.o); RACE.myVote = v.dataset.o; lobbyEl.querySelectorAll('.vc').forEach(x => { x.classList.toggle('on', x === v); }); setTimeout(lobbyUi, 50); return; }
+  const b = e.target.closest('[data-a]'); if (!b) return;
+  if (b.dataset.a === 'hide') { LOBBY.open = false; lobbyUi(); }
+  if (b.dataset.a === 'leave') { LOBBY.open = false; MP.close(); MP.stat('Left the lobby'); el('menu').classList.remove('hide'); setTab('mp'); }
+});
+let cdLast = '';
+function cdSet(html, key) { if (key === cdLast) return; cdLast = key; cdEl.innerHTML = html; }
+let cdGoT = 0;
+function cdGo() { cdGoT = performance.now(); cdSet('<div class="n go pop">GO</div>', 'go'); }
+setInterval(() => {
+  try {
+    const S = RACE.S, me = MP.myId(), inR = MP.joined && S && S.ids && S.ids.includes(me);
+    if (inR && S.ph === 'count') { const left = (S.end - rcNow()) / 1000;
+      if (left > 5) cdSet('<div class="s pop">ON THE GRID</div><div class="s" style="font-size:15px;opacity:.7;margin-top:8px">' + escH(rcTrack(S.track).name || '') + ' · ' + (S.laps || 1) + ' laps</div>', 'grid' + S.seq);
+      else { const n = Math.max(1, Math.ceil(left)); cdSet('<div class="n pop">' + n + '</div>', 'n' + n + S.seq); } }
+    else if (performance.now() - cdGoT < 800) {} else cdSet('', '');
+    lobbyTimer();
+  } catch (e) {}
+}, 100);
+rcUi = function () {
+  const box = el('raceBox'); if (!box) return; try { const ic = el('rcIce'); if (ic) ic.textContent = '🧊 ' + iceBal() + ' icetokens · cosmetics shop coming soon'; } catch (e) {}
+  const S = RACE.S, me = MP.myId(), inR = S && S.ids && S.ids.includes(me);
+  if (!MP.joined || !S || (S.ph !== 'count' && S.ph !== 'race')) { box.classList.add('hide'); lobbyUi(); return; }
+  const tn = escH(rcTrack(S.track).name || '');
+  let h = '<b>' + tn + '</b> · ' + (S.laps || 1) + ' laps';
+  if (!inR) h += '<div class="keys">Race in progress — spectating. You\'ll join the next vote.</div>';
+  else if (S.ph === 'race') { const lap = race ? Math.max(0, Math.min(S.laps, (race.lapNo || 0) - Math.max(RACE.lap0, 1) + 1)) : 0; h += '<div>Lap ' + Math.max(1, lap) + '/' + S.laps + (RACE.fin ? ' · finished!' : '') + '</div>'; if ((S.res || []).length) h += '<div class="keys">' + S.res.map((r, i) => (i + 1) + '. ' + escH(r.n || rcPlayerName(r.id)) + ' ' + (r.ms != null ? rcFmt(r.ms) : '')).join(' · ') + '</div>'; }
+  box.innerHTML = h; box.classList.remove('hide'); lobbyUi();
+};
+
+// ---- developer dashboard ----
+(function () {
+  const dd = el('devDash'); if (!dd) return; document.body.appendChild(dd);
+  const show = p => { dd.querySelectorAll('.ddSide [data-p]').forEach(b => b.classList.toggle('on', b.dataset.p === p)); dd.querySelectorAll('.ddPane').forEach(s => s.classList.toggle('on', s.dataset.p === p)); store.set('ddPane', p);
+    if (p === 'race') rcPoolRender().catch(e => console.error(e)); if (p === 'tset' && !ADM_TRACKS.length) tkList().catch(e => console.error(e)); };
+  dd.querySelector('.ddSide').addEventListener('click', e => { const b = e.target.closest('[data-p]'); if (b) show(b.dataset.p); });
+  window.ddOpen = () => { dd.classList.remove('hide'); show(store.get('ddPane') || 'players'); };
+  window.ddClose = () => dd.classList.add('hide');
+  el('ddOpen').addEventListener('click', ddOpen); el('ddClose').addEventListener('click', ddClose);
+  dd.addEventListener('mousedown', e => { if (e.target === dd) ddClose(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && !dd.classList.contains('hide')) { e.stopImmediatePropagation(); e.preventDefault(); ddClose(); } }, true);
+  dd.addEventListener('keydown', e => e.stopPropagation());
+  for (const id of ['regBtn', 'startBtn']) el(id).addEventListener('click', () => ddClose());
+  el('ddUpd').addEventListener('click', () => el('ghSaveDev').click());
+  el('ddUp').addEventListener('click', () => { if (!el('pubName').value.trim()) { show('tracks'); el('pubName').focus(); return admStat('Give the track a name, then upload'); } el('pubBtn').click(); });
+  // mirror status lines from every section into the sticky status bar
+  const bar = el('admStat'); const mo = new MutationObserver(ms => { for (const m of ms) { const t = m.target.nodeType === 3 ? m.target.parentElement : m.target; if (t && t !== bar && t.textContent.trim()) bar.textContent = t.textContent; } });
+  for (const id of ['ghStat', 'regStat', 'mpStat']) if (el(id)) mo.observe(el(id), { childList: true, characterData: true, subtree: true });
+})();
+
+// race lobby list: pool + laps per track + grids
+function rcLapsSet(id, v) { if (!MP.cfg) MP.load(); const c = MP.cfg.race = Object.assign({ pool: rcCfg().pool, laps: rcCfg().laps, inter: rcCfg().inter }, MP.cfg.race || {}); c.lapsBy = Object.assign({}, c.lapsBy || {}); v = Math.round(+v); if (v >= 1 && v !== c.laps) c.lapsBy[id] = Math.min(99, v); else delete c.lapsBy[id]; MP.save(); }
+rcPoolRender = async function () {
+  const box = el('rcPool'); if (!box) return; box.innerHTML = '<div class="keys">Loading tracks…</div>';
+  const L = await raceTracks(), c = rcCfg(), pool = rcPool(L); el('rcLaps').value = c.laps; el('rcInter').value = c.inter;
+  box.innerHTML = L.length ? L.map(t => '<div class="rcRow' + (pool.includes(t.id) ? ' in' : '') + '" data-id="' + escH(t.id) + '"><input type="checkbox" data-id="' + escH(t.id) + '"' + (pool.includes(t.id) ? ' checked' : '') + ' title="Include in the vote">' + thumbHtml(t, 'sm') + '<div class="rcN"><b>' + escH(t.name || t.id) + '</b><small>' + (t.closed ? '🔒 closed · ' : '') + (t.grids == null ? 'grid: re-upload to count slots' : t.grids ? t.grids + ' grid slot' + (t.grids > 1 ? 's' : '') : 'no grid — everyone spawns on the start') + '</small></div><label class="rcL">Laps <input type="number" min="1" max="99" value="' + rcLapsFor(t.id) + '"></label><button class="b" data-a="grid">🏁 Edit grid</button></div>').join('') : '<div class="keys">No published tracks yet — upload one in Track import &amp; regions.</div>';
+  box.querySelectorAll('input[type=checkbox]').forEach(i => i.addEventListener('change', rcPoolSave));
+  box.querySelectorAll('input[type=number]').forEach(i => i.addEventListener('change', () => { rcLapsSet(i.closest('.rcRow').dataset.id, i.value); MP.stat('Laps saved — Publish multiplayer settings to go live'); }));
+  box.querySelectorAll('[data-a=grid]').forEach(b => b.addEventListener('click', () => tkGridEdit(b.closest('.rcRow').dataset.id)));
+};
+rcPoolSave = function () {
+  const box = el('rcPool'), rows = [...box.querySelectorAll('.rcRow')], pool = rows.filter(r => r.querySelector('input[type=checkbox]').checked).map(r => r.dataset.id);
+  const prev = (MP.cfg.race && MP.cfg.race.lapsBy) || rcCfg().lapsBy || {};
+  MP.cfg.race = { pool, laps: Math.max(1, +el('rcLaps').value || 3), inter: Math.max(5, +el('rcInter').value || 20), lapsBy: prev }; MP.save();
+  rows.forEach(r => r.classList.toggle('in', pool.includes(r.dataset.id))); MP.stat('Race settings saved — Publish multiplayer settings to go live');
+};
+for (const id of ['rcLaps', 'rcInter', 'rcPoolLoad', 'tkTimesBtn']) { const o = el(id); if (!o) continue; const n = o.cloneNode(true); o.replaceWith(n); }
+el('rcLaps').addEventListener('change', rcPoolSave); el('rcInter').addEventListener('change', rcPoolSave);
+el('rcPoolLoad').addEventListener('click', () => { RACE.tracks = []; rcPoolRender().catch(e => MP.stat('Error: ' + e.message)); });
+
+// track settings: searchable dropdown + card
+async function tkGridEdit(id) {
+  try { if (!ADM_TRACKS.length) await tkList(); const i = ADM_TRACKS.findIndex(t => t.id === id); if (i < 0) return admStat('Track not found — press ↻ in Track settings');
+    el('tkPick').value = i; tkSel(); await tkEdit(); if (EDIT_SLUG !== id) return;
+    ddClose(); openRegions(); const b = document.querySelector('#regBar [data-t=grid]'); if (b) b.click();
+    toast('Grid tool: click to drop grid slots (P1 first), then Upload track', 3000);
+  } catch (e) { admStat('Error: ' + e.message); }
+}
+function tkCard() {
+  const t = tkCur(); el('tkTitle').textContent = t ? t.name : 'No track selected';
+  el('tkMeta').textContent = t ? [t.id, t.closed ? '🔒 closed' : 'open', t.info, t.grids != null ? t.grids + ' grid slots' : ''].filter(Boolean).join(' · ') : 'Search for a track above';
+  el('tkImg').innerHTML = t ? thumbHtml(t) : ''; el('tkLaps').value = t ? rcLapsFor(t.id) : '';
+  el('tkCard').querySelectorAll('button,input').forEach(b => b.disabled = !t);
+  if (t && document.activeElement !== el('tkSearch')) el('tkSearch').value = t.name;
+}
+{ const _tkSel = tkSel; tkSel = function () { _tkSel(); tkCard(); }; el('tkPick').addEventListener('change', tkCard); }
+{ const _tkList = tkList; tkList = async function () { await _tkList(); tkCard(); if (document.activeElement === el('tkSearch')) tkDropRender(); }; }
+const tkS = el('tkSearch'), tkD = el('tkDrop');
+function tkDropRender() {
+  const q = tkS.dataset.all ? '' : tkS.value.trim().toLowerCase(), cur = tkCur();
+  const L = ADM_TRACKS.map((t, i) => ({ t, i })).filter(({ t }) => !q || ((t.name || '') + ' ' + t.id).toLowerCase().includes(q));
+  tkD.innerHTML = L.length ? L.map(({ t, i }) => '<button type="button" data-i="' + i + '" class="' + (cur === t ? 'on' : '') + '">' + thumbHtml(t, 'xs') + '<span><b>' + escH(t.name || t.id) + '</b><small>' + (t.closed ? '🔒 closed · ' : '') + escH(t.id) + '</small></span></button>').join('') : '<div class="keys" style="padding:8px">' + (ADM_TRACKS.length ? 'No matches' : 'No tracks loaded — add your admin secret / GitHub token, then press ↻') + '</div>';
+  tkD.classList.remove('hide');
+}
+tkS.addEventListener('focus', () => { tkS.dataset.all = '1'; tkS.select(); tkDropRender(); });
+tkS.addEventListener('input', () => { delete tkS.dataset.all; tkDropRender(); });
+tkD.addEventListener('mousedown', e => { const b = e.target.closest('[data-i]'); if (!b) return; e.preventDefault(); el('tkPick').value = b.dataset.i; tkSel(); el('tkTimes').innerHTML = ''; tkD.classList.add('hide'); tkS.blur(); tkCard(); });
+tkS.addEventListener('blur', () => setTimeout(() => { tkD.classList.add('hide'); const t = tkCur(); if (t) tkS.value = t.name; }, 120));
+tkS.addEventListener('keydown', e => { if (e.key === 'Enter') { const b = tkD.querySelector('[data-i]'); if (b) b.dispatchEvent(new MouseEvent('mousedown', { bubbles: true })); } else if (e.key === 'Escape') tkS.blur(); });
+el('tkGrid').addEventListener('click', () => { const t = tkCur(); if (t) tkGridEdit(t.id); });
+el('tkLaps').addEventListener('change', () => { const t = tkCur(); if (!t) return; rcLapsSet(t.id, el('tkLaps').value); admStat('Laps for ' + t.name + ' set to ' + rcLapsFor(t.id) + ' — Publish multiplayer settings to go live'); });
+async function tkSetImg(t, url) {
+  if (!gh.tok || !gh.web) throw new Error('add a GitHub token + play repo first (Website & servers)');
+  admStat('Saving image…'); const list = JSON.parse(ghText(await ghGet(gh.web, 'tracks/index.json')) || '[]'); const e = list.find(x => x.id === t.id); if (!e) throw new Error('track not in index.json');
+  e.img = url; await ghPut(gh.web, 'tracks/index.json', JSON.stringify(list, null, 1) + '\n', 'Track image: ' + t.name); t.img = url; RACE.tracks = []; tkCard(); admStat('✓ Image saved for ' + t.name + ' — live in about a minute');
+}
+el('tkImgBtn').addEventListener('click', () => el('tkImgFile').click());
+el('tkImgFile').addEventListener('change', async () => { const f = el('tkImgFile').files[0], t = tkCur(); el('tkImgFile').value = ''; if (!f || !t) return; try { await tkSetImg(t, await imgToThumb(f)); } catch (e) { admStat('Error: ' + e.message); } });
+el('tkImgGen').addEventListener('click', async () => { const t = tkCur(); if (!t) return; if (EDIT_SLUG !== t.id && !confirm('The loaded track isn\'t ' + t.name + '. Use it for the image anyway? (Tip: Open in editor first.)')) return; try { const u = trackThumb(); if (!u) throw new Error('no track loaded'); await tkSetImg(t, u); } catch (e) { admStat('Error: ' + e.message); } });
+function parseMs(s) { const m = String(s).trim().match(/^(?:(\d+):)?(\d{1,4}(?:\.\d{1,3})?)$/); return m ? Math.round(((+m[1] || 0) * 60 + +m[2]) * 1000) : 0; }
+async function admSetTime(id, track, ms) {
+  if (typeof NET.adminSetTime === 'function') return NET.adminSetTime(id, track, ms);
+  if (NET.adminRekey.length === 2 && String(NET.adminRekey).includes('LOC')) { const T = LOC.t; T[track] = T[track] || {}; T[track][id] = Object.assign({}, T[track][id] || {}, { ms }); store.set('lt', T); return true; }
+  return admRpc('ibr_dev_set_time', { p_id: id, p_track: track, p_ms: ms });
+}
+tkTimes = async function () {
+  const t = tkCur(); if (!t) return; const box = el('tkTimes'); box.innerHTML = '<div class="keys">Loading…</div>';
+  try { const b = (await NET.board(t.id)) || [];
+    box.innerHTML = b.length ? b.map((r, k) => '<div class="tmRow" data-k="' + k + '"><span class="rk">' + r.rank + '</span><span class="pl" style="flex:1;min-width:0">' + avHtml(r) + escH(r.name) + tagHtml(r.player_id) + '</span><input type="text" class="tmIn" value="' + fmtMs(r.ms) + '" title="m:ss.mmm"><button class="b" data-a="save">Save</button><button class="b danger" data-a="del">Remove</button></div>').join('') : '<div class="keys">No times on this track.</div>';
+    box.querySelectorAll('.tmRow').forEach(row => row.addEventListener('click', async e => { const btn = e.target.closest('[data-a]'); if (!btn) return; const r = b[+row.dataset.k];
+      try { if (btn.dataset.a === 'del') { if (!confirm('Remove ' + r.name + "'s time (" + fmtMs(r.ms) + ')?')) return; await NET.adminDelTime(r.player_id, t.id); admStat('Time removed'); return tkTimes(); }
+        const ms = parseMs(row.querySelector('.tmIn').value); if (!ms) return admStat('Time format: m:ss.mmm (e.g. 1:02.345)'); await admSetTime(r.player_id, t.id, ms); admStat('✓ ' + r.name + ' → ' + fmtMs(ms)); tkTimes();
+      } catch (err) { admStat('Error: ' + err.message + (/ibr_dev_set_time/.test(err.message) ? ' — the server needs the ibr_dev_set_time function' : '')); } }));
+  } catch (e) { box.innerHTML = ''; admStat('Error: ' + e.message); }
+};
+el('tkTimesBtn').addEventListener('click', () => tkTimes());
+tkCard();
+
+// player moderation: custom login keys
+{ const _admRender = admRender; admRender = function (list) {
+  _admRender(list);
+  el('admList').querySelectorAll('.adm').forEach((row, i) => { const p = (row.dataset.id && list.find(q => q.id === row.dataset.id)) || list[i]; if (!p || row.querySelector('.ck')) return;
+    const d = document.createElement('div'); d.className = 'row ck';
+    d.innerHTML = '<input type="text" class="ckIn" placeholder="Custom login key (6+ characters, no spaces)" spellcheck="false" autocomplete="off" style="flex:1;min-width:0"><button class="b" type="button">🔑 Set custom key</button>';
+    const nk = row.querySelector('.nk'); if (nk) nk.before(d); else row.appendChild(d);
+    d.querySelector('button').addEventListener('click', async e => { e.stopPropagation(); const raw = d.querySelector('.ckIn').value, k = keyNorm(raw) || customKey(raw);
+      if (!k) return admStat('Custom keys need 6–64 characters with no spaces');
+      if (!confirm('Set ' + p.name + '\'s login key to "' + k + '"? Their old key will stop working.')) return;
+      try { await NET.adminRekey(p.id, k); d.querySelector('.ckIn').value = ''; admStat('✓ ' + p.name + ' can now log in with: ' + k); } catch (err) { admStat('Error: ' + err.message); } });
+  });
+}; }
 
 // ---------- chat: lobby / track / whole-game, filtered ----------
 const CHAT = { log: { lobby: [], track: [], global: [] }, tab: 'lobby', feed: [], open: false, g: null, gTopic: 'realtime:ibr-global' };
