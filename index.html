@@ -300,8 +300,46 @@ html body .hud,html body #mini{transition:opacity .2s ease}html body:has(#menu:n
 #devDash .tkCombo{flex:1 1 auto;min-width:0}
 #devDash .tkCombo input{width:100%!important;display:block}
 #devDash #tkReload{flex:none;width:auto;padding:9px 13px}
+/* ---- v2: HUD layout ---- */
+#surf{display:none!important}
+#hudC{top:auto!important;left:auto!important;right:14px;bottom:14px;transform:none!important;min-width:132px;text-align:right;padding:8px 14px!important}
+#hudC #speed{font-size:26px}
+#raceBox{display:none!important}
+#rcLine{font-size:12px;letter-spacing:.04em;color:var(--tx2);margin-top:6px;padding-top:6px;border-top:1px solid var(--bd);white-space:nowrap}
+#rcLine b{color:#fff;font-weight:700;letter-spacing:.06em}
+#dlt.n{background:#3d4450}
+/* ---- scoreboard ---- */
+#sboard{position:fixed;right:12px;top:134px;width:240px;z-index:30;background:rgba(25,25,25,.72);border:1px solid var(--bd);border-radius:8px;overflow:hidden;pointer-events:none;font-variant-numeric:tabular-nums;text-shadow:0 1px 2px rgba(0,0,0,.6)}
+#sboard .sbH{display:flex;justify-content:space-between;padding:7px 12px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--tx2);border-bottom:1px solid var(--bd)}
+#sboard .sbR{display:grid;grid-template-columns:20px 1fr auto;gap:8px;align-items:center;padding:5px 12px;font-size:13px}
+#sboard .sbR+.sbR{border-top:1px solid rgba(255,255,255,.06)}
+#sboard .sbR.me{background:rgba(94,159,232,.18)}
+#sboard .sbP{font-weight:800;text-align:center}
+#sboard .sbNm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#sboard .sbG{font:600 12px/1 ui-monospace,Consolas,monospace;color:var(--tx2)}
+#sboard .sbR:first-of-type .sbG{color:#fff}
+#sboard .sbFlI{display:inline-block;padding:0 5px;margin-left:4px;border-radius:4px;background:#8b3fd6;color:#fff;font-size:10px;font-weight:800;line-height:16px;vertical-align:1px}
+#sboard .sbFL{display:flex;justify-content:space-between;gap:8px;padding:6px 12px;font-size:12px;background:rgba(139,63,214,.85);color:#fff}
+#sboard .sbFL.new{animation:sbFlash 1.6s ease-out}
+@keyframes sbFlash{0%{background:#c77dff}100%{background:rgba(139,63,214,.85)}}
+/* ---- keybinds ---- */
+.kbList{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+.kbRow{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:14px;padding:3px 0}
+.kbBtn{min-width:76px;padding:4px 10px;border:1px solid var(--bd);border-radius:6px;background:var(--bg);color:#fff;font:600 12px/18px Menlo,Consolas,monospace;cursor:pointer}
+.kbBtn:hover{border-color:var(--blue)}
+.kbBtn.wait{border-color:var(--blue);background:rgba(94,159,232,.2);font-family:inherit}
+@media (max-width:560px){.kbList{grid-template-columns:1fr}}
+/* ---- dev: servers ---- */
+.svRow{display:flex;align-items:center;gap:10px;padding:8px 0}
+.svRow+.svRow{border-top:1px solid rgba(255,255,255,.06)}
+.svRow .svN{flex:1;font-weight:600}
+.svDot{width:9px;height:9px;border-radius:50%;background:#22a35a;box-shadow:0 0 0 3px rgba(34,163,90,.18)}
+.svRow.off .svDot{background:#d63c3c;box-shadow:0 0 0 3px rgba(214,60,60,.18)}
+.svRow .svS{font-size:12px;opacity:.6;min-width:70px}
+.rgBtn.off{opacity:.45;cursor:not-allowed}
+.rgBtn.off .rgMs{color:var(--tx2)!important}
 </style>
-<meta name="ibr-build" content="2026-10-05T12:40:17.383Z">
+<meta name="ibr-build" content="2026-10-05T13:09:06.267Z">
 <script type="application/json" id="webSite">{"tracks":"tracks/index.json","sb":{"url":"https://dbyqswlvmequszujpwaj.supabase.co","key":"sb_publishable_-Av4-QPspUOMHAUtM5Jksw_amiBfwpy"}}</script>
 </head>
 <body>
@@ -315,6 +353,7 @@ html body .hud,html body #mini{transition:opacity .2s ease}html body:has(#menu:n
     <div class="lbl" id="lapLbl">Lap –</div>
     <div id="time">0.000</div><div id="dlt" aria-live="polite"></div>
     <div id="times">Last –:–– · Best –:––</div>
+    <div id="rcLine" class="hide"></div>
   </div>
 </div>
 <div id="hudC" class="hud"><div id="speed">0.0 b/s</div><div id="surf">ice · s 0.980</div></div>
@@ -558,7 +597,13 @@ html body .hud,html body #mini{transition:opacity .2s ease}html body:has(#menu:n
       <div class="field"><label for="woodSel">Boat</label><select id="woodSel"><option value="oak">Oak</option><option value="spruce">Spruce</option><option value="birch">Birch</option><option value="jungle">Jungle</option><option value="acacia">Acacia</option><option value="dark_oak">Dark oak</option><option value="mangrove">Mangrove</option><option value="cherry">Cherry</option><option value="bamboo">Bamboo raft colours</option><option value="crimson">Crimson</option><option value="warped">Warped</option><option value="custom">Custom colour</option></select></div>
       <div class="field hide" id="boatColRow"><label for="boatCol">Boat colour</label><input type="color" id="boatCol" style="width:56px;height:30px;border:none;background:none;padding:0;cursor:pointer"></div>
     </div>
-    <div class="sec keys">
+    <div class="sec" id="kbSec">
+      <h2>Keybinds</h2>
+      <div class="keys" style="margin-bottom:8px">Click a key, then press the new one. Esc cancels.</div>
+      <div id="kbList" class="kbList"></div>
+      <div class="row" style="margin-top:10px"><button class="b" id="kbReset">Reset to defaults</button></div>
+    </div>
+    <div class="sec keys" id="ctlHelp">
       <h2>Controls</h2>
       <kbd>W</kbd>/<kbd>↑</kbd> forward · <kbd>S</kbd>/<kbd>↓</kbd> back · <kbd>A</kbd><kbd>D</kbd>/<kbd>←</kbd><kbd>→</kbd> steer · <kbd>R</kbd> reset to start · <kbd>H</kbd> hitbox · <kbd>F5</kbd> 3D/2D · <kbd>Esc</kbd> menu. Touch buttons appear on phones. Drag a .litematic onto the window to load it.
     </div>
@@ -1127,13 +1172,13 @@ const evTime = (e) => (e && e.timeStamp > 0 ? e.timeStamp : performance.now()) /
 function typing(e) { const t = e.target; return t && (t.tagName === 'INPUT' && t.type !== 'checkbox' || t.tagName === 'TEXTAREA' || t.isContentEditable); }
 window.addEventListener('keydown', (e) => {
   if (typing(e)) return;
-  const k = KEYMAP[e.code];
+  const k = kbMove(e.code);
   if (k) { e.preventDefault(); if (!e.repeat && !paused) pushInput('kb', k, 1, evTime(e)); return; }
   if (e.code === 'Escape' || e.code === 'KeyP') { e.preventDefault(); if (placing === 3 && (edSel || edSpawn)) { edSel = null; edSpawn = null; regHint(); } else if (placing) cancelPlacing(); else togglePause(); }
-  else if (e.code === 'KeyR' && !e.repeat) { e.preventDefault(); resetToStart(); }
+  else if (e.code === kb('reset') && !e.repeat) { e.preventDefault(); resetToStart(); }
   else if (e.code === 'Enter' && paused && document.activeElement === document.body) resume();
 });
-window.addEventListener('keyup', (e) => { const k = KEYMAP[e.code]; if (k) pushInput('kb', k, 0, evTime(e)); });
+window.addEventListener('keyup', (e) => { const k = kbMove(e.code); if (k) pushInput('kb', k, 0, evTime(e)); });
 window.addEventListener('blur', releaseAll);
 document.addEventListener('visibilitychange', () => { releaseAll(); lastTime = null; if (document.hidden && !paused) pause(); });
 
@@ -1160,8 +1205,9 @@ window.addEventListener('keydown', e => {
   if (typing(e)) return;
   for (const k in bcHeld) if (e.code === bcKeys[k]) bcHeld[k] = true;
   if (e.repeat) return;
-  if (e.code === 'F5') { e.preventDefault(); toggleView(); }
-  else if (e.code === 'KeyH') toggleHitbox();
+  if (e.code === kb('view')) { e.preventDefault(); toggleView(); }
+  else if (e.code === kb('hitbox')) toggleHitbox();
+  else if (e.code === kb('regions')) toggleRegions();
   else if (e.code === bcKeys.toggle) toggleBoatCam();
   else if (e.code === bcKeys.menu) openBoatCamMenu();
 });
@@ -1552,7 +1598,7 @@ function overview() { const k0 = Math.min(cssW / map.W, cssH / map.H) * 0.9, e =
 const REG_COL = { grid: '255,170,40', cp: '255,214,92', reset: '233,115,102', fin: '114,188,143', start: '110,160,255' };
 function drawRegions(k, play) {
   if (!play) edDraw2D(k);
-  const R = map.regions; if (!R || !R.length) return;
+  const R = map.regions; if (!R || !R.length || (play && regHidden())) return;
   ctx.lineWidth = Math.max(0.1, 1.5 / k);
   for (const r of R) {
     const c = REG_COL[r.t], ci = r.t === 'cp' ? map.cps.indexOf(r) : -1, next = play && race && race.racing && ci === race.cp;
@@ -1738,7 +1784,7 @@ function glInit() {
   G.rider = glBuf(r);
   G.skin = glProg('attribute vec3 aP; attribute vec3 aC; uniform mat4 uVP; uniform mat4 uM; uniform vec3 uEye; varying vec3 vC; varying vec3 vR; void main(){ vec4 w = uM * vec4(aP, 1.0); vC = aC; vR = w.xyz - uEye; gl_Position = uVP * w; }',
     'precision mediump float; varying vec3 vC; uniform sampler2D uSkin; uniform vec4 uTint; ' + FOG + ' void main(){ vec4 t = texture2D(uSkin, vC.xy); if (t.a < 0.5) discard; gl_FragColor = vec4(fog(t.rgb * vC.z * uTint.rgb), uTint.a); }');
-  G.skinTex = null; G.skinMesh = glBuf(skinMesh()); G.skinKey = ''; riderSkinUpdate();
+  G.skinTex = null; G.skinMesh = glBuf(skinMesh('body')); G.skinHead = glBuf(skinMesh('head')); G.skinKey = ''; riderSkinUpdate();
   try { G.defSkin = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, G.defSkin); gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, defSkinCanvas());
     for (const [q, v] of [[gl.TEXTURE_MIN_FILTER, gl.NEAREST], [gl.TEXTURE_MAG_FILTER, gl.NEAREST], [gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE], [gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE]]) gl.texParameteri(gl.TEXTURE_2D, q, v); } catch (e) { G.defSkin = null; }
 }
@@ -1755,7 +1801,7 @@ function defSkinCanvas() {
   for (const [u, v] of [[0, 16], [16, 48]]) { f(PN, u, v, 16, 16); f(BT, u, v + 13, 16, 3); f(BT, u + 8, v, 4, 4); }
   return c;
 }
-function skinMesh() {
+function skinMesh(part) {
   const A = [];
   const face = (c, rc, sh) => { const [u, v, w, h] = rc, uv = [[u, v], [u + w, v], [u + w, v + h], [u, v + h]]; for (const i of [0, 1, 2, 0, 2, 3]) A.push(c[i][0], c[i][1], c[i][2], uv[i][0] / 64, uv[i][1] / 64, sh); };
   const box = (x0, y0, z0, x1, y1, z1, u, v, w, h, d, xf, e) => {
@@ -1771,7 +1817,8 @@ function skinMesh() {
   const S = 0.0586, Y = 0.31, Z = 0.14, L = 12 * S, T = 2 * S, E = 0.03; // vanilla 0.9375 player scale
   for (const e of [0, E]) {
     const o = e ? 1 : 0;
-    box(-4 * S, Y + L, Z - 4 * S, 4 * S, Y + L + 8 * S, Z + 4 * S, o ? 32 : 0, 0, 8, 8, 8, null, e * 1.6);   // head / hat
+    if (part !== 'body') box(-4 * S, Y + L, Z - 4 * S, 4 * S, Y + L + 8 * S, Z + 4 * S, o ? 32 : 0, 0, 8, 8, 8, null, e * 1.6);   // head / hat
+    if (part === 'head') continue;
     box(-4 * S, Y, Z - T, 4 * S, Y + L, Z + T, 16, o ? 32 : 16, 8, 12, 4, null, e);                        // body / jacket
     const arm = rot(0.75, Y + L - T, Z), leg = rot(Math.PI / 2, Y, Z);
     box(4 * S, -10 * S, -T, 8 * S, 2 * S, T, 40, o ? 32 : 16, 4, 12, 4, arm, e);                           // right arm
@@ -2024,7 +2071,7 @@ if (gl) {
 const projM = new Float32Array(16), viewM = new Float32Array(16), vpM = new Float32Array(16), modM = new Float32Array(16), idM = new Float32Array([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
 function mul4(o, a, b) { for (let c = 0; c < 4; c++) for (let r = 0; r < 4; r++) o[c * 4 + r] = a[r] * b[c * 4] + a[4 + r] * b[c * 4 + 1] + a[8 + r] * b[c * 4 + 2] + a[12 + r] * b[c * 4 + 3]; }
 let boatY = 0;
-function setModel(x, z, yaw, y = boatY) { const t = -yaw * Math.PI / 180, c = Math.cos(t), s = Math.sin(t); modM.fill(0); modM[0] = c; modM[2] = -s; modM[5] = 1; modM[8] = s; modM[10] = c; modM[12] = x; modM[13] = y; modM[14] = z; modM[15] = 1; }
+function setModel(x, z, yaw, y = boatY) { const SL = setModel.l || (setModel.l = [0, 0, 0, 0]); SL[0] = x; SL[1] = z; SL[2] = yaw; SL[3] = y; const t = -yaw * Math.PI / 180, c = Math.cos(t), s = Math.sin(t); modM.fill(0); modM[0] = c; modM[2] = -s; modM[5] = 1; modM[8] = s; modM[10] = c; modM[12] = x; modM[13] = y; modM[14] = z; modM[15] = 1; }
 function drawMesh(m, n, mode) { gl.bindBuffer(gl.ARRAY_BUFFER, m); gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 24, 0); gl.vertexAttribPointer(1, 3, gl.FLOAT, false, 24, 12); gl.drawArrays(mode === undefined ? gl.TRIANGLES : mode, 0, n); }
 const view3D = { ex: 0, ey: 0, ez: 0, pitch: 0, fp: false, drawn: 0 };
 function menuPan() { try { return paused && !placing && !el('menu').classList.contains('hide') && !(MP.joined && RACE.S && RACE.S.ph !== 'vote'); } catch (e) { return false; } }
@@ -2121,9 +2168,9 @@ function draw3D(a) {
   if (G.skin && G.defSkin && G.skinMesh) {
     const S = G.skin; gl.useProgram(S.p); gl.uniformMatrix4fv(S.u.uVP, false, vpM); gl.uniform3f(S.u.uEye, ex, ey, ez); gl.uniform3f(S.u.uFog, SKY[0], SKY[1], SKY[2]); gl.uniform2f(S.u.uFogR, fogA, fogB);
     gl.uniform4f(S.u.uTint, 1, 1, 1, 1); gl.activeTexture(gl.TEXTURE0); gl.uniform1i(S.u.uSkin, 0);
-    const one = tex => { gl.bindTexture(gl.TEXTURE_2D, tex); gl.uniformMatrix4fv(S.u.uM, false, modM); drawMesh(G.skinMesh.b, G.skinMesh.n); };
-    if (!fp) { setModel(bx, bz, byaw); one(G.skinOn && G.skinTex ? G.skinTex : G.defSkin); }
-    for (const q of mpPeers) { setModel(q.sx, q.sz, q.syaw, q.sy); one(G.defSkin); }
+    const one = (tex, hy) => { gl.bindTexture(gl.TEXTURE_2D, tex); gl.uniformMatrix4fv(S.u.uM, false, modM); drawMesh(G.skinMesh.b, G.skinMesh.n); if (G.skinHead) { headM(hy); gl.uniformMatrix4fv(S.u.uM, false, modM); drawMesh(G.skinHead.b, G.skinHead.n); } };
+    if (!fp) { setModel(bx, bz, byaw); one(G.skinOn && G.skinTex ? G.skinTex : G.defSkin, headYaw(byaw, cyaw)); }
+    for (const q of mpPeers) { setModel(q.sx, q.sz, q.syaw, q.sy); one(G.defSkin, q.syaw + (+q.hr || 0)); }
     if (gp) { setModel(gp[0], gp[1], gp[2]); ghostOn(S); one(G.defSkin); ghostOff(S); }
     gl.useProgram(P.p);
   } else {
@@ -2132,7 +2179,7 @@ function draw3D(a) {
     if (G.skinOn && G.skin && G.skinTex && G.skinMesh) {
       const S = G.skin; gl.useProgram(S.p); gl.uniformMatrix4fv(S.u.uVP, false, vpM); gl.uniform3f(S.u.uEye, ex, ey, ez); gl.uniform3f(S.u.uFog, SKY[0], SKY[1], SKY[2]); gl.uniform2f(S.u.uFogR, fogA, fogB);
       gl.uniform4f(S.u.uTint, 1, 1, 1, 1); gl.uniformMatrix4fv(S.u.uM, false, modM); gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, G.skinTex); gl.uniform1i(S.u.uSkin, 0);
-      drawMesh(G.skinMesh.b, G.skinMesh.n); gl.useProgram(P.p);
+      drawMesh(G.skinMesh.b, G.skinMesh.n); if (G.skinHead) { headM(headYaw(byaw, cyaw)); gl.uniformMatrix4fv(S.u.uM, false, modM); drawMesh(G.skinHead.b, G.skinHead.n); } gl.useProgram(P.p);
     } else { gl.uniformMatrix4fv(P.u.uM, false, modM); drawMesh(G.rider.b, G.rider.n); } }
   if (gp) { setModel(gp[0], gp[1], gp[2]); gl.uniformMatrix4fv(P.u.uM, false, modM); ghostOn(P); drawMesh(G.rider.b, G.rider.n); ghostOff(P); }
   for (const q of mpPeers) { setModel(q.sx, q.sz, q.syaw, q.sy); gl.uniformMatrix4fv(P.u.uM, false, modM); drawMesh(G.rider.b, G.rider.n); }
@@ -2147,7 +2194,7 @@ function draw3D(a) {
     for (const c of G.chunks) { if (!c.tb) continue; const vx = c.x - ex, vz = c.z - ez; if (Math.hypot(vx, vz) - R > rd) continue; drawMesh(c.tb, c.tn); }
     gl.depthMask(true); gl.disable(gl.BLEND); gl.useProgram(P.p);
   }
-  if (map.regions.length) {
+  if (map.regions.length && !regHidden()) {
     if (G.regV !== map.regV || G.regMap !== map || G.regCp !== (race.racing ? race.cp : -1)) gl3dRegions();
     if (G.regBuf) {
       gl.uniformMatrix4fv(P.u.uM, false, idM); gl.uniform4f(P.u.uTint, 1, 1, 1, 0.33);
@@ -3346,7 +3393,7 @@ const MP_REG = { eu: 'Europe', us: 'United States', asia: 'Asia' };
 const MP = {
   ws: null, joined: false, peers: {}, ref: 0, hb: 0, tx: 0, ui: 0, ping: 0, pingAt: {}, cfg: null, topic: '',
   id: 'g' + Math.random().toString(36).slice(2, 10),
-  load() { const c = Object.assign({ region: 'eu', room: 'lobby', coll: false, srv: {} }, store.get('mp') || {}); const pub = (MP_PUB && MP_PUB.srv) || {}; for (const r in MP_REG) c.srv[r] = Object.assign({ url: SB_DEF.url, key: SB_DEF.key }, pub[r] || {}, IS_DEV ? (c.srv[r] || {}) : {}); if (!IS_DEV) c.coll = !!(MP_PUB && MP_PUB.coll); this.cfg = c; return c; },
+  load() { const c = Object.assign({ region: 'eu', room: 'lobby', coll: false, srv: {} }, store.get('mp') || {}); const pub = (MP_PUB && MP_PUB.srv) || {}; for (const r in MP_REG) c.srv[r] = Object.assign({ url: SB_DEF.url, key: SB_DEF.key }, pub[r] || {}, IS_DEV ? (c.srv[r] || {}) : {}); if (!IS_DEV) c.coll = !!(MP_PUB && MP_PUB.coll); c.off = IS_DEV ? (Array.isArray(c.off) ? c.off : []) : ((MP_PUB && MP_PUB.off) || []); this.cfg = c; return c; },
   save() { store.set('mp', this.cfg); },
   send(topic, event, payload) { if (!this.ws || this.ws.readyState !== 1) return ''; const ref = String(++this.ref); this.ws.send(JSON.stringify({ topic, event, payload, ref })); return ref; },
   connect() {
@@ -3390,7 +3437,7 @@ const MP = {
   sendPos() {
     if (!this.joined || typeof st === 'undefined') return;
     if (RACE.S && RACE.S.ph !== 'race' && RACE.S.ph !== 'count' && ((this.skip = ((this.skip || 0) + 1) % 2))) return;
-    this.send(this.topic, 'broadcast', { type: 'broadcast', event: 'pos', payload: { t: Date.now(), id: this.myId(), n: (ME && ME.name) || 'Guest', x: +st.x.toFixed(3), z: +st.z.toFixed(3), y: +(st.y || 0).toFixed(3), yaw: +st.yaw.toFixed(4), vx: +st.vx.toFixed(4), vz: +st.vz.toFixed(4), c: this.cfg.coll ? 1 : 0, tr: (WEB_CUR && WEB_CUR.id) || '' } });
+    this.send(this.topic, 'broadcast', { type: 'broadcast', event: 'pos', payload: { t: Date.now(), id: this.myId(), n: (ME && ME.name) || 'Guest', x: +st.x.toFixed(3), z: +st.z.toFixed(3), y: +(st.y || 0).toFixed(3), yaw: +st.yaw.toFixed(4), vx: +st.vx.toFixed(4), vz: +st.vz.toFixed(4), c: this.cfg.coll ? 1 : 0, tr: (WEB_CUR && WEB_CUR.id) || '', hr: +(headYaw(st.yaw, cam.yaw) - st.yaw).toFixed(1), rp: sbMine(), fl: SBD.best || 0 } });
   },
   list() { const now = performance.now(), L = []; for (const k in this.peers) { const q = this.peers[k]; if (now - q.rx > 4000) { delete this.peers[k]; continue; } if (!q.tr || !WEB_CUR || q.tr === WEB_CUR.id) L.push(q); } return L; },
   draw() {
@@ -3465,7 +3512,7 @@ if (el('mpPConn')) {
 if (el('mpPublish')) el('mpPublish').addEventListener('click', async () => {
   try {
     if (!gh.tok || !gh.web) throw new Error('add a GitHub token + play repo first');
-    const cfg = { open: el('mpOpen').value, coll: !!MP.cfg.coll, srv: MP.cfg.srv, race: Object.assign(rcCfg(), { pool: rcPool(RACE.tracks), lapsBy: (MP.cfg.race && MP.cfg.race.lapsBy) || rcCfg().lapsBy || {} }), muted: (el('mpMuted').value || '').split(/[,\n]+/).map(x => x.trim()).filter(Boolean), updated: new Date().toISOString() };
+    const cfg = { open: el('mpOpen').value, coll: !!MP.cfg.coll, srv: MP.cfg.srv, off: MP.cfg.off || [], race: Object.assign(rcCfg(), { pool: rcPool(RACE.tracks), lapsBy: (MP.cfg.race && MP.cfg.race.lapsBy) || rcCfg().lapsBy || {} }), muted: (el('mpMuted').value || '').split(/[,\n]+/).map(x => x.trim()).filter(Boolean), updated: new Date().toISOString() };
     MP.stat('Publishing…'); await ghPut(gh.web, 'mp.json', JSON.stringify(cfg, null, 1) + '\n', 'Update multiplayer settings'); MP_PUB = cfg;
     MP.stat('✓ Multiplayer: ' + ({ off: 'closed', testers: 'testers only', all: 'everyone' })[cfg.open] + ' · collisions ' + (cfg.coll ? 'on' : 'off') + ' — live in about a minute');
   } catch (e) { MP.stat('Error: ' + e.message); }
@@ -3945,6 +3992,161 @@ tkCard();
   });
 }; }
 
+// ==================== v2 additions ====================
+// ---- keybinds ----
+const KB_DEF = { fwd: 'KeyW', back: 'KeyS', left: 'KeyA', right: 'KeyD', reset: 'KeyR', regions: 'KeyG', view: 'F5', hitbox: 'KeyH', bcToggle: 'KeyV', bcMenu: 'KeyB', lookBehind: 'KeyC', lookLeft: 'KeyQ', lookRight: 'KeyE', chat: 'KeyT' };
+const KB_LBL = { fwd: 'Forward', back: 'Back / brake', left: 'Steer left', right: 'Steer right', reset: 'Reset to start', regions: 'Show / hide regions', view: '3D / 2D view', hitbox: 'Show hitbox', bcToggle: 'BoatCam on / off', bcMenu: 'BoatCam menu', lookBehind: 'Look behind (hold)', lookLeft: 'Look left (hold)', lookRight: 'Look right (hold)', chat: 'Open chat' };
+const KB = Object.assign({}, KB_DEF, store.get('binds') || {});
+let KB_WAIT = null;
+function kb(a) { try { return KB[a]; } catch (e) { return ({ reset: 'KeyR', view: 'F5', hitbox: 'KeyH', chat: 'KeyT', regions: 'KeyG' })[a]; } }
+function kbMove(code) {
+  const A = { ArrowUp: 'W', ArrowDown: 'S', ArrowLeft: 'A', ArrowRight: 'D' }; if (A[code]) return A[code];
+  try { return code === KB.fwd ? 'W' : code === KB.back ? 'S' : code === KB.left ? 'A' : code === KB.right ? 'D' : undefined; } catch (e) { return KEYMAP[code]; }
+}
+function keyName(c) {
+  if (!c) return '—'; if (/^Key[A-Z]$/.test(c)) return c.slice(3); if (/^Digit\d$/.test(c)) return c.slice(5); if (/^Numpad/.test(c)) return 'Num ' + c.slice(6);
+  const M = { ArrowUp: '↑', ArrowDown: '↓', ArrowLeft: '←', ArrowRight: '→', Space: 'Space', ShiftLeft: 'L Shift', ShiftRight: 'R Shift', ControlLeft: 'L Ctrl', ControlRight: 'R Ctrl', AltLeft: 'L Alt', AltRight: 'R Alt', Backquote: '`', Minus: '-', Equal: '=', BracketLeft: '[', BracketRight: ']', Semicolon: ';', Quote: "'", Comma: ',', Period: '.', Slash: '/', Backslash: '\\', Tab: 'Tab', CapsLock: 'Caps', Enter: 'Enter', Backspace: 'Backspace' };
+  return M[c] || c;
+}
+function kbSet(a, code) { const prev = KB[a]; for (const k in KB) if (k !== a && KB[k] === code) KB[k] = prev; KB[a] = code; store.set('binds', KB); kbApply(); }
+function kbApply() {
+  bcKeys.menu = KB.bcMenu; bcKeys.toggle = KB.bcToggle; bcKeys.lookBehind = KB.lookBehind; bcKeys.lookLeft = KB.lookLeft; bcKeys.lookRight = KB.lookRight;
+  const K = a => '<kbd>' + escH(keyName(KB[a])) + '</kbd>';
+  const h = el('ctlHelp'); if (h) { const i = h.innerHTML.indexOf('Touch buttons'), tail = i >= 0 ? h.innerHTML.slice(i) : '';
+    h.innerHTML = '<h2>Controls</h2>' + K('fwd') + '/<kbd>↑</kbd> forward · ' + K('back') + '/<kbd>↓</kbd> back · ' + K('left') + K('right') + '/<kbd>←</kbd><kbd>→</kbd> steer · ' + K('reset') + ' reset to start · ' + K('regions') + ' regions · ' + K('hitbox') + ' hitbox · ' + K('view') + ' 3D/2D · <kbd>Esc</kbd> menu. ' + tail; }
+  const bh = [...document.querySelectorAll('#bcSec .keys')].find(x => /BoatCam menu/.test(x.textContent));
+  if (bh) bh.innerHTML = K('bcMenu') + ' BoatCam menu · ' + K('bcToggle') + ' boat / normal mode · hold ' + K('lookBehind') + ' look behind · ' + K('lookLeft') + '/' + K('lookRight') + ' look left/right';
+  kbRender();
+}
+function kbRender() {
+  const L = el('kbList'); if (!L) return;
+  L.innerHTML = Object.keys(KB_DEF).map(a => '<div class="kbRow"><span>' + KB_LBL[a] + '</span><button type="button" class="kbBtn' + (KB_WAIT === a ? ' wait' : '') + '" data-a="' + a + '">' + (KB_WAIT === a ? 'Press a key…' : escH(keyName(KB[a]))) + '</button></div>').join('');
+}
+if (el('kbList')) el('kbList').addEventListener('click', e => { const b = e.target.closest('.kbBtn'); if (!b) return; KB_WAIT = KB_WAIT === b.dataset.a ? null : b.dataset.a; kbRender(); });
+if (el('kbReset')) el('kbReset').addEventListener('click', () => { Object.assign(KB, KB_DEF); store.set('binds', KB); KB_WAIT = null; kbApply(); toast('Keybinds reset', 900); });
+addEventListener('keydown', e => {
+  if (!KB_WAIT) return; e.preventDefault(); e.stopImmediatePropagation();
+  if (e.code !== 'Escape') { if (e.code === 'KeyP') { toast('P is reserved for pause', 1000); } else kbSet(KB_WAIT, e.code); }
+  KB_WAIT = null; kbRender();
+}, true);
+kbApply();
+
+// ---- region visibility ----
+function regHidden() { return !!settings.regHide && placing !== 3; }
+function toggleRegions() { settings.regHide = !settings.regHide; saveSettings(); toast(settings.regHide ? 'Regions hidden' : 'Regions shown', 900); }
+
+// ---- head follows the BoatCam camera ----
+function headYaw(b, cy) {
+  if (settings.camera !== 'boatcam' || cy == null || !isFinite(cy)) return b;
+  const c = cy - (bcHeld.lookBehind ? 180 : 0);
+  return b + clamp(wrapDegrees(c - b), -105, 105);
+}
+function headM(hy) {
+  const L = setModel.l; if (!L) return; const x = L[0], z = L[1], yw = L[2], y = L[3]; if (hy == null || !isFinite(hy)) hy = yw;
+  const Zp = 0.14, tb = -yw * Math.PI / 180, th = -hy * Math.PI / 180;
+  setModel(x + (Math.sin(tb) - Math.sin(th)) * Zp, z + (Math.cos(tb) - Math.cos(th)) * Zp, hy, y);
+}
+
+// ---- per-checkpoint (sector) deltas ----
+function secBest() { try { return (map && store.get('sect:' + map.id)) || []; } catch (e) { return []; } }
+function secNote(i, sec) { const B = secBest(), b = B[i]; if (sec > 0 && (b == null || sec < b)) { B[i] = +sec.toFixed(4); store.set('sect:' + map.id, B); } return b; }
+function dltSec(sec) {
+  const e = el('dlt'); if (!e) return; e.className = 'on n'; e.textContent = fmtT(sec); e.parentElement.classList.add('hasD');
+  clearTimeout(dltTmr); dltTmr = setTimeout(() => { e.className = ''; e.parentElement.classList.remove('hasD'); }, 3000);
+}
+function secShow(i, sec) { const b = secNote(i, sec); if (b != null) dltShow(sec - b); else dltSec(sec); }
+function cpSplit(i, t) {
+  if (!race) return; const sp = race.sp = race.sp || []; sp[i] = t;
+  const prev = i > 0 && sp[i - 1] != null ? sp[i - 1] : 0; secShow(i, t - prev);
+  try { sbMine(); } catch (e) {}
+}
+function spFinish(t) {
+  const n = (map.cps || []).length, cur = (race && race.sp) || [], sp = cur.slice(); sp[n] = t;
+  const prev = n && cur[n - 1] != null ? cur[n - 1] : 0; secShow(n, t - prev);
+  if (race) race.sp = [];
+  try { if (MP.joined && RACE.S && RACE.S.ph === 'race') { const ms = Math.round(t * 1000); if (!SBD.best || ms < SBD.best) SBD.best = ms; } } catch (e) {}
+  setTimeout(() => { try { sbMine(); } catch (e) {} }, 0);
+  return sp;
+}
+
+// ---- multiplayer servers on / off ----
+function regOff(r) { try { if (!MP.cfg) MP.load(); return (MP.cfg.off || []).includes(r); } catch (e) { return false; } }
+{ const _po = probeOpen; probeOpen = function (r) { if (regOff(r)) { try { if (PROBE.s[r]) { PROBE.s[r].close(); delete PROBE.s[r]; } } catch (e) {} PROBE.ping[r] = 0; return; } return _po(r); }; }
+{ const _rj = rgJoin; rgJoin = function (r) { if (regOff(r)) { toast((MP_REG[r] || r) + ' servers are offline', 1200); return; } return _rj(r); }; }
+{ const _ru = rgUi; rgUi = function () { _ru(); document.querySelectorAll('.rgBtn').forEach(b => { const off = regOff(b.dataset.r); b.classList.toggle('off', off); b.disabled = off; if (off) { b.querySelector('.rgMs').textContent = '[offline]'; b.querySelector('.rgN').textContent = 'disabled'; } }); }; }
+(function () {
+  const pane = document.querySelector('#devDash .ddPane[data-p=race]'); if (!pane) return;
+  const c = document.createElement('div'); c.className = 'ddCard'; c.id = 'svCard';
+  c.innerHTML = '<h3>Multiplayer servers</h3><div class="keys" style="margin-bottom:4px">Turn regions on or off. Disabled regions show as offline to players after you publish multiplayer settings.</div><div id="svList"></div>';
+  const bar = pane.querySelector('.ddBar'); if (bar && bar.nextSibling) pane.insertBefore(c, bar.nextSibling); else pane.appendChild(c);
+  const draw = () => { if (!MP.cfg) MP.load(); el('svList').innerHTML = Object.keys(MP_REG).map(r => { const off = regOff(r), on = MP.ws && MP.cfg.region === r; return '<div class="svRow' + (off ? ' off' : '') + '"><span class="svDot"></span><span class="svN">' + escH(MP_REG[r]) + ' <span class="keys">(' + r.toUpperCase().replace('US', 'NA') + ')</span></span><span class="svS">' + (off ? 'Disabled' : on ? 'Connected' : 'Enabled') + '</span><button class="b' + (off ? ' primary' : '') + '" data-r="' + r + '">' + (off ? 'Enable' : 'Disable') + '</button></div>'; }).join(''); };
+  el('svList').addEventListener('click', e => { const b = e.target.closest('button[data-r]'); if (!b) return; const r = b.dataset.r; if (!MP.cfg) MP.load(); const s = new Set(MP.cfg.off || []); if (s.has(r)) s.delete(r); else s.add(r); MP.cfg.off = [...s]; MP.save();
+    if (s.has(r) && MP.ws && MP.cfg.region === r) { MP.close(); toast('Left ' + MP_REG[r] + ' (disabled)', 1200); }
+    draw(); rgUi(); });
+  draw(); setInterval(() => { if (!el('devDash').classList.contains('hide')) draw(); }, 2000);
+})();
+
+// ---- race HUD line + scoreboard ----
+const SBD = { h: {}, best: 0, fl: { id: null, ms: 0 }, flT: 0, t0: 0, myP: -1, myAt: 0, html: '', line: '' };
+function sbN() { return ((map && map.cps) || []).length + 1; }
+function sbLap() { return race ? Math.max(1, (race.lapNo || 0) - Math.max(RACE.lap0 || 0, 1) + 1) : 1; }
+function sbMine() {
+  const S = RACE.S, me = MP.myId();
+  if (!MP.joined || !S || S.ph !== 'race' || !S.ids || !S.ids.includes(me) || !race || !RACE.t0) return null;
+  const n = sbN(); const p = RACE.fin ? (S.laps || 1) * n : (race.racing ? (sbLap() - 1) * n + (race.cp || 0) : 0);
+  if (p !== SBD.myP) { SBD.myP = p; SBD.myAt = Math.round(performance.now() - RACE.t0); const H = SBD.h[me] || (SBD.h[me] = {}); if (H[p] == null) H[p] = SBD.myAt; }
+  return [p, SBD.myAt];
+}
+function sbEl() { let b = el('sboard'); if (!b) { b = document.createElement('div'); b.id = 'sboard'; b.className = 'hide'; document.body.appendChild(b); } return b; }
+function sbName(id) { return String(rcPlayerName(id) || 'Guest').replace(/ \(you\)$/, ''); }
+function sbStand() {
+  const S = RACE.S, ids = (S && S.ids) || [], n = sbN(), me = MP.myId();
+  const rows = ids.map((id, o) => { const H = SBD.h[id] || {}; let p = 0, t = 0; for (const k in H) if (+k > p || (+k === p && !t)) { p = +k; t = H[k]; }
+    const q = (MP.peers || {})[id] || {}; return { id, o, p, t, fl: id === me ? SBD.best : (+q.fl || 0), fin: p >= (S.laps || 1) * n }; });
+  rows.sort((a, b) => b.p - a.p || a.t - b.t || a.o - b.o);
+  for (let i = 0; i < rows.length; i++) { const r = rows[i]; if (!i) { r.g = ''; continue; }
+    const A = rows[i - 1], HA = SBD.h[A.id] || {}, dp = A.p - r.p;
+    if (r.p <= 0) r.g = '—'; else if (dp >= n) { const l = Math.floor(dp / n); r.g = '+' + l + ' lap' + (l > 1 ? 's' : ''); }
+    else if (HA[r.p] != null) r.g = '+' + Math.max(0, (r.t - HA[r.p]) / 1000).toFixed(3); else r.g = '—'; }
+  return rows;
+}
+function sbUi() {
+  const S = RACE.S, me = MP.myId(), line = el('rcLine'), bd = sbEl();
+  const on = MP.joined && S && (S.ph === 'count' || S.ph === 'race');
+  if (!on) { if (line) line.classList.add('hide'); bd.classList.add('hide'); return; }
+  const inR = S.ids && S.ids.includes(me), tn = escH(rcName(S.track) || ''), laps = S.laps || 1, n = sbN();
+  const rows = sbStand(), myPos = rows.findIndex(x => x.id === me) + 1;
+  let L;
+  if (!inR) L = '<b>SPECTATING</b> · ' + tn;
+  else if (S.ph === 'count') L = '<b>ON THE GRID</b> · ' + tn + ' · ' + laps + ' lap' + (laps === 1 ? '' : 's');
+  else L = '<b>' + (RACE.fin ? 'FINISHED' : 'LAP ' + Math.min(laps, sbLap()) + '/' + laps) + '</b> · P' + myPos + '/' + rows.length + ' · ' + tn;
+  if (line && L !== SBD.line) { SBD.line = L; line.innerHTML = L; } if (line) line.classList.remove('hide');
+  // fastest lap
+  let fl = null; for (const r of rows) if (r.fl > 0 && (!fl || r.fl < fl.fl)) fl = r;
+  if (fl && (SBD.fl.id !== fl.id || SBD.fl.ms !== fl.fl)) { SBD.fl = { id: fl.id, ms: fl.fl }; SBD.flT = performance.now(); }
+  const flash = performance.now() - SBD.flT < 1600;
+  const lead = rows[0], lLap = lead ? Math.min(laps, Math.floor(lead.p / n) + 1) : 1;
+  const h = '<div class="sbH"><span>' + (S.ph === 'count' ? 'Grid' : 'Standings') + '</span><span>' + (S.ph === 'race' ? 'Lap ' + lLap + '/' + laps : laps + ' lap' + (laps === 1 ? '' : 's')) + '</span></div>' +
+    rows.map((r, i) => '<div class="sbR' + (r.id === me ? ' me' : '') + '"><span class="sbP">' + (i + 1) + '</span><span class="sbNm">' + escH(sbName(r.id)) + (r.fin ? ' 🏁' : '') + (fl && r.id === fl.id ? '<span class="sbFlI" title="Fastest lap">FL</span>' : '') + '</span><span class="sbG">' + (i ? r.g : (S.ph === 'race' ? 'Leader' : '')) + '</span></div>').join('') +
+    (fl ? '<div class="sbFL' + (flash ? ' new' : '') + '"><span>⏱ Fastest lap · <b>' + escH(sbName(fl.id)) + '</b></span><span>' + rcFmt(fl.fl) + '</span></div>' : '');
+  if (h !== SBD.html) { SBD.html = h; bd.innerHTML = h; }
+  bd.classList.remove('hide');
+}
+setInterval(() => { try {
+  if (SBD.t0 !== RACE.t0) { SBD.t0 = RACE.t0; SBD.h = {}; SBD.best = 0; SBD.fl = { id: null, ms: 0 }; SBD.myP = -1; SBD.html = ''; }
+  if (MP.joined && RACE.S && RACE.S.ph === 'race' && RACE.t0) {
+    sbMine(); const el0 = performance.now() - RACE.t0;
+    for (const id in MP.peers) { const q = MP.peers[id]; if (!Array.isArray(q.rp) || (q.tr && WEB_CUR && q.tr !== WEB_CUR.id)) continue;
+      if (q.rp[1] > el0 + 1500) continue;   // stale progress from a previous race
+      const H = SBD.h[id] || (SBD.h[id] = {}); if (H[q.rp[0]] == null) H[q.rp[0]] = q.rp[1]; }
+  }
+  sbUi();
+} catch (e) {} }, 50);
+rcUi = function () {
+  try { const ic = el('rcIce'); if (ic) ic.textContent = '🧊 ' + iceBal() + ' icetokens · cosmetics shop coming soon'; } catch (e) {}
+  const b = el('raceBox'); if (b) b.classList.add('hide'); lobbyUi(); try { sbUi(); } catch (e) {}
+};
+
 // ---------- chat: lobby / track / whole-game, filtered ----------
 const CHAT = { log: { lobby: [], track: [], global: [] }, tab: 'lobby', feed: [], open: false, g: null, gTopic: 'realtime:ibr-global' };
 const CHAT_SLUR = /n+[^\w\s]*[i1!|y]+[^\w\s]*[gq9]+[^\w\s]*[gq9]+[^\w\s]*(?:[e3]+[^\w\s]*r+|[a@4]+h?|u+h|[e3]+)?[sz]*/gi;
@@ -4014,7 +4216,7 @@ if (el('chatBox')) {
   el('chIn').addEventListener('blur', () => setTimeout(() => { if (CHAT.open && document.activeElement !== el('chIn')) chatOpen(false); }, 200));
   document.querySelectorAll('#chatBox .chTabs button').forEach(b => { b.addEventListener('mousedown', e => e.preventDefault()); b.addEventListener('click', () => { if (CHAT.open) el('chIn').focus(); }); });
   el('chBtn').addEventListener('click', () => chatOpen(true));
-  addEventListener('keydown', e => { if (e.code !== 'KeyT' || e.repeat || CHAT.open || el('chatBox').classList.contains('hide') || /INPUT|TEXTAREA|SELECT/.test((document.activeElement || {}).tagName || '')) return; e.preventDefault(); chatOpen(true); });
+  addEventListener('keydown', e => { if (e.code !== kb('chat') || e.repeat || CHAT.open || el('chatBox').classList.contains('hide') || /INPUT|TEXTAREA|SELECT/.test((document.activeElement || {}).tagName || '')) return; e.preventDefault(); chatOpen(true); });
 }
 
 window.IceBoat = { MP, RACE, CHAT, chatFilter, runTests, step, makeState, env, _rawMap(m) { const o = map; map = m; return o; }, parseLitematic, buildLitMap, importFile, publishTrack, obuRunCommands, obuSetMode, obuChanged, regionsChanged, ghPublish, webHtml, applyUrlObu, gh, nameOk, keyNorm, newKey, skinFace, devGateHtml, get net() { return NET; }, get me() { return ME; }, setTab, get baseTexCount() { return baseTex.size; }, get map() { return map; }, get race() { return race; }, get st() { return st; } };
