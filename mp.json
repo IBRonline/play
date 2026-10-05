@@ -1,5 +1,5 @@
 {
- "open": "all",
+ "open": "off",
  "coll": false,
  "srv": {
   "eu": {
@@ -15,13 +15,17 @@
    "key": "sb_publishable_-Av4-QPspUOMHAUtM5Jksw_amiBfwpy"
   }
  },
+ "off": [
+  "us"
+ ],
  "race": {
   "pool": [
    "frozen-lake"
   ],
   "laps": 3,
-  "inter": 20
+  "inter": 20,
+  "lapsBy": {}
  },
  "muted": [],
- "updated": "2026-10-05T09:44:24.175Z"
+ "updated": "2026-10-05T16:33:27.089Z"
 }
