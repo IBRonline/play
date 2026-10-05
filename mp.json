@@ -1,6 +1,6 @@
 {
- "open": "off",
- "coll": false,
+ "open": "all",
+ "coll": true,
  "srv": {
   "eu": {
    "url": "https://dbyqswlvmequszujpwaj.supabase.co",
@@ -15,7 +15,9 @@
    "key": "sb_publishable_-Av4-QPspUOMHAUtM5Jksw_amiBfwpy"
   }
  },
- "off": [],
+ "off": [
+  "asia"
+ ],
  "race": {
   "pool": [
    "frozen-lake"
@@ -27,5 +29,5 @@
   }
  },
  "muted": [],
- "updated": "2026-10-05T21:42:37.472Z"
+ "updated": "2026-10-05T21:42:46.942Z"
 }
