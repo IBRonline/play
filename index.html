@@ -369,8 +369,272 @@ html body .hud,html body #mini{transition:opacity .2s ease}html body:has(#menu:n
 .mcSug .mcX{background:none;border:0;color:inherit;opacity:.5;cursor:pointer;font-size:16px;padding:4px}
 /* popups: match the dark glass UI */
 html body #toast{top:132px!important;transform:translateX(-50%)!important;font:600 14px/1.3 system-ui,-apple-system,'Segoe UI',sans-serif!important;letter-spacing:.01em!important;color:#e8eef5!important;background:rgba(18,20,26,.86)!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:9px 16px;box-shadow:0 8px 24px rgba(0,0,0,.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);filter:none!important;text-shadow:none!important;max-width:80vw;z-index:70}
+/* sign-in chip: always pinned top-right of the screen */
+#menu #meChip,#meChip{position:fixed!important;top:16px!important;right:16px!important;left:auto!important;bottom:auto!important;margin:0!important;transform:none!important;z-index:31!important;height:34px;display:inline-flex;align-items:center;gap:8px;padding:3px 14px 3px 4px!important;border-radius:999px!important;border:1px solid rgba(255,255,255,.12)!important;background:rgba(14,16,21,.8)!important;color:#e8eef5!important;font:600 13px/1 system-ui,sans-serif!important;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.3)}
+#meChip.hide{display:none!important}
+#meChip:hover{border-color:rgba(255,255,255,.3)!important}
+#meChip .av{width:26px!important;height:26px!important;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,.1);font-size:13px}
+/* track dropdown */
+#webSec{display:none!important}
+#menu .track.tkDrop{position:relative;cursor:pointer;padding-right:40px!important;user-select:none}
+#menu .track.tkDrop:hover{border-color:rgba(255,255,255,.25)}
+.tkDrop .tkLbl{display:block;font:700 10px/1 system-ui,sans-serif;letter-spacing:1.5px;text-transform:uppercase;opacity:.5;margin-bottom:6px}
+.tkDrop .tkCar{position:absolute;right:14px;top:50%;transform:translateY(-50%);opacity:.6;transition:transform .15s;font-size:12px}
+.tkDrop.open .tkCar{transform:translateY(-50%) rotate(180deg)}
+#tkPop{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:20;background:rgba(16,18,24,.97);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:8px;box-shadow:0 14px 36px rgba(0,0,0,.45);cursor:default}
+#tkPop input{width:100%;box-sizing:border-box;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;color:#fff;padding:8px 10px;font:500 13px system-ui,sans-serif;outline:none}
+#tkPop input:focus{border-color:rgba(94,159,232,.6)}
+#tkPop .tkL{max-height:240px;overflow:auto;margin-top:6px;display:flex;flex-direction:column;gap:2px}
+#tkPop .tkI{display:block;width:100%;text-align:left;background:none;border:0;border-radius:8px;color:#e8eef5;padding:8px 10px;cursor:pointer;font:600 13px/1.3 system-ui,sans-serif}
+#tkPop .tkI small{display:block;font-weight:400;opacity:.55;font-size:11px}
+#tkPop .tkI:hover,#tkPop .tkI.on{background:rgba(255,255,255,.08)}
+#tkPop .tkE{padding:10px;opacity:.5;font-size:12px}
+/* play button with PB */
+#playBtn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;line-height:1.1}
+#playBtn .pbT{font-weight:800}
+#playBtn .pbS{font:600 11px/1 ui-monospace,Consolas,monospace;opacity:.7}
+#onl{display:inline-flex;align-items:center;gap:7px;margin:2px 0 10px;font:600 12px/1 system-ui,sans-serif;color:#b9f3c8;opacity:.9}
+#onl .dot{width:7px;height:7px;border-radius:50%;background:#3ddc84;box-shadow:0 0 0 0 rgba(61,220,132,.6);animation:onlP 2s infinite}
+@keyframes onlP{0%{box-shadow:0 0 0 0 rgba(61,220,132,.55)}70%{box-shadow:0 0 0 7px rgba(61,220,132,0)}100%{box-shadow:0 0 0 0 rgba(61,220,132,0)}}
+#cqN{display:none;font:600 11px/1 system-ui,sans-serif;opacity:.6;margin-left:6px;white-space:nowrap}
+#cqN.on{display:inline}
+.macRow{display:flex;gap:6px;align-items:center;margin-bottom:6px}
+.macRow .macK{min-width:84px;justify-content:center}
+.macRow .macK.wait{border-color:rgba(94,159,232,.7);color:#9cc8ff}
+.macRow .macT{flex:1;min-width:0;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;color:#fff;padding:7px 10px;font:500 13px system-ui,sans-serif;outline:none}
+.macRow .macT:focus{border-color:rgba(94,159,232,.6)}
+.macRow .macX{background:none;border:0;color:inherit;opacity:.5;cursor:pointer;font-size:14px;padding:4px 6px}
+#macStat{color:#ffb4a8;margin-top:4px}
+#rpBar{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:60;min-width:min(620px,92vw);background:rgba(14,18,26,.82);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:10px 14px;color:#fff;font:500 13px system-ui,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+#rpBar.hide{display:none}
+#rpBar .rpT{display:flex;gap:10px;align-items:baseline;margin-bottom:8px;font-size:12px;opacity:.85}
+#rpBar .rpT b{letter-spacing:.12em;font-size:11px;color:#fff}
+#rpBar .rpC{display:flex;align-items:center;gap:10px}
+#rpBar button{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:#fff;border-radius:8px;padding:6px 10px;font:600 12px system-ui,sans-serif;cursor:pointer;min-width:38px}
+#rpBar button:hover{background:rgba(255,255,255,.16)}
+#rpBar input[type=range]{flex:1;accent-color:#fff}
+#rpBar #rpTime,#rpBar #rpLen{font:600 13px ui-monospace,Menlo,monospace;min-width:62px;text-align:center}
+body.rpOn #specBar,body.rpOn #sboard,body.rpOn #chatBox{display:none!important}
+#rpModal{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center}
+#rpModal.hide{display:none}
+#rpModal .rpBox{width:min(520px,92vw);max-height:76vh;overflow:auto;background:rgba(16,20,28,.96);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px;color:#fff;font:500 13px system-ui,sans-serif}
+#rpModal .rpHd{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:15px}
+#rpModal .rpHd button,#rpModal .rpDel{background:none;border:0;color:#fff;opacity:.55;cursor:pointer;font-size:15px}
+.rpRow{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.04);margin-bottom:6px}
+.rpRow .rpI{flex:1;min-width:0}
+.rpRow .rpI b{font:700 15px ui-monospace,Menlo,monospace}
+.rpRow .rpS{font-size:11px;opacity:.6;margin-top:2px}
+.rpPb{margin-left:8px;font:700 10px system-ui;padding:2px 6px;border-radius:6px;background:#2fbf71;color:#04170c;vertical-align:2px}
+.rpDevH{display:flex;justify-content:space-between;align-items:center;margin:4px 0 8px}
+.rpDevR{justify-content:space-between}
+.rpDevR .pl{flex:1}
+#rpBar .rpSpG{display:flex;gap:0}
+#rpBar .rpSpG button{border-radius:0;min-width:30px}
+#rpBar .rpSpG button:first-child{border-radius:8px 0 0 8px}
+#rpBar .rpSpG button:last-child{border-radius:0 8px 8px 0}
+#rpBar #rpSp{min-width:46px}
+#rpBar #rpCamB.on{background:rgba(255,255,255,.9);color:#0e121a}
+#rpBar .rpH{margin-top:7px;font-size:11px;opacity:.55;text-align:center}
+#rpBar input[type=range]{-webkit-appearance:none;appearance:none;height:6px;border-radius:4px;background:linear-gradient(90deg,#fff var(--p,0%),rgba(255,255,255,.18) var(--p,0%));cursor:pointer}
+#rpBar input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.2)}
+#rpTip{position:absolute;bottom:62px;transform:translateX(-50%);background:#fff;color:#0e121a;font:700 11px ui-monospace,Menlo,monospace;padding:3px 6px;border-radius:6px;pointer-events:none}
+#rpTip.hide{display:none}
+#rpBar{min-width:min(760px,94vw)}
+
+/* phase 3: shop & quests */
+#cosOpen{position:relative}
+#cosOpen .cosBal{opacity:.75;font-size:.85em;margin-left:4px}
+#cosOpen.dot::after{content:'';position:absolute;top:5px;right:5px;width:8px;height:8px;border-radius:50%;background:#ff5a4f;box-shadow:0 0 0 2px rgba(0,0,0,.35)}
+#cosModal{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;background:rgba(6,10,18,.62);backdrop-filter:blur(4px)}
+#cosModal.hide{display:none}
+.cosBox{width:min(620px,94vw);max-height:86vh;overflow:auto;background:rgba(18,24,34,.97);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px 18px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.cosHd{display:flex;align-items:center;gap:10px;margin-bottom:12px}.cosHd b{font-size:17px;flex:1}
+.cosPill{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);padding:3px 10px;border-radius:999px;font-size:13px}
+.cosTabs{display:flex;gap:6px;margin-bottom:12px}
+.cosTabs button{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:inherit;padding:8px;border-radius:9px;cursor:pointer;font:inherit}
+.cosTabs button.on{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.22)}
+.cosSec{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:11px;padding:12px;margin-bottom:10px}
+.cosSh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:9px}
+.cosDays{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:10px}
+.cosDay{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 2px;border-radius:9px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);font-size:11px;opacity:.75}
+.cosDay b{font-size:12px}.cosDay.got{opacity:1;background:rgba(80,200,120,.12);border-color:rgba(80,200,120,.35)}
+.cosDay.nxt{opacity:1;border-color:rgba(255,255,255,.55);box-shadow:0 0 0 1px rgba(255,255,255,.25) inset}
+.cosDay i{position:absolute;top:3px;right:5px;font-style:normal;color:#6fe08f;font-size:10px}
+.cosClaim{width:100%}
+.cosQ{display:flex;gap:10px;align-items:center;padding:8px 0;border-top:1px solid rgba(255,255,255,.06)}
+.cosQ:first-of-type{border-top:0}.cosQ.got{opacity:.55}
+.cosQt{flex:1;display:grid;grid-template-columns:1fr auto;gap:4px 8px;align-items:baseline}
+.cosBar{grid-column:1/-1;height:5px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden}
+.cosBar i{display:block;height:100%;background:linear-gradient(90deg,#7fd0ff,#c5ecff);border-radius:3px}
+.cosQ .b{min-width:74px}
+.cosNote{text-align:center;margin-top:6px}
+.cosGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:9px}
+.cosCard{display:flex;flex-direction:column;gap:5px;padding:10px;border-radius:11px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+.cosCard.on{border-color:rgba(255,255,255,.45);background:rgba(255,255,255,.08)}
+.cosCard .b{margin-top:auto}
+.cosSw{height:30px;border-radius:7px;position:relative;overflow:hidden}
+.cosSw.ribbon{-webkit-mask:linear-gradient(90deg,transparent,#000 70%);mask:linear-gradient(90deg,transparent,#000 70%)}
+.cosSw.dots{-webkit-mask:radial-gradient(circle,#000 34%,transparent 38%) 0 50%/14px 14px repeat-x;mask:radial-gradient(circle,#000 34%,transparent 38%) 0 50%/14px 14px repeat-x}
+.cosSw.sparkle{-webkit-mask:radial-gradient(circle at 20% 30%,#000 2.5px,transparent 3px) 0 0/18px 15px,radial-gradient(circle at 70% 70%,#000 2px,transparent 2.5px) 0 0/13px 11px;mask:radial-gradient(circle at 20% 30%,#000 2.5px,transparent 3px) 0 0/18px 15px,radial-gradient(circle at 70% 70%,#000 2px,transparent 2.5px) 0 0/13px 11px}
+.cosSw.none{background:repeating-linear-gradient(45deg,rgba(255,255,255,.06) 0 6px,transparent 6px 12px)}
+/* dev cosmetics editor */
+.cdCard{display:flex;flex-direction:column;gap:9px;margin-bottom:9px}
+.cdTop{display:flex;gap:10px;align-items:center}.cdTop .cosSw{width:90px;flex:none}
+.cdTop input[type=text]{flex:1;font-weight:600}
+.cdRow{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}
+.cdRow label{display:flex;flex-direction:column;gap:3px;font-size:12px;opacity:.9;min-width:110px}
+.cdRow label span{opacity:.65}
+.cdRow input[type=number]{width:90px}.cdRow input[type=color]{width:56px;height:28px;padding:0;border:0;background:none}
+.cdRow .cdChk{flex-direction:row;align-items:center;gap:6px;min-width:0}
+
+/* phase 4: profiles + friends */
+#frOpen{position:relative}#frOpen .frC{opacity:.7;font-size:.85em;margin-left:4px}
+#frOpen.dot::after{content:'';position:absolute;top:5px;right:5px;width:8px;height:8px;border-radius:50%;background:#ff5a4f;box-shadow:0 0 0 2px rgba(0,0,0,.35)}
+.socModal{position:fixed;inset:0;z-index:61;display:flex;align-items:center;justify-content:center;background:rgba(6,10,18,.62);backdrop-filter:blur(4px)}
+.socModal.hide{display:none}#pfModal{z-index:62}
+.socBox{width:min(560px,94vw);max-height:86vh;overflow:auto;background:rgba(18,24,34,.97);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px 18px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.socEmpty{text-align:center;padding:18px 6px}
+.socSh{font-size:12px;text-transform:uppercase;letter-spacing:.06em;opacity:.6;margin:12px 0 6px}
+.frN{display:inline-block;min-width:18px;padding:0 5px;border-radius:9px;background:#ff5a4f;color:#fff;font-size:11px;line-height:18px}
+.frList{display:flex;flex-direction:column}
+.frRow{display:flex;align-items:center;gap:10px;padding:8px 4px;border-top:1px solid rgba(255,255,255,.06)}
+.frRow:first-child{border-top:0}
+.frWho{flex:1;display:flex;align-items:center;gap:9px;cursor:pointer;position:relative;min-width:0}
+.frWho:hover b{text-decoration:underline}
+.frWho>div{display:flex;flex-direction:column;min-width:0}.frWho>div .keys{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.frWho .av{width:30px;height:30px;flex:none}
+.frWho>.frDot{position:absolute;left:22px;top:22px;border:2px solid rgba(18,24,34,1)}
+.frDot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#6b7280;margin-right:5px;vertical-align:middle}
+.frDot.on{background:#46d17a}
+.frBtns{display:flex;gap:6px}
+.frSearch input{width:100%;margin-bottom:6px}
+.pfLink{cursor:pointer}.pfLink:hover{text-decoration:underline}
+.pfBan{display:flex;align-items:center;gap:14px;padding:16px;border-radius:12px;margin-bottom:12px;border:1px solid rgba(255,255,255,.1)}
+.pfBan .pfAv{width:64px;height:64px;font-size:28px;flex:none;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.pfName{flex:1;display:flex;flex-direction:column;gap:3px;min-width:0}.pfName b{font-size:20px}
+.pfActs{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.pfBio{padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.04);margin-bottom:12px;white-space:pre-wrap;word-break:break-word}
+.pfStats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
+.pfStats>div{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 4px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);text-align:center}
+.pfStats b{font-size:18px}.pfStats span{font-size:11px;opacity:.7}.pfStats .cosSw{width:70%;height:18px}
+.pfFav{margin-bottom:6px}
+.pfPbs .row{display:flex;gap:10px;align-items:baseline;padding:5px 2px;border-top:1px solid rgba(255,255,255,.05)}
+.pfPbs .row .pl{flex:1}.pfPbs .t{font-variant-numeric:tabular-nums}
+.pfJoin{text-align:right;margin-top:10px}
+.pfEd textarea{width:100%;resize:vertical}
+@media (max-width:520px){.pfStats{grid-template-columns:repeat(2,1fr)}.pfBan{flex-wrap:wrap}}
+
+/* home screen layout */
+#home{display:none}
+#menu.hmHome{background:linear-gradient(90deg,rgba(6,8,11,.82) 0%,rgba(6,8,11,.45) 45%,rgba(6,8,11,.35) 70%,rgba(6,8,11,.7) 100%)}
+#menu.hmHome>.panel{display:none!important}
+#menu.hmHome>#home{display:flex}
+#home{position:absolute;inset:0;justify-content:space-between;padding:44px 64px;color:#e8eef5;font-family:system-ui,-apple-system,'Segoe UI',sans-serif}
+.hmL{display:flex;flex-direction:column;min-width:0}
+.hmLogo{font:600 22px/1 system-ui,sans-serif;letter-spacing:.02em;color:#fff;margin-bottom:34px}
+#hmVer{font-size:11px;font-weight:400;opacity:.45;margin-left:8px;letter-spacing:0}
+.hmNav{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.hmNav button,.hmSmall button,.hmR button{all:unset;cursor:pointer}
+.hmNav button{position:relative;font:500 40px/1.15 system-ui,sans-serif;color:rgba(232,238,245,.86);padding:2px 0;transition:color .15s,transform .15s}
+.hmNav button::before{content:'';position:absolute;left:-18px;top:50%;width:4px;height:0;border-radius:2px;background:#7cc4ff;transform:translateY(-50%);transition:height .15s}
+.hmNav button:hover,.hmNav button:focus-visible{color:#fff;transform:translateX(6px)}
+.hmNav button:hover::before,.hmNav button:focus-visible::before{height:70%}
+.hmBadge:not(:empty){display:inline-block;vertical-align:top;margin-left:8px;min-width:20px;padding:0 6px;border-radius:10px;background:#ff5a4f;color:#fff;font-size:13px;line-height:20px;text-align:center}
+.hmSmall{display:flex;gap:18px;margin-top:26px}
+.hmSmall button{font-size:14px;color:rgba(232,238,245,.55)}.hmSmall button:hover{color:#fff}
+.hmHelp{margin-top:auto;padding-left:70px;font-size:12px;color:rgba(232,238,245,.4)}
+.hmR{display:flex;flex-direction:column;align-items:flex-end;text-align:right;gap:4px;min-width:180px}
+.hmProf{display:flex;align-items:center;gap:8px;font:500 22px/1 system-ui,sans-serif;color:#fff}
+.hmProf .n{order:0}.hmProf .av{width:30px;height:30px}.hmProf .nm{display:none}
+.hmProf:hover .n{text-decoration:underline}
+.hmBal{font-size:12px;color:rgba(232,238,245,.5);margin-bottom:10px}
+.hmFrH{font-size:16px;color:rgba(232,238,245,.8);margin-top:6px}
+.hmFr{display:flex;flex-direction:column;align-items:center;gap:3px;align-self:stretch;padding-left:40px}
+.hmFr button{font-size:15px;color:#e8eef5}.hmFr button:hover{text-decoration:underline}
+.hmMute{font-size:13px;color:rgba(232,238,245,.4)}
+.hmAll{font-size:12px;color:rgba(232,238,245,.5);margin-top:8px}.hmAll:hover{color:#fff}
+#hmOnl{margin-top:10px;font-size:12px}
+.hmBackRow{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.hmBackRow b{font-size:18px;color:#fff}
+#menu .panel[data-hm] > h1,#menu .panel[data-hm] > #verTag,#menu .panel[data-hm] > .sub,#menu .panel[data-hm] > #webTabs,#menu .panel[data-hm] > #meChip,#menu .panel[data-hm] > .help,#menu .panel[data-hm] #cosOpen,#menu .panel[data-hm] #frOpen,#menu .panel[data-hm] > .row.dev{display:none!important}
+#menu .panel .hmOff{display:none!important}
+#menu .panel[data-hm="mp"] > .track,#menu .panel[data-hm="mp"] > .row,#menu .panel[data-hm="wrs"] > .track,#menu .panel[data-hm="wrs"] > .row,#menu .panel[data-hm="acct"] > .track,#menu .panel[data-hm="acct"] > .row,#menu .panel[data-hm="set"] > .track,#menu .panel[data-hm="set"] > .row,#menu .panel[data-hm="set"] > #status{display:none!important}
+#menu#menu#menu#menu .panel > .hmBackRow{display:flex!important}
+#menu .panel[data-hm="mp"] .row.dev{display:none!important}
+@media (max-width:760px){#home{padding:24px;flex-direction:column;gap:24px}.hmR{align-items:flex-start;text-align:left}.hmFr{align-items:flex-start;padding-left:0}.hmNav button{font-size:30px}}
+
+/* all screens: same full-height, left-aligned look as the home screen */
+#menu:not(.hmHome){justify-content:flex-start;align-items:stretch;padding:0;background:linear-gradient(90deg,rgba(6,8,11,.86) 0%,rgba(6,8,11,.62) 40%,rgba(6,8,11,.3) 75%,rgba(6,8,11,.45) 100%)}
+#menu:not(.hmHome)>.panel[data-hm]{width:min(680px,100%)!important;max-width:none!important;height:100%!important;max-height:none!important;margin:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;padding:44px 64px 56px!important;overflow:auto!important}
+#menu>.panel[data-hm]::before,#menu>.panel[data-hm]::after{display:none!important}
+#menu#menu#menu#menu .panel>.hmBackRow{flex-direction:column;align-items:flex-start;gap:10px;margin:0 0 26px;padding:0;border:0}
+#hmBack{all:unset;cursor:pointer;font-size:14px;color:rgba(232,238,245,.55);transition:color .15s}
+#hmBack:hover,#hmBack:focus-visible{color:#fff}
+#hmTitle{font:500 40px/1.1 system-ui,-apple-system,'Segoe UI',sans-serif!important;color:#fff;letter-spacing:0}
+#menu .panel[data-hm] .sec{border-top:1px solid rgba(255,255,255,.07)!important;background:transparent!important}
+#menu .panel[data-hm] .sec h2{font:600 11px/1 system-ui,sans-serif!important;text-transform:uppercase;letter-spacing:.1em;color:rgba(232,238,245,.45)!important;margin-bottom:12px}
+#menu .panel[data-hm] .track{background:transparent!important;border:0!important;border-left:3px solid #7cc4ff!important;border-radius:0!important;padding:4px 0 4px 14px!important}
+#menu .panel[data-hm] .track b{font-size:22px!important}
+/* pop-up windows: full-height side sheet on the left */
+#cosModal,.socModal,#rpModal,#lobby{justify-content:flex-start!important;align-items:stretch!important;background:linear-gradient(90deg,rgba(6,8,11,.9) 0%,rgba(6,8,11,.66) 42%,rgba(6,8,11,.3) 78%,rgba(6,8,11,.45) 100%)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+.cosBox,.socBox,#rpModal .rpBox,#lobby .lbWin{width:min(720px,100%)!important;max-width:none!important;height:100%!important;max-height:none!important;margin:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;padding:44px 64px 56px!important;overflow:auto!important;box-sizing:border-box}
+.cosHd{position:relative;flex-wrap:wrap;margin-bottom:22px!important;padding-top:26px}
+.cosHd b{font:500 40px/1.1 system-ui,-apple-system,'Segoe UI',sans-serif!important;color:#fff;flex-basis:100%!important;order:1}
+.cosHd .cosPill{order:2;margin-top:4px}
+.cosHd #cosX,.cosHd [data-x]{all:unset;position:absolute;left:0;top:0;cursor:pointer;font-size:0;color:rgba(232,238,245,.55)}
+.cosHd #cosX::after,.cosHd [data-x]::after{content:'\2190  Back';font-size:14px}
+.cosHd #cosX:hover,.cosHd [data-x]:hover{color:#fff}
+.cosTabs{display:flex!important;gap:26px!important;background:none!important;border:0!important;border-bottom:1px solid rgba(255,255,255,.08)!important;border-radius:0!important;padding:0!important;margin-bottom:16px!important}
+.cosTabs button{all:unset;cursor:pointer;position:relative;padding:0 0 10px;font-size:18px;color:rgba(232,238,245,.5);transition:color .15s}
+.cosTabs button:hover{color:#fff}
+.cosTabs button.on{color:#fff}
+.cosTabs button.on::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:3px;border-radius:2px;background:#7cc4ff}
+#rpModal .rpBox h2,#rpModal .rpBox h3,#lobby .lbWin h2{font:500 40px/1.1 system-ui,sans-serif!important;color:#fff;margin:0 0 18px}
+.pfBan{border-radius:0!important;border:0!important;border-left:3px solid rgba(255,255,255,.25)!important}
+@media (max-width:760px){#menu:not(.hmHome)>.panel[data-hm],.cosBox,.socBox,#rpModal .rpBox,#lobby .lbWin{padding:24px!important}#hmTitle,.cosHd b{font-size:30px!important}}
+body:has(#cosModal:not(.hide)) #home,body:has(.socModal:not(.hide)) #home,body:has(#rpModal:not(.hide)) #home,body:has(#lobby:not(.hide)) #home{visibility:hidden}
+#rpModal .rpHd{position:relative;display:block!important;padding-top:26px;margin-bottom:22px}
+#rpModal .rpHd b{display:block;font:500 40px/1.1 system-ui,-apple-system,'Segoe UI',sans-serif!important;color:#fff}
+#rpMx{all:unset;position:absolute;left:0;top:0;cursor:pointer;font-size:0;color:rgba(232,238,245,.55)}
+#rpMx::after{content:'\2190  Back';font-size:14px}#rpMx:hover{color:#fff}
+
+/* developer dashboard: full screen, home-style */
+#devDash{background:linear-gradient(90deg,rgba(6,8,11,.94) 0%,rgba(6,8,11,.86) 50%,rgba(6,8,11,.7) 100%)!important;backdrop-filter:blur(3px)!important;align-items:stretch!important;justify-content:stretch!important}
+#devDash .ddWin{width:100%!important;height:100%!important;max-width:none!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+#devDash .ddSide{width:260px!important;background:transparent!important;border-right:1px solid rgba(255,255,255,.06)!important;padding:44px 22px 28px 44px!important;gap:4px!important}
+#devDash .ddBrand{font:600 22px/1 system-ui,-apple-system,'Segoe UI',sans-serif!important;color:#fff;padding:0 0 30px!important;letter-spacing:.02em}
+#devDash .ddSide button{position:relative;background:none!important;border-radius:0!important;padding:7px 0!important;font:500 16px/1.2 system-ui,-apple-system,'Segoe UI',sans-serif!important;color:rgba(232,238,245,.6)!important;transition:color .15s,transform .15s}
+#devDash .ddSide button::before{content:'';position:absolute;left:-16px;top:50%;width:4px;height:0;border-radius:2px;background:#7cc4ff;transform:translateY(-50%);transition:height .15s}
+#devDash .ddSide button:hover{color:#fff!important;transform:translateX(4px)}
+#devDash .ddSide button.on,#devDash .ddSide button[aria-selected="true"]{color:#fff!important}
+#devDash .ddSide button.on::before,#devDash .ddSide button[aria-selected="true"]::before,#devDash .ddSide button:hover::before{height:70%}
+#devDash .ddMain{padding:44px 64px 60px!important;background:transparent!important}
+#devDash header h2{font:500 40px/1.1 system-ui,-apple-system,'Segoe UI',sans-serif!important;color:#fff}
+#devDash header p{font-size:14px!important;opacity:.55!important;margin:8px 0 26px!important}
+#devDash .ddCard{background:rgba(255,255,255,.035)!important;border:0!important;border-left:3px solid rgba(124,196,255,.55)!important;border-radius:0 10px 10px 0!important}
+#devDash .ddCard h3{font:600 11px/1 system-ui,sans-serif!important;text-transform:uppercase;letter-spacing:.1em;color:rgba(232,238,245,.5)!important;margin-bottom:14px!important}
+/* race HUD: borderless, soft dark, same type */
+#hudL .box,#hudC,#sboard{background:linear-gradient(90deg,rgba(6,8,11,.62),rgba(6,8,11,.38))!important;border:0!important;border-left:3px solid #7cc4ff!important;border-radius:0 8px 8px 0!important;backdrop-filter:blur(2px);font-family:system-ui,-apple-system,'Segoe UI',sans-serif}
+#hudC{border-left:0!important;border-right:3px solid #7cc4ff!important;border-radius:8px 0 0 8px!important;background:linear-gradient(270deg,rgba(6,8,11,.62),rgba(6,8,11,.38))!important;text-align:right}
+#time{font-weight:500!important;letter-spacing:.01em}
+#speed{font-weight:500!important}
+.lbl,#surf{font-size:11px!important;letter-spacing:.1em!important;text-transform:uppercase;color:rgba(232,238,245,.55)!important}
+#times{color:rgba(232,238,245,.7)}
+#sboard{border-left:0!important;border-right:3px solid #7cc4ff!important;border-radius:8px 0 0 8px!important;background:linear-gradient(270deg,rgba(6,8,11,.62),rgba(6,8,11,.38))!important}
+#cdown,#finFx,#specBar{font-family:system-ui,-apple-system,'Segoe UI',sans-serif!important}
+#specBar .spT{font-weight:500!important;letter-spacing:.3em!important}
+#rpBar{background:linear-gradient(0deg,rgba(6,8,11,.8),rgba(6,8,11,.35))!important;border:0!important;border-radius:0!important}
+#lobby .lbWin .lbCard,#lobby .lbWin [class*="vote"]{border-radius:10px}
+#mini{border:0!important;border-radius:8px!important;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+body:has(#devDash:not(.hide)) #home{visibility:hidden}
+
+#home [data-hm=cos],#cosModal [data-ct=trails],#cosModal .cosTabs{display:none!important}
+#devDash #cdPub,#devDash #cdNew,#devDash #cdReset,#devDash #cdStat,#devDash #cdList{display:none!important}
+#hmDevBR{position:fixed;right:44px;bottom:34px;z-index:5;background:none;border:0;padding:6px 0;font:500 14px/1 system-ui,-apple-system,'Segoe UI',sans-serif;color:rgba(232,238,245,.55);cursor:pointer;letter-spacing:.02em;transition:color .15s}
+#hmDevBR:hover{color:#7cc4ff}
+#menu:not(.hmHome) #hmDevBR,#menu.hide #hmDevBR{display:none}
 </style>
-<meta name="ibr-build" content="2026-10-05T13:16:54.234Z">
+<meta name="ibr-build" content="2026-10-05T16:08:26.533Z">
 <script type="application/json" id="webSite">{"tracks":"tracks/index.json","sb":{"url":"https://dbyqswlvmequszujpwaj.supabase.co","key":"sb_publishable_-Av4-QPspUOMHAUtM5Jksw_amiBfwpy"}}</script>
 </head>
 <body>
@@ -467,7 +731,7 @@ html body #toast{top:132px!important;transform:translateX(-50%)!important;font:6
       <button type="button" data-p="race"><span>🏁</span>Race settings</button>
       <button type="button" data-p="tset"><span>🗂️</span>Track settings</button>
       <button type="button" data-p="phys"><span>⚙️</span>Physics (OpenBoatUtils)</button>
-      <button type="button" data-p="site"><span>🌐</span>Website &amp; servers</button>
+      <button type="button" data-p="cos"><span>✨</span>Cosmetics &amp; quests</button><button type="button" data-p="site"><span>🌐</span>Website &amp; servers</button>
       <div style="flex:1"></div>
       <button type="button" id="ddClose" class="ddX"><span>✕</span>Close (Esc)</button>
      </nav>
@@ -568,6 +832,13 @@ html body #toast{top:132px!important;transform:translateX(-50%)!important;font:6
        </div>
       </section>
 
+      <section class="ddPane" data-p="cos">
+       <header><h2>Quests</h2><p>Daily quests and login rewards.</p></header>
+       <div class="ddBar"><button class="b primary" id="cdPub">☁️ Publish to players</button><button class="b" id="cdNew">+ New trail</button><button class="b" id="cdReset">Reset to defaults</button></div>
+       <div class="keys" id="cdStat" style="margin-bottom:8px">Edit a trail, press Try on my boat to preview it, then Publish to players.</div>
+       <div id="cdList"></div>
+       <div class="ddCard"><h3>Daily quests &amp; login rewards</h3><p class="keys">Players get 3 quests a day from this list. Rewards are checked on the server, so players can't change them.</p><div id="cdQuests"></div></div>
+      </section>
       <section class="ddPane" data-p="site">
        <header><h2>Website &amp; servers</h2><p>GitHub publishing, accounts server and multiplayer region servers.</p></header>
        <div class="ddBar"><button class="b primary" id="ghSaveDev">🌐 Update website</button><button class="b" id="ghTest">Test connection</button></div>
@@ -1252,6 +1523,7 @@ window.addEventListener('blur', () => { for (const k in bcHeld) bcHeld[k] = fals
 const st = makeState(0, 0, 0), prev = makeState(0, 0, 0);
 let race = null, best = null;
 const cam = { yaw: 0, pyaw: 0, zoom: 26, pzoom: 26 };
+const MCAM = { y: 0, p: 0, d: 1, drag: false };
 
 /* ---- BoatCam port (boatcam.cam.BoatCamera + boatcam.AngleUtil), float32 like the Java ---- */
 const f32 = Math.fround;
@@ -1692,7 +1964,7 @@ function draw(a) {
     }
     return;
   }
-  const cyaw = lerpAngle(cam.pyaw, cam.yaw, a), zoomB = lerp(cam.pzoom, cam.zoom, a);
+  const cyaw = lerpAngle(cam.pyaw, cam.yaw, a) + MCAM.y, zoomB = lerp(cam.pzoom, cam.zoom, a) * MCAM.d;
   k = Math.min(cssW, cssH) / zoomB;
   const bcOn = settings.camera === 'boatcam';
   const anchor = settings.camera === 'north' ? 0.5 : (bcOn && bcCfg.perspective === 'FIRST_PERSON' ? 0.56 : 0.64);
@@ -2124,12 +2396,13 @@ function draw3D(a) {
   // BoatCam: first person unless looking behind (the mod switches to third-person-front for look-behind)
   const fp = !SPc && !edM && bcOn && bcCfg.perspective === 'FIRST_PERSON' && !bcHeld.lookBehind;
   const pitchDeg = bcOn && bcCfg.fixedPitch ? bcCfg.pitch : +settings.pitch3;
-  let pr = (edM ? ec.pitch : pitchDeg) * Math.PI / 180, yr = (edM ? ec.yaw : cyaw) * Math.PI / 180, cp = Math.cos(pr);
+  let pr = (edM ? ec.pitch : clamp(pitchDeg + MCAM.p, -30, 89)) * Math.PI / 180, yr = (edM ? ec.yaw : cyaw + MCAM.y) * Math.PI / 180, cp = Math.cos(pr);
   let dx = Math.sin(yr) * cp, dy = -Math.sin(pr), dz = -Math.cos(yr) * cp;
   let ex = bx, ey = 1.2 + by, ez = bz;
   if (fp) { const f = forward(byaw); ex -= f.x * 0.12; ez -= f.z * 0.12; }
-  else { const dist = 4; ex -= dx * dist; ey -= dy * dist; ez -= dz * dist; if (ey < by + 0.3) ey = by + 0.3; }
+  else { const dist = 4 * MCAM.d; ex -= dx * dist; ey -= dy * dist; ez -= dz * dist; if (ey < by + 0.3) ey = by + 0.3; }
   if (edM) { ex = ec.tx - dx * ec.dist; ey = ec.ty - dy * ec.dist; ez = ec.tz - dz * ec.dist; }
+  if (!edM && typeof rpCam === 'function') { const RC = rpCam(); if (RC) { yr = RC.yaw * Math.PI / 180; pr = RC.pitch * Math.PI / 180; cp = Math.cos(pr); dx = Math.sin(yr) * cp; dy = -Math.sin(pr); dz = -Math.cos(yr) * cp; ex = RC.x; ey = RC.y; ez = RC.z; } }
   if (!edM && menuPan()) { const c0 = panCtr(); yr = performance.now() / 1000 * 0.12; pr = 0.36; cp = Math.cos(pr); dx = Math.sin(yr) * cp; dy = -Math.sin(pr); dz = -Math.cos(yr) * cp; ex = c0.x - dx * c0.r; ey = c0.y - dy * c0.r; ez = c0.z - dz * c0.r; }
   view3D.ex = ex; view3D.ey = ey; view3D.ez = ez; view3D.pitch = pitchDeg; view3D.fp = fp;
   const rd0 = settings.quality === 'low' ? Math.min(+settings.rd3, 48) : +settings.rd3, rd = edM ? Math.max(rd0, Math.min(320, ec.dist * 2 + 64)) : rd0;
@@ -2186,7 +2459,7 @@ function draw3D(a) {
   }
   view3D.drawn = drawn;
   setModel(bx, bz, byaw); gl.uniformMatrix4fv(B.u.uM, false, modM);
-  drawMesh(G.hull.b, G.hull.n); drawOars(B, a, false);
+  drawMesh(G.hull.b, G.hull.n); drawOars(B, a, false); if (typeof trDraw === 'function') trDraw(B, bx, bz, typeof by === 'number' ? by : boatY, MPP);
   let gp = null;
   if (settings.ghost && best && race.racing) {
     const tau = (prev.tick + a) - race.lapStartT - best.off0, n = best.d.length / 3;
@@ -3152,7 +3425,7 @@ async function wrShow() {
       const b = await NET.board(id); if (seq !== wrSeq) return;
       if (!b || !b.length) { body.innerHTML = '<div class="keys">No times yet — set the first WR!</div>'; return; }
       body.innerHTML = '<table class="wr"><tr><th>#</th><th>Player</th><th class="t">Time</th><th>Date</th></tr>' + b.map(r =>
-        '<tr' + (ME && r.player_id === ME.id ? ' class="mine"' : '') + '><td' + rkCls(r.rank) + '><b>' + r.rank + '</b></td><td><span class="pl">' + avHtml(r) + escH(r.name) + tagHtml(r.player_id) + '</span></td><td class="t">' + fmtMs(r.ms) + (r.rank > 1 ? '<br><span class="keys" style="font-weight:400;font-size:11px">+' + ((r.ms - b[0].ms) / 1000).toFixed(3) + '</span>' : '') + '</td><td class="d">' + fmtDay(r.at) + '</td></tr>').join('') + '</table>';
+        '<tr' + (ME && r.player_id === ME.id ? ' class="mine"' : '') + '><td' + rkCls(r.rank) + '><b>' + r.rank + '</b></td><td><span class="pl pfLink" data-pid="' + escH(r.player_id) + '" title="View profile">' + avHtml(r) + escH(r.name) + tagHtml(r.player_id) + '</span></td><td class="t">' + fmtMs(r.ms) + (r.rank > 1 ? '<br><span class="keys" style="font-weight:400;font-size:11px">+' + ((r.ms - b[0].ms) / 1000).toFixed(3) + '</span>' : '') + '</td><td class="d">' + fmtDay(r.at) + '</td></tr>').join('') + '</table>';
     }
   } catch (e) { if (seq === wrSeq) body.innerHTML = '<div class="keys" style="color:var(--red)">Could not load records: ' + escH(e.message) + '</div>'; }
 }
@@ -3469,7 +3742,7 @@ const MP = {
   sendPos() {
     if (!this.joined || typeof st === 'undefined') return;
     if (RACE.S && RACE.S.ph !== 'race' && RACE.S.ph !== 'count' && ((this.skip = ((this.skip || 0) + 1) % 2))) return;
-    this.send(this.topic, 'broadcast', { type: 'broadcast', event: 'pos', payload: { t: Date.now(), id: this.myId(), n: (ME && ME.name) || 'Guest', x: +st.x.toFixed(3), z: +st.z.toFixed(3), y: +(st.y || 0).toFixed(3), yaw: +st.yaw.toFixed(4), vx: +st.vx.toFixed(4), vz: +st.vz.toFixed(4), c: this.cfg.coll ? 1 : 0, tr: (WEB_CUR && WEB_CUR.id) || '', hr: +(headYaw(st.yaw, cam.yaw) - st.yaw).toFixed(1), rp: sbMine(), fl: SBD.best || 0 } });
+    this.send(this.topic, 'broadcast', { type: 'broadcast', event: 'pos', payload: { t: Date.now(), id: this.myId(), n: (ME && ME.name) || 'Guest', x: +st.x.toFixed(3), z: +st.z.toFixed(3), y: +(st.y || 0).toFixed(3), yaw: +st.yaw.toFixed(4), vx: +st.vx.toFixed(4), vz: +st.vz.toFixed(4), c: this.cfg.coll ? 1 : 0, tr: (WEB_CUR && WEB_CUR.id) || '', hr: +(headYaw(st.yaw, cam.yaw) - st.yaw).toFixed(1), rp: sbMine(), fl: SBD.best || 0, tc: (typeof trMine === 'function' ? trMine() : '') } });
   },
   list() { const now = performance.now(), L = []; for (const k in this.peers) { const q = this.peers[k]; if (now - q.rx > 4000) { delete this.peers[k]; continue; } if (!q.tr || !WEB_CUR || q.tr === WEB_CUR.id) L.push(q); } return L; },
   draw() {
@@ -3735,7 +4008,7 @@ const RACE_EV = {
 function rcVote(o) { RACE.myVote = o; const d = { id: MP.myId(), opt: o }; rcSend('vote', d); if (rcAmHost()) RACE_EV.vote(d); else if (RACE.S) RACE.S.votes[d.id] = o; rcUi(); }
 function rcUi() {
   const box = el('raceBox'); if (!box) return; const S = RACE.S, ice = el('rcIce');
-  if (ice) ice.textContent = '\u{1F9CA} ' + iceBal() + ' icetokens · cosmetics shop coming soon';
+  if (ice) ice.textContent = '\u{1F9CA} ' + iceBal() + ' icetokens';
   if (!MP.joined) { box.classList.add('hide'); return; }
   box.classList.remove('hide');
   const left = S ? Math.max(0, Math.ceil((S.end - Date.now()) / 1000)) : 0, me = MP.myId(), n = rcMembers().length;
@@ -3836,7 +4109,7 @@ function rgUi() {
     b.querySelector('.rgN').textContent = n + ' active'; b.classList.toggle('on', !!MP.ws && MP.cfg.region === r); });
   const lr = el('rgLeaveRow'); if (lr) lr.classList.toggle('hide', !MP.ws);
 }
-setInterval(() => { try { const pn = document.querySelector('#menu .panel'), on = pn && pn.dataset.tab === 'mp' && !el('menu').classList.contains('hide'); if (on) { if (!MP.cfg) MP.load(); for (const r in MP_REG) probeOpen(r); rgUi(); } else probeClose(); } catch (e) {} }, 1000);
+setInterval(() => { try { const pn = document.querySelector('#menu .panel'), on = pn && !el('menu').classList.contains('hide'); if (on) { if (!MP.cfg) MP.load(); for (const r in MP_REG) probeOpen(r); rgUi(); } else probeClose(); } catch (e) {} }, 1000);
 function rgJoin(r) {
   if (!MP.cfg) MP.load(); const same = MP.ws && MP.cfg.region === r;
   MP.cfg.region = r; MP.save(); try { if (el('mpRegion')) { el('mpRegion').value = r; mpSync(); } } catch (e) {}
@@ -3902,7 +4175,7 @@ setInterval(() => {
   } catch (e) {}
 }, 100);
 rcUi = function () {
-  const box = el('raceBox'); if (!box) return; try { const ic = el('rcIce'); if (ic) ic.textContent = '🧊 ' + iceBal() + ' icetokens · cosmetics shop coming soon'; } catch (e) {}
+  const box = el('raceBox'); if (!box) return; try { const ic = el('rcIce'); if (ic) ic.textContent = '🧊 ' + iceBal() + ' icetokens'; } catch (e) {}
   const S = RACE.S, me = MP.myId(), inR = S && S.ids && rcIn(S);
   if (!MP.joined || !S || (S.ph !== 'count' && S.ph !== 'race')) { box.classList.add('hide'); lobbyUi(); return; }
   const tn = escH(rcTrack(S.track).name || '');
@@ -4175,7 +4448,7 @@ setInterval(() => { try {
   sbUi();
 } catch (e) {} }, 50);
 rcUi = function () {
-  try { const ic = el('rcIce'); if (ic) ic.textContent = '🧊 ' + iceBal() + ' icetokens · cosmetics shop coming soon'; } catch (e) {}
+  try { const ic = el('rcIce'); if (ic) ic.textContent = '🧊 ' + iceBal() + ' icetokens'; } catch (e) {}
   const b = el('raceBox'); if (b) b.classList.add('hide'); lobbyUi(); try { sbUi(); } catch (e) {}
 };
 
@@ -4295,6 +4568,839 @@ function spFinish(t) {
   return sp;
 }
 { const _rr = resetRun; resetRun = function () { const r = _rr.apply(this, arguments); dltClear(); return r; }; }
+
+// ---- sign-in chip: keep it in the menu overlay (not inside the panel) ----
+function chipFix() { try { const c = el('meChip'), m = el('menu'); if (c && m && c.parentElement !== m) m.appendChild(c); } catch (e) {} }
+chipFix(); setInterval(chipFix, 1000);
+
+// ---- track dropdown with search ----
+const TK = { open: false };
+function tkItems() {
+  if (WEB_LIST && WEB_LIST.length) return WEB_LIST.map((t, i) => ({ i, name: t.name, info: (t.closed ? 'Closed \u00b7 ' : '') + (t.info || ''), on: typeof WEB_CUR !== 'undefined' && WEB_CUR === t, lock: t.closed }));
+  return [{ i: -1, name: 'Glacier Sweep', info: 'Built-in track', on: map && String(map.id).startsWith('builtin') }];
+}
+function tkRender() {
+  const P = el('tkPop'); if (!P) return; const q = P.querySelector('input').value.trim().toLowerCase();
+  const L = tkItems().filter(t => !q || (t.name + ' ' + t.info).toLowerCase().includes(q));
+  P.querySelector('.tkL').innerHTML = L.length ? L.map(t => '<button type="button" class="tkI' + (t.on ? ' on' : '') + '" data-i="' + t.i + '">' + (t.lock ? '\ud83d\udd12 ' : '') + escH(t.name) + '<small>' + escH(t.info) + '</small></button>').join('') : '<div class="tkE">No tracks match</div>';
+}
+function tkClose() { TK.open = false; const P = el('tkPop'); if (P) P.remove(); const d = document.querySelector('#menu .track'); if (d) d.classList.remove('open'); }
+function tkOpen() {
+  const d = document.querySelector('#menu .track'); if (!d || el('tkPop')) return; TK.open = true; d.classList.add('open');
+  const P = document.createElement('div'); P.id = 'tkPop'; P.innerHTML = '<input type="search" placeholder="Select track" autocomplete="off" spellcheck="false"><div class="tkL"></div>'; d.appendChild(P);
+  const inp = P.querySelector('input'); inp.addEventListener('input', tkRender);
+  inp.addEventListener('keydown', e => { e.stopPropagation(); if (e.key === 'Escape') tkClose(); if (e.key === 'Enter') { const f = P.querySelector('.tkI'); if (f) f.click(); } });
+  P.addEventListener('click', e => { e.stopPropagation(); const b = e.target.closest('.tkI'); if (!b) return; const i = +b.dataset.i; tkClose();
+    if (i < 0) { try { setMap(buildDefaultTrack()); } catch (er) {} } else { const w = el('webList').querySelector('.b[data-i="' + i + '"]'); if (w) w.click(); } });
+  tkRender(); setTimeout(() => inp.focus(), 0);
+}
+(function tkInit() {
+  const d = document.querySelector('#menu .track'); if (!d) return; d.classList.add('tkDrop');
+  d.insertAdjacentHTML('afterbegin', '<span class="tkLbl">Select track</span>'); d.insertAdjacentHTML('beforeend', '<span class="tkCar">\u25be</span>');
+  d.addEventListener('click', e => { if (e.target.closest('#tkPop')) return; TK.open ? tkClose() : tkOpen(); });
+  document.addEventListener('pointerdown', e => { if (TK.open && !e.target.closest('#menu .track')) tkClose(); });
+})();
+
+// ---- play button: "Set a time" / "Time trial" + PB ----
+function playLbl() {
+  const b = el('playBtn'); if (!b) return; let h;
+  if (race && race.racing && paused) h = '<span class="pbT">Resume</span>';
+  else h = '<span class="pbT">' + (best ? 'Time trial' : 'Set a time') + '</span><span class="pbS">PB: ' + (best ? fmtT(best.t) : '\u2013') + '</span>';
+  if (b.innerHTML !== h) b.innerHTML = h;
+}
+{ const _p = pause; pause = function () { const r = _p.apply(this, arguments); playLbl(); return r; }; }
+{ const _s = setMap; setMap = function () { const r = _s.apply(this, arguments); playLbl(); return r; }; }
+playLbl(); setInterval(playLbl, 400);
+
+// ---- server disabling: read live published list for players, auto-publish dev toggles, kick from disabled regions ----
+function regOff(r) {
+  try { if (IS_DEV) { if (!MP.cfg) MP.load(); return (MP.cfg.off || []).includes(r); } return ((MP_PUB && MP_PUB.off) || []).includes(r); } catch (e) { return false; }
+}
+function regKick() {
+  try { if (MP.ws && MP.cfg && regOff(MP.cfg.region)) { MP.close(); try { RACE.S = null; } catch (e) {} toast((MP_REG[MP.cfg.region] || 'This') + ' server has been disabled', 2500); try { lobbyUi(); } catch (e) {} } rgUi(); } catch (e) {}
+}
+setTimeout(() => {
+  const L = el('svList'); if (!L) return;
+  L.addEventListener('click', e => { if (!e.target.closest('button[data-r]')) return;
+    setTimeout(() => { regKick(); if (gh.tok && gh.web && el('mpPublish')) { el('mpPublish').click(); toast('Publishing server settings…', 1500); } else toast('Saved locally — add a GitHub token to publish to players', 2500); }, 0); });
+}, 1500);
+setInterval(() => { if (IS_DEV) return regKick(); mpPubLoad().catch(() => {}).finally(regKick); }, 30000);
+setTimeout(regKick, 3000);
+
+// ---- chat: 1 message per second, extra messages wait in a queue ----
+const CQ = { q: [], last: 0, t: 0 };
+const _chatSendRaw = chatSend;
+function chatSendText(tx, tab) {
+  const inp = el('chIn'); if (!inp) return; const keep = inp.value, keepTab = CHAT.tab;
+  CHAT.tab = tab; inp.value = tx; try { _chatSendRaw(); } catch (e) { console.error(e); } finally { CHAT.tab = keepTab; inp.value = keep; }
+}
+function cqUi() {
+  const inp = el('chIn'); if (!inp) return; let b = el('cqN');
+  if (!b) { b = document.createElement('span'); b.id = 'cqN'; inp.insertAdjacentElement('afterend', b); }
+  b.textContent = CQ.q.length ? CQ.q.length + ' queued' : ''; b.classList.toggle('on', !!CQ.q.length);
+}
+function cqPump() {
+  if (CQ.t || !CQ.q.length) return;
+  CQ.t = setTimeout(() => { CQ.t = 0; const m = CQ.q.shift(); if (m) { CQ.last = Date.now(); chatSendText(m.tx, m.tab); } cqUi(); cqPump(); }, Math.max(0, CQ.last + 1000 - Date.now()));
+}
+function chatQueue(tx, tab) { tx = String(tx || '').trim(); if (!tx) return; if (CQ.q.length >= 10) { toast('Slow down \u2014 chat queue is full', 1200); return; } CQ.q.push({ tx, tab: tab || CHAT.tab }); cqUi(); cqPump(); }
+chatSend = function () { const inp = el('chIn'); if (!inp) return; const raw = inp.value.trim(); if (!raw) return; inp.value = ''; chatQueue(raw, CHAT.tab); };
+
+// ---- macros: press a key to send a saved chat message ----
+const MAC = { L: store.get('macros') || [], wait: -1 };
+const MAC_BAN = ['Escape', 'Enter', 'Tab', 'KeyW', 'KeyA', 'KeyS', 'KeyD', 'Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ShiftLeft', 'ShiftRight', 'ControlLeft', 'ControlRight', 'AltLeft', 'AltRight', 'MetaLeft', 'MetaRight'];
+function macKeyName(c) { return !c ? 'Set key' : c.replace(/^Key/, '').replace(/^Digit/, '').replace(/^Numpad/, 'Num '); }
+function macSave() { store.set('macros', MAC.L); }
+function macUsed(code) { try { return Object.values(KB).includes(code); } catch (e) { return false; } }
+function macDraw() {
+  const L = el('macList'); if (!L) return;
+  L.innerHTML = MAC.L.length ? MAC.L.map((m, i) => '<div class="macRow"><button type="button" class="b macK' + (MAC.wait === i ? ' wait' : '') + '" data-k="' + i + '">' + (MAC.wait === i ? 'Press a key\u2026' : escH(macKeyName(m.code))) + '</button><input class="macT" data-t="' + i + '" maxlength="120" placeholder="Message to send" value="' + escH(m.text || '') + '"><button type="button" class="macX" data-x="' + i + '" title="Remove">\u2715</button></div>').join('') : '<div class="keys">No macros yet.</div>';
+}
+function macInit() {
+  if (el('macSec')) return; const kb = el('kbSec'); const host = kb ? kb.parentNode : document.querySelector('#menu .panel'); if (!host) return;
+  const s = document.createElement('div'); s.id = 'macSec'; s.className = 'sec';
+  s.innerHTML = '<h2>Macros</h2><div class="keys" style="margin-bottom:6px">Press a key to send a chat message. Messages go to your current chat tab, 1 per second.</div><div id="macList"></div><div class="row" style="margin-top:6px"><button type="button" class="b" id="macAdd">+ Add macro</button></div><div class="keys" id="macStat"></div>';
+  if (kb && kb.nextSibling) host.insertBefore(s, kb.nextSibling); else host.appendChild(s);
+  el('macAdd').onclick = () => { if (MAC.L.length >= 8) { el('macStat').textContent = 'Up to 8 macros.'; return; } MAC.L.push({ code: '', text: '' }); macSave(); MAC.wait = MAC.L.length - 1; macDraw(); };
+  el('macList').addEventListener('click', e => { const k = e.target.closest('[data-k]'), x = e.target.closest('[data-x]');
+    if (k) { MAC.wait = +k.dataset.k; el('macStat').textContent = ''; macDraw(); }
+    if (x) { MAC.L.splice(+x.dataset.x, 1); MAC.wait = -1; macSave(); macDraw(); } });
+  el('macList').addEventListener('input', e => { const t = e.target.closest('[data-t]'); if (t) { MAC.L[+t.dataset.t].text = t.value; macSave(); } });
+  el('macList').addEventListener('keydown', e => { if (e.target.matches('.macT')) e.stopPropagation(); });
+  macDraw();
+}
+window.addEventListener('keydown', e => {
+  if (MAC.wait >= 0) {
+    e.preventDefault(); e.stopImmediatePropagation();
+    if (e.code === 'Escape') { MAC.wait = -1; return macDraw(); }
+    const st = el('macStat');
+    if (MAC_BAN.includes(e.code) || macUsed(e.code)) { if (st) st.textContent = macKeyName(e.code) + ' is already used for controls \u2014 pick another key.'; return; }
+    if (MAC.L.some((m, j) => j !== MAC.wait && m.code === e.code)) { if (st) st.textContent = macKeyName(e.code) + ' already has a macro.'; return; }
+    MAC.L[MAC.wait].code = e.code; MAC.wait = -1; macSave(); if (st) st.textContent = ''; return macDraw();
+  }
+  if (e.repeat || CHAT.open) return; const t = e.target; if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable)) return;
+  const m = MAC.L.find(m => m.code && m.code === e.code && (m.text || '').trim()); if (!m) return;
+  e.preventDefault(); e.stopImmediatePropagation(); chatQueue(m.text, CHAT.tab);
+}, true);
+setTimeout(macInit, 600);
+
+// ---- home page: players online right now ----
+function onlineCount() {
+  let n = 0, any = false;
+  for (const r in MP_REG) { if (regOff(r)) continue; const S = MP.cfg && MP.cfg.srv && MP.cfg.srv[r]; if (S && S.url && S.key) any = true; n += rgActive(r); }
+  if (!MP.joined) n += 1; return any ? n : -1;
+}
+setInterval(() => {
+  try {
+    const sub = document.querySelector('#menu .panel .sub'); if (!sub) return; let o = el('onl');
+    if (!o) { o = document.createElement('div'); o.id = 'onl'; sub.insertAdjacentElement('afterend', o); }
+    if (!MP.cfg) MP.load(); const n = onlineCount();
+    o.classList.toggle('hide', n < 0); if (n >= 0) o.innerHTML = '<span class="dot"></span>' + n + ' online right now';
+  } catch (e) {}
+}, 1000);
+
+// ---- replays ----
+function rpEnc(a) { const f = Float32Array.from(a), u = new Uint8Array(f.buffer); let s = ''; for (let i = 0; i < u.length; i += 0x8000) s += String.fromCharCode.apply(null, u.subarray(i, i + 0x8000)); return btoa(s); }
+function rpDec(b) { const s = atob(b), u = new Uint8Array(s.length); for (let i = 0; i < s.length; i++) u[i] = s.charCodeAt(i); return new Float32Array(u.buffer); }
+function rpTrack() { return WEB_CUR ? WEB_CUR.id : (map && map.id) || 'local'; }
+function rpTrackName() { return (WEB_CUR && WEB_CUR.name) || (map && map.name) || 'Track'; }
+function rpList() { return store.get('rp:list') || []; }
+function rpSaveLocal(t, rec, pb) {
+  if (!rec || rec.length < 30) return; const id = Date.now().toString(36), track = rpTrack();
+  let L = rpList(); if (pb) L.forEach(r => { if (r.track === track) r.pb = false; });
+  L.unshift({ id, track, name: rpTrackName(), t, at: Date.now(), pb: !!pb });
+  const keep = [], gone = []; let n = 0; for (const r of L) { if (r.pb || n < 15) { keep.push(r); if (!r.pb) n++; } else gone.push(r); }
+  gone.forEach(r => { try { localStorage.removeItem(store.k ? store.k('rp:' + r.id) : 'rp:' + r.id); } catch (e) {} store.set('rp:' + r.id, null); });
+  try { store.set('rp:' + id, { d: rpEnc(rec) }); store.set('rp:list', keep); } catch (e) { console.warn('replay save failed', e); }
+}
+const _saveTimeRp = saveTime;
+saveTime = function (t, label) {
+  const rec = race && race.rec ? race.rec.slice() : [], pb = !best || t < best.t;
+  _saveTimeRp(t, label);
+  try { rpSaveLocal(t, rec, pb); } catch (e) {}
+  try { if (pb && SB && NET.online && ME && MY_KEY && WEB_CUR && !URL_TWEAK && rec.length >= 30) sbRpc('ibr_replay_put', { p_key: MY_KEY, p_track: WEB_CUR.id, p_ms: Math.round(t * 1000), p_data: rpEnc(rec) }).catch(e => console.warn('replay upload', e.message)); } catch (e) {}
+};
+
+const RP = { on: false, d: null, n: 0, t: 0, f: 0, play: false, sp: 1, who: '', track: '', dd: false, last: 0 };
+function rpPos() {
+  const n = RP.n; if (!n) return null; const f = Math.min(Math.max(RP.f, 0), n - 1), i = Math.floor(f), j = Math.min(n - 1, i + 1), a = f - i, d = RP.d;
+  let y0 = d[i * 3 + 2], y1 = d[j * 3 + 2]; const yaw = Math.abs(y1 - y0) > 3 ? y1 : y0 + (y1 - y0) * a;
+  return { x: d[i * 3] + (d[j * 3] - d[i * 3]) * a, z: d[i * 3 + 1] + (d[j * 3 + 1] - d[i * 3 + 1]) * a, yaw, y: 0, q: { hr: 0 } };
+}
+const _specPosRp = specPos;
+specPos = function () { if (RP.on) return rpPos(); return _specPosRp(); };
+function rpBar() {
+  let b = el('rpBar'); if (b) return b; b = document.createElement('div'); b.id = 'rpBar'; b.className = 'hide';
+  b.innerHTML = '<div class="rpT"><b>REPLAY</b><span id="rpWho"></span></div><div class="rpC"><button type="button" id="rpPlay" title="Play / pause (Space)">\u275a\u275a</button><span id="rpTime">0.000</span><input type="range" id="rpSeek" min="0" max="1000" value="0"><span id="rpLen"></span><div class="rpSpG"><button type="button" id="rpSpD" title="Slower ( , )">\u2212</button><button type="button" id="rpSp" title="Reset speed">1x</button><button type="button" id="rpSpU" title="Faster ( . )">+</button></div><button type="button" id="rpCamB" title="Toggle free cam (C)">\ud83c\udfa5 Free cam</button><button type="button" id="rpX" title="Exit (Esc)">\u2715</button></div><div class="rpH" id="rpHint"></div><div id="rpTip" class="hide"></div>';
+  document.body.appendChild(b);
+  el('rpPlay').onclick = () => { if (RP.f >= RP.n - 1) RP.f = 0; RP.play = !RP.play; rpUi(); };
+  el('rpSeek').oninput = e => { RP.f = (+e.target.value / 1000) * (RP.n - 1); rpUi(); };
+  el('rpSp').onclick = () => { RP.sp = 1; rpUi(); }; el('rpSpD').onclick = () => rpSpeed(-1); el('rpSpU').onclick = () => rpSpeed(1); el('rpCamB').onclick = () => fcToggle();
+  const sk = el('rpSeek'), tip = el('rpTip'); sk.addEventListener('mousemove', e => { const r = sk.getBoundingClientRect(), fr = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)); tip.textContent = fmtT(fr * RP.t); tip.style.left = (e.clientX - b.getBoundingClientRect().left) + 'px'; tip.classList.remove('hide'); }); sk.addEventListener('mouseleave', () => tip.classList.add('hide'));
+  el('rpX').onclick = rpStop; return b;
+}
+function rpUi() {
+  if (!RP.on) return; rpBar(); const fr = RP.n > 1 ? RP.f / (RP.n - 1) : 0;
+  el('rpTime').textContent = fmtT(fr * RP.t); el('rpLen').textContent = fmtT(RP.t); el('rpSp').textContent = RP.sp + 'x';
+  el('rpPlay').textContent = RP.play ? '\u275a\u275a' : '\u25b6'; el('rpCamB').classList.toggle('on', FC.on); el('rpCamB').textContent = FC.on ? '\ud83d\udea4 Follow boat' : '\ud83c\udfa5 Free cam'; el('rpSeek').style.setProperty('--p', (fr * 100).toFixed(2) + '%');
+  el('rpHint').textContent = FC.on ? 'WASD fly \u00b7 Space up \u00b7 Shift down \u00b7 Ctrl fast \u00b7 scroll = fly speed (' + FC.sp.toFixed(0) + ') \u00b7 click to look \u00b7 C follow boat' : 'P play/pause \u00b7 \u2190 \u2192 skip 5s \u00b7 0\u20139 jump \u00b7 , . speed \u00b7 C or WASD free cam'; if (document.activeElement !== el('rpSeek')) el('rpSeek').value = Math.round(fr * 1000);
+}
+function rpLoadTrack(track) {
+  return new Promise(res => {
+    if (rpTrack() === track) return res(true);
+    const i = (typeof WEB_LIST !== 'undefined' && WEB_LIST || []).findIndex(t => t.id === track), b = i >= 0 && document.querySelector('#webList .b[data-i="' + i + '"]');
+    if (!b) return res(false); b.click(); let k = 0; const iv = setInterval(() => { if (rpTrack() === track) { clearInterval(iv); setTimeout(() => res(true), 300); } else if (++k > 40) { clearInterval(iv); res(false); } }, 100);
+  });
+}
+async function rpStart(o) {
+  const d = typeof o.d === 'string' ? rpDec(o.d) : o.d; if (!d || d.length < 9) { toast('That replay is empty', 1500); return; }
+  if (!(await rpLoadTrack(o.track))) { toast('Could not load the track for this replay', 1800); return; }
+  if (!paused) pause();
+  FC.on = false; FC.k = {}; Object.assign(RP, { on: true, d, n: Math.floor(d.length / 3), t: o.t, f: 0, play: true, sp: 1, who: o.who || '', track: o.track, last: performance.now() });
+  const dd = el('devDash'); RP.dd = !!(dd && !dd.classList.contains('hide')); if (RP.dd) dd.classList.add('hide');
+  el('menu').classList.add('hide'); const m = el('rpModal'); if (m) m.classList.add('hide');
+  rpBar().classList.remove('hide'); el('rpWho').textContent = (o.who ? o.who + ' \u00b7 ' : '') + (o.name || rpTrackName()) + ' \u00b7 ' + fmtT(o.t); document.body.classList.add('rpOn'); rpUi();
+}
+function rpStop() {
+  if (!RP.on) return; RP.on = false; RP.play = false; FC.on = false; FC.k = {}; try { if (document.pointerLockElement) document.exitPointerLock(); } catch (e) {} rpBar().classList.add('hide'); document.body.classList.remove('rpOn');
+  if (RP.dd) { const dd = el('devDash'); if (dd) dd.classList.remove('hide'); } else el('menu').classList.remove('hide');
+}
+(function rpLoop(now) {
+  requestAnimationFrame(rpLoop); if (!RP.on) return; const dt = Math.min(0.1, (now - RP.last) / 1000); RP.last = now;
+  if (RP.play && RP.n > 1 && RP.t > 0) { RP.f += dt * RP.sp * (RP.n - 1) / RP.t; if (RP.f >= RP.n - 1) { RP.f = RP.n - 1; RP.play = false; } }
+  fcMove(dt); rpUi();
+})(performance.now());
+window.addEventListener('keydown', e => {
+  if (!RP.on || e.code === 'F5') return; e.stopImmediatePropagation();
+  const tg = e.target; if (tg && tg.tagName === 'INPUT' && tg.type !== 'range') return;
+  if (FC.MV.includes(e.code)) { e.preventDefault(); if (!FC.on && !e.repeat && ['KeyW', 'KeyA', 'KeyS', 'KeyD'].includes(e.code)) fcToggle(true); FC.k[e.code] = 1; if (FC.on || e.code !== 'Space') return; }
+  if (e.key === 'Escape') { e.preventDefault(); rpStop(); }
+  else if (e.code === 'Space' || e.code === 'KeyP' || e.code === 'KeyK') { e.preventDefault(); el('rpPlay').click(); }
+  else if (e.code === 'KeyC') { e.preventDefault(); fcToggle(); }
+  else if (e.code === 'Comma') { e.preventDefault(); rpSpeed(-1); }
+  else if (e.code === 'Period') { e.preventDefault(); rpSpeed(1); }
+  else if (/^Digit\d$/.test(e.code)) { e.preventDefault(); RP.f = (+e.code.slice(5) / 10) * (RP.n - 1); }
+  else if (e.code === 'ArrowLeft' || e.code === 'ArrowRight') { e.preventDefault(); RP.f = Math.min(RP.n - 1, Math.max(0, RP.f + (e.code === 'ArrowLeft' ? -5 : 5) * (RP.n - 1) / RP.t)); }
+}, true);
+window.addEventListener('keyup', e => { if (RP.on && e.code !== 'F5') { e.stopImmediatePropagation(); delete FC.k[e.code]; } }, true);
+
+// player: my replays
+function rpModal() {
+  let m = el('rpModal'); if (m) return m; m = document.createElement('div'); m.id = 'rpModal'; m.className = 'hide';
+  m.innerHTML = '<div class="rpBox"><div class="rpHd"><b>My replays</b><button type="button" id="rpMx">\u2715</button></div><div id="rpMl"></div><div class="keys" style="margin-top:8px">Your last 15 runs and your PB on each track are saved on this device.</div></div>';
+  document.body.appendChild(m); m.addEventListener('click', e => { if (e.target === m || e.target.id === 'rpMx') m.classList.add('hide'); });
+  el('rpMl').addEventListener('click', e => {
+    const w = e.target.closest('[data-w]'), x = e.target.closest('[data-x]');
+    if (w) { const r = rpList().find(q => q.id === w.dataset.w), s = r && store.get('rp:' + r.id); if (s) rpStart({ d: s.d, t: r.t, track: r.track, name: r.name, who: ME && ME.name }); else toast('Replay data missing', 1500); }
+    if (x) { store.set('rp:list', rpList().filter(q => q.id !== x.dataset.x)); store.set('rp:' + x.dataset.x, null); rpModalDraw(); }
+  });
+  return m;
+}
+function rpModalDraw() {
+  const L = rpList(); el('rpMl').innerHTML = L.length ? L.map(r => '<div class="rpRow"><div class="rpI"><b>' + escH(fmtT(r.t)) + '</b>' + (r.pb ? '<span class="rpPb">PB</span>' : '') + '<div class="rpS">' + escH(r.name) + ' \u00b7 ' + new Date(r.at).toLocaleString([], { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) + '</div></div><button type="button" class="b primary" data-w="' + r.id + '">\u25b6 Watch</button><button type="button" class="rpDel" data-x="' + r.id + '" title="Delete">\u2715</button></div>').join('') : '<div class="keys">No replays yet \u2014 finish a lap and it will show up here.</div>';
+}
+function rpOpen() { rpModal().classList.remove('hide'); rpModalDraw(); }
+setInterval(() => { if (el('rpOpen')) return; const pb = el('playBtn'); if (!pb) return; const b = document.createElement('button'); b.type = 'button'; b.className = 'b'; b.id = 'rpOpen'; b.textContent = '\ud83c\udfac Replays'; b.onclick = rpOpen; pb.insertAdjacentElement('afterend', b); }, 800);
+
+// dev: Track settings > Replays
+async function tkReplays() {
+  const t = tkCur(); if (!t) { admStat('Pick a track first'); return; } const box = el('tkTimes'); box.innerHTML = '<div class="keys">Loading replays\u2026</div>';
+  try {
+    const [L, B] = await Promise.all([sbRpc('ibr_dev_replays', { p_secret: admSec(), p_track: t.id }), NET.board(t.id).catch(() => [])]);
+    const nm = {}; (B || []).forEach(r => nm[r.player_id] = r.name);
+    box.innerHTML = '<div class="rpDevH"><b>Replays \u00b7 ' + escH(t.name || t.id) + '</b><span class="keys">' + (L || []).length + ' saved</span></div>' + ((L && L.length) ? L.map((r, i) => '<div class="row rpDevR"><span class="pl">' + (i + 1) + '. ' + escH(nm[r.player_id] || r.player_id) + ' \u2014 ' + fmtMs(r.ms) + ' <span class="keys">' + new Date(r.at).toLocaleDateString() + '</span></span><button class="b primary" data-rw="' + r.id + '">\u25b6 Watch</button><button class="b" data-rd="' + r.id + '" style="color:var(--red)">Delete</button></div>').join('') : '<div class="keys">No replays uploaded for this track yet. Replays upload automatically when a signed-in player sets a PB.</div>');
+    box.querySelectorAll('[data-rw]').forEach(x => x.onclick = async () => { try { const r = await sbRpc('ibr_dev_replay_get', { p_secret: admSec(), p_id: +x.dataset.rw }); if (!r) return admStat('Replay not found'); rpStart({ d: r.data, t: r.ms / 1000, track: r.track, name: t.name, who: nm[r.player_id] || r.player_id }); } catch (e) { admStat('Error: ' + e.message); } });
+    box.querySelectorAll('[data-rd]').forEach(x => x.onclick = async () => { if (!confirm('Delete this replay?')) return; try { await sbRpc('ibr_dev_replay_del', { p_secret: admSec(), p_id: +x.dataset.rd }); admStat('Replay deleted'); tkReplays(); } catch (e) { admStat('Error: ' + e.message); } });
+  } catch (e) { box.innerHTML = ''; admStat(/function|schema cache|404/i.test(e.message) ? 'Replays aren\u2019t set up yet \u2014 run ibronline-replays-setup.sql in Supabase' : 'Error: ' + e.message); }
+}
+setInterval(() => { if (el('tkRpBtn')) return; const tb = el('tkTimesBtn'); if (!tb) return; const b = document.createElement('button'); b.type = 'button'; b.className = 'b'; b.id = 'tkRpBtn'; b.textContent = '\ud83c\udfac Replays'; b.onclick = tkReplays; tb.insertAdjacentElement('afterend', b); }, 800);
+
+// ---- replay free cam (Minecraft spectator style) ----
+const FC = { on: false, x: 0, y: 0, z: 0, yaw: 0, pitch: 20, sp: 12, k: {}, drag: false, MV: ['KeyW', 'KeyA', 'KeyS', 'KeyD', 'Space', 'ShiftLeft', 'ShiftRight', 'ControlLeft', 'ControlRight'] };
+const RP_SPEEDS = [0.1, 0.25, 0.5, 0.75, 1, 1.5, 2, 4, 8];
+function rpSpeed(d) { let i = RP_SPEEDS.indexOf(RP.sp); if (i < 0) i = 4; RP.sp = RP_SPEEDS[Math.min(RP_SPEEDS.length - 1, Math.max(0, i + d))]; rpUi(); }
+function fcToggle(on) {
+  on = on == null ? !FC.on : !!on; if (on === FC.on) return;
+  if (on) { const v = view3D || {}, p = rpPos() || { x: 0, z: 0, yaw: 0 }; FC.x = v.ex != null ? v.ex : p.x; FC.y = v.ey != null ? v.ey : 3; FC.z = v.ez != null ? v.ez : p.z; FC.yaw = p.yaw; FC.pitch = v.pitch != null ? +v.pitch : 20; }
+  else { FC.k = {}; try { if (document.pointerLockElement) document.exitPointerLock(); } catch (e) {} }
+  FC.on = on; rpUi();
+}
+function rpCam() { if (!RP.on || !FC.on) return null; return FC; }
+function fcMove(dt) {
+  if (!RP.on || !FC.on) return; const k = FC.k; let f = (k.KeyW ? 1 : 0) - (k.KeyS ? 1 : 0), r = (k.KeyD ? 1 : 0) - (k.KeyA ? 1 : 0), u = (k.Space ? 1 : 0) - (k.ShiftLeft || k.ShiftRight ? 1 : 0);
+  if (!f && !r && !u) return; const sp = FC.sp * (k.ControlLeft || k.ControlRight ? 2.5 : 1) * dt, y = FC.yaw * Math.PI / 180, l = Math.hypot(f, r) || 1;
+  FC.x += (Math.sin(y) * f + Math.cos(y) * r) / l * sp; FC.z += (-Math.cos(y) * f + Math.sin(y) * r) / l * sp; FC.y = Math.max(-20, Math.min(400, FC.y + u * sp));
+}
+cv.addEventListener('mousedown', e => { if (!RP.on) return; if (!FC.on) fcToggle(true); FC.drag = true; try { cv.requestPointerLock(); } catch (er) {} e.stopImmediatePropagation(); e.preventDefault(); }, true);
+window.addEventListener('mouseup', () => { FC.drag = false; }, true);
+window.addEventListener('mousemove', e => {
+  if (!RP.on || !FC.on) return; const locked = document.pointerLockElement === cv; if (!locked && !FC.drag) return;
+  FC.yaw = wrapDegrees(FC.yaw + e.movementX * 0.15); FC.pitch = Math.max(-89, Math.min(89, FC.pitch + e.movementY * 0.15)); e.stopImmediatePropagation();
+}, true);
+window.addEventListener('wheel', e => { if (!RP.on || !FC.on || e.target.closest && e.target.closest('#rpBar')) return; FC.sp = Math.max(1, Math.min(80, FC.sp * (e.deltaY < 0 ? 1.15 : 1 / 1.15))); e.preventDefault(); e.stopImmediatePropagation(); rpUi(); }, { capture: true, passive: false });
+
+// ---------- phase 3: wallet, daily login rewards, daily quests, trail cosmetics ----------
+const TRAIL_DEF = [
+  { id: 'frost', name: 'Frost', price: 0, style: 'ribbon', c1: '#d8f1ff', c2: '#6fb6ff', w: 0.45, len: 1.0, a: 0.55, glow: 0, rb: 0 },
+  { id: 'snowdust', name: 'Snowdust', price: 25, style: 'dots', c1: '#ffffff', c2: '#bcd7ff', w: 0.5, len: 1.4, a: 0.8, glow: 0, rb: 0 },
+  { id: 'ember', name: 'Ember', price: 40, style: 'ribbon', c1: '#ffd36b', c2: '#ff3b1f', w: 0.55, len: 1.3, a: 0.75, glow: 1, rb: 0 },
+  { id: 'gold', name: 'Gold sparkle', price: 60, style: 'sparkle', c1: '#fff3b0', c2: '#ffb300', w: 0.6, len: 1.5, a: 0.9, glow: 1, rb: 0 },
+  { id: 'aurora', name: 'Aurora', price: 80, style: 'ribbon', c1: '#5dffb0', c2: '#9b5cff', w: 0.7, len: 1.8, a: 0.6, glow: 1, rb: 0 },
+  { id: 'rainbow', name: 'Rainbow', price: 150, style: 'ribbon', c1: '#ff0000', c2: '#0000ff', w: 0.65, len: 1.8, a: 0.7, glow: 1, rb: 1 },
+];
+const LOGIN_RW = [5, 5, 10, 10, 15, 15, 30];
+const QUESTS = [
+  { id: 'laps3', t: 'Finish 3 laps', goal: 3, m: 'laps', rw: 10 },
+  { id: 'laps10', t: 'Finish 10 laps', goal: 10, m: 'laps', rw: 25 },
+  { id: 'laps20', t: 'Finish 20 laps', goal: 20, m: 'laps', rw: 40 },
+  { id: 'pb', t: 'Set a new personal best', goal: 1, m: 'pb', rw: 15 },
+  { id: 'race', t: 'Finish a multiplayer race', goal: 1, m: 'race', rw: 20 },
+  { id: 'race3', t: 'Finish 3 multiplayer races', goal: 3, m: 'race', rw: 35 },
+  { id: 'dist', t: 'Boat 3,000 blocks', goal: 3000, m: 'dist', rw: 15 },
+  { id: 'cp50', t: 'Pass 50 checkpoints', goal: 50, m: 'cp', rw: 10 },
+];
+const COS = { trails: TRAIL_DEF.map(t => Object.assign({}, t)), srv: false };
+let W = null; // wallet { bal, streak, last_login, equipped, owned[], claimed[], today }
+const wDay = () => new Date().toISOString().slice(0, 10);
+const wOnline = () => !!(typeof SB !== 'undefined' && SB && typeof NET !== 'undefined' && NET.online && typeof MY_KEY !== 'undefined' && MY_KEY && typeof URL_TWEAK !== 'undefined' && !URL_TWEAK);
+const wLKey = () => 'wal:' + ((typeof ME !== 'undefined' && ME && ME.id) || MP.myId());
+const _iceBalW = iceBal;
+iceBal = function () { return W ? W.bal : _iceBalW(); };
+function wErr(e) { const m = String((e && e.message) || e); return /already_claimed/.test(m) ? 'Already claimed today' : /not_enough/.test(m) ? 'Not enough icetokens' : /already_owned/.test(m) ? 'You already own that' : /not_for_sale/.test(m) ? 'That trail is not for sale' : /quests_done/.test(m) ? 'All quests claimed today' : /bad_key/.test(m) ? 'Sign in again to use your wallet' : 'Error: ' + m; }
+function wLocal() {
+  let w = store.get(wLKey());
+  if (!w) w = { bal: _iceBalW(), streak: 0, last_login: null, equipped: 'frost', owned: [], claimed: [], cday: wDay() };
+  if (w.cday !== wDay()) { w.claimed = []; w.cday = wDay(); }
+  w.today = wDay(); return w;
+}
+function wSaveLocal() { if (W && !W.srv) store.set(wLKey(), W); }
+function wSet(j, srv) { W = Object.assign({ owned: [], claimed: [] }, j, { srv: !!srv }); if (srv) { const p = store.get('trEq'); if (W.equipped == null && p) W.equipped = p; } cosUi(); try { rcUi(); } catch (e) { } }
+async function wInit() {
+  if (wOnline()) {
+    try { const j = await sbRpc('ibr_w_get', { p_key: MY_KEY, p_seed: _iceBalW() }); if (j) { wSet(j, true); return; } } catch (e) { console.warn('wallet', e); }
+  }
+  wSet(wLocal(), false);
+}
+async function cosLoad() {
+  if (typeof SB === 'undefined' || !SB) return;
+  try { const d = await sbRpc('ibr_cos_get', {}); if (d && Array.isArray(d.trails) && d.trails.length) { COS.trails = d.trails; COS.srv = true; } } catch (e) { console.warn('cosmetics', e); }
+  cosUi();
+}
+function trById(id) { return COS.trails.find(t => t.id === id) || null; }
+function trOwned(id) { const t = trById(id); return !!t && (+t.price === 0 || (W && (W.owned || []).includes(id))); }
+function trMine() { const id = W ? W.equipped : store.get('trEq'); return id && trById(id) && !(trById(id).off && !trOwned(id)) ? id : ''; }
+// ---- login reward
+function loginState() {
+  if (!W) return { can: false, next: 1 };
+  const today = W.today || wDay(), last = W.last_login ? String(W.last_login).slice(0, 10) : null;
+  const y = new Date(Date.parse(today + 'T00:00:00Z') - 864e5).toISOString().slice(0, 10);
+  const can = last !== today, next = last === y ? (W.streak % 7) + 1 : 1;
+  return { can, next: can ? next : W.streak, cur: can ? (last === y ? W.streak : 0) : W.streak };
+}
+async function claimLogin() {
+  const L = loginState(); if (!L.can) return toast('Login reward already claimed today', 2000);
+  try {
+    if (W.srv) wSet(await sbRpc('ibr_w_login', { p_key: MY_KEY }), true);
+    else { const amt = LOGIN_RW[L.next - 1]; W.streak = L.next; W.last_login = wDay(); W.bal += amt; W.claimed.push('login'); wSaveLocal(); cosUi(); }
+    toast('+' + LOGIN_RW[L.next - 1] + ' \u{1F9CA} day ' + L.next + ' login reward', 2400); cosDraw();
+  } catch (e) { toast(wErr(e), 2400); }
+}
+// ---- daily quests
+function qToday() {
+  const d = wDay(); let h = 7; for (const c of d) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+  const pool = QUESTS.slice(), out = [], used = new Set();
+  while (out.length < 3 && pool.length) { h = (h * 1103515245 + 12345) >>> 0; const q = pool.splice(h % pool.length, 1)[0]; if (used.has(q.m)) continue; used.add(q.m); out.push(q); }
+  return out;
+}
+function qProg() { const k = 'qp:' + wDay(); return store.get(k) || { laps: 0, pb: 0, race: 0, dist: 0, cp: 0 }; }
+function qAdd(m, n) {
+  const k = 'qp:' + wDay(), p = qProg(), before = qToday().filter(q => q.m === m && p[m] >= q.goal).length;
+  p[m] = (p[m] || 0) + n; store.set(k, p);
+  const done = qToday().filter(q => q.m === m && p[m] >= q.goal && !(W && (W.claimed || []).includes('q:' + q.id)));
+  if (done.length > before && m !== 'dist') toast('\u2705 Quest complete: ' + done[0].t + ' \u2014 claim it in Quests', 2600);
+  else if (m === 'dist' && done.length && p.dist - n < done[0].goal) toast('\u2705 Quest complete: ' + done[0].t, 2600);
+  cosBadge(); if (!el('cosModal') || !el('cosModal').classList.contains('hide')) cosDraw();
+}
+async function claimQuest(id) {
+  const q = QUESTS.find(x => x.id === id), p = qProg(); if (!q || p[q.m] < q.goal) return;
+  try {
+    if (W.srv) wSet(await sbRpc('ibr_w_quest', { p_key: MY_KEY, p_quest: id }), true);
+    else { if (W.claimed.includes('q:' + id)) throw new Error('already_claimed'); W.claimed.push('q:' + id); W.bal += q.rw; wSaveLocal(); cosUi(); }
+    toast('+' + q.rw + ' \u{1F9CA} ' + q.t, 2200); cosDraw();
+  } catch (e) { toast(wErr(e), 2400); }
+}
+// ---- shop
+async function trBuy(id) {
+  const t = trById(id); if (!t) return;
+  if (W.bal < +t.price) return toast('Not enough icetokens', 2000);
+  try {
+    if (W.srv) wSet(await sbRpc('ibr_w_buy', { p_key: MY_KEY, p_item: id }), true);
+    else { W.bal -= +t.price; W.owned.push(id); W.equipped = id; wSaveLocal(); cosUi(); }
+    store.set('trEq', id); toast('Unlocked ' + t.name + ' trail', 2200); cosDraw();
+  } catch (e) { toast(wErr(e), 2400); }
+}
+async function trEquip(id) {
+  try {
+    if (W.srv) { if (COS.srv) wSet(await sbRpc('ibr_w_equip', { p_key: MY_KEY, p_item: id }), true); else W.equipped = id; }
+    else { W.equipped = id; wSaveLocal(); }
+    store.set('trEq', id); cosUi(); cosDraw();
+  } catch (e) { toast(wErr(e), 2400); }
+}
+// ---- hooks: laps / PB / checkpoints / races / distance / race tokens
+const _saveTimeQ = saveTime;
+saveTime = function (...a) { const b0 = typeof best !== 'undefined' ? best : null; const r = _saveTimeQ.apply(this, a); try { qAdd('laps', 1); if (typeof best !== 'undefined' && best && best !== b0) qAdd('pb', 1); } catch (e) { } return r; };
+const _cpSplitQ = cpSplit;
+cpSplit = function (...a) { const r = _cpSplitQ.apply(this, a); try { qAdd('cp', 1); } catch (e) { } return r; };
+const _finFxQ = finFx;
+finFx = function (...a) { const r = _finFxQ.apply(this, a); try { if (MP.joined) qAdd('race', 1); } catch (e) { } return r; };
+const _rcAwardQ = rcAward;
+rcAward = async function (...a) {
+  await _rcAwardQ.apply(this, a);
+  if (!W) return;
+  if (W.srv) { try { wSet(await sbRpc('ibr_w_race', { p_key: MY_KEY }), true); } catch (e) { console.warn('race reward', e); } }
+  else { W.bal += 2; wSaveLocal(); cosUi(); }
+};
+(function distLoop() {
+  let lx = null, lz = null, acc = 0;
+  setInterval(() => {
+    try {
+      if (paused || placing || (typeof RP !== 'undefined' && RP.on)) { lx = null; return; }
+      if (lx != null) { const d = Math.hypot(st.x - lx, st.z - lz); if (d < 15) acc += d; }
+      lx = st.x; lz = st.z;
+      if (acc >= 25) { const n = Math.floor(acc); acc -= n; qAdd('dist', n); }
+    } catch (e) { }
+  }, 250);
+})();
+// ---- trail rendering
+const TR = { p: null, u: null, buf: null, me: [], peers: {}, lastT: 0 };
+function hexRgb(h) { h = String(h || '#ffffff').replace('#', ''); if (h.length === 3) h = h.split('').map(c => c + c).join(''); const n = parseInt(h, 16) || 0; return [(n >> 16 & 255) / 255, (n >> 8 & 255) / 255, (n & 255) / 255]; }
+function hsl(h) { const f = n => { const k = (n + h * 12) % 12; return 0.5 - 0.5 * Math.max(-1, Math.min(k - 3, 9 - k, 1)); }; return [f(0), f(8), f(4)]; }
+function trInit() {
+  if (TR.p) return true;
+  const sh = (t, s) => { const o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); return o; };
+  const p = gl.createProgram();
+  gl.attachShader(p, sh(gl.VERTEX_SHADER, 'attribute vec3 aP; attribute vec4 aC; uniform mat4 uVP; varying vec4 vC; void main(){ vC = aC; gl_Position = uVP * vec4(aP, 1.0); }'));
+  gl.attachShader(p, sh(gl.FRAGMENT_SHADER, 'precision mediump float; varying vec4 vC; void main(){ gl_FragColor = vC; }'));
+  gl.bindAttribLocation(p, 0, 'aP'); gl.bindAttribLocation(p, 1, 'aC'); gl.linkProgram(p);
+  if (!gl.getProgramParameter(p, gl.LINK_STATUS)) { console.warn('trail shader', gl.getProgramInfoLog(p)); TR.p = false; return false; }
+  TR.p = p; TR.u = gl.getUniformLocation(p, 'uVP'); TR.buf = gl.createBuffer(); return true;
+}
+function trSample(arr, x, z, y, now, len) {
+  const L = arr[arr.length - 1];
+  if (!L || now - L.t > 30 || Math.hypot(x - L.x, z - L.z) > 0.6) { if (!L || Math.hypot(x - L.x, z - L.z) > 0.03) arr.push({ x, z, y, t: now }); else L.t = now; }
+  while (arr.length && now - arr[0].t > len * 1000) arr.shift();
+  if (arr.length > 400) arr.splice(0, arr.length - 400);
+}
+function trGeom(V, pts, tr, now, bx, bz, by) {
+  if (!tr || pts.length < 2) return;
+  const c1 = hexRgb(tr.c1), c2 = hexRgb(tr.c2), A = Math.max(0.05, Math.min(1, +tr.a || 0.7)), w = Math.max(0.05, +tr.w || 0.5), len = Math.max(0.2, +tr.len || 1) * 1000;
+  const col = (i, f) => { if (+tr.rb) { const c = hsl((i * 0.025 + now * 0.0004) % 1); return c; } return [c1[0] + (c2[0] - c1[0]) * f, c1[1] + (c2[1] - c1[1]) * f, c1[2] + (c2[2] - c1[2]) * f]; };
+  const P = pts.concat([{ x: bx, z: bz, y: by, t: now }]);
+  const push = (x, y, z, c, a) => V.push(x, y, z, c[0], c[1], c[2], a);
+  if (tr.style === 'ribbon') {
+    for (let i = 0; i < P.length - 1; i++) {
+      const p0 = P[i], p1 = P[i + 1], dx = p1.x - p0.x, dz = p1.z - p0.z, l = Math.hypot(dx, dz); if (l < 1e-4) continue;
+      const f0 = Math.min(1, (now - p0.t) / len), f1 = Math.min(1, (now - p1.t) / len), nx = -dz / l, nz = dx / l;
+      const w0 = w * (1 - f0 * 0.7) / 2, w1 = w * (1 - f1 * 0.7) / 2, y0 = p0.y + 0.07, y1 = p1.y + 0.07, k0 = col(i, f0), k1 = col(i + 1, f1), a0 = A * (1 - f0), a1 = A * (1 - f1);
+      push(p0.x + nx * w0, y0, p0.z + nz * w0, k0, a0); push(p0.x - nx * w0, y0, p0.z - nz * w0, k0, a0); push(p1.x + nx * w1, y1, p1.z + nz * w1, k1, a1);
+      push(p0.x - nx * w0, y0, p0.z - nz * w0, k0, a0); push(p1.x - nx * w1, y1, p1.z - nz * w1, k1, a1); push(p1.x + nx * w1, y1, p1.z + nz * w1, k1, a1);
+    }
+  } else {
+    const spark = tr.style === 'sparkle', step = spark ? 1 : 2;
+    for (let i = 0; i < P.length - 1; i += step) {
+      const p = P[i], f = Math.min(1, (now - p.t) / len); if (f >= 1) continue;
+      const hsh = Math.sin(i * 12.9898 + Math.floor(p.t) * 0.001) * 43758.5453, r = hsh - Math.floor(hsh);
+      const s = (spark ? w * 0.28 * (0.5 + r) * (1 - f) : w * 0.22 * (1 - f * 0.5)), jx = spark ? (r - 0.5) * w * 1.6 : 0, jz = spark ? (((r * 7) % 1) - 0.5) * w * 1.6 : 0;
+      const x = p.x + jx, z = p.z + jz, y = p.y + 0.08 + (spark ? f * 0.9 : 0), k = col(i, f), a = A * (1 - f) * (spark ? (0.6 + 0.4 * Math.sin(now * 0.02 + i)) : 1);
+      push(x - s, y, z - s, k, a); push(x + s, y, z - s, k, a); push(x + s, y, z + s, k, a); push(x - s, y, z - s, k, a); push(x + s, y, z + s, k, a); push(x - s, y, z + s, k, a);
+      if (spark) { push(x - s, y - s, z, k, a); push(x + s, y - s, z, k, a); push(x + s, y + s, z, k, a); push(x - s, y - s, z, k, a); push(x + s, y + s, z, k, a); push(x - s, y + s, z, k, a); }
+    }
+  }
+}
+function trDraw(B, bx, bz, by, peers) {
+  try {
+    if (settings.trails === false || !trInit()) return;
+    const now = performance.now(), myT = trById(trMine());
+    trSample(TR.me, bx, bz, by, now, myT ? +myT.len || 1 : 1);
+    const V = []; let glow = false;
+    if (myT) { trGeom(V, TR.me, myT, now, bx, bz, by); if (+myT.glow) glow = true; }
+    const seen = {};
+    for (const q of peers || []) {
+      const id = q.id || (q.sx.toFixed(0) + ':' + q.sz.toFixed(0)); seen[id] = 1; const t = trById(q.tc || ''); if (!t) continue;
+      const arr = TR.peers[id] || (TR.peers[id] = []); trSample(arr, q.sx, q.sz, q.sy || boatY, now, +t.len || 1); trGeom(V, arr, t, now, q.sx, q.sz, q.sy || boatY);
+    }
+    for (const k in TR.peers) if (!seen[k]) delete TR.peers[k];
+    if (!V.length) return;
+    gl.useProgram(TR.p); gl.uniformMatrix4fv(TR.u, false, vpM);
+    gl.bindBuffer(gl.ARRAY_BUFFER, TR.buf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(V), gl.DYNAMIC_DRAW);
+    gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 28, 0); gl.vertexAttribPointer(1, 4, gl.FLOAT, false, 28, 12);
+    gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, glow ? gl.ONE : gl.ONE_MINUS_SRC_ALPHA); gl.depthMask(false); gl.disable(gl.CULL_FACE);
+    gl.drawArrays(gl.TRIANGLES, 0, V.length / 7);
+    gl.depthMask(true); gl.disable(gl.BLEND);
+  } catch (e) { console.warn('trail', e); }
+  finally { gl.useProgram(B.p); }
+}
+// ---- UI: menu button + shop & quests modal
+function trSwatch(t) { return +t.rb ? 'linear-gradient(90deg,#ff4d4d,#ffb84d,#fff04d,#4dff88,#4dc3ff,#9b6bff)' : 'linear-gradient(90deg,' + escH(t.c1) + ',' + escH(t.c2) + ')'; }
+function cosBadge() {
+  const b = el('cosOpen'); if (!b || !W) return;
+  const p = qProg(), cl = W.claimed || [], q = qToday().some(x => p[x.m] >= x.goal && !cl.includes('q:' + x.id));
+  b.classList.toggle('dot', loginState().can || q);
+}
+function cosUi() {
+  const b = el('cosOpen'); if (b && W) b.querySelector('.cosBal').textContent = '\u{1F9CA} ' + W.bal;
+  const m = el('cosBal'); if (m && W) m.textContent = '\u{1F9CA} ' + W.bal + ' icetokens';
+  cosBadge();
+}
+function cosModal() {
+  let m = el('cosModal'); if (m) return m;
+  m = document.createElement('div'); m.id = 'cosModal'; m.className = 'hide';
+  m.innerHTML = '<div class="cosBox"><div class="cosHd"><b>Quests</b><span id="cosBal" class="cosPill"></span><button class="b" id="cosX">\u2715</button></div>'
+    + '<div class="cosTabs"><button class="on" data-ct="daily">\u{1F4C5} Daily</button><button data-ct="trails">\u2728 Trails</button></div><div id="cosBody"></div></div>';
+  document.body.appendChild(m);
+  m.addEventListener('mousedown', e => { if (e.target === m) m.classList.add('hide'); });
+  el('cosX').onclick = () => m.classList.add('hide');
+  m.querySelectorAll('[data-ct]').forEach(b => b.onclick = () => { m.querySelectorAll('[data-ct]').forEach(x => x.classList.toggle('on', x === b)); cosDraw(); });
+  return m;
+}
+function cosDraw() {
+  const m = el('cosModal'); if (!m || !W) return; cosUi();
+  const tab = (m.querySelector('[data-ct].on') || {}).dataset.ct || 'daily', body = el('cosBody');
+  if (tab === 'daily') {
+    const L = loginState(), p = qProg(), cl = W.claimed || [];
+    const days = LOGIN_RW.map((r, i) => { const d = i + 1, got = d <= L.cur, nxt = L.can && d === L.next; return '<div class="cosDay' + (got ? ' got' : '') + (nxt ? ' nxt' : '') + '"><span>Day ' + d + '</span><b>\u{1F9CA} ' + r + '</b>' + (got ? '<i>\u2713</i>' : '') + '</div>'; }).join('');
+    const qs = qToday().map(q => { const v = Math.min(q.goal, Math.floor(p[q.m] || 0)), done = v >= q.goal, c = cl.includes('q:' + q.id); return '<div class="cosQ' + (c ? ' got' : '') + '"><div class="cosQt"><b>' + escH(q.t) + '</b><span class="keys">' + (q.m === 'dist' ? v.toLocaleString() + ' / ' + q.goal.toLocaleString() : v + ' / ' + q.goal) + '</span><div class="cosBar"><i style="width:' + (100 * v / q.goal) + '%"></i></div></div><button class="b' + (done && !c ? ' primary' : '') + '" data-cq="' + q.id + '"' + (done && !c ? '' : ' disabled') + '>' + (c ? 'Claimed' : '\u{1F9CA} ' + q.rw) + '</button></div>'; }).join('');
+    const ms = Date.parse(wDay() + 'T00:00:00Z') + 864e5 - Date.now(), hh = Math.floor(ms / 36e5), mm = Math.floor(ms / 6e4) % 60;
+    body.innerHTML = '<div class="cosSec"><div class="cosSh"><b>Login reward</b><span class="keys">' + (L.cur ? L.cur + '-day streak' : 'Log in each day to build a streak') + '</span></div><div class="cosDays">' + days + '</div><button class="b' + (L.can ? ' primary' : '') + ' cosClaim" id="cosLogin"' + (L.can ? '' : ' disabled') + '>' + (L.can ? 'Claim day ' + L.next + ' reward' : 'Come back tomorrow') + '</button></div>'
+      + '<div class="cosSec"><div class="cosSh"><b>Daily quests</b><span class="keys">New quests in ' + hh + 'h ' + mm + 'm</span></div>' + qs + '</div>'
+      + (W.srv ? '' : '<div class="keys cosNote">Sign in to sync your icetokens and cosmetics across devices.</div>');
+    const lb = el('cosLogin'); if (lb) lb.onclick = claimLogin;
+    body.querySelectorAll('[data-cq]').forEach(b => b.onclick = () => claimQuest(b.dataset.cq));
+  } else {
+    const eq = trMine();
+    body.innerHTML = '<div class="cosGrid">' + COS.trails.filter(t => !t.off || trOwned(t.id)).map(t => { const own = trOwned(t.id), on = eq === t.id; return '<div class="cosCard' + (on ? ' on' : '') + '"><div class="cosSw ' + escH(t.style) + '" style="background:' + trSwatch(t) + '"></div><b>' + escH(t.name) + '</b><span class="keys">' + escH(t.style) + (+t.glow ? ' \u00b7 glow' : '') + '</span><button class="b' + (!own ? ' primary' : '') + '" data-tb="' + escH(t.id) + '"' + (on ? ' disabled' : '') + '>' + (on ? 'Equipped' : own ? 'Equip' : (+t.price ? '\u{1F9CA} ' + t.price : 'Free')) + '</button></div>'; }).join('')
+      + '<div class="cosCard' + (!eq ? ' on' : '') + '"><div class="cosSw none"></div><b>No trail</b><span class="keys">off</span><button class="b" data-tb=""' + (!eq ? ' disabled' : '') + '>' + (!eq ? 'Equipped' : 'Equip') + '</button></div></div>';
+    body.querySelectorAll('[data-tb]').forEach(b => b.onclick = () => { const id = b.dataset.tb; if (!id) return trEquip(null); trOwned(id) ? trEquip(id) : trBuy(id); });
+  }
+}
+function cosOpen() { cosModal().classList.remove('hide'); cosDraw(); }
+(function cosButton() {
+  const ref = el('rpOpen') || el('playBtn'); if (!ref) return;
+  const b = document.createElement('button'); b.type = 'button'; b.className = 'b'; b.id = 'cosOpen'; b.innerHTML = '\u2728 Shop &amp; quests <span class="cosBal"></span>';
+  ref.insertAdjacentElement('afterend', b); b.onclick = cosOpen;
+})();
+// ---- dev dashboard: cosmetics editor
+const CD = { list: null };
+function cdList() { if (!CD.list) CD.list = COS.trails.map(t => Object.assign({}, t)); return CD.list; }
+function cdStat(t) { const s = el('cdStat'); if (s) s.textContent = t; }
+function cdDraw() {
+  const box = el('cdList'); if (!box) return; const L = cdList();
+  box.innerHTML = L.map((t, i) => '<div class="ddCard cdCard" data-i="' + i + '"><div class="cdTop"><div class="cosSw ' + escH(t.style) + '" style="background:' + trSwatch(t) + '"></div><input type="text" data-k="name" value="' + escH(t.name) + '" aria-label="Name"><span class="keys">id: ' + escH(t.id) + '</span></div>'
+    + '<div class="cdRow"><label>Price<input type="number" min="0" data-k="price" value="' + (+t.price || 0) + '"></label><label>Style<select data-k="style">' + ['ribbon', 'sparkle', 'dots'].map(s => '<option' + (s === t.style ? ' selected' : '') + '>' + s + '</option>').join('') + '</select></label><label>Colour 1<input type="color" data-k="c1" value="' + escH(t.c1) + '"></label><label>Colour 2<input type="color" data-k="c2" value="' + escH(t.c2) + '"></label></div>'
+    + '<div class="cdRow"><label>Width <span>' + t.w + '</span><input type="range" min="0.1" max="1.5" step="0.05" data-k="w" value="' + t.w + '"></label><label>Length (s) <span>' + t.len + '</span><input type="range" min="0.3" max="4" step="0.1" data-k="len" value="' + t.len + '"></label><label>Opacity <span>' + t.a + '</span><input type="range" min="0.1" max="1" step="0.05" data-k="a" value="' + t.a + '"></label></div>'
+    + '<div class="cdRow"><label class="cdChk"><input type="checkbox" data-k="glow"' + (+t.glow ? ' checked' : '') + '>Glow</label><label class="cdChk"><input type="checkbox" data-k="rb"' + (+t.rb ? ' checked' : '') + '>Rainbow</label><label class="cdChk"><input type="checkbox" data-k="sale"' + (!t.off ? ' checked' : '') + '>For sale</label><div style="flex:1"></div><button class="b" data-cd="try">Try on my boat</button><button class="b" data-cd="up">\u2191</button><button class="b" data-cd="dn">\u2193</button><button class="b danger" data-cd="del">Delete</button></div></div>').join('');
+  box.querySelectorAll('.cdCard').forEach(c => {
+    const i = +c.dataset.i, t = L[i];
+    c.querySelectorAll('[data-k]').forEach(inp => inp.oninput = inp.onchange = () => {
+      const k = inp.dataset.k;
+      if (k === 'glow' || k === 'rb') t[k] = inp.checked ? 1 : 0; else if (k === 'sale') t.off = !inp.checked; else if (['price', 'w', 'len', 'a'].includes(k)) t[k] = +inp.value; else t[k] = inp.value;
+      const sp = inp.parentElement.querySelector('span'); if (sp && inp.type === 'range') sp.textContent = inp.value;
+      c.querySelector('.cosSw').style.background = trSwatch(t); c.querySelector('.cosSw').className = 'cosSw ' + t.style; cdStat('Unsaved changes \u2014 press Publish to players');
+      if (CD.tryId === t.id) COS.trails = cdList().map(x => Object.assign({}, x));
+    });
+    c.querySelectorAll('[data-cd]').forEach(b => b.onclick = () => {
+      const a = b.dataset.cd;
+      if (a === 'del') { if (!confirm('Delete the ' + t.name + ' trail? Players who bought it keep it in their history but cannot equip it.')) return; L.splice(i, 1); }
+      else if (a === 'up' && i > 0) L.splice(i - 1, 0, L.splice(i, 1)[0]);
+      else if (a === 'dn' && i < L.length - 1) L.splice(i + 1, 0, L.splice(i, 1)[0]);
+      else if (a === 'try') { CD.tryId = t.id; COS.trails = cdList().map(x => Object.assign({}, x)); if (W) { W.equipped = t.id; if (!W.srv) wSaveLocal(); } store.set('trEq', t.id); cdStat('Preview: ' + t.name + ' is on your boat (close the dashboard to see it)'); return; }
+      else return;
+      cdStat('Unsaved changes \u2014 press Publish to players'); cdDraw();
+    });
+  });
+  const q = el('cdQuests'); if (q) q.innerHTML = QUESTS.map(x => '<div class="row"><span class="pl">' + escH(x.t) + '</span><span class="keys">\u{1F9CA} ' + x.rw + '</span></div>').join('') + '<div class="row"><span class="pl">Login streak (days 1\u20137)</span><span class="keys">' + LOGIN_RW.join(' \u00b7 ') + '</span></div>';
+}
+function cdInit() {
+  const nw = el('cdNew'), pub = el('cdPub'), rs = el('cdReset'); if (!nw) return;
+  nw.onclick = () => { const L = cdList(); let n = 1; while (L.some(t => t.id === 'trail' + n)) n++; L.push({ id: 'trail' + n, name: 'New trail', price: 50, style: 'ribbon', c1: '#ffffff', c2: '#7fd0ff', w: 0.5, len: 1.2, a: 0.7, glow: 0, rb: 0, off: true }); cdDraw(); cdStat('New trail added (not for sale yet). Tick For sale, then Publish.'); };
+  rs.onclick = () => { if (!confirm('Reset the trail list to the built-in defaults? (Not published until you press Publish.)')) return; CD.list = TRAIL_DEF.map(t => Object.assign({}, t)); cdDraw(); cdStat('Defaults loaded \u2014 press Publish to players'); };
+  pub.onclick = async () => {
+    const L = cdList(), ids = new Set();
+    for (const t of L) { if (!t.name || ids.has(t.id)) return cdStat('Each trail needs a name and a unique id'); ids.add(t.id); }
+    if (typeof SB === 'undefined' || !SB) return cdStat('Accounts server is not connected (Website & servers)');
+    try { await sbRpc('ibr_dev_cos_set', { p_secret: admSec(), p_data: { trails: L } }); COS.trails = L.map(t => Object.assign({}, t)); COS.srv = true; cdStat('\u2705 Published ' + L.length + ' trails to players'); cosUi(); }
+    catch (e) { cdStat(/bad_secret/.test(e.message) ? 'Wrong admin secret (same one as replays)' : /function|does not exist|404/.test(e.message) ? 'Run ibronline-cosmetics-setup.sql in Supabase first' : 'Error: ' + e.message); }
+  };
+  document.querySelectorAll('.ddSide [data-p="cos"]').forEach(b => b.addEventListener('click', () => { CD.list = null; cdDraw(); }));
+  cdDraw();
+}
+cdInit();
+// ---- boot + keep wallet in sync with sign-in state
+(function wBoot() {
+  let k = null;
+  const tick = () => { const now = (wOnline() ? 's:' + MY_KEY : 'l:' + wLKey()); if (now !== k) { k = now; wInit(); } if (W && W.today && W.today !== wDay()) wInit(); };
+  cosLoad().then(tick); setInterval(tick, 4000); tick();
+})();
+
+// ---------- phase 4: player profiles + friends list ----------
+const SOC = { fr: [], inc: 0, lastInc: null, tab: 'friends', busy: false };
+const socOn = () => !!(typeof SB !== 'undefined' && SB && NET.online && MY_KEY && ME && !URL_TWEAK);
+function socErr(e) { const m = String((e && e.message) || e); return /no_player/.test(m) ? 'That player has not opened the game since profiles launched' : /self/.test(m) ? "You can't add yourself" : /too_many/.test(m) ? 'Too many pending requests' : /bad_key/.test(m) ? 'Sign in again' : /does not exist|404|function/.test(m) ? 'Friends are not set up on the server yet' : 'Error: ' + m; }
+function ago(ts) { const s = Math.max(0, (Date.now() - Date.parse(ts)) / 1000); return s < 120 ? 'just now' : s < 3600 ? Math.floor(s / 60) + 'm ago' : s < 86400 ? Math.floor(s / 3600) + 'h ago' : Math.floor(s / 86400) + 'd ago'; }
+function trackName(id) { try { const t = (WEB_LIST || []).find(x => x && (x.id === id || x.slug === id)); if (t) return t.name || t.title || id; } catch (e) { } return String(id || '').replace(/[-_]/g, ' '); }
+function socStatus() {
+  try {
+    if (typeof RP !== 'undefined' && RP.on) return 'Watching a replay';
+    if (MP.joined) return 'In a multiplayer race';
+    if (paused) return 'In the menu';
+    return 'Driving ' + ((WEB_CUR && (WEB_CUR.name || WEB_CUR.id)) || 'a track');
+  } catch (e) { return ''; }
+}
+async function socPing() {
+  if (!socOn()) { socBadge(); return; }
+  try {
+    const r = await sbRpc('ibr_prof_ping', { p_key: MY_KEY, p_status: socStatus() });
+    const inc = +(r && r.incoming) || 0;
+    if (SOC.lastInc != null && inc > SOC.lastInc) toast('\u{1F465} New friend request \u2014 open Friends to accept', 2600);
+    SOC.lastInc = inc; SOC.inc = inc; await socList();
+  } catch (e) { console.warn('profile ping', e); }
+}
+async function socList() {
+  if (!socOn()) return;
+  try { SOC.fr = (await sbRpc('ibr_fr_list', { p_key: MY_KEY })) || []; SOC.inc = SOC.fr.filter(f => f.kind === 'in').length; } catch (e) { console.warn('friends', e); }
+  socBadge(); if (!el('frModal') || !el('frModal').classList.contains('hide')) frDraw();
+}
+function frState(pid) { const f = SOC.fr.find(x => x.id === pid); return f ? f.kind : 'none'; }
+async function frAct(act, pid) {
+  if (!socOn()) return toast('Sign in to use friends', 2000);
+  try {
+    if (act === 'add') { const r = await sbRpc('ibr_fr_add', { p_key: MY_KEY, p_target: pid }); toast(r && r.state === 'friend' ? '\u2705 You are now friends' : 'Friend request sent', 2000); }
+    else { await sbRpc('ibr_fr_remove', { p_key: MY_KEY, p_other: pid }); }
+    await socList(); if (el('pfModal') && !el('pfModal').classList.contains('hide') && SOC.pf === pid) pfActs(pid);
+  } catch (e) { toast(socErr(e), 2600); }
+}
+function frBtns(pid) {
+  const s = frState(pid);
+  if (s === 'friend') return '<button class="b" data-fa="rm" data-id="' + escH(pid) + '">Remove</button>';
+  if (s === 'in') return '<button class="b primary" data-fa="add" data-id="' + escH(pid) + '">Accept</button><button class="b" data-fa="rm" data-id="' + escH(pid) + '">Decline</button>';
+  if (s === 'out') return '<button class="b" data-fa="rm" data-id="' + escH(pid) + '">Cancel request</button>';
+  return '<button class="b primary" data-fa="add" data-id="' + escH(pid) + '">+ Add friend</button>';
+}
+function frWire(root) {
+  root.querySelectorAll('[data-fa]').forEach(b => b.onclick = e => { e.stopPropagation(); b.disabled = true; frAct(b.dataset.fa, b.dataset.id); });
+  root.querySelectorAll('[data-pf]').forEach(b => b.onclick = () => pfOpen(b.dataset.pf));
+}
+function socModal(id, title) {
+  let m = el(id); if (m) return m;
+  m = document.createElement('div'); m.id = id; m.className = 'socModal hide';
+  m.innerHTML = '<div class="socBox"><div class="cosHd"><b>' + title + '</b><button class="b" data-x>\u2715</button></div><div class="socBody"></div></div>';
+  document.body.appendChild(m);
+  m.addEventListener('mousedown', e => { if (e.target === m) m.classList.add('hide'); });
+  m.querySelector('[data-x]').onclick = () => m.classList.add('hide');
+  return m;
+}
+function frRow(f, extra) {
+  return '<div class="frRow"><div class="frWho" data-pf="' + escH(f.id) + '">' + avHtml(f) + '<i class="frDot' + (f.online ? ' on' : '') + '"></i><div><b>' + escH(f.name) + '</b>' + tagHtml(f.id) + '<span class="keys">' + escH(extra != null ? extra : (f.online ? (f.status || 'Online') : (f.last_seen ? 'Last seen ' + ago(f.last_seen) : 'Offline'))) + '</span></div></div><div class="frBtns">' + frBtns(f.id) + '</div></div>';
+}
+function frDraw() {
+  const m = socModal('frModal', '\u{1F465} Friends'), body = m.querySelector('.socBody');
+  if (!socOn()) { body.innerHTML = '<div class="keys socEmpty">' + (ME ? 'Friends need the online accounts server.' : 'Sign in (top right) to add friends and see who is online.') + '</div>'; return; }
+  const F = SOC.fr.filter(f => f.kind === 'friend'), I = SOC.fr.filter(f => f.kind === 'in'), O = SOC.fr.filter(f => f.kind === 'out'), on = F.filter(f => f.online).length;
+  const tabs = '<div class="cosTabs"><button data-ft="friends"' + (SOC.tab === 'friends' ? ' class="on"' : '') + '>Friends \u00b7 ' + on + '/' + F.length + ' online</button><button data-ft="req"' + (SOC.tab === 'req' ? ' class="on"' : '') + '>Requests' + (I.length ? ' <span class="frN">' + I.length + '</span>' : '') + '</button><button data-ft="add"' + (SOC.tab === 'add' ? ' class="on"' : '') + '>+ Add friend</button></div>';
+  let html = '';
+  if (SOC.tab === 'friends') html = F.length ? F.map(f => frRow(f)).join('') : '<div class="keys socEmpty">No friends yet. Use + Add friend, or open someone\'s profile from the WR leaderboard.</div>';
+  else if (SOC.tab === 'req') html = (I.length ? '<div class="socSh">Incoming</div>' + I.map(f => frRow(f, 'Wants to be friends')).join('') : '') + (O.length ? '<div class="socSh">Sent</div>' + O.map(f => frRow(f, 'Waiting for them to accept')).join('') : '') + (!I.length && !O.length ? '<div class="keys socEmpty">No pending requests.</div>' : '');
+  else html = '<div class="frSearch"><input type="text" id="frQ" placeholder="Search player name\u2026" maxlength="16" spellcheck="false" autocomplete="off"></div><div id="frRes" class="keys socEmpty">Type at least 2 letters.</div>';
+  body.innerHTML = tabs + '<div class="frList">' + html + '</div>';
+  body.querySelectorAll('[data-ft]').forEach(b => b.onclick = () => { SOC.tab = b.dataset.ft; frDraw(); });
+  frWire(body);
+  const q = el('frQ');
+  if (q) {
+    q.value = SOC.q || ''; q.focus(); let tm = 0;
+    const go = async () => {
+      SOC.q = q.value; const r = el('frRes'); if (q.value.trim().length < 2) { r.className = 'keys socEmpty'; r.textContent = 'Type at least 2 letters.'; return; }
+      try { const L = ((await sbRpc('ibr_prof_search', { p_q: q.value.trim() })) || []).filter(x => x.id !== ME.id); if (q.value !== SOC.q) return; r.className = ''; r.innerHTML = L.length ? L.map(x => frRow(x, x.online ? 'Online' : '')).join('') : '<div class="keys socEmpty">No players found.</div>'; frWire(r); } catch (e) { r.className = 'keys socEmpty'; r.textContent = socErr(e); }
+    };
+    q.oninput = () => { clearTimeout(tm); tm = setTimeout(go, 250); }; if (q.value) go();
+  }
+}
+function frOpen() { socModal('frModal', '\u{1F465} Friends').classList.remove('hide'); frDraw(); socList(); }
+function socBadge() {
+  const b = el('frOpen'); if (!b) return;
+  const F = SOC.fr.filter(f => f.kind === 'friend'), on = F.filter(f => f.online).length;
+  b.querySelector('.frC').textContent = socOn() && F.length ? on + ' online' : '';
+  b.classList.toggle('dot', socOn() && SOC.inc > 0);
+}
+// ---- profile page
+function pfActs(pid) { const a = el('pfActs'); if (!a) return; a.innerHTML = ME && pid === ME.id ? '<button class="b" id="pfEdit">\u270F\uFE0F Edit profile</button>' : (socOn() ? frBtns(pid) : ''); frWire(a); const e = el('pfEdit'); if (e) e.onclick = () => pfEditor(); }
+async function pfOpen(pid) {
+  if (!pid) return; SOC.pf = pid;
+  const m = socModal('pfModal', 'Player profile'), body = m.querySelector('.socBody');
+  m.classList.remove('hide'); body.innerHTML = '<div class="keys socEmpty">Loading profile\u2026</div>';
+  let P = null;
+  if (typeof SB !== 'undefined' && SB && NET.online) { try { P = await sbRpc('ibr_prof_get', { p_id: pid }); } catch (e) { console.warn('profile', e); } }
+  if (SOC.pf !== pid) return;
+  if (!P && ME && pid === ME.id) {
+    const pbs = []; try { for (const r of rpList()) if (r.pb) pbs.push({ track: r.track, ms: Math.round(r.t * 1000), at: r.at }); } catch (e) { }
+    P = { id: ME.id, name: ME.name, face: ME.face, bio: store.get('pfBio') || '', color: store.get('pfColor') || '#4a7bd0', fav_track: store.get('pfFav') || '', pbs, friends: 0, trail: trMine(), streak: W ? W.streak : 0, online: true, status: socStatus(), local: true };
+  }
+  if (!P) { body.innerHTML = '<div class="keys socEmpty">This player has no profile yet (they need to open the game once while signed in).</div>'; return; }
+  SOC.P = P;
+  const col = /^#[0-9a-f]{6}$/i.test(P.color || '') ? P.color : '#4a7bd0', tr = trById(P.trail || ''), pbs = (P.pbs || []).slice().sort((a, b) => String(b.at || '').localeCompare(String(a.at || '')));
+  body.innerHTML = '<div class="pfBan" style="background:linear-gradient(135deg,' + col + ',rgba(18,24,34,.2))">' + avHtml(P, 'l pfAv') + '<div class="pfName"><b>' + escH(P.name) + '</b>' + tagHtml(P.id) + '<span class="keys"><i class="frDot' + (P.online ? ' on' : '') + '"></i>' + escH(P.online ? (P.status || 'Online') : (P.last_seen ? 'Last seen ' + ago(P.last_seen) : 'Offline')) + '</span></div><div id="pfActs" class="pfActs"></div></div>'
+    + (P.bio ? '<div class="pfBio">' + escH(P.bio) + '</div>' : '')
+    + '<div class="pfStats"><div><b>' + pbs.length + '</b><span>Tracks with a PB</span></div><div><b>' + (+P.friends || 0) + '</b><span>Friends</span></div><div><b>' + (+P.streak || 0) + '</b><span>Login streak</span></div><div><div class="cosSw ' + escH(tr ? tr.style : 'none') + '" style="' + (tr ? 'background:' + trSwatch(tr) : '') + '"></div><span>' + escH(tr ? tr.name + ' trail' : 'No trail') + '</span></div></div>'
+    + (P.fav_track ? '<div class="pfFav keys">\u2B50 Favourite track: <b>' + escH(trackName(P.fav_track)) + '</b></div>' : '')
+    + '<div class="socSh">Personal bests</div>' + (pbs.length ? '<div class="pfPbs">' + pbs.map(r => '<div class="row"><span class="pl">' + escH(trackName(r.track)) + '</span><b class="t">' + fmtMs(r.ms) + '</b><span class="keys">' + (r.at ? new Date(r.at).toLocaleDateString() : '') + '</span></div>').join('') + '</div>' : '<div class="keys socEmpty">No PBs uploaded yet.</div>')
+    + (P.joined ? '<div class="keys pfJoin">Joined ' + new Date(P.joined).toLocaleDateString() + '</div>' : '') + (P.local ? '<div class="keys pfJoin">Offline profile \u2014 only you can see this on this device.</div>' : '');
+  pfActs(pid);
+}
+function pfEditor() {
+  const P = SOC.P; if (!P) return; const body = el('pfModal').querySelector('.socBody');
+  let opts = '<option value="">None</option>'; try { for (const t of WEB_LIST || []) if (t && t.id) opts += '<option value="' + escH(t.id) + '"' + (t.id === P.fav_track ? ' selected' : '') + '>' + escH(t.name || t.id) + '</option>'; } catch (e) { }
+  body.innerHTML = '<div class="pfEd"><div class="field"><label for="pfBioI">Bio</label><textarea id="pfBioI" maxlength="200" rows="3" placeholder="Say something about yourself\u2026">' + escH(P.bio || '') + '</textarea></div>'
+    + '<div class="field"><label for="pfColI">Banner colour</label><input type="color" id="pfColI" value="' + escH(/^#[0-9a-f]{6}$/i.test(P.color || '') ? P.color : '#4a7bd0') + '"></div>'
+    + '<div class="field"><label for="pfFavI">Favourite track</label><select id="pfFavI">' + opts + '</select></div>'
+    + '<div class="keys" style="margin:4px 0 10px">Change your name and skin in Account.</div>'
+    + '<div class="row"><button class="b primary" id="pfSave">Save profile</button><button class="b" id="pfCancel">Cancel</button></div><div class="keys" id="pfStat"></div></div>';
+  el('pfCancel').onclick = () => pfOpen(P.id);
+  el('pfSave').onclick = async () => {
+    const bio = el('pfBioI').value.slice(0, 200), color = el('pfColI').value, fav = el('pfFavI').value;
+    store.set('pfBio', bio); store.set('pfColor', color); store.set('pfFav', fav);
+    if (socOn()) { try { await sbRpc('ibr_prof_edit', { p_key: MY_KEY, p_bio: bio, p_color: color, p_fav: fav }); } catch (e) { el('pfStat').textContent = socErr(e); return; } }
+    toast('Profile saved', 1800); pfOpen(P.id);
+  };
+}
+// ---- entry points
+(function socButtons() {
+  const ref = el('cosOpen') || el('rpOpen') || el('playBtn');
+  if (ref) { const b = document.createElement('button'); b.type = 'button'; b.className = 'b'; b.id = 'frOpen'; b.innerHTML = '\u{1F465} Friends <span class="frC"></span>'; ref.insertAdjacentElement('afterend', b); b.onclick = frOpen; }
+  const sv = el('acEdSave'); if (sv) { const p = document.createElement('button'); p.type = 'button'; p.className = 'b'; p.id = 'acProfile'; p.textContent = '\u{1F464} View my profile'; sv.parentElement.appendChild(p); p.onclick = () => ME && pfOpen(ME.id); }
+})();
+document.addEventListener('click', e => { const t = e.target.closest && e.target.closest('.pfLink[data-pid]'); if (t && t.dataset.pid) { e.preventDefault(); pfOpen(t.dataset.pid); } });
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  for (const id of ['pfModal', 'frModal', 'cosModal']) { const m = el(id); if (m && !m.classList.contains('hide')) { m.classList.add('hide'); e.stopPropagation(); e.preventDefault(); return; } }
+}, true);
+(function socBoot() {
+  let k = null;
+  setInterval(() => { const now = socOn() ? MY_KEY : ''; if (now !== k) { k = now; SOC.fr = []; SOC.lastInc = null; socPing(); } }, 2000);
+  setInterval(socPing, 45000); socBadge();
+})();
+
+// ---------- home screen layout (left nav, profile + friends top right) ----------
+const HM = { mode: 'home' };
+const HM_CORE = ['webSec', 'mpSec', 'wrSec', 'acctSec'];
+function hmSettingsSecs() { const P = document.querySelector('#menu .panel'); return P ? [...P.querySelectorAll(':scope > .sec')].filter(s => !HM_CORE.includes(s.id)) : []; }
+function hmBuild() {
+  const menu = el('menu'), P = menu && menu.querySelector('.panel'); if (!P || el('home')) return;
+  const h = document.createElement('div'); h.id = 'home';
+  h.innerHTML = '<div class="hmL"><div class="hmLogo">ibr-online<span id="hmVer"></span></div>'
+    + '<nav class="hmNav" aria-label="Main menu"><button data-hm="tt">Time Trial</button><button data-hm="mp">Multiplayer</button><button data-hm="quests">Quests<span class="hmBadge" id="hmQB"></span></button><button data-hm="cos">Cosmetics</button><button data-hm="set">Settings</button></nav>'
+    + '<div class="hmSmall"><button data-hm="rp">Replays</button><button data-hm="wrs">World records</button><button data-hm="dev" id="hmDev">Developer</button></div>'
+    + '<div class="hmHelp">Need help? Message <b>particle0325</b> on Discord</div></div>'
+    + '<div class="hmR"><button class="hmProf" id="hmProf" data-hm="prof"></button><div class="hmBal" id="hmBal"></div><div class="hmFrH">friends online:</div><div class="hmFr" id="hmFr"></div><button class="hmAll" data-hm="friends">All friends &amp; requests</button><div id="hmOnl"></div></div>';
+  menu.appendChild(h);
+  const back = document.createElement('div'); back.className = 'hmBackRow';
+  back.innerHTML = '<button class="b" id="hmBack">\u2190 Back</button><b id="hmTitle"></b>';
+  P.insertBefore(back, P.firstChild);
+  el('hmBack').onclick = () => hmShow('home');
+  h.addEventListener('click', e => { const b = e.target.closest('[data-hm]'); if (b) hmGo(b.dataset.hm); const f = e.target.closest('[data-pf]'); if (f) pfOpen(f.dataset.pf); });
+}
+function hmGo(a) {
+  if (a === 'tt') return hmShow('tt');
+  if (a === 'mp') return hmShow('mp');
+  if (a === 'wrs') return hmShow('wrs');
+  if (a === 'set') return hmShow('set');
+  if (a === 'prof') return ME ? pfOpen(ME.id) : hmShow('acct');
+  if (a === 'friends') return frOpen();
+  if (a === 'quests' || a === 'cos') { cosOpen(); const t = document.querySelector('#cosModal [data-ct="' + (a === 'quests' ? 'daily' : 'trails') + '"]'); if (t) t.click(); return; }
+  if (a === 'rp') { const b = el('rpOpen'); if (b) b.click(); return; }
+  if (a === 'dev') { const b = el('ddOpen'); if (b) b.click(); }
+}
+function hmShow(m) {
+  hmBuild(); HM.mode = m; const menu = el('menu'), P = menu.querySelector('.panel'); if (!P) return;
+  menu.classList.toggle('hmHome', m === 'home');
+  P.dataset.hm = m;
+  for (const s of hmSettingsSecs()) s.classList.toggle('hmOff', m !== 'set');
+  el('hmTitle').textContent = { tt: 'Time Trial', mp: 'Multiplayer', wrs: 'World records', acct: 'Account', set: 'Settings' }[m] || '';
+  const tab = { tt: 'tracks', mp: 'mp', wrs: 'wrs', acct: 'acct' }[m];
+  if (tab) try { setTab(tab); } catch (e) { }
+  if (m === 'set') for (const id of HM_CORE) { const s = el(id); if (s) s.classList.add('hide'); }
+  if (m === 'home') hmDraw();
+}
+function hmDraw() {
+  if (!el('home')) return;
+  el('hmProf').innerHTML = ME ? '<span class="n">profile</span>' + avHtml(ME) + '<span class="nm">' + escH(ME.name) + '</span>' : '<span class="n">sign in</span><span class="av">+</span>';
+  el('hmProf').title = ME ? 'View your profile' : 'Create an account or sign in';
+  try { el('hmBal').textContent = W ? '\u{1F9CA} ' + W.bal + ' icetokens' : ''; } catch (e) { }
+  const F = (SOC.fr || []).filter(f => f.kind === 'friend'), on = F.filter(f => f.online), inc = (SOC.fr || []).filter(f => f.kind === 'in').length;
+  el('hmFr').innerHTML = !ME ? '<span class="hmMute">sign in to see friends</span>' : on.length ? on.slice(0, 8).map(f => '<button data-pf="' + escH(f.id) + '" title="' + escH(f.status || 'Online') + '"><i class="frDot on"></i>' + escH(f.name) + '</button>').join('') + (on.length > 8 ? '<span class="hmMute">+' + (on.length - 8) + ' more</span>' : '') : '<span class="hmMute">' + (F.length ? 'none right now' : 'no friends yet') + '</span>';
+  const all = document.querySelector('#home .hmAll'); if (all) all.innerHTML = inc ? 'Friend requests <span class="frN">' + inc + '</span>' : 'All friends &amp; requests';
+  const o = el('onl'), ho = el('hmOnl'); if (o && ho && o.parentNode !== ho) ho.appendChild(o);
+  const v = el('verTag'); if (v) el('hmVer').textContent = v.textContent ? ' ' + v.textContent : '';
+  const dd = el('ddOpen'), dr = dd && dd.closest('.row'); el('hmDev').classList.toggle('hide', !dd || (dr && getComputedStyle(dr).display === 'none'));
+  try { const qb = el('hmQB'); const n = QUESTS.filter(q => { const p = qProg(q); return p && p.done && !p.claimed; }).length; qb.textContent = n ? n : ''; } catch (e) { }
+}
+(function hmBoot() {
+  hmBuild(); hmShow('home');
+  const menu = el('menu'); let vis = !menu.classList.contains('hide');
+  new MutationObserver(() => { const v = !menu.classList.contains('hide'); if (v && !vis && !LOBBY.open && !MP.joined) hmShow('home'); vis = v; }).observe(menu, { attributes: true, attributeFilter: ['class'] });
+  const sb = socBadge; socBadge = function () { sb(); hmDraw(); };
+  const rm = renderMe; renderMe = function () { rm.apply(this, arguments); hmDraw(); };
+  setInterval(hmDraw, 3000);
+})();
+
+
+// ---------- mouse camera: drag to look around, scroll to zoom, middle-click to reset ----------
+(function mcamInit() {
+  const canv = t => t === cv || t === cv3;
+  const ok = e => !(typeof RP !== 'undefined' && RP.on) && !placing && el('menu').classList.contains('hide') && canv(e.target);
+  let lx = 0, ly = 0;
+  window.addEventListener('mousedown', e => {
+    if (!ok(e)) return;
+    if (e.button === 1) { MCAM.y = 0; MCAM.p = 0; MCAM.d = 1; e.preventDefault(); return; }
+    MCAM.drag = true; lx = e.clientX; ly = e.clientY; e.preventDefault();
+  });
+  window.addEventListener('mouseup', () => { MCAM.drag = false; });
+  window.addEventListener('blur', () => { MCAM.drag = false; });
+  window.addEventListener('mousemove', e => {
+    if (!MCAM.drag) return;
+    const dx = e.clientX - lx, dy = e.clientY - ly; lx = e.clientX; ly = e.clientY;
+    MCAM.y = wrapDegrees(MCAM.y + dx * 0.3);
+    MCAM.p = Math.max(-40, Math.min(60, MCAM.p + dy * 0.25));
+  });
+  window.addEventListener('wheel', e => {
+    if (!ok(e)) return;
+    MCAM.d = Math.max(0.5, Math.min(3, MCAM.d * (e.deltaY > 0 ? 1.1 : 1 / 1.1)));
+  }, { passive: true });
+  window.addEventListener('contextmenu', e => { if (canv(e.target) && !placing) e.preventDefault(); });
+  (function ease() {
+    if (!MCAM.drag) {
+      MCAM.y *= 0.9; MCAM.p *= 0.9;
+      if (Math.abs(MCAM.y) < 0.05) MCAM.y = 0; if (Math.abs(MCAM.p) < 0.05) MCAM.p = 0;
+    }
+    requestAnimationFrame(ease);
+  })();
+})();
+
+// ---------- cosmetics removed: no trails, quests only ----------
+trDraw = function () {};
+(function () {
+  const _co = cosOpen;
+  cosOpen = function () { const r = _co.apply(this, arguments); const d = document.querySelector('#cosModal [data-ct=daily]'); if (d && !d.classList.contains('on')) d.click(); return r; };
+})();
+
+// ---------- always-visible Developer button, bottom right of the main menu ----------
+(function devCorner() {
+  function add() {
+    const h = el('home'); if (!h || el('hmDevBR')) return;
+    const b = document.createElement('button'); b.type = 'button'; b.id = 'hmDevBR'; b.textContent = '\u2699 Developer';
+    b.onclick = e => { e.stopPropagation(); const d = el('ddOpen'); if (d) d.click(); };
+    h.appendChild(b);
+  }
+  add(); setInterval(add, 1000);
+})();
 
 // ---------- chat: lobby / track / whole-game, filtered ----------
 const CHAT = { log: { lobby: [], track: [], global: [] }, tab: 'lobby', feed: [], open: false, g: null, gTopic: 'realtime:ibr-global' };
