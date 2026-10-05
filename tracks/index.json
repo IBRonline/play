@@ -1,12 +1,5 @@
 [
  {
-  "id": "frozen-loop",
-  "name": "Frozen Loop",
-  "file": "frozen-loop.json",
-  "info": "4 checkpoints · 200×130 blocks",
-  "updated": "2026-10-05T12:09:10.715Z"
- },
- {
   "id": "glacier-sweep",
   "name": "Glacier Sweep",
   "file": "glacier-sweep.json",
