@@ -1,0 +1,27 @@
+{
+ "open": "testers",
+ "coll": false,
+ "srv": {
+  "eu": {
+   "url": "https://dbyqswlvmequszujpwaj.supabase.co",
+   "key": "sb_publishable_-Av4-QPspUOMHAUtM5Jksw_amiBfwpy"
+  },
+  "us": {
+   "url": "https://dbyqswlvmequszujpwaj.supabase.co",
+   "key": "sb_publishable_-Av4-QPspUOMHAUtM5Jksw_amiBfwpy"
+  },
+  "asia": {
+   "url": "https://dbyqswlvmequszujpwaj.supabase.co",
+   "key": "sb_publishable_-Av4-QPspUOMHAUtM5Jksw_amiBfwpy"
+  }
+ },
+ "race": {
+  "pool": [
+   "frozen-lake"
+  ],
+  "laps": 3,
+  "inter": 20
+ },
+ "muted": [],
+ "updated": "2026-10-05T08:38:35.032Z"
+}
