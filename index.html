@@ -256,6 +256,7 @@ table.wr tr.go{cursor:pointer}table.wr tr.go:hover td{background:rgba(255,255,25
       <div class="row"><button class="b" id="rcPoolLoad">Refresh track list</button></div>
       <div class="field"><label for="mpMuted">Muted players (names or ids, comma separated)</label><input type="text" id="mpMuted" spellcheck="false"></div>
       <div class="row"><button class="b" id="mpPublish">Publish multiplayer settings</button></div>
+      <div class="row"><button class="b" id="mptBtn">🧪 Split-screen test (2 players)</button></div>
       <div class="row"><button class="b primary" id="mpConn">Connect</button><button class="b" id="mpPing">Ping all regions</button></div>
       <div class="keys" id="mpStat" style="margin:4px 0 6px;word-break:break-all">Not connected</div>
     </div>
@@ -811,10 +812,12 @@ function buildLitMap(L, floorY, gapsAsWalls) {
 /* =====================================================================
    4. STORAGE (safe in sandboxed iframes)
    ===================================================================== */
+const MPT = /^ibr-mpt-[LR]$/.test(window.name || '') ? window.name.slice(-1) : '';
+const STP = MPT ? 'ibr:mpt' + MPT + ':' : 'ibr:';
 const store = {
-  get(k) { try { const v = localStorage.getItem('ibr:' + k); return v ? JSON.parse(v) : null; } catch (e) { return null; } },
-  set(k, v) { try { localStorage.setItem('ibr:' + k, JSON.stringify(v)); } catch (e) { } },
-  del(k) { try { localStorage.removeItem('ibr:' + k); } catch (e) { } }
+  get(k) { try { let v = localStorage.getItem(STP + k); if (v == null && MPT && k !== 'acct') v = localStorage.getItem('ibr:' + k); return v ? JSON.parse(v) : null; } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(STP + k, JSON.stringify(v)); } catch (e) { } },
+  del(k) { try { localStorage.removeItem(STP + k); } catch (e) { } }
 };
 const settings = Object.assign({ camera: 'boatcam', quality: 'auto', ghost: true, hitbox: false, bcPrev: 'chase', view: '3d', rd3: 96, pitch3: 20, boatWood: 'oak', boatColor: '#8a5a2b', tex: true }, store.get('settings') || {});
 // BoatCam config — same fields, defaults and validation as boatcam.config.BoatCamConfig (boatcam.json5)
@@ -3063,7 +3066,7 @@ if (el('mpConn')) {
   el('mpKey').addEventListener('change', () => { MP.cfg.srv[MP.cfg.region].key = el('mpKey').value.trim(); MP.save(); });
   el('mpRoom').addEventListener('change', () => { MP.cfg.room = el('mpRoom').value.trim() || 'lobby'; MP.save(); if (MP.ws) MP.connect(); });
   el('mpColl').addEventListener('change', () => { MP.cfg.coll = el('mpColl').checked; MP.save(); MP.statLoop(); toast('Boat collisions ' + (MP.cfg.coll ? 'on' : 'off'), 1000); });
-  el('mpConn').addEventListener('click', () => { if (MP.ws) { MP.close(); MP.stat('Disconnected'); } else MP.connect(); mpBtn(); });
+  el('mpConn').addEventListener('click', () => { try { if (!MP.cfg) MP.load(); if (MP.ws) { MP.close(); MP.stat('Disconnected'); } else { MP.stat('Connecting…'); MP.connect(); } } catch (e) { console.error(e); MP.msg = 'Error: ' + e.message; for (const id of ['mpStat', 'mpPStat']) if (el(id)) el(id).textContent = MP.msg; } mpBtn(); });
   el('mpPing').addEventListener('click', async () => {
     const out = [];
     for (const r in MP_REG) { const S = MP.cfg.srv[r]; const t0 = performance.now(); let ms = 'fail';
@@ -3079,7 +3082,7 @@ function mpGate() {
   const b = document.querySelector('#webTabs .mpSoon, #webTabs [data-mp]'); if (!b) return;
   const open = (MP_PUB && MP_PUB.open) || 'off', ok = IS_DEV || open === 'all' || (open === 'testers' && ME && isTester(ME.id));
   b.dataset.mp = '1';
-  try { chatShow(ok); } catch (e) {}
+  try { chatShow(true); } catch (e) {}
   if (ok) { b.classList.remove('mpSoon'); b.removeAttribute('aria-disabled'); b.dataset.tab = 'mp'; b.title = open === 'all' ? '' : 'Testers only'; }
   else { b.classList.add('mpSoon'); b.setAttribute('aria-disabled', 'true'); delete b.dataset.tab; if (MP.ws) MP.close(); const pn = el('menu').querySelector('.panel'); if (pn && pn.dataset.tab === 'mp') setTab('tracks'); }
 }
@@ -3094,7 +3097,7 @@ async function mpPubLoad() {
 if (el('mpPConn')) {
   el('mpPRegion').addEventListener('change', () => { MP.cfg.region = el('mpPRegion').value; MP.save(); if (MP.ws) MP.connect(); });
   el('mpPRoom').addEventListener('change', () => { MP.cfg.room = el('mpPRoom').value.trim() || 'lobby'; MP.save(); if (MP.ws) MP.connect(); });
-  el('mpPConn').addEventListener('click', () => { if (MP.ws) { MP.close(); MP.stat('Left the room'); } else { MP.connect(); } mpBtn(); });
+  el('mpPConn').addEventListener('click', () => { try { if (!MP.cfg) MP.load(); if (MP.ws) { MP.close(); MP.stat('Left the room'); } else { MP.stat('Connecting…'); MP.connect(); } } catch (e) { console.error(e); MP.msg = 'Error: ' + e.message; for (const id of ['mpStat', 'mpPStat']) if (el(id)) el(id).textContent = MP.msg; } mpBtn(); });
 }
 if (el('mpPublish')) el('mpPublish').addEventListener('click', async () => {
   try {
@@ -3104,7 +3107,48 @@ if (el('mpPublish')) el('mpPublish').addEventListener('click', async () => {
     MP.stat('✓ Multiplayer: ' + ({ off: 'closed', testers: 'testers only', all: 'everyone' })[cfg.open] + ' · collisions ' + (cfg.coll ? 'on' : 'off') + ' — live in about a minute');
   } catch (e) { MP.stat('Error: ' + e.message); }
 });
-setTimeout(mpPubLoad, 400);
+setTimeout(() => { mpPubLoad().catch(e => console.error(e)).finally(() => { try { if (!MP.cfg) MP.load(); mpGate(); chatShow(true); } catch (e) { console.error(e); } }); }, 400);
+
+/* ---- split-screen multiplayer test (dev) ---- */
+function mptClose() { const b = el('mptBox'); if (b) b.remove(); }
+function mptRoute(t, code, rep) {
+  const b = el('mptBox'); if (!b) return;
+  if (code === 'Escape') { if (t === 'keydown') mptClose(); return; }
+  const side = /^Key[WASDR]$/.test(code) ? 'L' : /^(Arrow(Up|Down|Left|Right)|Enter)$/.test(code) ? 'R' : ''; if (!side) return;
+  const f = b.querySelector('iframe[name="ibr-mpt-' + side + '"]');
+  try { f.contentWindow.postMessage({ mptKey: { t, code: code === 'Enter' ? 'KeyR' : code, rep } }, '*'); } catch (e) {}
+}
+function mptOpen() {
+  if (el('mptBox')) return;
+  try { if (!MP.cfg) MP.load(); MP.save(); } catch (e) {}
+  try { if (MP.ws) { MP.close(); mpBtn(); } } catch (e) {}
+  try { pause(); } catch (e) {}
+  const c = MP.cfg || { region: 'eu', room: 'lobby' };
+  const box = document.createElement('div'); box.id = 'mptBox';
+  box.style.cssText = 'position:fixed;inset:0;z-index:9999;background:#0b1220;display:flex;flex-direction:column';
+  box.innerHTML = '<div style="display:flex;gap:12px;align-items:center;padding:6px 10px;color:#fff;font:13px system-ui;flex-wrap:wrap"><b>🧪 Split-screen multiplayer test</b><span style="opacity:.8">Left: <b>WASD</b> (R = reset) · Right: <b>arrow keys</b> (Enter = reset) · both join ' + escH(MP_REG[c.region] || c.region) + ' / ' + escH(c.room) + '</span><span style="flex:1"></span><button class="b" id="mptClose">Close (Esc)</button></div>'
+    + '<div style="flex:1;display:flex;gap:4px;min-height:0"><iframe name="ibr-mpt-L" title="Player 1" style="flex:1;border:0;min-width:0;background:#000"></iframe><iframe name="ibr-mpt-R" title="Player 2" style="flex:1;border:0;min-width:0;background:#000"></iframe></div>';
+  document.body.appendChild(box);
+  for (const f of box.querySelectorAll('iframe')) f.srcdoc = SRC_HTML;
+  el('mptClose').addEventListener('click', mptClose);
+}
+if (el('mptBtn')) { if (MPT) el('mptBtn').closest('.row').remove(); else el('mptBtn').addEventListener('click', mptOpen); }
+if (!MPT) {
+  for (const t of ['keydown', 'keyup']) addEventListener(t, e => { if (!el('mptBox') || !e.isTrusted) return; e.preventDefault(); e.stopImmediatePropagation(); mptRoute(t, e.code, e.repeat); }, true);
+  addEventListener('message', ev => { const k = ev.data && ev.data.mptKey; if (k && el('mptBox')) mptRoute(k.t, k.code, k.rep); });
+} else {
+  // inside a split-screen instance: send real key presses up to the dev page, only obey keys for our side
+  const ALLOW = MPT === 'L' ? /^Key[WASDR]$/ : /^(Arrow(Up|Down|Left|Right)|KeyR)$/;
+  for (const t of ['keydown', 'keyup']) addEventListener(t, e => {
+    if (!e.isTrusted || typing(e)) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    try { parent.postMessage({ mptKey: { t, code: e.code, rep: e.repeat } }, '*'); } catch (x) {}
+  }, true);
+  addEventListener('message', ev => { const k = ev.data && ev.data.mptKey; if (!k || ev.source !== parent || !ALLOW.test(k.code)) return; dispatchEvent(new KeyboardEvent(k.t, { code: k.code, key: k.code, repeat: !!k.rep, bubbles: true, cancelable: true })); });
+  document.title = 'IBR test ' + (MPT === 'L' ? 'P1' : 'P2');
+  setTimeout(() => { try { resume(); } catch (e) {} }, 1500);
+  setTimeout(() => { try { if (!MP.cfg) MP.load(); if (!MP.ws) MP.connect(); chatSys('global', 'Split-screen test: Player ' + (MPT === 'L' ? '1 (WASD)' : '2 (arrows)')); } catch (e) { console.error(e); } }, 2500);
+}
 
 // ---------- closed tracks + editing published tracks ----------
 let EDIT_SLUG = '';
@@ -3273,7 +3317,7 @@ function chatRender() {
   const box = el('chLog'); if (!box) return;
   if (!CHAT.open) {
     const now = Date.now(), tag = { lobby: 'Lobby', track: 'Track', global: 'Global' };
-    box.innerHTML = CHAT.feed.filter(m => now - m.at < 10000).slice(-8).map(m => '<div class="pop" style="opacity:' + Math.min(1, (10000 - (now - m.at)) / 1500).toFixed(2) + '"><span class="chc">[' + tag[m.ch] + ']</span> ' + (m.sys ? '<i>' + escH(m.tx) + '</i>' : '<b>' + escH(m.n) + '</b>' + tagHtml(m.id) + ': ' + escH(m.tx)) + '</div>').join('');
+    box.innerHTML = CHAT.feed.filter(m => now - m.at < 10000).slice(-8).map(m => '<div class="pop" style="opacity:' + Math.min(1, (10000 - (now - m.at)) / 1500).toFixed(2) + '"><span class="chc">[' + tag[m.ch] + ']</span> ' + (m.sys ? '<i>' + escH(m.tx) + '</i>' : '<b>' + escH(m.n) + '</b>' + tagHtml(m.id) + ': ' + escH(m.tx)) + '</div>').join('') || '<div class="pop" style="opacity:.5">Press T to chat</div>';
     return;
   }
   box.innerHTML = CHAT.log[CHAT.tab].map(m => m.sys ? '<div class="sys">' + escH(m.tx) + '</div>' : '<div><b>' + escH(m.n) + '</b>' + tagHtml(m.id) + ': ' + escH(m.tx) + '</div>').join('') || '<div class="sys">' + ({ lobby: MP.joined ? 'Lobby chat — only people in your race lobby see this' : 'Join a lobby to use lobby chat', track: MP.trackTopic ? 'Track chat for ' + escH((WEB_CUR && WEB_CUR.name) || 'this track') : 'Join a lobby and load a track to use track chat', global: 'Whole-game chat — everyone on ibronline' })[CHAT.tab] + '</div>';
