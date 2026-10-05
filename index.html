@@ -666,7 +666,7 @@ body:not(.isDev) #hmDevBR{display:none!important}
 /* quests removed for now; physics merged into Create a new track */
 #home [data-hm=quests],#devDash .ddSide [data-p=cos],#devDash .ddSide [data-p=phys],#devDash .ddPane[data-p=cos],#devDash .ddPane[data-p=phys]{display:none!important}
 </style>
-<meta name="ibr-build" content="2026-10-05T17:16:00.201Z">
+<meta name="ibr-build" content="2026-10-05T19:55:26.710Z">
 <script type="application/json" id="webSite">{"tracks":"tracks/index.json","sb":{"url":"https://dbyqswlvmequszujpwaj.supabase.co","key":"sb_publishable_-Av4-QPspUOMHAUtM5Jksw_amiBfwpy"}}</script>
 </head>
 <body>
@@ -964,9 +964,9 @@ const PUB_EL = document.getElementById('publishedTrack'), WEB_EL = document.getE
    ===================================================================== */
 const TICK_RATE = 20, DT = 1 / TICK_RATE;
 const HULL = 1.375, HALF = HULL / 2, EPS = 1e-6;
-const MAT_GROUND = 0, MAT_ICE = 1, MAT_PACKED = 2, MAT_BLUE = 3, MAT_MISSING = 255;
-const SLIP = [0.6, 0.98, 0.98, 0.989];
-const MAT_NAME = ['ground', 'ice', 'packed ice', 'blue ice'];
+const MAT_GROUND = 0, MAT_ICE = 1, MAT_PACKED = 2, MAT_BLUE = 3, MAT_WATER = 4, MAT_BUBBLE = 5, MAT_MISSING = 255;
+const SLIP = [0.6, 0.98, 0.98, 0.989, 0.82, 0.82];
+const MAT_NAME = ['ground', 'ice', 'packed ice', 'blue ice', 'water', 'bubble col'];
 
 function forward(yawDeg) { const r = yawDeg * Math.PI / 180; return { x: Math.sin(r), z: -Math.cos(r) }; }
 function thrustIncrement(i) {
@@ -1039,7 +1039,7 @@ function step(st, inp, env) {
     const g = env.groundAt(st.x, st.z);
     if (g > st.y) { st.y = g; st.vy = 0; }
     else if (st.y > g) { st.vy -= env.gravity(); st.y += st.vy; if (st.y <= g) { st.y = g; st.vy = 0; } }
-    else st.vy = 0;
+    else { if (sup && env.bubbleAt && env.bubbleAt(st.x, st.z)) st.vy = Math.min((st.vy || 0) + 0.04, 0.4); else st.vy = 0; }
   }
   st.tick++;
 }
@@ -1084,7 +1084,18 @@ const env = {
   stepFall() { const m = map; return !!(m && m.obuOn && m.obu && (m.obu.extra || {}).stepwhilefalling === 'true'); },
   airSlip() { const c = map && map.obuOn && map.obu; if (!c) return 0.9; const v = c.airSlip > 0 ? c.airSlip : (c.blockSlip || {}).air; return isFinite(v) && v > 0 ? +v : 0.9; },
   gravity() { const m = map, v = m && m.obuOn && m.obu ? parseFloat((m.obu.extra || {}).boatgravity) : NaN; return isFinite(v) ? Math.abs(v) : 0.04; },
-  obu(st) { return map && map.obuOn ? obuAt(map, st.x, st.z) : null; }
+  obu(st) { return map && map.obuOn ? obuAt(map, st.x, st.z) : null; },
+  bubbleAt(x, z) {
+    const m = map; if (!m || !m.mat) return false;
+    for (let j = Math.floor(z - HALF); j <= Math.ceil(z + HALF) - 1; j++) {
+      if (j < 0 || j >= m.H) continue;
+      for (let i = Math.floor(x - HALF); i <= Math.ceil(x + HALF) - 1; i++) {
+        if (i < 0 || i >= m.W) continue;
+        if (m.mat[j * m.W + i] === MAT_BUBBLE) return true;
+      }
+    }
+    return false;
+  }
 };
 const HINF = 65535;
 function cellTop(m, k) { if (!m.wall[k]) return 0; const h = m.hgt ? m.hgt[k] : HINF; return h === HINF ? 1e9 : h / 8; }
@@ -1349,7 +1360,7 @@ function parseNBT(u8) {
 const AIR_RE = /^(air|cave_air|void_air|structure_void)$/;
 const PASS_RE = /^(light|.*carpet|snow|.*pressure_plate|.*button|.*torch|.*sign|.*banner|rail|.*_rail|redstone_wire|tripwire.*|lever|.*sapling|grass|short_grass|tall_grass|fern|large_fern|dead_bush|.*tulip|dandelion|poppy|blue_orchid|allium|azure_bluet|oxeye_daisy|cornflower|lily_of_the_valley|wither_rose|sunflower|lilac|rose_bush|peony|vine|.*vines.*|string|seagrass|tall_seagrass|kelp.*|water|bubble_column|.*portal|fire|soul_fire|cobweb|sweet_berry_bush|wheat|carrots|potatoes|beetroots|sugar_cane|brown_mushroom|red_mushroom|crimson_fungus|warped_fungus|crimson_roots|warped_roots|nether_sprouts|hanging_roots|glow_lichen|sculk_vein|pink_petals|lily_pad|.*coral_fan|.*coral|tripwire_hook|redstone_torch|comparator|repeater|.*_wall_torch)$/;
 const THIN_RE = /^(snow|mud|farmland|dirt_path|.*carpet|.*pressure_plate|lily_pad)$/;
-function matOf(n) { if (n === 'blue_ice') return MAT_BLUE; if (n === 'packed_ice') return MAT_PACKED; if (n === 'ice' || n === 'frosted_ice' || n === 'mud') return MAT_ICE; return MAT_GROUND; }
+function matOf(n) { if (n === 'blue_ice') return MAT_BLUE; if (n === 'packed_ice') return MAT_PACKED; if (n === 'ice' || n === 'frosted_ice' || n === 'mud') return MAT_ICE; if (n === 'water') return MAT_WATER; if (n === 'bubble_column') return MAT_BUBBLE; return MAT_GROUND; }
 const DYE = { white: 0xe9ecec, orange: 0xf07613, magenta: 0xbd44b3, light_blue: 0x3aafd9, yellow: 0xf8c527, lime: 0x70b919, pink: 0xed8dac, gray: 0x3e4447, light_gray: 0x8e8e86, cyan: 0x158991, purple: 0x792aac, blue: 0x35399d, brown: 0x724728, green: 0x546d1b, red: 0xa12722, black: 0x141519 };
 function colorFor(n) {
   if (n === 'ice' || n === 'frosted_ice') return 0xa9c9f4;
@@ -2246,7 +2257,8 @@ function toggleHitbox() {
 const VX_SKIP = /^(air|cave_air|void_air|structure_void|barrier|light)$/;
 const VX_CROSS = /(sapling|flower|tulip|orchid|allium|bluet|daisy|poppy|dandelion|cornflower|lily_of_the_valley|^grass$|short_grass|tall_grass|fern$|dead_bush|_roots$|vines?$|sprouts|torch|^.*mushroom$|^wheat$|carrots|potatoes|beetroots|sugar_cane|kelp|seagrass|cobweb|sweet_berry_bush|lantern|^lever$|_button$|_sign$|banner$|^chain$|tripwire)/;
 const VX_TRANS = /(glass$|^water$|^bubble_column$|slime_block|honey_block|stained_glass$)/;
-const VX_CUT = /(leaves|glass_pane|iron_bars|_door$|trapdoor|scaffolding|fence|_wall$|ladder|spawner|azalea$|rail$|redstone_wire|repeater|comparator)/;
+const VX_PANE = /(glass_pane|iron_bars)/;
+const VX_CUT = /(leaves|_door$|trapdoor|scaffolding|fence|_wall$|ladder|spawner|azalea$|rail$|redstone_wire|repeater|comparator)/;
 function vxHeight(n) {
   if (/_slab$/.test(n)) return 0.5;
   if (/carpet$|rail$|redstone_wire|pressure_plate$|lily_pad|repeater|comparator/.test(n)) return 1 / 16;
@@ -2264,7 +2276,7 @@ function voxInfo(V) {
   V.info = V.pal.map((n0, i) => {
     const n = String(n0).replace(/^minecraft:/, '').replace(/\[.*$/, '');
     if (!i || VX_SKIP.test(n)) return { cls: 0, h: 0, occ: false, t: 0 };
-    const cls = VX_CROSS.test(n) ? 4 : VX_TRANS.test(n) ? 3 : VX_CUT.test(n) ? 2 : 1, h = cls === 4 ? 1 : vxHeight(n);
+    const cls = VX_CROSS.test(n) ? 4 : VX_TRANS.test(n) ? 3 : VX_PANE.test(n) ? 5 : VX_CUT.test(n) ? 2 : 1, h = cls === 4 ? 1 : vxHeight(n);
     return { cls, h, wat: /^(water|bubble_column)$/.test(n), occ: cls === 1 && h === 1, t: tId(n, colorFor(n)) };
   });
   return V.info;
@@ -2321,6 +2333,7 @@ function voxChunks(m, CH) {
         const id = d[(ly * sz + z) * sx + x]; if (!id) continue; const b = I[id]; if (!b || !b.cls) continue;
         const y0 = ly + V.y0, A = b.cls === 3 ? tr : a, ac = b.cls === 1 ? 0 : b.cls === 3 ? (b.wat ? 12 : 8) : 4, t = b.t;
         if (b.cls === 4) { const e0 = 0.15, e1 = 0.85, y1 = y0 + 1; pushQuad(A, [x + e0, y0, z + e0, x + e1, y0, z + e1, x + e1, y1, z + e1, x + e0, y1, z + e0], t, 0.9, ac); pushQuad(A, [x + e1, y0, z + e0, x + e0, y0, z + e1, x + e0, y1, z + e1, x + e1, y1, z + e0], t, 0.8, ac); continue; }
+        if (b.cls === 5) { const ep0 = 0.4375, ep1 = 0.5625, y1 = y0 + b.h; pushQuad(A, [x + ep0, y0, z, x + ep1, y0, z, x + ep1, y1, z, x + ep0, y1, z], t, 0.72, ac); pushQuad(A, [x + ep0, y0, z + 1, x + ep1, y0, z + 1, x + ep1, y1, z + 1, x + ep0, y1, z + 1], t, 0.9, ac); pushQuad(A, [x, y0, z + ep0, x, y0, z + ep1, x, y1, z + ep1, x, y1, z + ep0], t, 0.62, ac); pushQuad(A, [x + 1, y0, z + ep0, x + 1, y0, z + ep1, x + 1, y1, z + ep1, x + 1, y1, z + ep0], t, 0.8, ac); pushQuad(A, [x + ep0, y1, z, x + ep1, y1, z, x + ep1, y1, z + 1, x + ep0, y1, z + 1], t, 1, 1 + ac); continue; }
         const h = b.h, y1 = y0 + h;
         const vis = (nx, ny, nz) => { const n = at(nx, ny, nz); if (!n) return true; const c = I[n]; if (!c || !c.cls) return true; if (c.occ) return false; if (n === id && b.cls >= 2) return false; if (b.wat && c.wat) return false; return true; };
         if ((ly !== fl || b.wat) && (h < 1 || vis(x, ly + 1, z))) { pushQuad(A, [x, y1, z, x + 1, y1, z, x + 1, y1, z + 1, x, y1, z + 1], t, 1, 1 + ac); shTop(A, x, y1, z); }
@@ -2593,7 +2606,7 @@ function updateHud(a, now) {
   hud.times.textContent = 'Last ' + fmt(race.last) + ' · Best ' + fmt(best && best.t);
   hud.speed.textContent = Math.hypot(st.vx, st.vz).toFixed(1) + ' b/s';
   const s = st.slipperiness;
-  hud.surf.textContent = (s >= 0.985 ? 'blue ice' : s >= 0.975 ? 'ice' : s <= 0.61 ? 'ground' : 'mixed') + ' · s ' + s.toFixed(3) + (settings.camera === 'boatcam' ? ' · BoatCam' : '');
+  hud.surf.textContent = (s >= 0.985 ? 'blue ice' : s >= 0.975 ? 'ice' : s <= 0.61 ? 'ground' : s >= 0.80 && s <= 0.84 ? 'water' : 'mixed') + ' · s ' + s.toFixed(3) + (settings.camera === 'boatcam' ? ' · BoatCam' : '');
 }
 let toastTimer = 0;
 function toast(t, ms) { const e = el('toast'); e.textContent = t; e.style.opacity = 1; clearTimeout(toastTimer); toastTimer = setTimeout(() => e.style.opacity = 0, ms || 1200); }
