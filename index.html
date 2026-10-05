@@ -77,7 +77,7 @@ pre#tests{font:12px/1.5 Menlo,Consolas,monospace;background:var(--bg);border:1px
 .panel[data-tab=wrs]>:not(h1):not(.sub):not(#webTabs):not(#meChip):not(#wrSec),.panel[data-tab=acct]>:not(h1):not(.sub):not(#webTabs):not(#meChip):not(#acctSec){display:none!important}
 .panel[data-tab=mp]>:not(h1):not(.sub):not(#webTabs):not(#meChip):not(#mpSec){display:none!important}
 #raceBox{position:fixed;top:56px;left:50%;transform:translateX(-50%);z-index:40;background:rgba(10,14,20,.78);color:#fff;padding:10px 14px;border-radius:12px;font:13px/1.4 system-ui,sans-serif;text-align:center;max-width:92vw;backdrop-filter:blur(4px)}#raceBox .rv{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:6px}#raceBox button{background:#24303d;color:#fff;border:1px solid #3c4b5c;border-radius:8px;padding:6px 10px;cursor:pointer;font:inherit}#raceBox button.on{background:#2f6fd6;border-color:#5b93ff}#raceBox .big{font-size:20px;font-weight:700}
-#chatBox{position:fixed;left:10px;bottom:10px;width:310px;max-width:80vw;z-index:40;background:rgba(10,14,20,.62);color:#fff;border-radius:10px;font:12px/1.35 system-ui,sans-serif;overflow:hidden}#chatBox .chTabs{display:flex}#chatBox .chTabs button{flex:1;background:transparent;color:#cfd8e3;border:0;padding:5px 0;cursor:pointer;font:inherit}#chatBox .chTabs button.on{background:rgba(255,255,255,.12);color:#fff;font-weight:600}#chatBox #chMin{flex:0 0 28px}#chLog{height:150px;overflow-y:auto;padding:4px 8px;word-break:break-word}#chLog .sys{color:#9fb0c3;font-style:italic}#chIn{width:100%;box-sizing:border-box;border:0;border-top:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.35);color:#fff;padding:6px 8px;font:inherit;outline:none}#chatBox.min #chLog,#chatBox.min #chIn{display:none}
+#chatBox{position:fixed;left:10px;bottom:10px;width:310px;max-width:80vw;z-index:40;background:rgba(10,14,20,.62);color:#fff;border-radius:10px;font:12px/1.35 system-ui,sans-serif;overflow:hidden}#chatBox .chTabs{display:flex}#chatBox .chTabs button{flex:1;background:transparent;color:#cfd8e3;border:0;padding:5px 0;cursor:pointer;font:inherit}#chatBox .chTabs button.on{background:rgba(255,255,255,.12);color:#fff;font-weight:600}#chatBox #chMin{flex:0 0 28px}#chLog{height:150px;overflow-y:auto;padding:4px 8px;word-break:break-word}#chLog .sys{color:#9fb0c3;font-style:italic}#chIn{width:100%;box-sizing:border-box;border:0;border-top:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.35);color:#fff;padding:6px 8px;font:inherit;outline:none}#chatBox.min #chLog,#chatBox.min #chIn{display:none}#chatBox:not(.open){background:transparent;pointer-events:none;width:auto;max-width:min(440px,80vw)}#chatBox:not(.open) .chTabs,#chatBox:not(.open) #chIn{display:none}#chatBox:not(.open) #chLog{height:auto;overflow:hidden;padding:0}#chLog .pop{background:rgba(0,0,0,.5);padding:2px 6px;margin-top:2px;border-radius:3px;text-shadow:1px 1px 0 #000;width:fit-content;max-width:100%}#chLog .chc{color:#9fd3ff}#chBtn{display:none}#chatBox:not(.open) #chBtn{display:inline-block;pointer-events:auto;margin-top:4px;background:rgba(0,0,0,.45);color:#fff;border:0;border-radius:6px;padding:3px 8px;font:inherit;cursor:pointer;opacity:.7}#chatBox.open #chMin{display:none}
 .obuRow{align-items:center;gap:6px;margin:3px 0}.obuRow span{font-size:12px;word-break:break-word}
 .panel[data-tab=mp] #mpSec,.panel[data-tab=wrs] #wrSec,.panel[data-tab=acct] #acctSec{border-top:0;margin-top:0;padding-top:0}
 #meChip{position:absolute;top:22px;right:20px;display:flex;align-items:center;gap:8px;max-width:170px;background:var(--bg);border:1px solid var(--bd);border-radius:999px;padding:3px 12px 3px 3px;color:#fff;font:600 13px/1.2 inherit;font-family:inherit;cursor:pointer}
@@ -197,7 +197,7 @@ table.wr tr.go{cursor:pointer}table.wr tr.go:hover td{background:rgba(255,255,25
     <div class="row" style="margin-top:8px"><button class="b dev" id="startBtn">Set start line</button><button class="b" id="clearBest">Clear best lap</button></div>
     <div class="sec dev" id="edSec">
       <h2>Track editor <span class="pill">DEV</span></h2>
-      <div class="row"><button class="b" id="regBtn">Edit regions</button><button class="b primary" id="pubBtn">Publish</button></div>
+      <div class="row"><button class="b" id="regBtn">Edit regions</button><button class="b primary" id="pubBtn">Publish track</button></div>
       <div class="keys" id="regStat" style="margin:4px 0 6px"></div>
       <div class="field"><label for="pubName">Published track name</label><input type="text" id="pubName"></div>
       <h2 style="margin-top:10px">GitHub auto-publish</h2>
@@ -209,8 +209,7 @@ table.wr tr.go{cursor:pointer}table.wr tr.go:hover td{background:rgba(255,255,25
       <div class="field"><label for="sbUrl">Accounts server URL (Supabase)</label><input type="text" id="sbUrl" placeholder="https://xxxx.supabase.co" spellcheck="false"></div>
       <div class="field"><label for="sbKey">Accounts publishable key</label><input type="text" id="sbKey" placeholder="sb_publishable_… or anon key" spellcheck="false"></div>
       <div class="field"><label for="ghOn">Update the site when I press Publish</label><input type="checkbox" id="ghOn"></div>
-      <div class="row"><button class="b" id="ghTest">Test connection</button><button class="b" id="ghSaveDev">Save dev copy</button></div>
-      <div class="row" style="margin:4px 0"><button class="b" id="ghTest" type="button">Test GitHub connection</button></div>
+      <div class="row"><button class="b" id="ghTest">Test connection</button><button class="b primary" id="ghSaveDev">Update site</button></div>
       <div class="keys" id="ghStat" style="margin:4px 0 6px;word-break:break-all"></div>
       <h2 style="margin-top:10px">OpenBoatUtils</h2>
       <div class="field"><label for="obuChk">Enable OpenBoatUtils</label><input type="checkbox" id="obuChk"></div>
@@ -294,7 +293,7 @@ table.wr tr.go{cursor:pointer}table.wr tr.go:hover td{background:rgba(255,255,25
     </div>
     <div class="sec keys">
       <h2>Controls</h2>
-      <kbd>W</kbd>/<kbd>↑</kbd> forward · <kbd>S</kbd>/<kbd>↓</kbd> back · <kbd>A</kbd><kbd>D</kbd>/<kbd>←</kbd><kbd>→</kbd> steer · <kbd>R</kbd> reset to start · <kbd>H</kbd> hitbox · <kbd>T</kbd> 3D/2D · <kbd>Esc</kbd> menu. Touch buttons appear on phones. Drag a .litematic onto the window to load it.
+      <kbd>W</kbd>/<kbd>↑</kbd> forward · <kbd>S</kbd>/<kbd>↓</kbd> back · <kbd>A</kbd><kbd>D</kbd>/<kbd>←</kbd><kbd>→</kbd> steer · <kbd>R</kbd> reset to start · <kbd>H</kbd> hitbox · <kbd>F5</kbd> 3D/2D · <kbd>Esc</kbd> menu. Touch buttons appear on phones. Drag a .litematic onto the window to load it.
     </div>
     <div class="sec dev">
       <button class="b" id="testBtn" style="width:100%">Run physics self-test</button>
@@ -889,7 +888,7 @@ window.addEventListener('keydown', e => {
   if (typing(e)) return;
   for (const k in bcHeld) if (e.code === bcKeys[k]) bcHeld[k] = true;
   if (e.repeat) return;
-  if (e.code === 'KeyT') toggleView();
+  if (e.code === 'F5') { e.preventDefault(); toggleView(); }
   else if (e.code === 'KeyH') toggleHitbox();
   else if (e.code === bcKeys.toggle) toggleBoatCam();
   else if (e.code === bcKeys.menu) openBoatCamMenu();
@@ -1266,7 +1265,9 @@ function resize() {
   cssW = window.innerWidth; cssH = window.innerHeight;
   const dpr = window.devicePixelRatio || 1;
   rs = settings.quality === 'high' ? Math.min(dpr, 2) : settings.quality === 'low' ? 0.6 : autoScale;
-  cv.width = Math.max(1, Math.round(cssW * rs)); cv.height = Math.max(1, Math.round(cssH * rs));
+  const nw = Math.max(1, Math.round(cssW * rs)), nh = Math.max(1, Math.round(cssH * rs));
+  if (cv.width === nw && cv.height === nh && cv3.width === nw && cv3.height === nh) return;
+  cv.width = nw; cv.height = nh;
   cv.style.width = cssW + 'px'; cv.style.height = cssH + 'px';
   ctx.imageSmoothingEnabled = false;
   cv3.width = cv.width; cv3.height = cv.height; cv3.style.width = cssW + 'px'; cv3.style.height = cssH + 'px';
@@ -1402,7 +1403,7 @@ function paddleAngles(i, a, rest) {
 /* ---------- 3D renderer: plain WebGL1, chunked static meshes, fog-limited draw distance ---------- */
 const cv3 = document.getElementById('c3');
 let gl = null;
-try { gl = cv3.getContext('webgl', { antialias: false, alpha: false, depth: true, stencil: false, powerPreference: 'default', desynchronized: true }) || cv3.getContext('experimental-webgl'); } catch (e) { gl = null; }
+try { gl = cv3.getContext('webgl', { antialias: false, alpha: false, depth: true, stencil: false, powerPreference: 'default' }) || cv3.getContext('experimental-webgl'); } catch (e) { gl = null; }
 const G = { ok: false, col: null, flo: null, chunks: [], floorTex: null, floorBuf: null, groundBuf: null, hull: null, rider: null, size: [1, 1] };
 const SKY = [0.66, 0.80, 0.92];
 function glProg(vs, fs) {
@@ -1867,8 +1868,10 @@ function toast(t, ms) { const e = el('toast'); e.textContent = t; e.style.opacit
    ===================================================================== */
 let lastTime = null, tickBoundary = 0, acc = 0;
 let qFrames = 0, qSum = 0, qMin = 1, qCool = 0;
+let needRs = false;
 function frame(ms) {
   requestAnimationFrame(frame);
+  if (needRs) { needRs = false; resize(); }
   const now = ms / 1000;
   if (lastTime === null) { lastTime = now; tickBoundary = now; acc = 0; }
   let elapsed = now - lastTime; lastTime = now;
@@ -1882,12 +1885,12 @@ function frame(ms) {
   const alpha = paused ? 1 : acc / DT; frameAlpha = alpha;
   applyView(); if (shown3D) draw3D(alpha); else draw(alpha); drawMini(); updateHud(alpha, now);
   // adaptive resolution: lower render scale if frames are being dropped
-  if (settings.quality === 'auto' && !paused && elapsed > 0.002 && elapsed < 0.25) {
+  if (settings.quality === 'auto' && !paused && ms > 5000 && elapsed > 0.002 && elapsed < 0.25) {
     qMin = Math.min(qMin, elapsed); qSum += elapsed; qFrames++;
     if (qCool > 0) qCool--;
     else if (qFrames >= 60) {
       const avg = qSum / qFrames;
-      if (avg > qMin * 1.45 && avg > 0.018 && autoScale > 0.5) { autoScale = Math.max(0.5, autoScale - 0.25); resize(); qCool = 120; }
+      if (avg > qMin * 1.45 && avg > 0.018 && autoScale > 0.5) { autoScale = Math.max(0.5, autoScale - 0.25); needRs = true; qCool = 120; }
       qFrames = 0; qSum = 0;
     }
   }
@@ -2750,7 +2753,7 @@ async function ghApi(repo, path, opt) {
     try { r = await fetch('https://api.github.com/repos/' + repo + path, { method: opt.method || 'GET', headers: h, body: opt.body, cache: 'no-store' }); }
     catch (e) { ne = e; await new Promise(z => setTimeout(z, 1500 * (a + 1))); }
   }
-  if (!r) throw new Error('could not reach GitHub (' + (ne && ne.message || 'network error') + ') while ' + ((opt.method || 'GET') === 'GET' ? 'reading ' : 'uploading ') + where + ' — check your internet, turn off content blockers / Private Relay / VPN for this page, and make sure you opened the site from https:// not a downloaded file');
+  if (!r) throw new Error('could not reach GitHub (' + (ne && ne.message || 'network error') + ') while ' + ((opt.method || 'GET') === 'GET' ? 'reading ' : 'uploading ') + where + ' — check your internet, turn off content blockers / Private Relay / VPN for this page, or try again on Wi-Fi');
   if (r.status === 404 && opt.allow404) return null;
   if (!r.ok) { let m = ''; try { m = (await r.json()).message; } catch (e) {} throw new Error('GitHub ' + r.status + (m ? ' ' + m : '') + ' — ' + repo + path.split('?')[0]); }
   return r.status === 204 ? null : r.json();
@@ -2761,8 +2764,14 @@ async function ghBlobSha(bytes) {
   return [...new Uint8Array(await crypto.subtle.digest('SHA-1', all))].map(x => x.toString(16).padStart(2, '0')).join('');
 }
 const ghGet = (repo, file) => ghApi(repo, '/contents/' + file, { allow404: true });
+async function ghShaOf(repo, file) {
+  const k = file.lastIndexOf('/'), dir = k < 0 ? '' : file.slice(0, k), name = file.slice(k + 1);
+  const L = await ghApi(repo, '/contents/' + dir, { allow404: true });
+  const f = Array.isArray(L) ? L.find(x => x.name === name) : null;
+  return f ? { sha: f.sha } : null;
+}
 async function ghPut(repo, file, text, msg) {
-  const bytes = new TextEncoder().encode(text), cur = await ghGet(repo, file);
+  const bytes = new TextEncoder().encode(text), cur = await ghShaOf(repo, file);
   if (cur && cur.sha && cur.sha === await ghBlobSha(bytes)) return 'unchanged';
   const body = { message: msg, content: b64(bytes) }; if (cur && cur.sha) body.sha = cur.sha;
   await ghApi(repo, '/contents/' + file, { method: 'PUT', body: JSON.stringify(body) }); return 'updated';
@@ -2773,7 +2782,6 @@ function siteUrl(repo) { const [o, r] = repo.split('/'); return r.toLowerCase() 
 const WEB_README = '# ibronline\n\nMinecraft ice-boat racing in the browser with OpenBoatUtils physics, BoatCam and 2D/3D views.\n\nThis repository is the public website. It is updated automatically when a track is published from the private dev build.\n\n- `index.html` - the game (play mode)\n- `tracks/index.json` - published track list\n- `tracks/<id>.json` - track data (blocks, regions, OpenBoatUtils settings)\n\n## Link parameters\n\n- `?track=<id>` open a track\n- `&mode=RALLY_BLUE` apply an OpenBoatUtils mode (name or 0-24); repeatable\n- `&exclusive=BA` reset to vanilla, then apply a mode\n- `&obu=defaultslipperiness 0.98;blockslipperiness 0.989 packed_ice` run OpenBoatUtils commands\n- `&slip= &yaw= &fwd= &back= &turn= &lateral= &brake= &maxspeed= &maxres= &stack=1` set values\n- `&vanilla=1` ignore the track\'s OpenBoatUtils settings\n';
 async function ghPublish() {
   if (!gh.web) throw new Error('set the web repo');
-  if (location.protocol === 'file:') throw new Error('this page was opened as a downloaded file — open the dev site from its https:// link and publish from there');
   const d = await publishTrack('data'), json = JSON.stringify(d);
   const slug = (typeof EDIT_SLUG !== 'undefined' && EDIT_SLUG) || d.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'track';
   ghStat('Uploading track…'); await ghPut(gh.web, 'tracks/' + slug + '.json', json, 'Publish track: ' + d.name);
@@ -2783,11 +2791,9 @@ async function ghPublish() {
   const entry = { id: slug, name: d.name, file: slug + '.json', info: (cps ? cps + ' checkpoints · ' : '') + (d.regions.some(r => r.t === 'fin') ? 'sprint · ' : '') + (d.obu && d.obu.on ? 'OpenBoatUtils (' + ((d.obu.modes || []).join(', ') || 'custom') + ') · ' : '') + d.W + '×' + d.H + ' blocks', updated: new Date().toISOString() };
   const i = list.findIndex(t => t.id === slug); if (i >= 0) { if (list[i].closed) entry.closed = true; list[i] = entry; } else list.push(entry);
   await ghPut(gh.web, 'tracks/index.json', JSON.stringify(list, null, 1) + '\n', 'Update track list (' + d.name + ')');
-  ghStat('Updating the game page…'); await ghPut(gh.web, 'index.html', webHtml(), 'Update game');
-  await ghPut(gh.web, '.nojekyll', '', 'Add .nojekyll');
-  if (!(await ghGet(gh.web, 'README.md'))) await ghPut(gh.web, 'README.md', WEB_README, 'Add README');
   let extra = '';
-  if (gh.dev || gh.src) { try { extra = ' · saved ' + await ghSaveDev(slug, json); } catch (e) { extra = ' · dev save failed: ' + e.message; } }
+  if (gh.src) { try { ghStat('Backing up track source…'); await ghPut(gh.src, 'tracks/' + slug + '.json', json, 'Track source: ' + slug); } catch (e) { extra = ' · track backup failed: ' + e.message; } }
+  if (!(await ghShaOf(gh.web, 'index.html'))) extra += ' · the site has no game page yet — press Update site';
   const url = siteUrl(gh.web) + '?track=' + slug;
   ghStat('✓ Live in about a minute: ' + url + extra); return url;
 }
@@ -2827,8 +2833,12 @@ async function ghSaveDev(slug, json) {
   const done = [];
   if (gh.dev) {
     if (!gh.code || gh.code.length < 6) throw new Error('set a dev access code (6+ characters) first');
-    ghStat('Locking and uploading the dev site…');
-    await ghPut(gh.dev, 'index.html', await devGateHtml(SRC_HTML, gh.code), 'Update dev build (locked)');
+    const dv = await sha256(gh.dev + '|' + gh.code + '|' + SRC_HTML);
+    if (store.get('devver') !== dv) {
+      ghStat('Locking and uploading the dev site…');
+      await ghPut(gh.dev, 'index.html', await devGateHtml(SRC_HTML, gh.code), 'Update dev build (locked)');
+      store.set('devver', dv);
+    }
     await ghPut(gh.dev, '.nojekyll', '', 'Add .nojekyll');
     if (!(await ghGet(gh.dev, 'README.md'))) await ghPut(gh.dev, 'README.md', '# ibronline dev\n\nLocked dev build of ibronline. index.html is encrypted (AES-256-GCM); open the site and enter the access code.\n', 'Add README');
     done.push('dev site');
@@ -2862,11 +2872,9 @@ el('ghTest').addEventListener('click', async () => {
     ghStat(out.join(' · '));
   } catch (e) { ghStat('✗ ' + e.message); }
 });
-el('ghTest').addEventListener('click', ghTest);
 async function ghTest() {
   ghSave(); const out = [];
   const say = t => { out.push(t); ghStat(out.join(' · ')); };
-  if (location.protocol === 'file:') say('⚠ opened as a downloaded file — open it from the https:// site instead');
   try { await fetch('https://api.github.com/zen', { cache: 'no-store' }); say('✓ internet → GitHub'); }
   catch (e) { return say('✗ cannot reach api.github.com at all (' + e.message + ') — internet, content blocker, VPN or Private Relay is blocking it'); }
   if (!gh.tok) return say('✗ no token saved');
@@ -2876,7 +2884,23 @@ async function ghTest() {
     catch (e) { say('✗ ' + repo + ': ' + e.message); }
   }
 }
-el('ghSaveDev').addEventListener('click', async () => { ghSave(); try { ghStat('Saving dev copy…'); const r = await ghSaveDev(); ghStat('✓ Saved ' + r); } catch (e) { ghStat('✗ ' + e.message); } });
+async function ghUpdateSite() {
+  if (!gh.web) throw new Error('set the play repo first');
+  const done = [];
+  ghStat('Updating the game page…');
+  done.push('game page ' + await ghPut(gh.web, 'index.html', webHtml(), 'Update game'));
+  await ghPut(gh.web, '.nojekyll', '', 'Add .nojekyll');
+  if (!(await ghGet(gh.web, 'README.md'))) await ghPut(gh.web, 'README.md', WEB_README, 'Add README');
+  if (gh.dev || gh.src) done.push(await ghSaveDev());
+  return done.join(' · ');
+}
+el('ghSaveDev').addEventListener('click', async () => {
+  ghSave(); const b = el('ghSaveDev'); b.disabled = true;
+  try { const r = await ghUpdateSite(); ghStat('✓ Site updated (' + r + ') — live in about a minute: ' + siteUrl(gh.web)); }
+  catch (e) { ghStat('✗ Site update failed: ' + e.message); }
+  b.disabled = false;
+});
+if (0) el('ghSaveDev').addEventListener('click', async () => { ghSave(); try { ghStat('Saving dev copy…'); const r = await ghSaveDev(); ghStat('✓ Saved ' + r); } catch (e) { ghStat('✗ ' + e.message); } });
 ghSync();
 window.__edUI = true; if (map) edSync();
 el('testBtn').addEventListener('click', () => { const r = runTests(); const p = el('tests'); p.textContent = r.text; p.classList.remove('hide'); });
@@ -3231,13 +3255,13 @@ function rcPoolSave() { const box = el('rcPool'), pool = [...box.querySelectorAl
 if (el('rcPool')) { el('rcLaps').addEventListener('change', rcPoolSave); el('rcInter').addEventListener('change', rcPoolSave); el('rcPoolLoad').addEventListener('click', () => { RACE.tracks = []; rcPoolRender(); }); }
 
 // ---------- chat: lobby / track / whole-game, filtered ----------
-const CHAT = { log: { lobby: [], track: [], global: [] }, tab: 'lobby', g: null, gTopic: 'realtime:ibr-global' };
+const CHAT = { log: { lobby: [], track: [], global: [] }, tab: 'lobby', feed: [], open: false, g: null, gTopic: 'realtime:ibr-global' };
 const CHAT_SLUR = /n+[^\w\s]*[i1!|y]+[^\w\s]*[gq9]+[^\w\s]*[gq9]+[^\w\s]*(?:[e3]+[^\w\s]*r+|[a@4]+h?|u+h|[e3]+)?[sz]*/gi;
 const CHAT_WORDS = [[/f+[^\w\s]*[u*v]+[^\w\s]*c+[^\w\s]*k+/gi, 'oh dear'], [/p+[^\w\s]*[i1!]+[^\w\s]*[s$5]+[^\w\s]*[s$5]+/gi, 'peepee'], [/s+[^\w\s]*h+[^\w\s]*[i1!*]+[^\w\s]*t+/gi, 'poopoo']];
 function chatFilter(t) { let slur = false; t = String(t || '').slice(0, 200).replace(CHAT_SLUR, () => { slur = true; return 'neighbor'; }); for (const [re, w] of CHAT_WORDS) t = t.replace(re, w); return { t, slur }; }
 function chatMuted(id, name) { if ((+store.get('mute:' + id) || 0) > Date.now()) return true; const L = (MP_PUB && MP_PUB.muted) || []; return L.some(x => x === id || (name && String(x).toLowerCase() === String(name).toLowerCase())); }
 function chatMute(id) { store.set('mute:' + id, Date.now() + 24 * 3600 * 1000); }
-function chatPush(ch, m) { const L = CHAT.log[ch]; L.push(m); if (L.length > 80) L.shift(); if (ch === CHAT.tab) chatRender(); else { const b = document.querySelector('#chatBox [data-ch="' + ch + '"]'); if (b && !b.textContent.endsWith('•')) b.textContent += ' •'; } }
+function chatPush(ch, m) { const L = CHAT.log[ch]; m.at = Date.now(); m.ch = ch; L.push(m); if (L.length > 80) L.shift(); CHAT.feed.push(m); if (CHAT.feed.length > 40) CHAT.feed.shift(); chatRender(); if (ch !== CHAT.tab) { const b = document.querySelector('#chatBox [data-ch="' + ch + '"]'); if (b && !b.textContent.endsWith('•')) b.textContent += ' •'; } }
 function chatSys(ch, t) { try { chatPush(ch, { sys: 1, tx: t }); } catch (e) {} }
 function chatRecv(d, ch) {
   if (!d || !d.id || !d.tx) return; if (chatMuted(d.id, d.n)) return;
@@ -3247,6 +3271,11 @@ function chatRecv(d, ch) {
 }
 function chatRender() {
   const box = el('chLog'); if (!box) return;
+  if (!CHAT.open) {
+    const now = Date.now(), tag = { lobby: 'Lobby', track: 'Track', global: 'Global' };
+    box.innerHTML = CHAT.feed.filter(m => now - m.at < 10000).slice(-8).map(m => '<div class="pop" style="opacity:' + Math.min(1, (10000 - (now - m.at)) / 1500).toFixed(2) + '"><span class="chc">[' + tag[m.ch] + ']</span> ' + (m.sys ? '<i>' + escH(m.tx) + '</i>' : '<b>' + escH(m.n) + '</b>' + tagHtml(m.id) + ': ' + escH(m.tx)) + '</div>').join('');
+    return;
+  }
   box.innerHTML = CHAT.log[CHAT.tab].map(m => m.sys ? '<div class="sys">' + escH(m.tx) + '</div>' : '<div><b>' + escH(m.n) + '</b>' + tagHtml(m.id) + ': ' + escH(m.tx) + '</div>').join('') || '<div class="sys">' + ({ lobby: MP.joined ? 'Lobby chat — only people in your race lobby see this' : 'Join a lobby to use lobby chat', track: MP.trackTopic ? 'Track chat for ' + escH((WEB_CUR && WEB_CUR.name) || 'this track') : 'Join a lobby and load a track to use track chat', global: 'Whole-game chat — everyone on ibronline' })[CHAT.tab] + '</div>';
   box.scrollTop = box.scrollHeight;
 }
@@ -3278,13 +3307,23 @@ function chatSend() {
   inp.value = ''; chatPush(ch, { id: me, n: name, tx: f.t });
   if (f.slur) { chatMute(me); chatPush(ch, { sys: 1, tx: 'You have been muted for 24 hours' }); }
 }
+function chatOpen(on) {
+  const b = el('chatBox'), i = el('chIn'); if (!b || !i) return;
+  CHAT.open = !!on; b.classList.toggle('open', CHAT.open); b.classList.remove('min');
+  if (CHAT.open) { i.value = ''; setTimeout(() => i.focus(), 0); } else i.blur();
+  chatRender();
+}
+setInterval(() => { if (!CHAT.open && CHAT.feed.length) chatRender(); }, 400);
 function chatShow(on) { const b = el('chatBox'); if (!b) return; b.classList.toggle('hide', !on); if (on) { chatRender(); setTimeout(chatGlobal, 600); } else if (CHAT.g) { const g = CHAT.g; CHAT.g = null; g.close(); } }
 if (el('chatBox')) {
   document.querySelectorAll('#chatBox [data-ch]').forEach(b => b.addEventListener('click', () => { CHAT.tab = b.dataset.ch; document.querySelectorAll('#chatBox [data-ch]').forEach(x => { x.classList.toggle('on', x === b); x.textContent = x.textContent.replace(/ •$/, ''); }); el('chatBox').classList.remove('min'); chatRender(); }));
   el('chMin').addEventListener('click', () => el('chatBox').classList.toggle('min'));
-  el('chIn').addEventListener('keydown', e => { e.stopPropagation(); if (e.key === 'Enter') { e.preventDefault(); chatSend(); } else if (e.key === 'Escape') el('chIn').blur(); });
+  el('chIn').addEventListener('keydown', e => { e.stopPropagation(); if (e.key === 'Enter') { e.preventDefault(); chatSend(); chatOpen(false); } else if (e.key === 'Escape') { e.preventDefault(); chatOpen(false); } });
   el('chIn').addEventListener('keyup', e => e.stopPropagation());
-  addEventListener('keydown', e => { if (e.code !== 'KeyY' || el('chatBox').classList.contains('hide') || /INPUT|TEXTAREA|SELECT/.test((document.activeElement || {}).tagName || '')) return; e.preventDefault(); el('chatBox').classList.remove('min'); el('chIn').focus(); });
+  el('chIn').addEventListener('blur', () => setTimeout(() => { if (CHAT.open && document.activeElement !== el('chIn')) chatOpen(false); }, 200));
+  document.querySelectorAll('#chatBox .chTabs button').forEach(b => { b.addEventListener('mousedown', e => e.preventDefault()); b.addEventListener('click', () => { if (CHAT.open) el('chIn').focus(); }); });
+  el('chBtn').addEventListener('click', () => chatOpen(true));
+  addEventListener('keydown', e => { if (e.code !== 'KeyT' || e.repeat || CHAT.open || el('chatBox').classList.contains('hide') || /INPUT|TEXTAREA|SELECT/.test((document.activeElement || {}).tagName || '')) return; e.preventDefault(); chatOpen(true); });
 }
 
 window.IceBoat = { MP, RACE, CHAT, chatFilter, runTests, step, makeState, env, _rawMap(m) { const o = map; map = m; return o; }, parseLitematic, buildLitMap, importFile, publishTrack, obuRunCommands, obuSetMode, obuChanged, regionsChanged, ghPublish, webHtml, applyUrlObu, gh, nameOk, keyNorm, newKey, skinFace, devGateHtml, get net() { return NET; }, get me() { return ME; }, setTab, get baseTexCount() { return baseTex.size; }, get map() { return map; }, get race() { return race; }, get st() { return st; } };
