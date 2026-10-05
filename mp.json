@@ -1,6 +1,6 @@
 {
- "open": "all",
- "coll": true,
+ "open": "off",
+ "coll": false,
  "srv": {
   "eu": {
    "url": "https://dbyqswlvmequszujpwaj.supabase.co",
@@ -16,18 +16,16 @@
   }
  },
  "off": [
-  "us",
-  "asia"
+  "us"
  ],
  "race": {
   "pool": [
-   "frozen-loop",
-   "glacier-sweep"
+   "frozen-lake"
   ],
   "laps": 3,
   "inter": 20,
   "lapsBy": {}
  },
  "muted": [],
- "updated": "2026-10-05T16:44:46.383Z"
+ "updated": "2026-10-05T19:55:39.573Z"
 }
