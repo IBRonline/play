@@ -666,7 +666,7 @@ body:not(.isDev) #hmDevBR{display:none!important}
 /* quests removed for now; physics merged into Create a new track */
 #home [data-hm=quests],#devDash .ddSide [data-p=cos],#devDash .ddSide [data-p=phys],#devDash .ddPane[data-p=cos],#devDash .ddPane[data-p=phys]{display:none!important}
 </style>
-<meta name="ibr-build" content="2026-10-05T21:18:51.971Z">
+<meta name="ibr-build" content="2026-10-05T21:41:59.337Z">
 <script type="application/json" id="webSite">{"tracks":"tracks/index.json","sb":{"url":"https://dbyqswlvmequszujpwaj.supabase.co","key":"sb_publishable_-Av4-QPspUOMHAUtM5Jksw_amiBfwpy"}}</script>
 </head>
 <body>
@@ -1623,7 +1623,13 @@ function loadBest() {
 }
 function resetToStart() {
   if (placing) return;
-  resetRun(); lastTime = null;
+  if (RACE.S && RACE.S.ph === 'race' && race) {
+    race.resp = null; // go to map spawn, not last checkpoint
+    respawn();
+  } else {
+    resetRun();
+  }
+  lastTime = null;
   if (paused) resume();
 }
 function resetRun() {
@@ -3813,8 +3819,9 @@ const MP = {
       if (!q.c) continue;   // both players need collisions on
       const dx = s.x - q.x, dz = s.z - q.z, px = W - Math.abs(dx), pz = W - Math.abs(dz);
       if (px <= 0 || pz <= 0 || Math.abs((s.y || 0) - (q.y || 0)) > 0.6) continue;
-      if (px < pz) { const sg = dx >= 0 ? 1 : -1; s.x += sg * px * 0.5; if (s.vx * sg < 0) s.vx = (s.vx + q.vx) * 0.5; }
-      else { const sg = dz >= 0 ? 1 : -1; s.z += sg * pz * 0.5; if (s.vz * sg < 0) s.vz = (s.vz + q.vz) * 0.5; }
+      // Moving-walltap: q is the moving wall; push s fully out and cancel s's velocity relative to q.
+      if (px < pz) { const sg = dx >= 0 ? 1 : -1; s.x += sg * px; if (s.vx * sg < 0) s.vx = q.vx; }
+      else { const sg = dz >= 0 ? 1 : -1; s.z += sg * pz; if (s.vz * sg < 0) s.vz = q.vz; }
     }
   },
   stat(t) { this.msg = t; this.statLoop(); },
