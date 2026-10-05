@@ -2,7 +2,7 @@
 <html lang="en"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<title>Ice Boat Racer</title>
+<title>ibronline</title>
 <style>
 :root{--bg:#191919;--surf:#202020;--raise:#383836;--tx:#fff;--tx2:rgba(255,255,255,.65);--bd:rgba(255,255,255,.2);--blue:#5E9FE8;--green:#72BC8F;--orange:#DE9255;--red:#E97366}
 *{box-sizing:border-box}
@@ -65,11 +65,21 @@ pre#tests{font:12px/1.5 Menlo,Consolas,monospace;background:var(--bg);border:1px
 @media (max-width:560px){#hudL .box{min-width:120px;padding:6px 10px}#time{font-size:22px}#hudC{top:auto;bottom:110px}#speed{font-size:20px}}
 
 .panel{position:relative}
+.mpSoon{opacity:.42;cursor:not-allowed!important;position:relative;filter:grayscale(1)}
+.mpSoon:hover::after,.mpSoon:focus::after,.mpSoon.tip::after{content:attr(data-tip);position:absolute;left:50%;top:calc(100% + 6px);transform:translateX(-50%);background:#000;color:#fff;padding:5px 9px;border-radius:6px;font:600 12px/1.2 inherit;font-family:inherit;white-space:nowrap;z-index:20;pointer-events:none;opacity:1}
+.help{font-size:13px;color:var(--tx2);margin:10px 0 4px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}.help .b{min-height:30px;padding:0 10px;font-size:12px}
+.tag{display:inline-flex;align-items:center;gap:3px;margin-left:5px;padding:1px 6px;border-radius:999px;font-size:11px;font-weight:700;line-height:16px;vertical-align:middle;background:rgba(255,255,255,.1);white-space:nowrap}
+.adm{border:1px solid var(--bd);border-radius:8px;padding:8px;margin:6px 0;font-size:13px}.adm .row{margin:4px 0;flex-wrap:wrap}.adm .b{min-height:32px;padding:0 10px;font-size:12px}
+.admList{max-height:280px;overflow:auto}
 #webTabs{display:flex;gap:4px;margin:0 0 14px;background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:4px}
 #webTabs button{flex:1;min-height:38px;border:0;border-radius:7px;background:none;color:var(--tx2);font:600 14px/1 inherit;font-family:inherit;cursor:pointer}
 #webTabs button.on{background:var(--raise);color:#fff}
 .panel[data-tab=wrs]>:not(h1):not(.sub):not(#webTabs):not(#meChip):not(#wrSec),.panel[data-tab=acct]>:not(h1):not(.sub):not(#webTabs):not(#meChip):not(#acctSec){display:none!important}
-.panel[data-tab=wrs] #wrSec,.panel[data-tab=acct] #acctSec{border-top:0;margin-top:0;padding-top:0}
+.panel[data-tab=mp]>:not(h1):not(.sub):not(#webTabs):not(#meChip):not(#mpSec){display:none!important}
+#raceBox{position:fixed;top:56px;left:50%;transform:translateX(-50%);z-index:40;background:rgba(10,14,20,.78);color:#fff;padding:10px 14px;border-radius:12px;font:13px/1.4 system-ui,sans-serif;text-align:center;max-width:92vw;backdrop-filter:blur(4px)}#raceBox .rv{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:6px}#raceBox button{background:#24303d;color:#fff;border:1px solid #3c4b5c;border-radius:8px;padding:6px 10px;cursor:pointer;font:inherit}#raceBox button.on{background:#2f6fd6;border-color:#5b93ff}#raceBox .big{font-size:20px;font-weight:700}
+#chatBox{position:fixed;left:10px;bottom:10px;width:310px;max-width:80vw;z-index:40;background:rgba(10,14,20,.62);color:#fff;border-radius:10px;font:12px/1.35 system-ui,sans-serif;overflow:hidden}#chatBox .chTabs{display:flex}#chatBox .chTabs button{flex:1;background:transparent;color:#cfd8e3;border:0;padding:5px 0;cursor:pointer;font:inherit}#chatBox .chTabs button.on{background:rgba(255,255,255,.12);color:#fff;font-weight:600}#chatBox #chMin{flex:0 0 28px}#chLog{height:150px;overflow-y:auto;padding:4px 8px;word-break:break-word}#chLog .sys{color:#9fb0c3;font-style:italic}#chIn{width:100%;box-sizing:border-box;border:0;border-top:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.35);color:#fff;padding:6px 8px;font:inherit;outline:none}#chatBox.min #chLog,#chatBox.min #chIn{display:none}
+.obuRow{align-items:center;gap:6px;margin:3px 0}.obuRow span{font-size:12px;word-break:break-word}
+.panel[data-tab=mp] #mpSec,.panel[data-tab=wrs] #wrSec,.panel[data-tab=acct] #acctSec{border-top:0;margin-top:0;padding-top:0}
 #meChip{position:absolute;top:22px;right:20px;display:flex;align-items:center;gap:8px;max-width:170px;background:var(--bg);border:1px solid var(--bd);border-radius:999px;padding:3px 12px 3px 3px;color:#fff;font:600 13px/1.2 inherit;font-family:inherit;cursor:pointer}
 #meChip span.n{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .av{width:28px;height:28px;border-radius:6px;image-rendering:pixelated;flex:none;display:inline-flex;align-items:center;justify-content:center;background:#3a5a7a;color:#fff;font-weight:700;font-size:13px;vertical-align:middle;object-fit:cover}
@@ -110,7 +120,7 @@ table.wr tr.go{cursor:pointer}table.wr tr.go:hover td{background:rgba(255,255,25
 <canvas id="mini" width="150" height="110"></canvas>
 <div id="toast"></div>
 <div id="hint" class="hide"></div>
-<div id="regBar" class="hide"><button class="b on" data-t="cp">Checkpoint</button><button class="b" data-t="reset">Reset zone</button><button class="b" data-t="start">Start region</button><button class="b" data-t="fin">Finish</button><button class="b" data-t="spawn">Spawn block</button><button class="b" data-t="del">Delete</button><button class="b" id="regUndo">Undo</button><button class="b" id="regClear">Clear all</button><button class="b" id="regStart">Start line (old)</button><button class="b" id="regZin">＋</button><button class="b" id="regZout">−</button><button class="b" id="regView">3D</button><button class="b primary" id="regDone">Done</button></div>
+<div id="regBar" class="hide"><button class="b on" data-t="cp">Checkpoint</button><button class="b" data-t="reset">Reset zone</button><button class="b" data-t="start">Start region</button><button class="b" data-t="fin">Finish</button><button class="b" data-t="spawn">Spawn block</button><button class="b" data-t="grid">Grid block</button><button class="b" data-t="del">Delete</button><button class="b" id="regUndo" title="Ctrl/Cmd+Z">Undo</button><button class="b" id="regRedo" title="Ctrl/Cmd+Shift+Z or Ctrl+Y" disabled="">Redo</button><button class="b" id="regClear">Clear all</button><button class="b" id="regStart">Start line (old)</button><button class="b" id="regZin">＋</button><button class="b" id="regZout">−</button><button class="b" id="regView">3D</button><button class="b primary" id="regDone">Done</button></div>
 
 <div id="touch" class="hide">
   <div class="tb" id="tL" data-k="A">◀</div>
@@ -122,19 +132,28 @@ table.wr tr.go{cursor:pointer}table.wr tr.go:hover td{background:rgba(255,255,25
 
 <div id="menu">
   <div class="panel" role="dialog" aria-label="Game menu">
-    <h1>Ice Boat Racer</h1>
+    <h1>ibronline</h1>
     <div class="sub">Minecraft-style ice boat physics · 20 ticks/s</div>
     <button id="meChip" class="hide" aria-label="Account"></button>
-    <div id="webTabs" class="hide" role="tablist"><button data-tab="tracks" class="on">Tracks</button><button data-tab="wrs">WRs</button><button data-tab="acct">Account</button></div>
+    <div id="webTabs" class="hide" role="tablist"><button data-tab="tracks" class="on">Time Trial</button><button type="button" class="mpSoon" aria-disabled="true" data-tip="Coming soon">Multiplayer</button><button data-tab="wrs">WRs</button><button data-tab="acct">Account</button></div>
     <div class="track"><b id="trackName">Frozen Loop</b><span id="trackInfo">Built-in track</span></div>
-    <div class="row"><button class="b primary" id="playBtn">Race</button></div>
+    <div class="row"><button class="b primary" id="playBtn">Race</button><button type="button" class="b mpSoon" aria-disabled="true" data-tip="Coming soon">Multiplayer</button></div>
+    <div class="help">Need help? Message <b>particle0325</b> on Discord <button type="button" class="b" id="dcCopy">Copy username</button></div>
     <div class="row dev">
       <button class="b" id="importBtn">Import .litematic</button>
       <button class="b" id="defaultBtn">Built-in track</button>
     </div>
     <input type="file" id="file" accept=".litematic" class="hide">
     <div id="status"></div>
-    <div class="sec hide" id="webSec"><h2>Tracks</h2><div id="webList" class="tlist"></div></div>
+    <div class="sec hide" id="webSec"><h2>Time Trial</h2><div id="webList" class="tlist"></div></div>
+    <div class="sec hide" id="mpSec"><h2>Multiplayer <span class="pill">TESTERS</span></h2>
+      <div class="field"><label for="mpPRegion">Server region</label><select id="mpPRegion"><option value="eu">🇪🇺 Europe</option><option value="us">🇺🇸 United States</option><option value="asia">🌏 Asia</option></select></div>
+      <div class="field"><label for="mpPRoom">Lobby</label><input type="text" id="mpPRoom" value="lobby" spellcheck="false"></div>
+      <div class="row"><button class="b primary" id="mpPConn">Join</button></div>
+      <div class="keys" id="mpPStat" style="margin:6px 0">Join a lobby to race: everyone votes on 3 tracks, then races. Finishing a race earns 2 🧊 icetokens.</div>
+      <div id="mpPList" class="admList"></div>
+      <div class="keys" id="rcIce" style="margin-top:6px"></div>
+    </div>
     <div class="sec hide" id="wrSec">
       <h2>World records</h2>
       <div class="field"><label for="wrPick">Leaderboard</label><select id="wrPick"></select></div>
@@ -191,11 +210,20 @@ table.wr tr.go{cursor:pointer}table.wr tr.go:hover td{background:rgba(255,255,25
       <div class="field"><label for="sbKey">Accounts publishable key</label><input type="text" id="sbKey" placeholder="sb_publishable_… or anon key" spellcheck="false"></div>
       <div class="field"><label for="ghOn">Update the site when I press Publish</label><input type="checkbox" id="ghOn"></div>
       <div class="row"><button class="b" id="ghTest">Test connection</button><button class="b" id="ghSaveDev">Save dev copy</button></div>
+      <div class="row" style="margin:4px 0"><button class="b" id="ghTest" type="button">Test GitHub connection</button></div>
       <div class="keys" id="ghStat" style="margin:4px 0 6px;word-break:break-all"></div>
       <h2 style="margin-top:10px">OpenBoatUtils</h2>
       <div class="field"><label for="obuChk">Enable OpenBoatUtils</label><input type="checkbox" id="obuChk"></div>
       <div class="field"><label for="obuMode">Mode</label><select id="obuMode"></select></div>
       <div class="row" style="margin-bottom:6px"><button class="b" id="obuApply">Apply mode</button><button class="b" id="obuExcl">Exclusive</button><button class="b" id="obuReset">Reset</button></div>
+      <div class="keys" style="margin:6px 0 2px">Add a setting or group to this track:</div>
+      <div class="row"><select id="obuAdd" style="flex:1;min-width:0"></select></div>
+      <div class="row"><input type="text" id="obuAddBlk" list="obuBlkList" placeholder="block(s), e.g. packed_ice, blue_ice" spellcheck="false" style="flex:1;min-width:0"><input type="text" id="obuAddVal" placeholder="value" style="width:80px"><button class="b primary" id="obuAddBtn">Add</button></div>
+      <datalist id="obuBlkList"></datalist>
+      <div class="keys" id="obuAddHint" style="margin:2px 0 6px"></div>
+      <div class="keys" style="margin:4px 0 2px"><b>Current configuration</b></div>
+      <div id="obuCfg" class="admList"></div>
+      <div class="keys" style="margin:8px 0 2px">All values:</div>
       <div id="obuFields"></div>
       <div class="field"><label for="obuStack">Accel stacking</label><input type="checkbox" id="obuStack"></div>
       <textarea id="obuCmd" rows="4" spellcheck="false" placeholder="OBU commands, one per line, e.g.
@@ -204,6 +232,33 @@ table.wr tr.go{cursor:pointer}table.wr tr.go:hover td{background:rgba(255,255,25
 /boatmode RALLY_BLUE"></textarea>
       <div class="row" style="margin-top:6px"><button class="b" id="obuRun">Run commands</button></div>
       <pre id="obuSum"></pre>
+      <h2 style="margin-top:10px">Player admin <span class="pill">DEV</span></h2>
+      <div class="field"><label for="admSecret">Admin secret (accounts server)</label><input type="password" id="admSecret" autocomplete="off" placeholder="set in ibronline-dev-setup.sql"></div>
+      <div class="row"><input type="text" id="admQ" placeholder="Player name (blank = all)" spellcheck="false" style="flex:1;min-width:0"><button class="b" id="admFind">Find players</button></div>
+      <div class="admList" id="admList"></div>
+      <h2 style="margin-top:10px">Track admin <span class="pill">DEV</span></h2>
+      <div class="row"><select id="tkPick" style="flex:1;min-width:0"></select><button class="b" id="tkReload">↻</button></div>
+      <div class="row"><button class="b" id="tkEdit">Open in editor</button><button class="b" id="tkTimesBtn">Show times</button><button class="b" id="tkWipe">Clear all times</button><button class="b" id="tkClose">Close track</button><button class="b" id="tkDel" style="color:var(--red)">Delete track</button></div>
+      <div class="row"><span class="keys" id="tkEditing" style="flex:1"></span><button class="b hide" id="tkDetach">Stop editing</button></div>
+      <div class="admList" id="tkTimes"></div>
+      <div class="keys" id="admStat" style="margin:4px 0 6px;word-break:break-all"></div>
+      <h2 style="margin-top:10px">Multiplayer (experimental) <span class="pill">DEV</span></h2>
+      <div class="field"><label for="mpRegion">Server region</label><select id="mpRegion"><option value="eu">🇪🇺 Europe</option><option value="us">🇺🇸 United States</option><option value="asia">🌏 Asia</option></select></div>
+      <div class="field"><label for="mpUrl">Region server URL (Supabase)</label><input type="text" id="mpUrl" spellcheck="false" placeholder="https://xxxx.supabase.co"></div>
+      <div class="field"><label for="mpKey">Region publishable key</label><input type="text" id="mpKey" spellcheck="false" placeholder="sb_publishable_…"></div>
+      <div class="field"><label for="mpRoom">Room</label><input type="text" id="mpRoom" value="lobby" spellcheck="false"></div>
+      <div class="field"><label for="mpColl">Boat collisions</label><input type="checkbox" id="mpColl"></div>
+      <div class="field"><label for="mpOpen">Who can join (public site)</label><select id="mpOpen"><option value="off">Nobody (coming soon)</option><option value="testers">Testers only</option><option value="all">Everyone</option></select></div>
+      <h2 style="margin-top:10px">Race settings</h2>
+      <div class="field"><label for="rcLaps">Laps per race</label><input type="number" id="rcLaps" min="1" max="99" value="3"></div>
+      <div class="field"><label for="rcInter">Intermission / vote time (seconds)</label><input type="number" id="rcInter" min="5" max="300" value="20"></div>
+      <div class="keys" style="margin:4px 0 2px">Race pool — each intermission offers 3 random tracks from these:</div>
+      <div id="rcPool" class="admList"></div>
+      <div class="row"><button class="b" id="rcPoolLoad">Refresh track list</button></div>
+      <div class="field"><label for="mpMuted">Muted players (names or ids, comma separated)</label><input type="text" id="mpMuted" spellcheck="false"></div>
+      <div class="row"><button class="b" id="mpPublish">Publish multiplayer settings</button></div>
+      <div class="row"><button class="b primary" id="mpConn">Connect</button><button class="b" id="mpPing">Ping all regions</button></div>
+      <div class="keys" id="mpStat" style="margin:4px 0 6px;word-break:break-all">Not connected</div>
     </div>
     <div class="sec hide" id="obuInfo"><h2>OpenBoatUtils</h2><pre id="obuInfoT"></pre></div>
 
@@ -306,7 +361,7 @@ function moveAxis(st, axis, d, env, lim) {
 function step(st, inp, env) {
   const oldYaw = st.yaw;
   const g0 = env.groundAt ? env.groundAt(st.x, st.z) : 0, sup = env.hasSupport(st) && !(st.y > g0 + 1e-4);
-  const s = sup ? env.surfaceAt(st.x, st.z, st.y) : 0.9;
+  const s = sup ? env.surfaceAt(st.x, st.z, st.y) : (env.airSlip ? env.airSlip() : 0.9);
   st.slipperiness = s;
   st.vx *= s; st.vz *= s;
   const O = env.obu ? env.obu(st) : null;
@@ -379,10 +434,12 @@ const env = {
   },
   stepH() { const m = map; if (!m || !m.obuOn || !m.obu) return 0; const v = parseFloat((m.obu.extra || {}).stepsize); return v > 0 ? Math.min(v, 64) : 0; },
   stepFall() { const m = map; return !!(m && m.obuOn && m.obu && (m.obu.extra || {}).stepwhilefalling === 'true'); },
+  airSlip() { const c = map && map.obuOn && map.obu; if (!c) return 0.9; const v = c.airSlip > 0 ? c.airSlip : (c.blockSlip || {}).air; return isFinite(v) && v > 0 ? +v : 0.9; },
   gravity() { const m = map, v = m && m.obuOn && m.obu ? parseFloat((m.obu.extra || {}).boatgravity) : NaN; return isFinite(v) ? Math.abs(v) : 0.04; },
   obu(st) { return map && map.obuOn ? obuAt(map, st.x, st.z) : null; }
 };
-function cellTop(m, k) { if (!m.wall[k]) return 0; const h = m.hgt ? m.hgt[k] : 255; return h === 255 ? 1e9 : h / 8; }
+const HINF = 65535;
+function cellTop(m, k) { if (!m.wall[k]) return 0; const h = m.hgt ? m.hgt[k] : HINF; return h === HINF ? 1e9 : h / 8; }
 function hullFree(m, x, z) {
   for (let j = Math.floor(z - HALF); j <= Math.ceil(z + HALF) - 1; j++)
     for (let i = Math.floor(x - HALF); i <= Math.ceil(x + HALF) - 1; i++)
@@ -401,9 +458,9 @@ const OBU_MODES = ['BROKEN_SLIME_RALLY', 'BROKEN_SLIME_RALLY_BLUE', 'BROKEN_SLIM
 const PB_TYPES = ['JUMP_FORCE', 'FORWARDS_ACCEL', 'BACKWARDS_ACCEL', 'YAW_ACCEL', 'TURN_FORWARDS_ACCEL', 'WALLTAP_MULTIPLIER', 'JUMPS', 'COYOTE_TIME', 'STEP_UP_SLIPPERINESS', 'LATERAL_SLIPPERINESS', 'BRAKE_SLIPPERINESS', 'MAX_SPEED', 'MAX_SPEED_RESISTANCE'];
 const PB_SIM = { FORWARDS_ACCEL: 'fwd', BACKWARDS_ACCEL: 'back', YAW_ACCEL: 'yaw', TURN_FORWARDS_ACCEL: 'turn', LATERAL_SLIPPERINESS: 'lateral', BRAKE_SLIPPERINESS: 'brake', MAX_SPEED: 'maxSpeed', MAX_SPEED_RESISTANCE: 'maxRes' };
 const OBU_KEYS = ['yaw', 'fwd', 'back', 'turn', 'lateral', 'brake', 'maxSpeed', 'maxRes'];
-const VAN_SLIP = { ice: 0.98, packed_ice: 0.98, frosted_ice: 0.98, blue_ice: 0.989, slime_block: 0.8 };
+const VAN_SLIP = { ice: 0.98, packed_ice: 0.98, frosted_ice: 0.98, blue_ice: 0.989, slime_block: 0.8, mud: 0.98 };
 const OBU_STORED = ['stepsize', 'jumpforce', 'aircontrol', 'falldamage', 'boatgravity', 'waterelevation', 'coyotetime', 'setjumps', 'setscale', 'setstepupslipperiness', 'setwalltapmultiplier', 'collisionmode', 'stepwhilefalling', 'surfacewatercontrol', 'underwatercontrol', 'swimforce', 'waterjumping', 'fixdoublewaterelevation', 'setcollisionresolution', 'addcollisionfilter', 'clearcollisionfilter', 'sethoneycompat', 'setinterpolationten', 'setmultistepping', 'setresetonworldload', 'applyimpulse', 'applyimpulserelative', 'switchcontext', 'dropcontext', 'sendversionpacket'];
-function obuDefault() { return { on: false, modes: [], defSlip: 0.6, blockSlip: {}, yaw: 1, fwd: 0.04, back: 0.005, turn: 0.005, stack: false, lateral: 1, brake: 1, maxSpeed: -1, maxRes: 0, perBlock: {}, extra: {} }; }
+function obuDefault() { return { on: false, modes: [], defSlip: 0.6, airSlip: -1, blockSlip: {}, yaw: 1, fwd: 0.04, back: 0.005, turn: 0.005, stack: false, lateral: 1, brake: 1, maxSpeed: -1, maxRes: 0, perBlock: {}, extra: {} }; }
 function obuReset(c) { const on = c.on; Object.assign(c, obuDefault()); c.on = on; }
 function blkName(n) { n = String(n).trim().toLowerCase().replace(/^minecraft:/, '').replace(/\[.*$/, ''); return n === 'void' ? 'air' : n; }
 function pbSet(c, t, v, blocks) { for (const b of blocks) (c.perBlock[blkName(b)] = c.perBlock[blkName(b)] || {})[t] = v; }
@@ -643,7 +700,7 @@ function parseNBT(u8) {
 const AIR_RE = /^(air|cave_air|void_air|structure_void)$/;
 const PASS_RE = /^(light|.*carpet|snow|.*pressure_plate|.*button|.*torch|.*sign|.*banner|rail|.*_rail|redstone_wire|tripwire.*|lever|.*sapling|grass|short_grass|tall_grass|fern|large_fern|dead_bush|.*tulip|dandelion|poppy|blue_orchid|allium|azure_bluet|oxeye_daisy|cornflower|lily_of_the_valley|wither_rose|sunflower|lilac|rose_bush|peony|vine|.*vines.*|string|seagrass|tall_seagrass|kelp.*|water|bubble_column|.*portal|fire|soul_fire|cobweb|sweet_berry_bush|wheat|carrots|potatoes|beetroots|sugar_cane|brown_mushroom|red_mushroom|crimson_fungus|warped_fungus|crimson_roots|warped_roots|nether_sprouts|hanging_roots|glow_lichen|sculk_vein|pink_petals|lily_pad|.*coral_fan|.*coral|tripwire_hook|redstone_torch|comparator|repeater|.*_wall_torch)$/;
 const THIN_RE = /^(snow|mud|farmland|dirt_path|.*carpet|.*pressure_plate|lily_pad)$/;
-function matOf(n) { if (n === 'blue_ice') return MAT_BLUE; if (n === 'packed_ice') return MAT_PACKED; if (n === 'ice' || n === 'frosted_ice') return MAT_ICE; return MAT_GROUND; }
+function matOf(n) { if (n === 'blue_ice') return MAT_BLUE; if (n === 'packed_ice') return MAT_PACKED; if (n === 'ice' || n === 'frosted_ice' || n === 'mud') return MAT_ICE; return MAT_GROUND; }
 const DYE = { white: 0xe9ecec, orange: 0xf07613, magenta: 0xbd44b3, light_blue: 0x3aafd9, yellow: 0xf8c527, lime: 0x70b919, pink: 0xed8dac, gray: 0x3e4447, light_gray: 0x8e8e86, cyan: 0x158991, purple: 0x792aac, blue: 0x35399d, brown: 0x724728, green: 0x546d1b, red: 0xa12722, black: 0x141519 };
 function colorFor(n) {
   if (n === 'ice' || n === 'frosted_ice') return 0xa9c9f4;
@@ -710,9 +767,10 @@ async function parseLitematic(file) {
 function getBlock(R, i) { const p = i * R.bits, w = Math.floor(p / 32), o = p & 31; let v = R.words[w] >>> o; if (o + R.bits > 32) v |= R.words[w + 1] << (32 - o); const id = R.g[v & ((1 << R.bits) - 1)]; return id === undefined ? 0 : id; }
 function buildLitMap(L, floorY, gapsAsWalls) {
   const { W, H, names } = L, N = W * H;
-  const UPS = 8, floor = new Int32Array(N), below = new Int32Array(N), ups = []; for (let d = 0; d < UPS; d++) ups.push(new Int32Array(N)); const above = ups[0];
+  let topY = floorY + 2; for (const R of L.regions) topY = Math.max(topY, R.oy + R.sy);
+  const UPS = Math.max(1, topY - floorY - 1), floor = new Int32Array(N), below = new Int32Array(N), above = new Int32Array(N), run = new Int32Array(N), topId = new Int32Array(N);
   for (const R of L.regions) {
-    for (const [targetY, arr] of [[floorY, floor], [floorY - 1, below], ...ups.map((u, d) => [floorY + 1 + d, u])]) {
+    for (const [targetY, arr] of [[floorY, floor], [floorY - 1, below], [floorY + 1, above]]) {
       const y = targetY - R.oy; if (y < 0 || y >= R.sy) continue;
       for (let z = 0; z < R.sz; z++) for (let x = 0; x < R.sx; x++) {
         const id = getBlock(R, (y * R.sz + z) * R.sx + x);
@@ -721,18 +779,26 @@ function buildLitMap(L, floorY, gapsAsWalls) {
     }
   }
   const thin = names.map(n => THIN_RE.test(n.replace(/^minecraft:/, '')) ? 1 : 0), pass = names.map((n, i) => PASS_RE.test(n) || thin[i] ? 1 : 0), mats = names.map(matOf), cols = names.map(colorFor);
+  // stack heights: scan every layer above the floor (no height limit)
+  for (let k = 0; k < N; k++) if (above[k] && !pass[above[k]]) { run[k] = 1; topId[k] = above[k]; }
+  { const lay = new Int32Array(N);
+    for (let d = 1; d < UPS; d++) { const ty = floorY + 1 + d; let any = false; lay.fill(0);
+      for (const R of L.regions) { const y = ty - R.oy; if (y < 0 || y >= R.sy) continue;
+        for (let z = 0; z < R.sz; z++) for (let x = 0; x < R.sx; x++) { const id = getBlock(R, (y * R.sz + z) * R.sx + x); if (id) lay[(R.oz + z - L.minZ) * W + (R.ox + x - L.minX)] = id; } }
+      for (let k = 0; k < N; k++) if (run[k] === d && lay[k] && !pass[lay[k]]) { run[k] = d + 1; topId[k] = lay[k]; any = true; }
+      if (!any) break; } }
   const m = { W, H, mat: new Uint8Array(N), wall: new Uint8Array(N), col: new Uint32Array(N), name: L.name, info: `${L.fileName} · ${W}×${H} blocks · floor Y ${floorY}` };
-  m.ft = new Uint16Array(N); m.wt = new Uint16Array(N); m.hgt = new Uint8Array(N);
+  m.ft = new Uint16Array(N); m.wt = new Uint16Array(N); m.hgt = new Uint16Array(N);
   const tid = names.map((n, i) => i ? tId(n, cols[i]) : 0), tGap = tId('black_concrete', 0x15171b), tVoid = tId('void', 0x2a2d33);
   for (let k = 0; k < N; k++) {
     const a = above[k], f = floor[k];
-    if (a && !pass[a]) { m.wall[k] = 1; let n = 1; while (n < UPS && ups[n][k] && !pass[ups[n][k]]) n++; const top = ups[n - 1][k]; m.hgt[k] = n >= UPS ? 255 : Math.round((n - (/_slab$/.test(names[top]) ? 0.5 : 0)) * 8); m.mat[k] = mats[top]; m.col[k] = shade(cols[a], 0.85); m.wt[k] = tid[a]; m.ft[k] = f ? tid[f] : tVoid; continue; }
+    if (a && !pass[a]) { m.wall[k] = 1; const n = run[k], top = topId[k], tn = String(names[top]).replace(/^minecraft:/, '').replace(/\[.*$/, ''); m.hgt[k] = Math.min(HINF - 1, Math.round((n - (/_slab$/.test(tn) ? 0.5 : tn === 'mud' ? 0.125 : 0)) * 8)); m.mat[k] = mats[top]; m.col[k] = shade(cols[a], 0.85); m.wt[k] = tid[a]; m.ft[k] = f ? tid[f] : tVoid; continue; }
     if (!f) {
       m.mat[k] = MAT_GROUND;
-      m.ft[k] = tVoid; if (gapsAsWalls) { m.wall[k] = 1; m.hgt[k] = 255; m.col[k] = 0x15171b; m.wt[k] = tGap; } else m.col[k] = 0x2a2d33;
+      m.ft[k] = tVoid; if (gapsAsWalls) { m.wall[k] = 1; m.hgt[k] = HINF; m.col[k] = 0x15171b; m.wt[k] = tGap; } else m.col[k] = 0x2a2d33;
       continue;
     }
-    m.mat[k] = thin[f] && below[k] ? mats[below[k]] : mats[f]; m.col[k] = cols[f]; m.ft[k] = tid[f];
+    m.mat[k] = thin[f] && below[k] && mats[below[k]] !== MAT_GROUND ? mats[below[k]] : mats[f]; m.col[k] = cols[f]; m.ft[k] = tid[f];
   }
   m.tVoid = tVoid;
   { let SY = 0; for (const R of L.regions) SY = Math.max(SY, R.oy + R.sy - L.minY); const y0 = L.minY - floorY - 1;
@@ -1003,6 +1069,8 @@ function cameraTick() {
 function gameTick(inp) {
   copyState(prev, st);
   step(st, inp, env);
+  if (typeof MP !== 'undefined' && MP.ws) MP.collide(st);
+  if (window.RACE_T) window.RACE_T();
   paddleTick(inp);
   lapLogic();
   regionLogic();
@@ -1207,7 +1275,7 @@ window.addEventListener('resize', resize);
 
 const edV = { z: 1, ox: 0, oy: 0 }, ec = { tx: 0, ty: 0, tz: 0, yaw: 30, pitch: 50, dist: 40 }; let ed3 = false, edSel = null, edHov = null, edSpawn = null;
 function overview() { const k0 = Math.min(cssW / map.W, cssH / map.H) * 0.9, e = placing === 3, k = e ? k0 * edV.z : k0; return { k, ox: (cssW - map.W * k) / 2 + (e ? edV.ox : 0), oy: (cssH - map.H * k) / 2 + (e ? edV.oy : 0) }; }
-const REG_COL = { cp: '255,214,92', reset: '233,115,102', fin: '114,188,143', start: '110,160,255' };
+const REG_COL = { grid: '255,170,40', cp: '255,214,92', reset: '233,115,102', fin: '114,188,143', start: '110,160,255' };
 function drawRegions(k, play) {
   if (!play) edDraw2D(k);
   const R = map.regions; if (!R || !R.length) return;
@@ -1385,7 +1453,7 @@ function glInit() {
     ' void main(){ float id = floor(vC.x + 0.5); vec2 tl = vec2(mod(id, 16.0), floor(id / 16.0));' +
     ' float ax = mod(vC.z + 0.01, 4.0); float fy = clamp(1.0 - fract(vL.y), 0.002, 0.998); vec2 f = ax < 0.5 ? vec2(fract(vL.z), fy) : (ax < 1.5 ? fract(vL.xz) : vec2(fract(vL.x), fy));' +
     ' vec3 avg = texture2D(uAvg, (tl + 0.5) / 16.0).rgb; float k = clamp((length(vR) - uLod.x) / (uLod.y - uLod.x), 0.0, 1.0);' +
-    ' vec4 tx = texture2D(uAtlas, (tl + f) / 16.0); float ac = floor(vC.z / 4.0 + 0.01); if (ac > 0.5 && ac < 1.5 && tx.a < 0.5) discard; vec3 c = mix(tx.rgb, avg, k) * vC.y; gl_FragColor = vec4(fog(c * uTint.rgb), uTint.a * (ac > 1.5 ? clamp(tx.a, 0.45, 0.8) : 1.0)); }');
+    ' vec4 tx = texture2D(uAtlas, (tl + f) / 16.0); float ac = floor(vC.z / 4.0 + 0.01); if (ac > 0.5 && ac < 1.5 && tx.a < 0.5) discard; vec3 c = mix(tx.rgb, avg, k) * vC.y; if (ac > 2.5) c *= vec3(0.55, 0.78, 1.2); gl_FragColor = vec4(fog(c * uTint.rgb), uTint.a * (ac > 2.5 ? 0.55 : ac > 1.5 ? clamp(tx.a, 0.45, 0.8) : 1.0)); }');
   buildBoatMeshes();
   const r = [];
   pushBox(r, -0.22, 0.14, -0.6, 0.22, 0.34, 0.12, 0x34469a);
@@ -1394,6 +1462,74 @@ function glInit() {
   pushBox(r, -0.22, 0.95, -0.06, 0.22, 1.39, 0.38, 0xc68e6b);
   pushBox(r, -0.23, 1.3, -0.07, 0.23, 1.42, 0.39, 0x3b2a1a);
   G.rider = glBuf(r);
+  G.skin = glProg('attribute vec3 aP; attribute vec3 aC; uniform mat4 uVP; uniform mat4 uM; uniform vec3 uEye; varying vec3 vC; varying vec3 vR; void main(){ vec4 w = uM * vec4(aP, 1.0); vC = aC; vR = w.xyz - uEye; gl_Position = uVP * w; }',
+    'precision mediump float; varying vec3 vC; uniform sampler2D uSkin; uniform vec4 uTint; ' + FOG + ' void main(){ vec4 t = texture2D(uSkin, vC.xy); if (t.a < 0.5) discard; gl_FragColor = vec4(fog(t.rgb * vC.z * uTint.rgb), uTint.a); }');
+  G.skinTex = null; G.skinMesh = glBuf(skinMesh()); G.skinKey = ''; riderSkinUpdate();
+}
+// ---------- player skin model (the skin from the account is worn by the rider) ----------
+function skinMesh() {
+  const A = [];
+  const face = (c, rc, sh) => { const [u, v, w, h] = rc, uv = [[u, v], [u + w, v], [u + w, v + h], [u, v + h]]; for (const i of [0, 1, 2, 0, 2, 3]) A.push(c[i][0], c[i][1], c[i][2], uv[i][0] / 64, uv[i][1] / 64, sh); };
+  const box = (x0, y0, z0, x1, y1, z1, u, v, w, h, d, xf, e) => {
+    e = e || 0; x0 -= e; y0 -= e; z0 -= e; x1 += e; y1 += e; z1 += e; const P = (x, y, z) => xf ? xf(x, y, z) : [x, y, z];
+    face([P(x1, y1, z0), P(x0, y1, z0), P(x0, y0, z0), P(x1, y0, z0)], [u + d, v + d, w, h], 0.95);
+    face([P(x0, y1, z1), P(x1, y1, z1), P(x1, y0, z1), P(x0, y0, z1)], [u + 2 * d + w, v + d, w, h], 0.7);
+    face([P(x1, y1, z1), P(x1, y1, z0), P(x1, y0, z0), P(x1, y0, z1)], [u, v + d, d, h], 0.8);
+    face([P(x0, y1, z0), P(x0, y1, z1), P(x0, y0, z1), P(x0, y0, z0)], [u + d + w, v + d, d, h], 0.75);
+    face([P(x1, y1, z1), P(x0, y1, z1), P(x0, y1, z0), P(x1, y1, z0)], [u + d, v, w, d], 1);
+    face([P(x1, y0, z0), P(x0, y0, z0), P(x0, y0, z1), P(x1, y0, z1)], [u + d + w, v, w, d], 0.55);
+  };
+  const rot = (th, oy, oz) => (x, y, z) => [x, y * Math.cos(th) - z * Math.sin(th) + oy, y * Math.sin(th) + z * Math.cos(th) + oz];
+  const L = 0.66, T = 0.11, E = 0.028;
+  for (const e of [0, E]) {
+    const o = e ? 1 : 0;
+    box(-0.22, 0.96, -0.07, 0.22, 1.4, 0.37, o ? 32 : 0, 0, 8, 8, 8, null, e * 1.6);                      // head / hat
+    box(-0.22, 0.3, 0.04, 0.22, 0.96, 0.26, 16, o ? 32 : 16, 8, 12, 4, null, e);                          // body / jacket
+    const arm = rot(0.62, 0.92, 0.15), leg = rot(Math.PI / 2, 0.25, 0.2);
+    box(0.22, -L, -T, 0.44, 0, T, 40, o ? 32 : 16, 4, 12, 4, arm, e);                                     // right arm
+    box(-0.44, -L, -T, -0.22, 0, T, o ? 48 : 32, 48, 4, 12, 4, arm, e);                                   // left arm
+    box(0, -L, -T, 0.22, 0, T, 0, o ? 32 : 16, 4, 12, 4, leg, e);                                         // right leg
+    box(-0.22, -L, -T, 0, 0, T, o ? 0 : 16, 48, 4, 12, 4, leg, e);                                        // left leg
+  }
+  return A;
+}
+function skinFromFace(face) {
+  const c = document.createElement('canvas'); c.width = c.height = 64; const g = c.getContext('2d');
+  const fill = (col, r) => { g.fillStyle = col; g.fillRect(r[0], r[1], r[2], r[3]); };
+  fill('#c68e6b', [0, 0, 32, 16]); fill('#2f9fb3', [16, 16, 24, 16]); fill('#2f9fb3', [40, 16, 16, 16]); fill('#2f9fb3', [32, 48, 16, 16]);
+  fill('#c68e6b', [44, 28, 8, 4]); fill('#c68e6b', [36, 60, 8, 4]); fill('#34469a', [0, 16, 16, 16]); fill('#34469a', [16, 48, 16, 16]);
+  return new Promise(res => { const im = new Image(); im.onload = () => {
+    g.imageSmoothingEnabled = false; const t = document.createElement('canvas'); t.width = t.height = 8; const tg = t.getContext('2d'); tg.drawImage(im, 0, 0, 8, 8);
+    const d = tg.getImageData(0, 0, 8, 1).data; let r = 0, gg = 0, b = 0; for (let i = 0; i < 32; i += 4) { r += d[i]; gg += d[i + 1]; b += d[i + 2]; }
+    const hair = 'rgb(' + (r / 8 | 0) + ',' + (gg / 8 | 0) + ',' + (b / 8 | 0) + ')'; fill(hair, [8, 0, 16, 8]); fill(hair, [0, 8, 8, 8]); fill(hair, [16, 8, 16, 8]);
+    g.drawImage(im, 0, 0, 8, 8, 8, 8, 8, 8); res(c); }; im.onerror = () => res(c); im.src = face; });
+}
+async function skinFull(file) {
+  const url = URL.createObjectURL(file);
+  try {
+    const img = new Image(); img.src = url; await img.decode();
+    if (img.width !== 64 || (img.height !== 64 && img.height !== 32)) return null;
+    const c = document.createElement('canvas'); c.width = c.height = 64; const g = c.getContext('2d'); g.drawImage(img, 0, 0);
+    if (img.height === 32) { g.drawImage(c, 40, 16, 16, 16, 32, 48, 16, 16); g.drawImage(c, 0, 16, 16, 16, 16, 48, 16, 16); }
+    const hat = g.getImageData(32, 0, 32, 16).data; let solid = true; for (let i = 3; i < hat.length; i += 4) if (hat[i] < 255) { solid = false; break; }
+    if (solid) g.clearRect(32, 0, 32, 16);   // old skins fill the hat layer with a solid colour
+    return c.toDataURL('image/png');
+  } catch (e) { return null; } finally { URL.revokeObjectURL(url); }
+}
+async function riderSkinUpdate() {
+  if (!gl || !G.skin) return;
+  const full = ME && ME.id ? store.get('skin:' + ME.id) : null, key = ME ? (full ? 'f:' + full.length + ':' + ME.id : 'p:' + (ME.face || '')) : '';
+  if (key === G.skinKey && G.skinTex) return; G.skinKey = key;
+  if (!ME || (!full && !ME.face)) { G.skinOn = false; return; }
+  let src;
+  if (full) src = await new Promise(res => { const im = new Image(); im.onload = () => res(im); im.onerror = () => res(null); im.src = full; });
+  if (!src) src = await skinFromFace(ME.face);
+  if (!src || G.skinKey !== key || !G.skin) return;
+  if (!G.skinTex) G.skinTex = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, G.skinTex); gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, src);
+  for (const [q, v] of [[gl.TEXTURE_MIN_FILTER, gl.NEAREST], [gl.TEXTURE_MAG_FILTER, gl.NEAREST], [gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE], [gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE]]) gl.texParameteri(gl.TEXTURE_2D, q, v);
+  G.skinOn = true;
 }
 function buildBoatMeshes() {
   for (const k of ['hull', 'oarL', 'oarR', 'hitbox']) if (G[k]) gl.deleteBuffer(G[k].b);
@@ -1438,24 +1574,27 @@ function toggleHitbox() {
 // ---------- full litematic voxel rendering ----------
 const VX_SKIP = /^(air|cave_air|void_air|structure_void|barrier|light)$/;
 const VX_CROSS = /(sapling|flower|tulip|orchid|allium|bluet|daisy|poppy|dandelion|cornflower|lily_of_the_valley|^grass$|short_grass|tall_grass|fern$|dead_bush|_roots$|vines?$|sprouts|torch|^.*mushroom$|^wheat$|carrots|potatoes|beetroots|sugar_cane|kelp|seagrass|cobweb|sweet_berry_bush|lantern|^lever$|_button$|_sign$|banner$|^chain$|tripwire)/;
-const VX_TRANS = /(glass$|^water$|slime_block|honey_block|stained_glass$)/;
+const VX_TRANS = /(glass$|^water$|^bubble_column$|slime_block|honey_block|stained_glass$)/;
 const VX_CUT = /(leaves|glass_pane|iron_bars|_door$|trapdoor|scaffolding|fence|_wall$|ladder|spawner|azalea$|rail$|redstone_wire|repeater|comparator)/;
 function vxHeight(n) {
   if (/_slab$/.test(n)) return 0.5;
   if (/carpet$|rail$|redstone_wire|pressure_plate$|lily_pad|repeater|comparator/.test(n)) return 1 / 16;
   if (n === 'snow') return 0.125;
+  if (n === 'mud' || /^(water|bubble_column)$/.test(n)) return 14 / 16;
   if (n === 'farmland' || n === 'dirt_path') return 15 / 16;
   if (/trapdoor$/.test(n)) return 3 / 16;
   if (/_bed$/.test(n)) return 9 / 16;
   return 1;
 }
+const WATER_TC = new Map();
+function isWaterTile(t) { let v = WATER_TC.get(t); if (v === undefined) { const n = tiles[t] ? String(tiles[t].name).replace(/^minecraft:/, '').replace(/\[.*$/, '') : ''; v = /^(water|bubble_column)$/.test(n); WATER_TC.set(t, v); } return v; }
 function voxInfo(V) {
   if (V.info) return V.info;
   V.info = V.pal.map((n0, i) => {
     const n = String(n0).replace(/^minecraft:/, '').replace(/\[.*$/, '');
     if (!i || VX_SKIP.test(n)) return { cls: 0, h: 0, occ: false, t: 0 };
     const cls = VX_CROSS.test(n) ? 4 : VX_TRANS.test(n) ? 3 : VX_CUT.test(n) ? 2 : 1, h = cls === 4 ? 1 : vxHeight(n);
-    return { cls, h, occ: cls === 1 && h === 1, t: tId(n, colorFor(n)) };
+    return { cls, h, wat: /^(water|bubble_column)$/.test(n), occ: cls === 1 && h === 1, t: tId(n, colorFor(n)) };
   });
   return V.info;
 }
@@ -1474,11 +1613,11 @@ function voxChunks(m, CH) {
     for (let z = cz; z < Math.min(sz, cz + CH); z++) for (let x = cx; x < Math.min(sx, cx + CH); x++) {
       for (let ly = 0; ly < sy; ly++) {
         const id = d[(ly * sz + z) * sx + x]; if (!id) continue; const b = I[id]; if (!b || !b.cls) continue;
-        const y0 = ly + V.y0, A = b.cls === 3 ? tr : a, ac = b.cls === 1 ? 0 : b.cls === 3 ? 8 : 4, t = b.t;
+        const y0 = ly + V.y0, A = b.cls === 3 ? tr : a, ac = b.cls === 1 ? 0 : b.cls === 3 ? (b.wat ? 12 : 8) : 4, t = b.t;
         if (b.cls === 4) { const e0 = 0.15, e1 = 0.85, y1 = y0 + 1; pushQuad(A, [x + e0, y0, z + e0, x + e1, y0, z + e1, x + e1, y1, z + e1, x + e0, y1, z + e0], t, 0.9, ac); pushQuad(A, [x + e1, y0, z + e0, x + e0, y0, z + e1, x + e0, y1, z + e1, x + e1, y1, z + e0], t, 0.8, ac); continue; }
         const h = b.h, y1 = y0 + h;
-        const vis = (nx, ny, nz) => { const n = at(nx, ny, nz); if (!n) return true; const c = I[n]; if (!c || !c.cls) return true; if (c.occ) return false; if (n === id && b.cls >= 2) return false; return true; };
-        if (ly !== fl && (h < 1 || vis(x, ly + 1, z))) pushQuad(A, [x, y1, z, x + 1, y1, z, x + 1, y1, z + 1, x, y1, z + 1], t, 1, 1 + ac);
+        const vis = (nx, ny, nz) => { const n = at(nx, ny, nz); if (!n) return true; const c = I[n]; if (!c || !c.cls) return true; if (c.occ) return false; if (n === id && b.cls >= 2) return false; if (b.wat && c.wat) return false; return true; };
+        if ((ly !== fl || b.wat) && (h < 1 || vis(x, ly + 1, z))) pushQuad(A, [x, y1, z, x + 1, y1, z, x + 1, y1, z + 1, x, y1, z + 1], t, 1, 1 + ac);
         if (vis(x, ly - 1, z)) pushQuad(A, [x, y0, z, x + 1, y0, z, x + 1, y0, z + 1, x, y0, z + 1], t, 0.5, 1 + ac);
         if (vis(x, ly, z - 1)) pushQuad(A, [x, y0, z, x + 1, y0, z, x + 1, y1, z, x, y1, z], t, 0.72, 2 + ac);
         if (vis(x, ly, z + 1)) pushQuad(A, [x, y0, z + 1, x + 1, y0, z + 1, x + 1, y1, z + 1, x, y1, z + 1], t, 0.9, 2 + ac);
@@ -1486,7 +1625,7 @@ function voxChunks(m, CH) {
         if (vis(x + 1, ly, z)) pushQuad(A, [x + 1, y0, z, x + 1, y0, z + 1, x + 1, y1, z + 1, x + 1, y1, z], t, 0.8, ac);
       }
       const k = z * m.W + x;
-      if (m.wall[k] && m.hgt && m.hgt[k] === 255 && !at(x, fl, z) && !at(x, fl + 1, z)) voxBox(a, x, 0, z, x + 1, 1, z + 1, m.wt[k], 0);
+      if (m.wall[k] && m.hgt && m.hgt[k] === HINF && !at(x, fl, z) && !at(x, fl + 1, z)) voxBox(a, x, 0, z, x + 1, 1, z + 1, m.wt[k], 0);
     }
     out.push({ a, tr, x: cx + CH / 2, z: cz + CH / 2 });
   }
@@ -1497,7 +1636,7 @@ function gl3dBuild(m) {
   try {
     if (!G.col) glInit();
     for (const c of G.chunks) { if (c.b) gl.deleteBuffer(c.b); if (c.tb) gl.deleteBuffer(c.tb); } G.chunks = [];
-    const CH = 32, W = m.W, H = m.H, wh = (x, z) => { if (x < 0 || z < 0 || x >= W || z >= H) return 1e9; const k = z * W + x; return !m.wall[k] ? 0 : (!m.hgt || m.hgt[k] === 255) ? 1 : m.hgt[k] / 8; };
+    const CH = 32, W = m.W, H = m.H, wh = (x, z) => { if (x < 0 || z < 0 || x >= W || z >= H) return 1e9; const k = z * W + x; return !m.wall[k] ? 0 : (!m.hgt || m.hgt[k] === HINF) ? 1 : m.hgt[k] / 8; };
     if (m.vox) { for (const c of voxChunks(m, CH)) { const o = { x: c.x, z: c.z, b: null, n: 0, tb: null, tn: 0 }; if (c.a.length) { const bf = glBuf(c.a); o.b = bf.b; o.n = bf.n; } if (c.tr.length) { const bf = glBuf(c.tr); o.tb = bf.b; o.tn = bf.n; } if (o.b || o.tb) G.chunks.push(o); } } else
     for (let cz = 0; cz < H; cz += CH) for (let cx = 0; cx < W; cx += CH) {
       const a = [];
@@ -1521,7 +1660,7 @@ function gl3dBuild(m) {
     const max = gl.getParameter(gl.MAX_TEXTURE_SIZE);
     G.idxOk = useTex && W <= max && H <= max;
     if (G.idxOk) {
-      const ix = new Uint8Array(W * H * 4); for (let k = 0; k < W * H; k++) { ix[k * 4] = m.wall[k] ? m.wt[k] : m.ft[k]; if (m.vox && !m.wall[k] && m.ft[k] === m.tVoid) ix[k * 4 + 1] = 255; }
+      const ix = new Uint8Array(W * H * 4); for (let k = 0; k < W * H; k++) { ix[k * 4] = m.wall[k] ? m.wt[k] : m.ft[k]; if (m.vox && !m.wall[k] && (m.ft[k] === m.tVoid || isWaterTile(m.ft[k]))) ix[k * 4 + 1] = 255; }
       if (!G.idxTex) G.idxTex = gl.createTexture();
       gl.bindTexture(gl.TEXTURE_2D, G.idxTex); gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
       gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, W, H, 0, gl.RGBA, gl.UNSIGNED_BYTE, ix);
@@ -1555,7 +1694,7 @@ function gl3dBuild(m) {
   } catch (e) { console.warn('3D disabled:', e); G.ok = false; }
 }
 if (gl) {
-  cv3.addEventListener('webglcontextlost', e => { e.preventDefault(); G.ok = false; G.col = null; G.chunks = []; G.floorTex = null; G.floorBuf = null; G.groundBuf = null; G.atlasTex = null; G.avgTex = null; G.idxTex = null; G.lineBuf = null; G.blk = null; });
+  cv3.addEventListener('webglcontextlost', e => { e.preventDefault(); G.ok = false; G.col = null; G.chunks = []; G.floorTex = null; G.floorBuf = null; G.groundBuf = null; G.atlasTex = null; G.avgTex = null; G.idxTex = null; G.lineBuf = null; G.blk = null; G.skin = null; G.skinTex = null; G.skinOn = false; G.skinKey = ''; });
   cv3.addEventListener('webglcontextrestored', () => { if (map) gl3dBuild(map); });
 }
 const projM = new Float32Array(16), viewM = new Float32Array(16), vpM = new Float32Array(16), modM = new Float32Array(16), idM = new Float32Array([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
@@ -1636,9 +1775,17 @@ function draw3D(a) {
   const ghostOn = (U) => { gl.uniform4f(U.u.uTint, 1.7, 1.7, 1.9, 0.38); gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA); gl.depthMask(false); };
   const ghostOff = (U) => { gl.depthMask(true); gl.disable(gl.BLEND); gl.uniform4f(U.u.uTint, 1, 1, 1, 1); };
   if (gp) { setModel(gp[0], gp[1], gp[2]); gl.uniformMatrix4fv(B.u.uM, false, modM); ghostOn(B); drawMesh(G.hull.b, G.hull.n); drawOars(B, a, true); ghostOff(B); }
+  const mpPeers = typeof MP !== 'undefined' && MP.ws ? MP.draw() : [];
+  for (const q of mpPeers) { setModel(q.sx, q.sz, q.syaw, q.sy); gl.uniformMatrix4fv(B.u.uM, false, modM); drawMesh(G.hull.b, G.hull.n); }
   gl.useProgram(P.p);
-  if (!fp) { setModel(bx, bz, byaw); gl.uniformMatrix4fv(P.u.uM, false, modM); drawMesh(G.rider.b, G.rider.n); }
+  if (!fp) { setModel(bx, bz, byaw);
+    if (G.skinOn && G.skin && G.skinTex && G.skinMesh) {
+      const S = G.skin; gl.useProgram(S.p); gl.uniformMatrix4fv(S.u.uVP, false, vpM); gl.uniform3f(S.u.uEye, ex, ey, ez); gl.uniform3f(S.u.uFog, SKY[0], SKY[1], SKY[2]); gl.uniform2f(S.u.uFogR, fogA, fogB);
+      gl.uniform4f(S.u.uTint, 1, 1, 1, 1); gl.uniformMatrix4fv(S.u.uM, false, modM); gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, G.skinTex); gl.uniform1i(S.u.uSkin, 0);
+      drawMesh(G.skinMesh.b, G.skinMesh.n); gl.useProgram(P.p);
+    } else { gl.uniformMatrix4fv(P.u.uM, false, modM); drawMesh(G.rider.b, G.rider.n); } }
   if (gp) { setModel(gp[0], gp[1], gp[2]); gl.uniformMatrix4fv(P.u.uM, false, modM); ghostOn(P); drawMesh(G.rider.b, G.rider.n); ghostOff(P); }
+  for (const q of mpPeers) { setModel(q.sx, q.sz, q.syaw, q.sy); gl.uniformMatrix4fv(P.u.uM, false, modM); drawMesh(G.rider.b, G.rider.n); }
   if (settings.hitbox) {
     modM.set(idM); modM[12] = bx; modM[13] = by; modM[14] = bz; gl.uniformMatrix4fv(P.u.uM, false, modM); gl.uniform4f(P.u.uTint, 1, 1, 1, 1);
     gl.disable(gl.DEPTH_TEST); drawMesh(G.hitbox.b, G.hitbox.n, gl.LINES); gl.enable(gl.DEPTH_TEST);
@@ -1938,7 +2085,13 @@ function regRect(a, b) {
   const x1 = clamp(Math.max(x0 + 1, Math.ceil(Math.max(a.x, b.x))), 1, map.W), z1 = clamp(Math.max(z0 + 1, Math.ceil(Math.max(a.z, b.z))), 1, map.H);
   return { x0, z0, x1, z1 };
 }
-function regCommit(fn) { regUndo.push(JSON.stringify(map.regions)); if (regUndo.length > 100) regUndo.shift(); fn(); regionsChanged(map, true); edSync(); }
+const regRedo = [];
+function regSnap() { return JSON.stringify({ r: map.regions, s: map.start }); }
+function regRestore(j) { const o = JSON.parse(j); if (Array.isArray(o)) { map.regions = o; } else { map.regions = o.r; if (o.s && JSON.stringify(o.s) !== JSON.stringify(map.start)) { map.start = o.s; store.set('start:' + map.id, map.start); computeLine(map); buildTexture(map); if (G.ok) gl3dBuild(map); } } edSel = null; edSpawn = null; regionsChanged(map, true); edSync(); regBtns(); }
+function regBtns() { const u = el('regUndo'), r = el('regRedo'); if (u) u.textContent = 'Undo' + (regUndo.length ? ' (' + regUndo.length + ')' : ''); if (r) r.disabled = !regRedo.length; }
+function regDoUndo() { if (edSel || edSpawn) { edSel = null; edSpawn = null; regHint(); toast('Cancelled', 700); return; } if (!regUndo.length) { toast('Nothing to undo', 800); return; } regRedo.push(regSnap()); regRestore(regUndo.pop()); toast('Undone', 700); }
+function regDoRedo() { if (!regRedo.length) { toast('Nothing to redo', 800); return; } regUndo.push(regSnap()); regRestore(regRedo.pop()); toast('Redone', 700); }
+function regCommit(fn) { regRedo.length = 0; regUndo.push(regSnap()); if (regUndo.length > 200) regUndo.shift(); fn(); regionsChanged(map, true); edSync(); regBtns(); }
 function openRegions() {
   placing = 3; regDrag = null; placeHover = null; menu.classList.add('hide'); el('regBar').classList.remove('hide');
   regHint(); hint.classList.remove('hide');
@@ -1952,6 +2105,7 @@ function regHint() {
 function regDown(e) {
   const p = screenToWorld(e); placeHover = p;
   if (regTool === 'spawn') { edSpawnClick(p, e.shiftKey); return; }
+  if (regTool === 'grid') { edGridClick(Math.floor(p.x), Math.floor(p.z), null); return; }
   if (regTool === 'del') {
     const R = map.regions;
     for (let i = R.length - 1; i >= 0; i--) { const r = R[i]; if (p.x >= r.x0 && p.x <= r.x1 && p.z >= r.z0 && p.z <= r.z1) { regCommit(() => R.splice(i, 1)); return; } }
@@ -1967,7 +2121,8 @@ cv.addEventListener('pointerup', e => {
 document.querySelectorAll('#regBar [data-t]').forEach(b => b.addEventListener('click', () => {
   regTool = b.dataset.t; edSel = null; edSpawn = null; document.querySelectorAll('#regBar [data-t]').forEach(x => x.classList.toggle('on', x === b)); regHint();
 }));
-el('regUndo').addEventListener('click', () => { if (!regUndo.length) return; map.regions = JSON.parse(regUndo.pop()); regionsChanged(map, true); edSync(); });
+el('regUndo').addEventListener('click', regDoUndo); el('regRedo').addEventListener('click', regDoRedo);
+addEventListener('keydown', e => { if (placing !== 3 || !(e.ctrlKey || e.metaKey) || /INPUT|TEXTAREA|SELECT/.test((document.activeElement || {}).tagName || '')) return; const k = e.key.toLowerCase(); if (k === 'z' && !e.shiftKey) { e.preventDefault(); e.stopPropagation(); regDoUndo(); } else if (k === 'y' || (k === 'z' && e.shiftKey)) { e.preventDefault(); e.stopPropagation(); regDoRedo(); } }, true);
 el('regClear').addEventListener('click', () => { if (map.regions.length && confirm('Delete every region on this track?')) regCommit(() => { map.regions.length = 0; }); });
 el('regDone').addEventListener('click', () => { edSel = null; edSpawn = null; buildTexture(map); placing = 0; regDrag = null; el('regBar').classList.add('hide'); hint.classList.add('hide'); race = null; resetRun(); pause(); });
 el('regStart').addEventListener('click', () => { el('regBar').classList.add('hide'); regReturn = true; placing = 1; placeTmp = null; hint.textContent = 'Click/tap where the start line goes · Esc to cancel'; });
@@ -2038,7 +2193,7 @@ function edRay(px, py) {
 function edSolid(i, y, j) {
   const m = map; if (i < 0 || j < 0 || i >= m.W || j >= m.H) return false;
   const V = m.vox, k = j * m.W + i;
-  if (V) { const ly = y - V.y0; if (ly >= 0 && ly < V.sy) { const id = V.d[(ly * V.sz + j) * V.sx + i]; if (id && voxInfo(V)[id] && voxInfo(V)[id].cls) return true; } return y === 0 && !!m.wall[k] && !!m.hgt && m.hgt[k] === 255; }
+  if (V) { const ly = y - V.y0; if (ly >= 0 && ly < V.sy) { const id = V.d[(ly * V.sz + j) * V.sx + i]; if (id && voxInfo(V)[id] && voxInfo(V)[id].cls) return true; } return y === 0 && !!m.wall[k] && !!m.hgt && m.hgt[k] === HINF; }
   if (y === -1) return true;
   if (y < 0 || !m.wall[k]) return false; const t = cellTop(m, k); return y < (t > 1e8 ? 1 : Math.ceil(t));
 }
@@ -2058,6 +2213,7 @@ function edPick(px, py) {
 function edClick(h, free) {
   if (!h) return;
   if (regTool === 'spawn') return edSpawnClick({ x: h.i + 0.5, z: h.j + 0.5 }, free);
+  if (regTool === 'grid') return edGridClick(h.i, h.j, h.y + 1);
   if (regTool === 'del') {
     const R = map.regions, c = { x: h.i + 0.5 + h.n[0], y: h.y + 0.5 + h.n[1], z: h.j + 0.5 + h.n[2] };
     for (let q = R.length - 1; q >= 0; q--) { const r = R[q]; if (c.x >= r.x0 && c.x <= r.x1 && c.z >= r.z0 && c.z <= r.z1 && (r.y0 === undefined || (c.y >= r.y0 - 0.5 && c.y <= r.y1 + 0.5))) { regCommit(() => R.splice(q, 1)); return; } }
@@ -2072,7 +2228,7 @@ function edClick(h, free) {
 }
 function spawnOk(m, x, z) {
   for (let j = Math.floor(z - HALF); j <= Math.ceil(z + HALF) - 1; j++) for (let i = Math.floor(x - HALF); i <= Math.ceil(x + HALF) - 1; i++) {
-    if (i < 0 || j < 0 || i >= m.W || j >= m.H) return false; const k = j * m.W + i; if (m.wall[k] && (!m.hgt || m.hgt[k] === 255)) return false;
+    if (i < 0 || j < 0 || i >= m.W || j >= m.H) return false; const k = j * m.W + i; if (m.wall[k] && (!m.hgt || m.hgt[k] === HINF)) return false;
   }
   return true;
 }
@@ -2084,9 +2240,19 @@ function edSpawnClick(p, free) {
   }
   const dx = p.x - edSpawn.x, dz = p.z - edSpawn.z; if (Math.hypot(dx, dz) < 0.5) return;
   let yaw = Math.atan2(dx, -dz) * 180 / Math.PI; if (!free) yaw = Math.round(yaw / 45) * 45;
+  regRedo.length = 0; regUndo.push(regSnap()); regBtns();
   map.start = { x: edSpawn.x, z: edSpawn.z, yaw, blk: true }; edSpawn = null;
   store.set('start:' + map.id, map.start); computeLine(map); buildTexture(map); if (G.ok) gl3dBuild(map);
   store.del('best:' + map.id); best = null; race = null; resetRun(); regHint(); setStatus('Spawn set. Best time reset.', 'ok');
+}
+function edGridClick(i, j, y) {
+  if (!spawnOk(map, i + 0.5, j + 0.5)) { hint.textContent = 'The boat doesn\u2019t fit there \u2014 pick a block with room around it'; return; }
+  const n = map.regions.filter(r => r.t === 'grid').length;
+  const a = prompt('Grid slot ' + (n + 1) + ' \u2014 direction to face (0/360 = north, 90 = east, 180 = south, 270 = west):', map.start ? String(Math.round(((map.start.yaw % 360) + 360) % 360)) : '0');
+  if (a === null) return; const v = parseFloat(a); if (!isFinite(v)) { toast('Type a number like 90', 1200); return; }
+  const y0 = y == null ? Math.round(env.groundAt(i + 0.5, j + 0.5)) : y;
+  regCommit(() => map.regions.push({ t: 'grid', x0: i, x1: i + 1, z0: j, z1: j + 1, y0, y1: y0 + 1, yaw: ((v % 360) + 360) % 360, n: n + 1 }));
+  hint.textContent = 'Grid slot ' + (n + 1) + ' added facing ' + (((v % 360) + 360) % 360) + '\u00b0 \u2014 click another block for the next slot'; regHint && 0;
 }
 function edDraw2D(k) {
   if (placing !== 3) return;
@@ -2098,9 +2264,10 @@ function edOverlay() {
   const L = [], box = (x0, y0, z0, x1, y1, z1, c) => { const e = 0.02; x0 -= e; y0 -= e; z0 -= e; x1 += e; y1 += e; z1 += e; const Q = [[x0, y0, z0], [x1, y0, z0], [x1, y0, z1], [x0, y0, z1], [x0, y1, z0], [x1, y1, z0], [x1, y1, z1], [x0, y1, z1]]; for (const [p, q] of [[0, 1], [1, 2], [2, 3], [3, 0], [4, 5], [5, 6], [6, 7], [7, 4], [0, 4], [1, 5], [2, 6], [3, 7]]) L.push(...Q[p], ...c, ...Q[q], ...c); };
   const h = edHov;
   if (h) {
-    if (regTool === 'spawn' || regTool === 'del') box(h.i, h.y, h.j, h.i + 1, h.y + 1, h.j + 1, [1, 1, 1]);
+    if (regTool === 'spawn' || regTool === 'grid' || regTool === 'del') box(h.i, h.y, h.j, h.i + 1, h.y + 1, h.j + 1, [1, 1, 1]);
     else { const b = { i: h.i + h.n[0], y: h.y + h.n[1], j: h.j + h.n[2] }, a = edSel || b, c = REG_COL[regTool] ? REG_COL[regTool].split(',').map(v => v / 255) : [1, 1, 1]; box(Math.min(a.i, b.i), Math.min(a.y, b.y), Math.min(a.j, b.j), Math.max(a.i, b.i) + 1, Math.max(a.y, b.y) + 1, Math.max(a.j, b.j) + 1, c); }
   } else if (edSel) box(edSel.i, edSel.y, edSel.j, edSel.i + 1, edSel.y + 1, edSel.j + 1, [1, 1, 1]);
+  for (const g of map.regions) if (g.t === 'grid') { const cx = (g.x0 + g.x1) / 2, cz = (g.z0 + g.z1) / 2, f = forward(g.yaw), y = g.y0 + 0.1; L.push(cx, y, cz, 1, 0.67, 0.16, cx + f.x * 2, y, cz + f.z * 2, 1, 0.67, 0.16); }
   const S = map.spawn; if (S) { const f = forward(S.yaw), y = env.groundAt(S.x, S.z) + 0.1; L.push(S.x, y, S.z, 0.3, 1, 0.4, S.x + f.x * 3, y, S.z + f.z * 3, 0.3, 1, 0.4); }
   if (edSpawn) { const y = env.groundAt(edSpawn.x, edSpawn.z); box(edSpawn.x - 0.5, y, edSpawn.z - 0.5, edSpawn.x + 0.5, y + 0.2, edSpawn.z + 0.5, [0.3, 1, 0.4]); }
   if (!L.length) return;
@@ -2119,7 +2286,7 @@ el('regZout').addEventListener('click', () => { if (ed3) ec.dist = Math.min(400,
 el('regBtn').addEventListener('click', openRegions);
 
 // OpenBoatUtils panel
-const OBU_FIELDS = [['defSlip', 'Default slipperiness', 0.001], ['yaw', 'Yaw accel', 0.001], ['fwd', 'Forward accel', 0.001], ['back', 'Backward accel', 0.001], ['turn', 'Turn-forward accel', 0.001], ['lateral', 'Lateral slipperiness', 0.001], ['brake', 'Brake slipperiness', 0.001], ['maxSpeed', 'Max speed (blocks/tick, −1 off)', 0.01], ['maxRes', 'Max speed resistance', 0.01]];
+const OBU_FIELDS = [['defSlip', 'Default slipperiness', 0.001], ['airSlip', 'Air slipperiness (-1 = vanilla 0.9)', 0.001], ['yaw', 'Yaw accel', 0.001], ['fwd', 'Forward accel', 0.001], ['back', 'Backward accel', 0.001], ['turn', 'Turn-forward accel', 0.001], ['lateral', 'Lateral slipperiness', 0.001], ['brake', 'Brake slipperiness', 0.001], ['maxSpeed', 'Max speed (blocks/tick, −1 off)', 0.01], ['maxRes', 'Max speed resistance', 0.01]];
 el('obuFields').innerHTML = OBU_FIELDS.map(([k, l, s]) => `<div class="field"><label for="obu_${k}">${l}</label><input type="number" id="obu_${k}" step="${s}"></div>`).join('');
 el('obuMode').innerHTML = OBU_MODES.map((n, i) => `<option value="${i}">${i} · ${n}</option>`).join('');
 el('obuMode').value = 9;
@@ -2127,8 +2294,9 @@ function obuChanged(msg) { obuCompile(map); if (!PUB_EL) store.set('obu:' + map.
 function edSync(msg) {
   const c = map.obu;
   el('obuChk').checked = c.on; el('obuStack').checked = c.stack;
-  for (const [k] of OBU_FIELDS) { const i = el('obu_' + k); if (document.activeElement !== i) i.value = c[k]; }
+  for (const [k] of OBU_FIELDS) { const i = el('obu_' + k); if (document.activeElement !== i) i.value = k === 'airSlip' ? (c.airSlip > 0 ? c.airSlip : (c.blockSlip && c.blockSlip.air) || -1) : c[k]; }
   el('obuSum').textContent = (msg ? msg + '\n\n' : '') + obuSummary(c);
+  try { obuCfgRender(); } catch (e) {}
   const n = map.cps.length, rs = map.resets.length;
   el('regStat').textContent = `${n} checkpoint${n === 1 ? '' : 's'} · ${rs} reset zone${rs === 1 ? '' : 's'} · ` + (map.fins.length ? 'finish region → sprint' : 'lap mode (start line = finish)');
   if (document.activeElement !== el('pubName')) el('pubName').value = map.name;
@@ -2136,7 +2304,7 @@ function edSync(msg) {
 }
 el('obuChk').addEventListener('change', () => { map.obu.on = el('obuChk').checked; obuChanged(); });
 el('obuStack').addEventListener('change', () => { map.obu.stack = el('obuStack').checked; obuChanged(); });
-for (const [k] of OBU_FIELDS) el('obu_' + k).addEventListener('change', e => { const v = parseFloat(e.target.value); if (isFinite(v)) { map.obu[k] = v; map.obu.on = true; } obuChanged(); });
+for (const [k] of OBU_FIELDS) el('obu_' + k).addEventListener('change', e => { const v = parseFloat(e.target.value); if (isFinite(v)) { map.obu[k] = v; map.obu.on = true; if (k === 'airSlip') { if (v > 0) map.obu.blockSlip.air = v; else delete map.obu.blockSlip.air; } } obuChanged(); });
 el('obuApply').addEventListener('click', () => { map.obu.on = true; obuSetMode(map.obu, +el('obuMode').value); obuChanged('Applied ' + OBU_MODES[+el('obuMode').value]); });
 el('obuExcl').addEventListener('click', () => { obuReset(map.obu); map.obu.on = true; obuSetMode(map.obu, +el('obuMode').value); obuChanged('Exclusive ' + OBU_MODES[+el('obuMode').value]); });
 el('obuReset').addEventListener('click', () => { obuReset(map.obu); obuChanged('Reset to vanilla values'); });
@@ -2144,6 +2312,73 @@ el('obuRun').addEventListener('click', () => {
   try { const log = obuRunCommands(map.obu, el('obuCmd').value); obuChanged(log.join('\n')); }
   catch (err) { obuChanged('✗ ' + err.message); }
 });
+
+// ---------- OpenBoatUtils builder: pick a setting/group from the menu, give it a value ----------
+function oe(v) { return String(v == null ? '' : v).replace(/[&<>"]/g, ch => '&#' + ch.charCodeAt(0) + ';'); }
+const OBU_COMMON_BLOCKS = ['air', 'ice', 'packed_ice', 'blue_ice', 'frosted_ice', 'slime_block', 'mud', 'soul_sand', 'honey_block', 'water', 'stone', 'grass_block', 'orange_concrete', 'black_concrete', 'green_concrete', 'yellow_concrete', 'magenta_glazed_terracotta', 'light_gray_glazed_terracotta'];
+function obuAddOpts() {
+  const g = (label, items) => '<optgroup label="' + oe(label) + '">' + items.map(([v, t]) => '<option value="' + oe(v) + '">' + oe(t) + '</option>').join('') + '</optgroup>';
+  el('obuAdd').innerHTML = '<option value="">+ Choose a setting or group…</option>'
+    + g('Boat settings', OBU_FIELDS.map(([k, l]) => ['f:' + k, l]).concat([['stack', 'Accel stacking (true / false)']]))
+    + g('Block settings', [['bs', 'Block slipperiness']].concat(PB_TYPES.map(t => ['pb:' + t, t.charAt(0) + t.slice(1).toLowerCase().replace(/_/g, ' ') + ' (per block)' + (PB_SIM[t] ? '' : ' †')])))
+    + g('Groups (mode presets)', OBU_MODES.map(n => ['m:' + n, n]))
+    + g('Other OpenBoatUtils settings †', OBU_STORED.map(k => ['x:' + k, k]));
+}
+function obuAddUi() {
+  const v = el('obuAdd').value, blk = v === 'bs' || v.startsWith('pb:'), mode = v.startsWith('m:'), c = (map && map.obu) || obuDefault(), d = obuDefault(); let h = '';
+  el('obuAddBlk').style.display = blk ? '' : 'none'; el('obuAddVal').style.display = mode || !v ? 'none' : ''; el('obuAddBtn').textContent = mode ? 'Apply group' : 'Add';
+  if (v.startsWith('f:')) { const k = v.slice(2); h = 'Now: ' + c[k] + ' · vanilla: ' + d[k]; el('obuAddVal').value = c[k]; }
+  else if (v === 'stack') { h = 'true or false'; el('obuAddVal').value = c.stack; }
+  else if (v === 'bs') { h = 'Slipperiness on those blocks (ground 0.6 · ice 0.98 · blue ice 0.989). Use "air" for in-air.'; el('obuAddVal').value = ''; }
+  else if (v.startsWith('pb:')) { h = 'Value used while the boat is on those blocks' + (PB_SIM[v.slice(3)] ? '' : ' († saved for the real mod, not simulated here)'); el('obuAddVal').value = ''; }
+  else if (mode) h = 'Applies the whole ' + v.slice(2) + ' preset (sets several values at once — you can tweak them below afterwards).';
+  else if (v.startsWith('x:')) { h = '† Saved with the track for OpenBoatUtils, not simulated here'; el('obuAddVal').value = (c.extra || {})[v.slice(2)] || ''; }
+  el('obuAddHint').textContent = h;
+}
+function obuAddDo() {
+  const v = el('obuAdd').value; if (!v || !map || !map.obu) return; const c = map.obu, raw = el('obuAddVal').value.trim(), num = parseFloat(raw), blocks = el('obuAddBlk').value.split(/[,\s]+/).filter(Boolean);
+  try {
+    if (v.startsWith('m:')) obuSetMode(c, v.slice(2));
+    else if (v === 'stack') c.stack = /^(true|1|yes|on)$/i.test(raw);
+    else if (v.startsWith('x:')) c.extra[v.slice(2)] = raw || 'true';
+    else {
+      if (!isFinite(num)) throw new Error('enter a number');
+      if (v.startsWith('f:')) { const k = v.slice(2); c[k] = num; if (k === 'airSlip') { if (num > 0) c.blockSlip.air = num; else delete c.blockSlip.air; } }
+      else { if (!blocks.length) throw new Error('enter at least one block'); if (v === 'bs') for (const b of blocks) c.blockSlip[blkName(b)] = num; else pbSet(c, v.slice(3), num, blocks); }
+    }
+    c.on = true; obuChanged('✓ Added ' + el('obuAdd').selectedOptions[0].textContent + (raw && !v.startsWith('m:') ? ' = ' + raw : '') + (blocks.length && (v === 'bs' || v.startsWith('pb:')) ? ' on ' + blocks.join(', ') : ''));
+  } catch (e) { obuChanged('✗ ' + e.message); }
+}
+function obuEntries(c) {
+  const d = obuDefault(), E = [];
+  for (const [k, l] of OBU_FIELDS) { if (k === 'airSlip') continue; if (c[k] !== d[k]) E.push({ l, v: c[k], set: x => { c[k] = x; }, del: () => { c[k] = d[k]; } }); }
+  if (c.stack) E.push({ l: 'Accel stacking', v: 'true', txt: 1, set: x => { c.stack = /^(true|1|yes|on)$/i.test(x); }, del: () => { c.stack = false; } });
+  for (const b in c.blockSlip) E.push({ l: 'Slipperiness · ' + b, v: c.blockSlip[b], set: x => { c.blockSlip[b] = x; }, del: () => { delete c.blockSlip[b]; if (b === 'air') c.airSlip = -1; } });
+  for (const b in c.perBlock) for (const t in c.perBlock[b]) E.push({ l: t.charAt(0) + t.slice(1).toLowerCase().replace(/_/g, ' ') + ' · ' + b, v: c.perBlock[b][t], set: x => { c.perBlock[b][t] = x; }, del: () => { delete c.perBlock[b][t]; if (!Object.keys(c.perBlock[b]).length) delete c.perBlock[b]; } });
+  for (const k in c.extra || {}) E.push({ l: k, v: c.extra[k], txt: 1, set: x => { c.extra[k] = x; }, del: () => { delete c.extra[k]; } });
+  c.modes.forEach((m, i) => E.push({ l: 'Group · ' + m, mode: 1, del: () => { c.modes.splice(i, 1); } }));
+  return E;
+}
+let OBU_E = [];
+function obuCfgRender() {
+  const box = el('obuCfg'); if (!box || !map || !map.obu) return; OBU_E = obuEntries(map.obu);
+  box.innerHTML = OBU_E.length ? OBU_E.map((e, i) => '<div class="row obuRow" data-i="' + i + '"><span style="flex:1;min-width:0">' + oe(e.l) + '</span>' + (e.mode ? '<span class="keys" style="font-size:11px">preset</span>' : '<input type="' + (e.txt ? 'text' : 'number') + '" step="any" value="' + oe(e.v) + '" style="width:84px">') + '<button class="b" title="Remove">×</button></div>').join('') : '<div class="keys">Nothing added yet — vanilla physics.</div>';
+  box.querySelectorAll('.obuRow').forEach(r => {
+    const e = OBU_E[+r.dataset.i], inp = r.querySelector('input');
+    if (inp) inp.addEventListener('change', () => { const x = e.txt ? inp.value.trim() : parseFloat(inp.value); if (!e.txt && !isFinite(x)) return; e.set(x); map.obu.on = true; obuChanged('✓ ' + e.l + ' = ' + x); });
+    r.querySelector('button').addEventListener('click', () => { e.del(); obuChanged('Removed ' + e.l + (e.mode ? ' (values it set are kept — remove them above if needed)' : '')); });
+  });
+}
+obuAddOpts(); obuAddUi();
+el('obuAdd').addEventListener('change', obuAddUi);
+el('obuAddBtn').addEventListener('click', obuAddDo);
+el('obuAddVal').addEventListener('keydown', e => { if (e.key === 'Enter') obuAddDo(); });
+el('obuAddBlk').addEventListener('focus', () => {
+  const set = new Set(OBU_COMMON_BLOCKS);
+  try { const seen = new Set(map.ft); for (const t of seen) if (tiles[t] && t !== T_MISSING) set.add(blkName(tiles[t].name)); } catch (e) {}
+  el('obuBlkList').innerHTML = [...set].sort().map(b => '<option value="' + oe(b) + '">').join('');
+});
+try { obuCfgRender(); } catch (e) {}
 
 // publish: a copy of this game with the track baked in and every dev tool hidden
 async function zipBytes(u8, dir) {
@@ -2156,17 +2391,17 @@ async function publishTrack(asText) {
   const m = map, N = m.W * m.H, pal = [], pIdx = new Map();
   const remap = arr => { const o = new Uint16Array(N); for (let k = 0; k < N; k++) { const t = arr[k]; let j = pIdx.get(t); if (j === undefined) { j = pal.length; pIdx.set(t, j); pal.push(t === T_MISSING || !tiles[t] ? null : [tiles[t].name, tiles[t].col]); } o[k] = j; } return o; };
   const ft = remap(m.ft), wt = remap(m.wt);
-  const hasH = !!m.hgt, bin = new Uint8Array(N * (hasH ? 11 : 10)); let o = 0;
-  for (const part of [m.mat, m.wall, new Uint8Array(m.col.buffer, m.col.byteOffset, N * 4), new Uint8Array(ft.buffer), new Uint8Array(wt.buffer)].concat(hasH ? [m.hgt] : [])) { bin.set(part, o); o += part.length; }
+  const hasH = !!m.hgt, h16 = hasH ? Uint16Array.from(m.hgt) : null, bin = new Uint8Array(N * (hasH ? 12 : 10)); let o = 0;
+  for (const part of [m.mat, m.wall, new Uint8Array(m.col.buffer, m.col.byteOffset, N * 4), new Uint8Array(ft.buffer), new Uint8Array(wt.buffer)].concat(hasH ? [new Uint8Array(h16.buffer)] : [])) { bin.set(part, o); o += part.length; }
   const z = !!window.CompressionStream, payload = z ? await zipBytes(bin, true) : bin;
   const name = el('pubName').value.trim() || m.name;
-  const data = { v: 1, h: hasH ? 1 : 0, z, W: m.W, H: m.H, name, info: m.info, id: 'pub-' + m.id, bg: m.bg, start: m.start, regions: m.regions, obu: m.obu, pal, bin: b64(payload) };
+  const data = { v: 1, h: hasH ? 2 : 0, z, W: m.W, H: m.H, name, info: m.info, id: 'pub-' + m.id, bg: m.bg, start: m.start, regions: m.regions, obu: m.obu, pal, bin: b64(payload) };
   if (m.vox) { const V = m.vox, d = V.d, out = []; const vint = v => { while (v > 127) { out.push((v & 127) | 128); v >>>= 7; } out.push(v); };
     for (let i = 0; i < d.length;) { const id = d[i]; let n = 1; while (i + n < d.length && d[i + n] === id) n++; vint(id); vint(n); i += n; }
     const raw = new Uint8Array(out); data.vox = { sx: V.sx, sy: V.sy, sz: V.sz, y0: V.y0, pal: V.pal, d: b64(z ? await zipBytes(raw, true) : raw) }; }
   if (asText === 'data') return data;
   const tag = '<scr' + 'ipt type="application/json" id="publishedTrack">' + JSON.stringify(data).replace(/</g, '\\u003c') + '</scr' + 'ipt>';
-  const html = SRC_PUBLIC.replace('</head>', tag + '\n</head>').replace(/<title>[^<]*<\/title>/, '<title>' + name.replace(/[<&]/g, '') + ' · Ice Boat Racer</title>');
+  const html = SRC_PUBLIC.replace('</head>', tag + '\n</head>').replace(/<title>[^<]*<\/title>/, '<title>' + name.replace(/[<&]/g, '') + ' · ibronline</title>');
   if (asText) return html;
   const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
   a.download = (name.replace(/[^\w\- ]+/g, '').trim().replace(/\s+/g, '-') || 'track') + '.html';
@@ -2181,13 +2416,13 @@ el('pubBtn').addEventListener('click', async () => {
   }
   catch (err) { console.error(err); setStatus('Publish failed: ' + err.message, 'err'); }
 });
-async function loadPublished(d0) {
-  document.body.classList.add('pub');
+async function loadPublished(d0, keepDev) {
+  if (!keepDev) document.body.classList.add('pub');
   try {
     const d = d0 || JSON.parse(PUB_EL.textContent), N = d.W * d.H;
     let bin = unb64(d.bin); if (d.z) bin = await zipBytes(bin, false);
     let o = 0; const take = n => { const s = bin.slice(o, o + n); o += n; return s; };
-    const mat = take(N), wall = take(N), col = new Uint32Array(take(N * 4).buffer), ftp = new Uint16Array(take(N * 2).buffer), wtp = new Uint16Array(take(N * 2).buffer), hgt = d.h ? take(N) : undefined;
+    const mat = take(N), wall = take(N), col = new Uint32Array(take(N * 4).buffer), ftp = new Uint16Array(take(N * 2).buffer), wtp = new Uint16Array(take(N * 2).buffer), hgt = d.h === 2 ? new Uint16Array(take(N * 2).buffer) : d.h ? Uint16Array.from(take(N), v => v === 255 ? HINF : v) : undefined;
     const tm = d.pal.map(p => p ? tId(p[0], p[1]) : T_MISSING), ft = new Uint16Array(N), wt = new Uint16Array(N);
     for (let k = 0; k < N; k++) { ft[k] = tm[ftp[k]]; wt[k] = tm[wtp[k]]; }
     const m = { W: d.W, H: d.H, mat, wall, col, ft, wt, hgt, name: d.name, info: (d.regions.filter(r => r.t === 'cp').length ? d.regions.filter(r => r.t === 'cp').length + ' checkpoints · ' : '') + (d.obu && d.obu.on ? 'OpenBoatUtils · ' : '') + d.W + '×' + d.H + ' blocks', id: d.id, bg: d.bg, start: d.start, regions: d.regions, obu: d.obu };
@@ -2224,7 +2459,7 @@ async function webLoad(t, base, quiet) {
   try {
     const r = await fetch(base + t.file + '?v=' + encodeURIComponent(t.updated || Date.now()));
     if (!r.ok) throw new Error('HTTP ' + r.status);
-    await loadPublished(await r.json()); WEB_CUR = t; document.title = t.name + ' · Ice Boat Racer';
+    await loadPublished(await r.json()); WEB_CUR = t; document.title = t.name + ' · ibronline';
     el('webList').querySelectorAll('.b').forEach(b => b.classList.toggle('on', WEB_LIST[+b.dataset.i] === t));
     if (!quiet) { const q = new URLSearchParams(location.search); q.set('track', t.id); history.replaceState(null, '', '?' + q); }
   } catch (err) { console.error(err); setStatus('Could not load ' + t.name + ': ' + err.message, 'err'); }
@@ -2235,7 +2470,7 @@ async function webBoot() {
     const cfg = JSON.parse(WEB_EL.textContent), base = cfg.tracks.replace(/[^/]*$/, '');
     const r = await fetch(cfg.tracks + '?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) throw new Error('HTTP ' + r.status);
     WEB_LIST = await r.json(); wrFillPick();
-    el('webList').innerHTML = WEB_LIST.length ? WEB_LIST.map((t, i) => `<button class="b" data-i="${i}"><b>${escH(t.name)}</b><br><span>${escH(t.info)}</span></button>`).join('') : '<div class="keys">No tracks published yet.</div>';
+    el('webList').innerHTML = WEB_LIST.length ? WEB_LIST.map((t, i) => `<button class="b" data-i="${i}"><b>${t.closed ? '🔒 ' : ''}${escH(t.name)}</b><br><span>${t.closed ? 'Closed · times not recorded · ' : ''}${escH(t.info)}</span></button>`).join('') : '<div class="keys">No tracks published yet.</div>';
     el('webList').querySelectorAll('.b').forEach(b => b.addEventListener('click', () => webLoad(WEB_LIST[+b.dataset.i], base)));
     const want = QP.get('track'), t = WEB_LIST.find(x => x.id === want) || WEB_LIST[0];
     if (t) await webLoad(t, base, !want); else { applyUrlObu(map); setStatus('No tracks published yet — here is the built-in track.', 'ok'); }
@@ -2262,7 +2497,7 @@ function keyNorm(k) {
   return c.length === 20 && [...c].every(ch => KEY_ABC.includes(ch)) ? 'IBR-' + c.match(/.{5}/g).join('-') : '';
 }
 async function sha256(t) { return [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t)))].map(x => x.toString(16).padStart(2, '0')).join(''); }
-const NET_ERR = { name_not_allowed: "That name isn't allowed — please pick something friendly", name_taken: 'Someone already has that name', bad_key: "That player key wasn't recognised", bad_skin: 'That skin image could not be used', bad_time: 'Time rejected', bad_track: 'Unknown track' };
+const NET_ERR = { name_not_allowed: "That name isn't allowed — please pick something friendly", name_taken: 'Someone already has that name', bad_key: "That player key wasn't recognised. Lost your key? Message particle0325 on Discord", bad_skin: 'That skin image could not be used', bad_time: 'Time rejected', bad_track: 'Unknown track' };
 function netErr(code) { const e = new Error(NET_ERR[code] || code); e.code = code; return e; }
 const SB = (() => { try { const c = WEB_EL && JSON.parse(WEB_EL.textContent).sb; return c && c.url && c.key ? { url: c.url.replace(/\/+$/, ''), key: c.key } : SB_DEF; } catch (e) { return SB_DEF; } })();
 async function sbRpc(fn, args) {
@@ -2307,6 +2542,40 @@ const NET = SB ? {
   },
   async wrs() { const out = []; for (const tr of Object.keys(LOC.t)) { const b = await this.board(tr); if (b[0]) out.push(Object.assign({ track: tr }, b[0])); } return out; },
 };
+const admSec = () => { const e = document.getElementById('admSecret'); return (e && e.value) || store.get('admSecret') || ''; };
+const admRpc = (fn, a) => sbRpc(fn, Object.assign({ p_secret: admSec() }, a));
+Object.assign(NET, NET.online ? {
+  adminPlayers: q => admRpc('ibr_dev_players', { p_q: q || '' }),
+  adminRename: (id, name) => admRpc('ibr_dev_rename', { p_id: id, p_name: name }),
+  adminRekey: (id, key) => admRpc('ibr_dev_rekey', { p_id: id, p_key: key }),
+  adminDelete: id => admRpc('ibr_dev_delete', { p_id: id }),
+  adminDelTime: (id, track) => admRpc('ibr_dev_del_time', { p_id: id, p_track: track }),
+  adminDelTrack: track => admRpc('ibr_dev_del_track', { p_track: track }),
+} : {
+  async adminPlayers(q) { q = (q || '').toLowerCase(); return Object.values(LOC.p).filter(p => !q || p.name.toLowerCase().includes(q)); },
+  async adminRename(id, name) { const P = LOC.p, e = Object.entries(P).find(([, p]) => p.id === id); if (!e) throw new Error('No such player'); if (Object.values(P).some(p => p.id !== id && p.name.toLowerCase() === name.toLowerCase())) throw netErr('name_taken'); e[1].name = name; store.set('lp', P); return e[1]; },
+  async adminRekey(id, key) { const P = LOC.p, e = Object.entries(P).find(([, p]) => p.id === id); if (!e) throw new Error('No such player'); delete P[e[0]]; P[await sha256(key)] = e[1]; store.set('lp', P); return true; },
+  async adminDelete(id) { const P = LOC.p, T = LOC.t; for (const k in P) if (P[k].id === id) delete P[k]; for (const t in T) delete T[t][id]; store.set('lp', P); store.set('lt', T); return true; },
+  async adminDelTime(id, track) { const T = LOC.t; if (T[track]) delete T[track][id]; store.set('lt', T); return true; },
+  async adminDelTrack(track) { const T = LOC.t; delete T[track]; store.set('lt', T); return true; },
+});
+// ---------- player tags (stored in tags.json on the play site) ----------
+let TAGS = store.get('tags') || {};
+const TAG_PRESETS = [['Owner', '👑', '#f5c542'], ['Builder', '🔨', '#5fb3ff'], ['Contributor', '⭐', '#7ee08a'], ['Tester', '🧪', '#c58cff']];
+function tagHtml(pid) { const L = pid && TAGS[pid]; if (!L || !L.length) return ''; return L.map(t => '<span class="tag" title="' + escH(t.t) + '" style="color:' + escH(/^#[0-9a-f]{3,8}$/i.test(t.c || '') ? t.c : '#ddd') + '">' + escH(t.i || '') + (t.t ? ' ' + escH(t.t) : '') + '</span>').join(''); }
+async function tagsLoad() {
+  let got = null;
+  try { const r = await fetch('tags.json?t=' + Date.now(), { cache: 'no-store' }); if (r.ok) got = await r.json(); } catch (e) {}
+  if (!got && typeof gh !== 'undefined' && gh.tok && gh.web) { try { const t = ghText(await ghGet(gh.web, 'tags.json')); if (t) got = JSON.parse(t); } catch (e) {} }
+  if (got && typeof got === 'object') { TAGS = got; store.set('tags', TAGS); }
+  try { mpGate(); } catch (e) {}
+  try { renderMe(); if (!el('wrSec').classList.contains('hide')) wrShow(); } catch (e) {}
+}
+async function tagsSave() {
+  store.set('tags', TAGS);
+  if (gh.tok && gh.web) { await ghPut(gh.web, 'tags.json', JSON.stringify(TAGS, null, 1) + '\n', 'Update player tags'); return 'saved to ' + gh.web + '/tags.json (live in about a minute)'; }
+  return 'saved on this device only (add a GitHub token to publish)';
+}
 
 // Minecraft skin -> 8x8 face (+ hat layer) PNG
 async function skinFace(file) {
@@ -2332,12 +2601,12 @@ function avHtml(p, cls) {
 function acStat(t, cls) { const e = el('acStat'); e.textContent = t || ''; e.className = 'keys' + (cls ? ' ' + cls : ''); }
 function setTab(t) {
   el('menu').querySelector('.panel').dataset.tab = t;
-  document.querySelectorAll('#webTabs button').forEach(b => b.classList.toggle('on', b.dataset.tab === t));
-  el('wrSec').classList.toggle('hide', t !== 'wrs'); el('acctSec').classList.toggle('hide', t !== 'acct');
+  document.querySelectorAll('#webTabs button[data-tab]').forEach(b => b.classList.toggle('on', b.dataset.tab === t));
+  el('wrSec').classList.toggle('hide', t !== 'wrs'); el('acctSec').classList.toggle('hide', t !== 'acct'); if (el('mpSec')) el('mpSec').classList.toggle('hide', t !== 'mp'); if (t === 'mp') try { mpPSync(); } catch (e) {}
   if (t === 'wrs') wrShow();
 }
 function renderMe() {
-  el('meChip').innerHTML = ME ? avHtml(ME) + '<span class="n">' + escH(ME.name) + '</span>' : '<span class="av">+</span><span class="n">Sign in</span>';
+  el('meChip').innerHTML = ME ? avHtml(ME) + '<span class="n">' + escH(ME.name) + '</span>' + tagHtml(ME.id) : '<span class="av">+</span><span class="n">Sign in</span>';
   el('acctOut').classList.toggle('hide', !!ME); el('acctIn').classList.toggle('hide', !ME);
   if (ME) {
     el('acAv').innerHTML = avHtml(ME, 'l'); el('acMeName').textContent = ME.name; el('acEdName').value = ME.name;
@@ -2345,7 +2614,8 @@ function renderMe() {
     el('acKeyShow').textContent = 'IBR-•••••-•••••-•••••-•••••'; el('acKeyReveal').textContent = 'Show key';
   }
 }
-function setMe(p, key) { ME = p || null; MY_KEY = p ? key : ''; if (p) store.set('acct', { key }); renderMe(); }
+function setMe(p, key) { ME = p || null; MY_KEY = p ? key : ''; if (p) store.set('acct', { key }); renderMe(); try { riderSkinUpdate(); } catch (e) {} try { mpGate(); } catch (e) {} }
+let newSkinFull = null;
 let newFace = null, skinFor = 'new';
 async function acctBoot() {
   el('webTabs').classList.remove('hide'); el('meChip').classList.remove('hide');
@@ -2357,7 +2627,7 @@ async function acctBoot() {
 function showNewKey(k) { el('acKeyNewT').textContent = k; el('acKeyNew').classList.remove('hide'); }
 async function copyText(t) { try { await navigator.clipboard.writeText(t); toast('Copied', 900); } catch (e) { prompt('Copy your key:', t); } }
 el('meChip').addEventListener('click', () => setTab('acct'));
-document.querySelectorAll('#webTabs button').forEach(b => b.addEventListener('click', () => setTab(b.dataset.tab)));
+document.querySelectorAll('#webTabs button[data-tab]').forEach(b => b.addEventListener('click', () => setTab(b.dataset.tab)));
 el('acNewBtn').addEventListener('click', () => { el('acNew').classList.remove('hide'); el('acLogin').classList.add('hide'); el('acName').focus(); acStat(''); });
 el('acLoginBtn').addEventListener('click', () => { el('acLogin').classList.remove('hide'); el('acNew').classList.add('hide'); el('acKey').focus(); acStat(''); });
 el('acNewSkin').addEventListener('click', () => { skinFor = 'new'; el('acSkinFile').click(); });
@@ -2365,15 +2635,15 @@ el('acEdSkin').addEventListener('click', () => { skinFor = 'me'; el('acSkinFile'
 el('acSkinFile').addEventListener('change', async e => {
   const f = e.target.files[0]; e.target.value = ''; if (!f) return;
   try {
-    const face = await skinFace(f);
-    if (skinFor === 'new') { newFace = face; el('acNewAv').innerHTML = avHtml({ face }); acStat('Skin ready.', 'ok'); }
-    else { acStat('Saving skin…'); setMe(await NET.update(MY_KEY, ME.name, face), MY_KEY); acStat('✓ Skin updated', 'ok'); }
+    const face = await skinFace(f), full = await skinFull(f);
+    if (skinFor === 'new') { newFace = face; newSkinFull = full; el('acNewAv').innerHTML = avHtml({ face }); acStat('Skin ready.', 'ok'); }
+    else { acStat('Saving skin…'); if (full) store.set('skin:' + ME.id, full); setMe(await NET.update(MY_KEY, ME.name, face), MY_KEY); acStat('✓ Skin updated', 'ok'); }
   } catch (err) { acStat(err.message, 'err'); }
 });
 el('acCreate').addEventListener('click', async () => {
   const name = nameNorm(el('acName').value), bad = nameOk(name); if (bad) return acStat(bad, 'err');
   const key = newKey(); acStat('Creating…');
-  try { const p = await NET.create(key, name, newFace); setMe(p, key); showNewKey(key); el('acNew').classList.add('hide'); newFace = null; el('acNewAv').innerHTML = ''; acStat('✓ Account created — welcome, ' + p.name + '!', 'ok'); }
+  try { const p = await NET.create(key, name, newFace); if (newSkinFull) store.set('skin:' + p.id, newSkinFull); newSkinFull = null; setMe(p, key); showNewKey(key); el('acNew').classList.add('hide'); newFace = null; el('acNewAv').innerHTML = ''; acStat('✓ Account created — welcome, ' + p.name + '!', 'ok'); }
   catch (e) { acStat(e.message, 'err'); }
 });
 el('acKey').addEventListener('keydown', e => { if (e.key === 'Enter') el('acLoginGo').click(); });
@@ -2393,8 +2663,8 @@ el('acKeyReveal').addEventListener('click', () => { const sh = el('acKeyReveal')
 el('acKeyCopy').addEventListener('click', () => copyText(MY_KEY));
 el('acKeyNewCopy').addEventListener('click', () => copyText(el('acKeyNewT').textContent));
 el('acKeyNewDl').addEventListener('click', () => {
-  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['Ice Boat Racer player key for ' + (ME ? ME.name : '') + '\n\n' + el('acKeyNewT').textContent + '\n\nPaste it into Account > Log in with key at https://ibronline.github.io/play/\n'], { type: 'text/plain' }));
-  a.download = 'ibr-player-key.txt'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['ibronline player key for ' + (ME ? ME.name : '') + '\n\n' + el('acKeyNewT').textContent + '\n\nPaste it into Account > Log in with key at https://ibronline.github.io/play/\n'], { type: 'text/plain' }));
+  a.download = 'ibronline-player-key.txt'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
 });
 el('acLogout').addEventListener('click', () => { if (!confirm('Log out? You will need your player key to log back in.')) return; store.del('acct'); setMe(null); el('acKeyNew').classList.add('hide'); acStat('Logged out.'); });
 
@@ -2412,7 +2682,7 @@ async function netOnTime(t) {
 // WR leaderboards
 function wrFillPick() {
   const s = el('wrPick'), v = s.value;
-  s.innerHTML = '<option value="">All tracks — WR holders</option>' + WEB_LIST.map(t => '<option value="' + escH(t.id) + '">' + escH(t.name) + '</option>').join('');
+  s.innerHTML = '<option value="">All tracks — WR holders</option><option value="__count">🏆 Most world records</option>' + WEB_LIST.map(t => '<option value="' + escH(t.id) + '">' + escH(t.name) + '</option>').join('');
   s.value = v;
 }
 const fmtMs = ms => { const m = Math.floor(ms / 60000), r = (ms % 60000) / 1000; return m + ':' + (r < 10 ? '0' : '') + r.toFixed(3); };
@@ -2421,25 +2691,34 @@ const rkCls = n => n <= 3 ? ' class="rk' + n + '"' : '';
 let wrSeq = 0;
 async function wrShow() {
   const id = el('wrPick').value, seq = ++wrSeq, body = el('wrBody');
-  el('wrRace').classList.toggle('hide', !id);
+  el('wrRace').classList.toggle('hide', !id || id === '__count');
   el('wrNote').textContent = (NET.online ? '' : 'Offline mode — showing records from this device only. ') + (URL_TWEAK ? 'This link changes the physics, so your times here are not posted. ' : '') + (ME ? '' : 'Make an account to get on the board.');
   body.innerHTML = '<div class="keys">Loading…</div>';
   try {
-    if (!id) {
+    if (id === '__count') {
+      const wrs = (await NET.wrs()) || []; if (seq !== wrSeq) return;
+      const live = WEB_LIST.length ? new Set(WEB_LIST.map(t => t.id)) : null, by = {};
+      for (const w of wrs) { if (live && !live.has(w.track)) continue; const o = by[w.player_id] = by[w.player_id] || { p: w, n: 0, tr: [] }; o.n++; const t = WEB_LIST.find(x => x.id === w.track); o.tr.push(t ? t.name : w.track); }
+      const rows = Object.values(by).sort((a, b) => b.n - a.n || a.p.name.localeCompare(b.p.name));
+      if (!rows.length) { body.innerHTML = '<div class="keys">No world records yet.</div>'; return; }
+      let rk = 0, last = -1;
+      body.innerHTML = '<table class="wr"><tr><th>#</th><th>Player</th><th class="t">WRs</th><th>Tracks</th></tr>' + rows.map((o, i) => { if (o.n !== last) { rk = i + 1; last = o.n; }
+        return '<tr' + (ME && o.p.player_id === ME.id ? ' class="mine"' : '') + '><td' + rkCls(rk) + '><b>' + rk + '</b></td><td><span class="pl">' + avHtml(o.p) + escH(o.p.name) + tagHtml(o.p.player_id) + '</span></td><td class="t">' + o.n + '</td><td class="d" style="white-space:normal">' + escH(o.tr.join(', ')) + '</td></tr>'; }).join('') + '</table>';
+    } else if (!id) {
       const wrs = await NET.wrs(); if (seq !== wrSeq) return;
       const by = {}; for (const w of wrs || []) by[w.track] = w;
       const ids = WEB_LIST.map(t => t.id); for (const k in by) if (!ids.includes(k)) ids.push(k);
       if (!ids.length) { body.innerHTML = '<div class="keys">No tracks yet.</div>'; return; }
       body.innerHTML = '<table class="wr"><tr><th>Track</th><th>WR holder</th><th class="t">Time</th></tr>' + ids.map(k => {
         const t = WEB_LIST.find(x => x.id === k), w = by[k], mine = w && ME && w.player_id === ME.id;
-        return '<tr class="go' + (mine ? ' mine' : '') + '" data-id="' + escH(k) + '"><td>' + escH(t ? t.name : k) + '</td><td>' + (w ? '<span class="pl">' + avHtml(w) + escH(w.name) + '</span>' : '<span class="keys">— unclaimed —</span>') + '</td><td class="t">' + (w ? fmtMs(w.ms) : '') + '</td></tr>';
+        return '<tr class="go' + (mine ? ' mine' : '') + '" data-id="' + escH(k) + '"><td>' + escH(t ? t.name : k) + '</td><td>' + (w ? '<span class="pl">' + avHtml(w) + escH(w.name) + tagHtml(w.player_id) + '</span>' : '<span class="keys">— unclaimed —</span>') + '</td><td class="t">' + (w ? fmtMs(w.ms) : '') + '</td></tr>';
       }).join('') + '</table>';
       body.querySelectorAll('tr.go').forEach(r => r.addEventListener('click', () => { el('wrPick').value = r.dataset.id; wrShow(); }));
     } else {
       const b = await NET.board(id); if (seq !== wrSeq) return;
       if (!b || !b.length) { body.innerHTML = '<div class="keys">No times yet — set the first WR!</div>'; return; }
       body.innerHTML = '<table class="wr"><tr><th>#</th><th>Player</th><th class="t">Time</th><th>Date</th></tr>' + b.map(r =>
-        '<tr' + (ME && r.player_id === ME.id ? ' class="mine"' : '') + '><td' + rkCls(r.rank) + '><b>' + r.rank + '</b></td><td><span class="pl">' + avHtml(r) + escH(r.name) + '</span></td><td class="t">' + fmtMs(r.ms) + (r.rank > 1 ? '<br><span class="keys" style="font-weight:400;font-size:11px">+' + ((r.ms - b[0].ms) / 1000).toFixed(3) + '</span>' : '') + '</td><td class="d">' + fmtDay(r.at) + '</td></tr>').join('') + '</table>';
+        '<tr' + (ME && r.player_id === ME.id ? ' class="mine"' : '') + '><td' + rkCls(r.rank) + '><b>' + r.rank + '</b></td><td><span class="pl">' + avHtml(r) + escH(r.name) + tagHtml(r.player_id) + '</span></td><td class="t">' + fmtMs(r.ms) + (r.rank > 1 ? '<br><span class="keys" style="font-weight:400;font-size:11px">+' + ((r.ms - b[0].ms) / 1000).toFixed(3) + '</span>' : '') + '</td><td class="d">' + fmtDay(r.at) + '</td></tr>').join('') + '</table>';
     }
   } catch (e) { if (seq === wrSeq) body.innerHTML = '<div class="keys" style="color:var(--red)">Could not load records: ' + escH(e.message) + '</div>'; }
 }
@@ -2462,10 +2741,16 @@ function ghSave() { gh.web = repoNorm(el('ghWeb').value); gh.dev = repoNorm(el('
 async function ghApi(repo, path, opt) {
   opt = opt || {};
   if (!gh.tok) throw new Error('add a GitHub access token first');
+  if (!/^[\x21-\x7e]+$/.test(gh.tok)) throw new Error('the GitHub token has a space or odd character in it — delete it and paste it again (it should start with github_pat_ or ghp_)');
   if (!/^[\w.-]+\/[\w.-]+$/.test(repo)) throw new Error('repo should look like owner/name');
   const h = { Accept: 'application/vnd.github+json', Authorization: 'Bearer ' + gh.tok, 'X-GitHub-Api-Version': '2022-11-28' };
   if (opt.body) h['Content-Type'] = 'application/json';
-  const r = await fetch('https://api.github.com/repos/' + repo + path, { method: opt.method || 'GET', headers: h, body: opt.body, cache: 'no-store' });
+  const where = repo + path.split('?')[0]; let r = null, ne = null;
+  for (let a = 0; a < 3 && !r; a++) {
+    try { r = await fetch('https://api.github.com/repos/' + repo + path, { method: opt.method || 'GET', headers: h, body: opt.body, cache: 'no-store' }); }
+    catch (e) { ne = e; await new Promise(z => setTimeout(z, 1500 * (a + 1))); }
+  }
+  if (!r) throw new Error('could not reach GitHub (' + (ne && ne.message || 'network error') + ') while ' + ((opt.method || 'GET') === 'GET' ? 'reading ' : 'uploading ') + where + ' — check your internet, turn off content blockers / Private Relay / VPN for this page, and make sure you opened the site from https:// not a downloaded file');
   if (r.status === 404 && opt.allow404) return null;
   if (!r.ok) { let m = ''; try { m = (await r.json()).message; } catch (e) {} throw new Error('GitHub ' + r.status + (m ? ' ' + m : '') + ' — ' + repo + path.split('?')[0]); }
   return r.status === 204 ? null : r.json();
@@ -2485,17 +2770,18 @@ async function ghPut(repo, file, text, msg) {
 function ghText(cur) { return cur && cur.content ? new TextDecoder().decode(unb64(cur.content.replace(/\s/g, ''))) : ''; }
 function webHtml() { const cfg = { tracks: 'tracks/index.json' }; if (gh.sbUrl && gh.sbKey) cfg.sb = { url: gh.sbUrl, key: gh.sbKey }; return SRC_PUBLIC.replace('</head>', '<scr' + 'ipt type="application/json" id="webSite">' + JSON.stringify(cfg).replace(/</g, '\\u003c') + '</scr' + 'ipt>\n</head>'); }
 function siteUrl(repo) { const [o, r] = repo.split('/'); return r.toLowerCase() === o.toLowerCase() + '.github.io' ? 'https://' + r.toLowerCase() + '/' : 'https://' + o.toLowerCase() + '.github.io/' + r + '/'; }
-const WEB_README = '# Ice Boat Racer\n\nMinecraft ice-boat racing in the browser with OpenBoatUtils physics, BoatCam and 2D/3D views.\n\nThis repository is the public website. It is updated automatically when a track is published from the private dev build.\n\n- `index.html` - the game (play mode)\n- `tracks/index.json` - published track list\n- `tracks/<id>.json` - track data (blocks, regions, OpenBoatUtils settings)\n\n## Link parameters\n\n- `?track=<id>` open a track\n- `&mode=RALLY_BLUE` apply an OpenBoatUtils mode (name or 0-24); repeatable\n- `&exclusive=BA` reset to vanilla, then apply a mode\n- `&obu=defaultslipperiness 0.98;blockslipperiness 0.989 packed_ice` run OpenBoatUtils commands\n- `&slip= &yaw= &fwd= &back= &turn= &lateral= &brake= &maxspeed= &maxres= &stack=1` set values\n- `&vanilla=1` ignore the track\'s OpenBoatUtils settings\n';
+const WEB_README = '# ibronline\n\nMinecraft ice-boat racing in the browser with OpenBoatUtils physics, BoatCam and 2D/3D views.\n\nThis repository is the public website. It is updated automatically when a track is published from the private dev build.\n\n- `index.html` - the game (play mode)\n- `tracks/index.json` - published track list\n- `tracks/<id>.json` - track data (blocks, regions, OpenBoatUtils settings)\n\n## Link parameters\n\n- `?track=<id>` open a track\n- `&mode=RALLY_BLUE` apply an OpenBoatUtils mode (name or 0-24); repeatable\n- `&exclusive=BA` reset to vanilla, then apply a mode\n- `&obu=defaultslipperiness 0.98;blockslipperiness 0.989 packed_ice` run OpenBoatUtils commands\n- `&slip= &yaw= &fwd= &back= &turn= &lateral= &brake= &maxspeed= &maxres= &stack=1` set values\n- `&vanilla=1` ignore the track\'s OpenBoatUtils settings\n';
 async function ghPublish() {
   if (!gh.web) throw new Error('set the web repo');
+  if (location.protocol === 'file:') throw new Error('this page was opened as a downloaded file — open the dev site from its https:// link and publish from there');
   const d = await publishTrack('data'), json = JSON.stringify(d);
-  const slug = d.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'track';
+  const slug = (typeof EDIT_SLUG !== 'undefined' && EDIT_SLUG) || d.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'track';
   ghStat('Uploading track…'); await ghPut(gh.web, 'tracks/' + slug + '.json', json, 'Publish track: ' + d.name);
   ghStat('Updating track list…');
   let list = []; try { list = JSON.parse(ghText(await ghGet(gh.web, 'tracks/index.json')) || '[]'); } catch (e) { list = []; }
   const cps = d.regions.filter(r => r.t === 'cp').length;
   const entry = { id: slug, name: d.name, file: slug + '.json', info: (cps ? cps + ' checkpoints · ' : '') + (d.regions.some(r => r.t === 'fin') ? 'sprint · ' : '') + (d.obu && d.obu.on ? 'OpenBoatUtils (' + ((d.obu.modes || []).join(', ') || 'custom') + ') · ' : '') + d.W + '×' + d.H + ' blocks', updated: new Date().toISOString() };
-  const i = list.findIndex(t => t.id === slug); if (i >= 0) list[i] = entry; else list.push(entry);
+  const i = list.findIndex(t => t.id === slug); if (i >= 0) { if (list[i].closed) entry.closed = true; list[i] = entry; } else list.push(entry);
   await ghPut(gh.web, 'tracks/index.json', JSON.stringify(list, null, 1) + '\n', 'Update track list (' + d.name + ')');
   ghStat('Updating the game page…'); await ghPut(gh.web, 'index.html', webHtml(), 'Update game');
   await ghPut(gh.web, '.nojekyll', '', 'Add .nojekyll');
@@ -2522,12 +2808,12 @@ function devGateMain() {
   if (saved) { e.textContent = 'Unlocking…'; open(saved).catch(() => { try { sessionStorage.removeItem('ibr-devcode'); localStorage.removeItem('ibr-devcode'); } catch (x) {} e.textContent = ''; }); }
 }
 const DEV_ITER = 250000;
-const DEV_GATE = '<!DOCTYPE html>\n<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>IBR dev · locked</title><style>'
+const DEV_GATE = '<!DOCTYPE html>\n<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>ibronline dev · locked</title><style>'
   + 'html,body{margin:0;height:100%;background:#191919;color:#fff;font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}body{display:flex;align-items:center;justify-content:center;padding:16px;box-sizing:border-box}'
   + 'form{width:100%;max-width:360px;background:#202020;border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:24px}h1{margin:0 0 4px;font-size:24px}p{margin:0 0 14px;color:rgba(255,255,255,.65);font-size:14px}'
   + 'input[type=password]{width:100%;box-sizing:border-box;min-height:44px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:#191919;color:#fff;font:inherit;padding:0 12px;margin-bottom:10px}'
   + 'label{display:flex;gap:8px;align-items:center;font-size:14px;color:rgba(255,255,255,.75);margin-bottom:14px}button{width:100%;min-height:44px;border-radius:8px;border:0;background:#5E9FE8;color:#0b1a2b;font:600 15px inherit;font-family:inherit;cursor:pointer}#e{margin:10px 0 0;color:#E97366;min-height:21px}'
-  + '</style></head><body><form id="f"><h1>IBR dev</h1><p>This page is locked. Enter the access code.</p><input type="password" id="c" autocomplete="current-password" autofocus aria-label="Access code"><label><input type="checkbox" id="r"> Remember on this device</label><button>Unlock</button><p id="e"></p></form>'
+  + '</style></head><body><form id="f"><h1>ibronline dev</h1><p>This page is locked. Enter the access code.</p><input type="password" id="c" autocomplete="current-password" autofocus aria-label="Access code"><label><input type="checkbox" id="r"> Remember on this device</label><button>Unlock</button><p id="e"></p></form>'
   + '<scr' + 'ipt type="application/json" id="box">%BOX%</scr' + 'ipt><scr' + 'ipt>(' + devGateMain.toString() + ')();</scr' + 'ipt></body></html>\n';
 async function devGateHtml(html, code) {
   const salt = crypto.getRandomValues(new Uint8Array(16)), iv = crypto.getRandomValues(new Uint8Array(12));
@@ -2544,14 +2830,14 @@ async function ghSaveDev(slug, json) {
     ghStat('Locking and uploading the dev site…');
     await ghPut(gh.dev, 'index.html', await devGateHtml(SRC_HTML, gh.code), 'Update dev build (locked)');
     await ghPut(gh.dev, '.nojekyll', '', 'Add .nojekyll');
-    if (!(await ghGet(gh.dev, 'README.md'))) await ghPut(gh.dev, 'README.md', '# IBR dev\n\nLocked dev build of Ice Boat Racer. index.html is encrypted (AES-256-GCM); open the site and enter the access code.\n', 'Add README');
+    if (!(await ghGet(gh.dev, 'README.md'))) await ghPut(gh.dev, 'README.md', '# ibronline dev\n\nLocked dev build of ibronline. index.html is encrypted (AES-256-GCM); open the site and enter the access code.\n', 'Add README');
     done.push('dev site');
   }
   if (gh.src) {
     ghStat('Backing up source…');
     await ghPut(gh.src, 'index.html', SRC_PUBLIC, 'Update dev source');
     if (slug) await ghPut(gh.src, 'tracks/' + slug + '.json', json, 'Track source: ' + slug);
-    if (!(await ghGet(gh.src, 'README.md'))) await ghPut(gh.src, 'README.md', '# Ice Boat Racer - dev source (private)\n\nUnencrypted dev build and track sources. Open index.html locally, or use the locked site at /dev.\n', 'Add README');
+    if (!(await ghGet(gh.src, 'README.md'))) await ghPut(gh.src, 'README.md', '# ibronline - dev source (private)\n\nUnencrypted dev build and track sources. Open index.html locally, or use the locked site at /dev.\n', 'Add README');
     done.push('private source');
   }
   return done.join(' + ') || 'nothing (no dev repos set)';
@@ -2576,11 +2862,432 @@ el('ghTest').addEventListener('click', async () => {
     ghStat(out.join(' · '));
   } catch (e) { ghStat('✗ ' + e.message); }
 });
+el('ghTest').addEventListener('click', ghTest);
+async function ghTest() {
+  ghSave(); const out = [];
+  const say = t => { out.push(t); ghStat(out.join(' · ')); };
+  if (location.protocol === 'file:') say('⚠ opened as a downloaded file — open it from the https:// site instead');
+  try { await fetch('https://api.github.com/zen', { cache: 'no-store' }); say('✓ internet → GitHub'); }
+  catch (e) { return say('✗ cannot reach api.github.com at all (' + e.message + ') — internet, content blocker, VPN or Private Relay is blocking it'); }
+  if (!gh.tok) return say('✗ no token saved');
+  if (!/^[\x21-\x7e]+$/.test(gh.tok)) return say('✗ token has a space/odd character — paste it again');
+  for (const repo of [gh.web, gh.dev, gh.src].filter(Boolean)) {
+    try { const j = await ghApi(repo, ''); say((j.permissions && j.permissions.push ? '✓ ' : '✗ read-only: ') + repo); }
+    catch (e) { say('✗ ' + repo + ': ' + e.message); }
+  }
+}
 el('ghSaveDev').addEventListener('click', async () => { ghSave(); try { ghStat('Saving dev copy…'); const r = await ghSaveDev(); ghStat('✓ Saved ' + r); } catch (e) { ghStat('✗ ' + e.message); } });
 ghSync();
 window.__edUI = true; if (map) edSync();
 el('testBtn').addEventListener('click', () => { const r = runTests(); const p = el('tests'); p.textContent = r.text; p.classList.remove('hide'); });
-window.IceBoat = { runTests, step, makeState, env, _rawMap(m) { const o = map; map = m; return o; }, parseLitematic, buildLitMap, importFile, publishTrack, obuRunCommands, obuSetMode, obuChanged, regionsChanged, ghPublish, webHtml, applyUrlObu, gh, nameOk, keyNorm, newKey, skinFace, devGateHtml, get net() { return NET; }, get me() { return ME; }, setTab, get baseTexCount() { return baseTex.size; }, get map() { return map; }, get race() { return race; }, get st() { return st; } };
+// ---------- help / multiplayer buttons ----------
+if (el('dcCopy')) el('dcCopy').addEventListener('click', () => { copyText('particle0325'); toast('Discord username copied: particle0325', 2000); });
+document.querySelectorAll('.mpSoon').forEach(b => b.addEventListener('click', e => { if (!b.classList.contains('mpSoon')) return; e.preventDefault(); b.classList.add('tip'); setTimeout(() => b.classList.remove('tip'), 1500); toast('Multiplayer — coming soon', 1500); }));
+// ---------- dev: player + track admin ----------
+const admStat = t => { const e = el('admStat'); if (e) e.textContent = t; };
+let ADM_TRACKS = [];
+function admTagRow(pid) { return (TAGS[pid] || []).map((t, i) => '<button class="b" data-act="tdel" data-i="' + i + '" title="Remove tag">' + escH((t.i || '') + ' ' + (t.t || '')) + ' ×</button>').join(''); }
+function admRender(list) {
+  const box = el('admList'); if (!list.length) { box.innerHTML = '<div class="keys">No players found.</div>'; return; }
+  box.innerHTML = list.map(p => '<div class="adm" data-id="' + escH(p.id) + '"><div><span class="pl">' + avHtml(p) + '<b>' + escH(p.name) + '</b>' + tagHtml(p.id) + '</span> <span class="keys" style="font-size:11px">' + escH(p.id) + '</span></div>'
+    + '<div class="row"><input type="text" class="nm" value="' + escH(p.name) + '" style="flex:1;min-width:90px"><button class="b" data-act="ren">Rename</button><button class="b" data-act="key">New player key</button><button class="b" data-act="del" style="color:var(--red)">Delete account</button></div>'
+    + '<div class="row nk"></div>'
+    + '<div class="row">' + admTagRow(p.id) + TAG_PRESETS.map((t, i) => '<button class="b" data-act="tpre" data-i="' + i + '">+ ' + t[1] + ' ' + t[0] + '</button>').join('') + '</div>'
+    + '<div class="row"><input type="text" class="tt" placeholder="Custom tag" style="width:110px"><input type="text" class="ti" placeholder="Icon/emoji" style="width:70px"><input type="color" class="tc" value="#ff7ac6"><button class="b" data-act="tadd">Add tag</button></div></div>').join('');
+  box.querySelectorAll('.adm').forEach(row => row.addEventListener('click', e => admAct(e, row, list.find(p => p.id === row.dataset.id))));
+}
+async function admFind() { admStat('Loading players…'); try { const L = (await NET.adminPlayers(el('admQ').value.trim())) || []; admRender(L); admStat(L.length + ' player' + (L.length === 1 ? '' : 's')); } catch (e) { admStat('Error: ' + e.message); } }
+async function admAct(e, row, p) {
+  const b = e.target.closest('button[data-act]'); if (!b || !p) return; const a = b.dataset.act;
+  try {
+    if (a === 'ren') { const n = row.querySelector('.nm').value.trim(); if (!n) return; await NET.adminRename(p.id, n); p.name = n; admStat('Renamed to ' + n); if (ME && ME.id === p.id) { ME.name = n; renderMe(); } admRender([...el('admList').querySelectorAll('.adm')].map(r => r === row ? p : null).filter(Boolean).concat([])); return admFind(); }
+    if (a === 'key') { if (!confirm('Make a new player key for ' + p.name + '? Their old key will stop working.')) return; const k = newKey(); await NET.adminRekey(p.id, k);
+      const nk = row.querySelector('.nk'); nk.innerHTML = '<code style="user-select:all">' + escH(k) + '</code><button class="b">Copy</button>'; nk.querySelector('button').onclick = () => { copyText(k); toast('Key copied', 1200); }; admStat('New key made for ' + p.name + ' — send it to them privately.'); return; }
+    if (a === 'del') { if (!confirm('Delete ' + p.name + "'s account and all their times? This can't be undone.")) return; await NET.adminDelete(p.id); delete TAGS[p.id]; admStat('Deleted ' + p.name); return admFind(); }
+    if (a === 'tpre' || a === 'tadd') {
+      const t = a === 'tpre' ? (([t, i, c]) => ({ t, i, c }))(TAG_PRESETS[+b.dataset.i]) : { t: row.querySelector('.tt').value.trim(), i: row.querySelector('.ti').value.trim(), c: row.querySelector('.tc').value };
+      if (!t.t && !t.i) return; (TAGS[p.id] = TAGS[p.id] || []).push(t); admStat('Saving tags…'); admStat('Tag added — ' + await tagsSave()); renderMe(); return admFind();
+    }
+    if (a === 'tdel') { (TAGS[p.id] || []).splice(+b.dataset.i, 1); if (TAGS[p.id] && !TAGS[p.id].length) delete TAGS[p.id]; admStat('Tag removed — ' + await tagsSave()); renderMe(); return admFind(); }
+  } catch (err) { admStat('Error: ' + err.message); }
+}
+async function tkList() {
+  admStat('Loading tracks…');
+  try {
+    let L = null;
+    if (gh.tok && gh.web) { try { L = JSON.parse(ghText(await ghGet(gh.web, 'tracks/index.json')) || '[]'); } catch (e) {} }
+    if (!L) { const r = await fetch((gh.web ? siteUrl(gh.web) : '') + 'tracks/index.json?t=' + Date.now(), { cache: 'no-store' }); L = r.ok ? await r.json() : []; }
+    ADM_TRACKS = L; el('tkPick').innerHTML = L.length ? L.map((t, i) => '<option value="' + i + '">' + (t.closed ? '🔒 ' : '') + escH(t.name) + ' (' + escH(t.id) + ')</option>').join('') : '<option value="">No published tracks</option>';
+    admStat(L.length + ' published track' + (L.length === 1 ? '' : 's')); try { tkSel(); } catch (e) {}
+  } catch (e) { admStat('Could not load tracks: ' + e.message); }
+}
+const tkCur = () => ADM_TRACKS[+el('tkPick').value];
+async function tkTimes() {
+  const t = tkCur(); if (!t) return; const box = el('tkTimes'); box.innerHTML = '<div class="keys">Loading…</div>';
+  try { const b = (await NET.board(t.id)) || [];
+    box.innerHTML = b.length ? b.map(r => '<div class="row" style="justify-content:space-between"><span class="pl">' + r.rank + '. ' + avHtml(r) + escH(r.name) + tagHtml(r.player_id) + ' — ' + fmtMs(r.ms) + '</span><button class="b" data-pid="' + escH(r.player_id) + '" style="color:var(--red)">Remove time</button></div>').join('') : '<div class="keys">No times on this track.</div>';
+    box.querySelectorAll('button[data-pid]').forEach(x => x.onclick = async () => { const r = b.find(q => q.player_id === x.dataset.pid); if (!confirm('Remove ' + r.name + "'s time (" + fmtMs(r.ms) + ')?')) return; try { await NET.adminDelTime(r.player_id, t.id); admStat('Time removed'); tkTimes(); } catch (e) { admStat('Error: ' + e.message); } });
+  } catch (e) { box.innerHTML = ''; admStat('Error: ' + e.message); }
+}
+async function tkEdit() {
+  const t = tkCur(); if (!t) return; admStat('Downloading ' + t.name + '…');
+  try {
+    let d = null; if (gh.tok && gh.web) { const tx = ghText(await ghGet(gh.web, 'tracks/' + t.file)); if (tx) d = JSON.parse(tx); }
+    if (!d) { const r = await fetch(siteUrl(gh.web) + 'tracks/' + t.file + '?t=' + Date.now(), { cache: 'no-store' }); if (!r.ok) throw new Error('HTTP ' + r.status); d = await r.json(); }
+    await loadPublished(d, true); if (el('pubName')) el('pubName').value = d.name; EDIT_SLUG = t.id; tkEditUi();
+    regUndo.length = 0; regRedo.length = 0; regBtns();
+    admStat('Loaded "' + d.name + '" — edit regions / spawn / OpenBoatUtils, then press Publish (same name overwrites it; a new name makes a copy).');
+  } catch (e) { admStat('Could not open: ' + e.message); }
+}
+async function tkDelete() {
+  const t = tkCur(); if (!t) return; if (!confirm('Delete track "' + t.name + '" from the site and remove all its times?')) return;
+  try {
+    admStat('Deleting…');
+    if (!gh.tok || !gh.web) throw new Error('add a GitHub token + play repo first');
+    const list = JSON.parse(ghText(await ghGet(gh.web, 'tracks/index.json')) || '[]').filter(x => x.id !== t.id);
+    await ghPut(gh.web, 'tracks/index.json', JSON.stringify(list, null, 1) + '\n', 'Delete track: ' + t.name);
+    const cur = await ghGet(gh.web, 'tracks/' + t.file); if (cur && cur.sha) await ghApi(gh.web, '/contents/tracks/' + t.file, { method: 'DELETE', body: JSON.stringify({ message: 'Delete track file: ' + t.name, sha: cur.sha }) });
+    let w = ''; try { await NET.adminDelTrack(t.id); } catch (e) { w = ' (times not cleared: ' + e.message + ')'; }
+    admStat('Deleted ' + t.name + w); tkList();
+  } catch (e) { admStat('Error: ' + e.message); }
+}
+if (el('admFind')) {
+  const sec = store.get('admSecret'); if (sec) el('admSecret').value = sec;
+  el('admSecret').addEventListener('change', () => store.set('admSecret', el('admSecret').value));
+  el('admFind').addEventListener('click', admFind); el('admQ').addEventListener('keydown', e => { if (e.key === 'Enter') admFind(); });
+  el('tkReload').addEventListener('click', tkList); el('tkTimesBtn').addEventListener('click', tkTimes); el('tkEdit').addEventListener('click', tkEdit); el('tkDel').addEventListener('click', tkDelete);
+  el('tkWipe').addEventListener('click', async () => { const t = tkCur(); if (!t || !confirm('Remove ALL times on "' + t.name + '"?')) return; try { await NET.adminDelTrack(t.id); admStat('All times cleared on ' + t.name); tkTimes(); } catch (e) { admStat('Error: ' + e.message); } });
+  if (!document.body.classList.contains('pub')) setTimeout(tkList, 800);
+}
+setTimeout(tagsLoad, 300); setTimeout(() => { window.ibronline = window.IceBoat; }, 0);
+
+// ---------- multiplayer foundation (experimental, dev only) ----------
+// Uses Supabase Realtime "broadcast" channels over a raw WebSocket (free tier, no extra library).
+// One Supabase project per region: EU / US / Asia. Rooms are per region + track + room name.
+let MP_PUB = null; const IS_DEV = !!document.getElementById('devCfg');
+const MP_REG = { eu: 'Europe', us: 'United States', asia: 'Asia' };
+const MP = {
+  ws: null, joined: false, peers: {}, ref: 0, hb: 0, tx: 0, ui: 0, ping: 0, pingAt: {}, cfg: null, topic: '',
+  id: 'g' + Math.random().toString(36).slice(2, 10),
+  load() { const c = Object.assign({ region: 'eu', room: 'lobby', coll: false, srv: {} }, store.get('mp') || {}); const pub = (MP_PUB && MP_PUB.srv) || {}; for (const r in MP_REG) c.srv[r] = Object.assign({ url: SB_DEF.url, key: SB_DEF.key }, pub[r] || {}, IS_DEV ? (c.srv[r] || {}) : {}); if (!IS_DEV) c.coll = !!(MP_PUB && MP_PUB.coll); this.cfg = c; return c; },
+  save() { store.set('mp', this.cfg); },
+  send(topic, event, payload) { if (!this.ws || this.ws.readyState !== 1) return ''; const ref = String(++this.ref); this.ws.send(JSON.stringify({ topic, event, payload, ref })); return ref; },
+  connect() {
+    const c = this.cfg, S = c.srv[c.region]; this.close();
+    if (!S.url || !S.key) { this.stat('Set a server URL + key for ' + MP_REG[c.region]); return; }
+    const track = (typeof WEB_CUR !== 'undefined' && WEB_CUR && WEB_CUR.id) || (map && map.id) || 'track';
+    this.topic = 'realtime:ibr-' + c.region + '-lobby-' + c.room.replace(/[^\w-]/g, ''); this.trackTopic = ''; void track;
+    const u = S.url.replace(/^http/, 'ws').replace(/\/+$/, '') + '/realtime/v1/websocket?apikey=' + encodeURIComponent(S.key) + '&vsn=1.0.0';
+    this.stat('Connecting to ' + MP_REG[c.region] + '…');
+    let ws; try { ws = new WebSocket(u); } catch (e) { this.stat('Error: ' + e.message); return; }
+    this.ws = ws;
+    ws.onopen = () => {
+      const pl = { config: { broadcast: { self: false, ack: false }, presence: { key: this.myId() }, private: false } };
+      if (!/^sb_/.test(S.key)) pl.access_token = S.key;
+      this.joinRef = this.send(this.topic, 'phx_join', pl);
+      this.hb = setInterval(() => { const r = this.send('phoenix', 'heartbeat', {}); this.pingAt[r] = performance.now(); }, 5000);
+      this.tx = setInterval(() => this.sendPos(), 66);   // ~15 updates / second
+    };
+    ws.onmessage = ev => { let m; try { m = JSON.parse(ev.data); } catch (e) { return; } this.onMsg(m); };
+    ws.onclose = () => { if (this.ws === ws) { this.close(); this.stat('Disconnected'); } };
+    ws.onerror = () => this.stat('Connection error (check URL/key, and that Realtime is enabled)');
+    this.ui = setInterval(() => this.statLoop(), 1000);
+  },
+  close() { clearInterval(this.hb); clearInterval(this.tx); clearInterval(this.ui); if (this.ws) { try { this.send(this.topic, 'phx_leave', {}); this.ws.close(); } catch (e) {} } this.ws = null; this.joined = false; this.peers = {}; this.trackTopic = ''; try { rcOnLeave(); } catch (e) {} mpBtn(); },
+  myId() { return (ME && ME.id) || this.id; },
+  onMsg(m) {
+    if (m.event === 'phx_reply') {
+      if (m.ref && this.pingAt[m.ref]) { this.ping = Math.round(performance.now() - this.pingAt[m.ref]); delete this.pingAt[m.ref]; }
+      if (m.ref === this.joinRef) { if (m.payload && m.payload.status === 'ok') { this.joined = true; this.stat('Connected'); mpBtn(); try { RACE.joinedAt = Date.now(); RACE.S = null; chatSys('lobby', 'Joined lobby ' + this.cfg.room); } catch (e) {} } else this.stat('Join refused: ' + JSON.stringify(m.payload && m.payload.response || {}).slice(0, 120)); }
+      return;
+    }
+    if (m.event === 'broadcast' && m.payload && typeof RACE_EV !== 'undefined' && RACE_EV[m.payload.event]) { try { RACE_EV[m.payload.event](m.payload.payload || {}, m.topic); } catch (e) { console.error(e); } return; }
+    if (m.event === 'broadcast' && m.payload && m.payload.event === 'pos') {
+      const d = m.payload.payload; if (!d || d.id === this.myId()) return;
+      const q = this.peers[d.id] || (this.peers[d.id] = { sx: d.x, sz: d.z, sy: d.y || 0, syaw: d.yaw });
+      Object.assign(q, d, { rx: performance.now() });
+    }
+    if (m.event === 'broadcast' && m.payload && m.payload.event === 'bye') delete this.peers[(m.payload.payload || {}).id];
+  },
+  sendPos() {
+    if (!this.joined || typeof st === 'undefined') return;
+    if (RACE.S && RACE.S.ph !== 'race' && RACE.S.ph !== 'count' && ((this.skip = ((this.skip || 0) + 1) % 8))) return;
+    this.send(this.topic, 'broadcast', { type: 'broadcast', event: 'pos', payload: { id: this.myId(), n: (ME && ME.name) || 'Guest', x: +st.x.toFixed(3), z: +st.z.toFixed(3), y: +(st.y || 0).toFixed(3), yaw: +st.yaw.toFixed(4), vx: +st.vx.toFixed(4), vz: +st.vz.toFixed(4), c: this.cfg.coll ? 1 : 0, tr: (WEB_CUR && WEB_CUR.id) || '' } });
+  },
+  list() { const now = performance.now(), L = []; for (const k in this.peers) { const q = this.peers[k]; if (now - q.rx > 4000) { delete this.peers[k]; continue; } if (!q.tr || !WEB_CUR || q.tr === WEB_CUR.id) L.push(q); } return L; },
+  draw() { const L = this.list(); for (const q of L) { const dt = Math.min(0.25, (performance.now() - q.rx) / 1000), tx = q.x + q.vx * 20 * dt, tz = q.z + q.vz * 20 * dt; q.sx += (tx - q.sx) * 0.3; q.sz += (tz - q.sz) * 0.3; q.sy += ((q.y || 0) - q.sy) * 0.3; q.syaw = lerpAngle(q.syaw, q.yaw, 0.3); } return L; },
+  // simple box-vs-box push using the same 1.375 hull size the walls use
+  collide(s) {
+    if (!this.cfg.coll) return; const W = 1.375;
+    for (const q of this.list()) {
+      if (!q.c) continue;   // both players need collisions on
+      const dx = s.x - q.x, dz = s.z - q.z, px = W - Math.abs(dx), pz = W - Math.abs(dz);
+      if (px <= 0 || pz <= 0 || Math.abs((s.y || 0) - (q.y || 0)) > 0.6) continue;
+      if (px < pz) { const sg = dx >= 0 ? 1 : -1; s.x += sg * px * 0.5; if (s.vx * sg < 0) s.vx = (s.vx + q.vx) * 0.5; }
+      else { const sg = dz >= 0 ? 1 : -1; s.z += sg * pz * 0.5; if (s.vz * sg < 0) s.vz = (s.vz + q.vz) * 0.5; }
+    }
+  },
+  stat(t) { this.msg = t; this.statLoop(); },
+  statLoop() { const n = this.list().length, tx = (this.msg || '') + (this.joined ? ' · ' + MP_REG[this.cfg.region] + ' · ' + (n + 1) + ' in room · ' + (this.ping ? this.ping + ' ms' : 'ping …') + ' · collisions ' + (this.cfg.coll ? 'on' : 'off') : ''); for (const id of ['mpStat', 'mpPStat']) { const e = el(id); if (e) e.textContent = tx; } try { mpPList(); } catch (e) {} },
+};
+function mpBtn() { const b = el('mpConn'); if (b) b.textContent = MP.ws ? 'Disconnect' : 'Connect'; const p = el('mpPConn'); if (p) p.textContent = MP.ws ? 'Leave' : 'Join'; }
+function mpSync() { const c = MP.cfg; el('mpRegion').value = c.region; el('mpUrl').value = c.srv[c.region].url; el('mpKey').value = c.srv[c.region].key; el('mpRoom').value = c.room; el('mpColl').checked = !!c.coll; }
+if (el('mpConn')) {
+  MP.load(); mpSync();
+  el('mpRegion').addEventListener('change', () => { MP.cfg.region = el('mpRegion').value; MP.save(); mpSync(); if (MP.ws) MP.connect(); });
+  el('mpUrl').addEventListener('change', () => { MP.cfg.srv[MP.cfg.region].url = el('mpUrl').value.trim().replace(/\/rest\/v1\/?$/, '').replace(/\/+$/, ''); MP.save(); });
+  el('mpKey').addEventListener('change', () => { MP.cfg.srv[MP.cfg.region].key = el('mpKey').value.trim(); MP.save(); });
+  el('mpRoom').addEventListener('change', () => { MP.cfg.room = el('mpRoom').value.trim() || 'lobby'; MP.save(); if (MP.ws) MP.connect(); });
+  el('mpColl').addEventListener('change', () => { MP.cfg.coll = el('mpColl').checked; MP.save(); MP.statLoop(); toast('Boat collisions ' + (MP.cfg.coll ? 'on' : 'off'), 1000); });
+  el('mpConn').addEventListener('click', () => { if (MP.ws) { MP.close(); MP.stat('Disconnected'); } else MP.connect(); mpBtn(); });
+  el('mpPing').addEventListener('click', async () => {
+    const out = [];
+    for (const r in MP_REG) { const S = MP.cfg.srv[r]; const t0 = performance.now(); let ms = 'fail';
+      try { await fetch(S.url.replace(/\/+$/, '') + '/rest/v1/', { headers: { apikey: S.key }, cache: 'no-store' }); ms = Math.round(performance.now() - t0) + ' ms'; } catch (e) {}
+      out.push(MP_REG[r] + ': ' + ms); el('mpStat').textContent = out.join(' · '); }
+  });
+  addEventListener('beforeunload', () => { if (MP.joined) MP.send(MP.topic, 'broadcast', { type: 'broadcast', event: 'bye', payload: { id: MP.myId() } }); });
+}
+
+// ---------- multiplayer for testers (public site) ----------
+function isTester(id) { return !!id && (TAGS[id] || []).some(t => /^(tester|owner|builder|contributor|dev|admin)$/i.test(String(t.t || '').trim())); }
+function mpGate() {
+  const b = document.querySelector('#webTabs .mpSoon, #webTabs [data-mp]'); if (!b) return;
+  const open = (MP_PUB && MP_PUB.open) || 'off', ok = IS_DEV || open === 'all' || (open === 'testers' && ME && isTester(ME.id));
+  b.dataset.mp = '1';
+  try { chatShow(ok); } catch (e) {}
+  if (ok) { b.classList.remove('mpSoon'); b.removeAttribute('aria-disabled'); b.dataset.tab = 'mp'; b.title = open === 'all' ? '' : 'Testers only'; }
+  else { b.classList.add('mpSoon'); b.setAttribute('aria-disabled', 'true'); delete b.dataset.tab; if (MP.ws) MP.close(); const pn = el('menu').querySelector('.panel'); if (pn && pn.dataset.tab === 'mp') setTab('tracks'); }
+}
+function mpPSync() { if (!MP.cfg) MP.load(); el('mpPRegion').value = MP.cfg.region; el('mpPRoom').value = MP.cfg.room; mpBtn(); MP.statLoop(); }
+function mpPList() { const box = el('mpPList'); if (!box) return; const L = MP.ws ? MP.list() : []; box.innerHTML = MP.joined ? '<div class="keys">In this room:</div>' + ['<div><span class="pl">' + (ME ? avHtml(ME) + escH(ME.name) + tagHtml(ME.id) : 'You') + '</span> (you)</div>'].concat(L.map(q => '<div><span class="pl">' + escH(q.n || 'Guest') + tagHtml(q.id) + '</span></div>')).join('') : ''; }
+async function mpPubLoad() {
+  let j = null;
+  try { const r = await fetch('mp.json?t=' + Date.now(), { cache: 'no-store' }); if (r.ok) j = await r.json(); } catch (e) {}
+  if (!j && IS_DEV && gh.tok && gh.web) { try { const t = ghText(await ghGet(gh.web, 'mp.json')); if (t) j = JSON.parse(t); } catch (e) {} }
+  MP_PUB = j; MP.load(); if (el('mpMuted')) el('mpMuted').value = ((j && j.muted) || []).join(', '); try { rcPoolRender(); } catch (e) {} if (el('mpOpen')) { el('mpOpen').value = (j && j.open) || 'off'; try { mpSync(); } catch (e) {} } mpGate();
+}
+if (el('mpPConn')) {
+  el('mpPRegion').addEventListener('change', () => { MP.cfg.region = el('mpPRegion').value; MP.save(); if (MP.ws) MP.connect(); });
+  el('mpPRoom').addEventListener('change', () => { MP.cfg.room = el('mpPRoom').value.trim() || 'lobby'; MP.save(); if (MP.ws) MP.connect(); });
+  el('mpPConn').addEventListener('click', () => { if (MP.ws) { MP.close(); MP.stat('Left the room'); } else { MP.connect(); } mpBtn(); });
+}
+if (el('mpPublish')) el('mpPublish').addEventListener('click', async () => {
+  try {
+    if (!gh.tok || !gh.web) throw new Error('add a GitHub token + play repo first');
+    const cfg = { open: el('mpOpen').value, coll: !!MP.cfg.coll, srv: MP.cfg.srv, race: Object.assign(rcCfg(), { pool: rcPool(RACE.tracks) }), muted: (el('mpMuted').value || '').split(/[,\n]+/).map(x => x.trim()).filter(Boolean), updated: new Date().toISOString() };
+    MP.stat('Publishing…'); await ghPut(gh.web, 'mp.json', JSON.stringify(cfg, null, 1) + '\n', 'Update multiplayer settings'); MP_PUB = cfg;
+    MP.stat('✓ Multiplayer: ' + ({ off: 'closed', testers: 'testers only', all: 'everyone' })[cfg.open] + ' · collisions ' + (cfg.coll ? 'on' : 'off') + ' — live in about a minute');
+  } catch (e) { MP.stat('Error: ' + e.message); }
+});
+setTimeout(mpPubLoad, 400);
+
+// ---------- closed tracks + editing published tracks ----------
+let EDIT_SLUG = '';
+NET_ERR.track_closed = 'This track is closed — times are not recorded';
+{ const sub = NET.submit; NET.submit = function (k, track, ms) { const t = WEB_LIST.find(x => x.id === track); if (t && t.closed) return Promise.reject(netErr('track_closed')); return sub.call(NET, k, track, ms); }; }
+NET.adminClose = NET.online ? (track, closed) => admRpc('ibr_dev_close', { p_track: track, p_closed: !!closed }) : async (track, closed) => { const L = store.get('closed') || []; store.set('closed', closed ? [...new Set(L.concat(track))] : L.filter(x => x !== track)); return true; };
+function tkEditUi() { const e = el('tkEditing'); if (!e) return; e.textContent = EDIT_SLUG ? '✏️ Editing published track "' + EDIT_SLUG + '" — Publish updates it in place' : ''; el('tkDetach').classList.toggle('hide', !EDIT_SLUG); }
+function tkSel() { const t = tkCur(), b = el('tkClose'); if (b) b.textContent = t && t.closed ? 'Reopen track' : 'Close track'; }
+async function tkCloseToggle() {
+  const t = tkCur(); if (!t) return; const close = !t.closed;
+  if (!confirm((close ? 'Close' : 'Reopen') + ' "' + t.name + '"?' + (close ? ' It stays playable, but no new times are recorded.' : ''))) return;
+  try {
+    if (!gh.tok || !gh.web) throw new Error('add a GitHub token + play repo first');
+    admStat((close ? 'Closing' : 'Reopening') + '…');
+    const list = JSON.parse(ghText(await ghGet(gh.web, 'tracks/index.json')) || '[]'), e = list.find(x => x.id === t.id); if (!e) throw new Error('track is not in the list');
+    if (close) e.closed = true; else delete e.closed;
+    await ghPut(gh.web, 'tracks/index.json', JSON.stringify(list, null, 1) + '\n', (close ? 'Close' : 'Reopen') + ' track: ' + t.name);
+    let w = ''; try { await NET.adminClose(t.id, close); } catch (x) { w = ' (server lock not set: ' + x.message + ')'; }
+    admStat((close ? '🔒 Closed ' : 'Reopened ') + t.name + w); await tkList();
+  } catch (e) { admStat('Error: ' + e.message); }
+}
+if (el('tkClose')) {
+  el('tkClose').addEventListener('click', tkCloseToggle); el('tkPick').addEventListener('change', tkSel);
+  el('tkDetach').addEventListener('click', () => { EDIT_SLUG = ''; tkEditUi(); admStat('Stopped editing — Publish now makes a new track from the name.'); });
+}
+
+// ---------- races: lobby → vote (3 random pool tracks) → countdown on the grid → race N laps → results ----------
+const RACE = { S: null, mem: {}, slot: null, freeze: false, t0: 0, lap0: 0, fin: false, myVote: '', awarded: -1, tracks: [], joinedAt: 0, hi: 0, lastB: 0 };
+function rcCfg() { const c = Object.assign({ pool: [], laps: 3, inter: 20 }, (IS_DEV && MP.cfg && MP.cfg.race) || (MP_PUB && MP_PUB.race) || {}); c.laps = Math.max(1, Math.round(+c.laps || 3)); c.inter = Math.max(5, Math.round(+c.inter || 20)); return c; }
+function rcPool(L) { const p = rcCfg().pool || []; if (p.length) return p.slice(); const f = (L || []).find(t => /frozen\s*lake/i.test(t.name || '') || /frozen-?lake/i.test(t.id || '')); return [f ? f.id : 'frozen-lake']; }
+async function raceTracks() {
+  if (typeof WEB_LIST !== 'undefined' && WEB_LIST && WEB_LIST.length) return (RACE.tracks = WEB_LIST);
+  if (RACE.tracks.length) return RACE.tracks;
+  if (IS_DEV && gh.tok && gh.web) { try { RACE.tracks = JSON.parse(ghText(await ghGet(gh.web, 'tracks/index.json')) || '[]'); } catch (e) {} }
+  return RACE.tracks;
+}
+const rcName = id => ((RACE.tracks.find(t => t.id === id) || {}).name) || id;
+const rcFmt = ms => { ms = Math.max(0, Math.round(ms)); const m = Math.floor(ms / 60000), s = (ms % 60000) / 1000; return m + ':' + (s < 10 ? '0' : '') + s.toFixed(3); };
+const rcSend = (ev, pl) => MP.send(MP.topic, 'broadcast', { type: 'broadcast', event: ev, payload: pl });
+function rcMembers() { const now = Date.now(), L = [MP.myId()]; for (const k in RACE.mem) { if (now - RACE.mem[k].at > 6000) delete RACE.mem[k]; else L.push(k); } return [...new Set(L)].sort(); }
+const rcAmHost = () => rcMembers()[0] === MP.myId();
+function rcBroadcast() { if (!RACE.S) return; const d = Object.assign({}, RACE.S, { rem: RACE.S.end - Date.now(), from: MP.myId() }); delete d.end; rcSend('state', d); }
+function rcSet(ph, extra, dur) { const o = RACE.S || { seq: 0 }; RACE.S = Object.assign({}, o, extra, { ph, seq: (o.seq || 0) + 1, end: Date.now() + dur }); rcOnPhase(); rcBroadcast(); rcUi(); }
+function rcShuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+async function rcNewVote() { const L = await raceTracks(), pool = rcPool(L).filter(id => !L.length || L.some(t => t.id === id)); const opts = rcShuffle(pool.length ? pool : rcPool(L)).slice(0, 3); rcSet('vote', { opts, votes: {}, track: '', res: [], ids: [], grace: 0, laps: rcCfg().laps }, rcCfg().inter * 1000); }
+function rcTally() { const S = RACE.S, n = {}; for (const k in S.votes) if (S.opts.includes(S.votes[k])) n[S.votes[k]] = (n[S.votes[k]] || 0) + 1; const max = Math.max(0, ...Object.values(n)); const top = max ? S.opts.filter(o => n[o] === max) : S.opts; return top[Math.floor(Math.random() * top.length)]; }
+function rcHost() {
+  if (!MP.joined) return; const now = Date.now();
+  if (now - RACE.hi > 1500) { RACE.hi = now; rcSend('hi', { id: MP.myId(), n: (ME && ME.name) || 'Guest' }); }
+  rcTrackChat(); rcUi();
+  if (!rcAmHost() || now - RACE.joinedAt < 3500) return;
+  const S = RACE.S;
+  if (!S) { rcNewVote(); return; }
+  if (now - RACE.lastB > 1000) { RACE.lastB = now; rcBroadcast(); }
+  if (S.ph === 'vote' && now >= S.end) rcSet('count', { track: rcTally(), laps: rcCfg().laps, ids: rcMembers(), res: [], grace: 0 }, 8000);
+  else if (S.ph === 'count' && now >= S.end) rcSet('race', {}, 15 * 60000);
+  else if (S.ph === 'race') {
+    const live = rcMembers(), left = S.ids.filter(id => live.includes(id) && !S.res.some(r => r.id === id));
+    if (!left.length || now >= S.end) rcSet('res', {}, 10000);
+    else if (S.res.length && !S.grace) { S.grace = 1; S.end = Math.min(S.end, now + 60000); rcBroadcast(); }
+  } else if (S.ph === 'res' && now >= S.end) rcNewVote();
+}
+function rcApply(d) { const old = RACE.S; if (old && d.seq < old.seq) return; const S = Object.assign({}, d, { end: Date.now() + (d.rem || 0) }); delete S.rem; delete S.from; RACE.S = S; if (!old || old.seq !== S.seq) rcOnPhase(); rcUi(); }
+async function rcLoad(id) {
+  if (WEB_CUR && WEB_CUR.id === id) return true; const L = await raceTracks(), t = L.find(x => x.id === id); if (!t) { toast('Track ' + id + ' not found', 2000); return false; }
+  try {
+    if (typeof WEB_EL !== 'undefined' && WEB_EL) { await webLoad(t, JSON.parse(WEB_EL.textContent).tracks.replace(/[^/]*$/, ''), true); }
+    else if (gh.tok && gh.web) { await loadPublished(JSON.parse(ghText(await ghGet(gh.web, 'tracks/' + t.file))), true); WEB_CUR = t; }
+    return true;
+  } catch (e) { console.error(e); toast('Could not load ' + t.name, 2000); return false; }
+}
+function rcGrid(idx) {
+  const G = map.regions.filter(r => r.t === 'grid'); if (!G.length) return { x: map.spawn.x, z: map.spawn.z, yaw: map.spawn.yaw };
+  const g = G[idx % G.length], row = Math.floor(idx / G.length), f = forward(g.yaw);
+  return { x: (g.x0 + g.x1) / 2 - f.x * 3 * row, z: (g.z0 + g.z1) / 2 - f.z * 3 * row, yaw: g.yaw };
+}
+async function rcOnPhase() {
+  const S = RACE.S, me = MP.myId(), inRace = S.ids && S.ids.includes(me);
+  if (S.ph === 'vote') { RACE.myVote = ''; RACE.freeze = false; RACE.fin = false; RACE.slot = null; }
+  else if (S.ph === 'count' && inRace) {
+    RACE.fin = false; RACE.freeze = true; RACE.slot = null; chatSys('lobby', 'Next race: ' + rcName(S.track) + ' · ' + S.laps + ' lap' + (S.laps === 1 ? '' : 's'));
+    if (!(await rcLoad(S.track))) return; if (RACE.S !== S) return;
+    try { if (typeof placing !== 'undefined' && placing) cancelPlacing(); } catch (e) {}
+    resetRun(); RACE.slot = rcGrid(S.ids.indexOf(me)); RACE.T(); if (paused) resume();
+  }
+  else if (S.ph === 'race' && inRace) { RACE.freeze = false; RACE.t0 = performance.now(); RACE.lap0 = race ? race.lapNo : 0; toast('GO!', 900); }
+  else if (S.ph === 'res') { RACE.freeze = false; if (inRace && RACE.awarded !== S.seq) { RACE.awarded = S.seq; rcAward(); } }
+}
+RACE.T = function () {
+  const S = RACE.S; if (!S || !MP.joined || typeof st === 'undefined') return;
+  if (RACE.freeze && RACE.slot) { const g = RACE.slot; copyState(st, makeState(g.x, g.z, g.yaw)); st.y = env.groundAt(g.x, g.z); copyState(prev, st); cam.yaw = cam.pyaw = g.yaw; return; }
+  if (S.ph === 'race' && !RACE.fin && race && S.ids.includes(MP.myId())) {
+    const laps = race.lapNo - Math.max(RACE.lap0, 1);
+    if (laps >= S.laps || (map.fins && map.fins.length && race.done)) {
+      RACE.fin = true; const d = { id: MP.myId(), n: (ME && ME.name) || 'Guest', ms: Math.round(performance.now() - RACE.t0) };
+      rcSend('fin', d); RACE_EV.fin(d); toast('Finished! ' + rcFmt(d.ms), 2500);
+    }
+  }
+};
+window.RACE_T = RACE.T;
+function rcOnLeave() { RACE.S = null; RACE.mem = {}; RACE.freeze = false; RACE.slot = null; rcUi(); }
+// icetokens (currency for cosmetics — shop not built yet)
+function iceKey() { return 'ice:' + ((ME && ME.id) || MP.myId()); }
+function iceBal() { return +store.get(iceKey()) || 0; }
+async function rcAward() {
+  let bal = iceBal() + 2;
+  if (NET.online && MY_KEY) { try { const v = await sbRpc('ibr_race_reward', { p_key: MY_KEY }); if (typeof v === 'number') bal = v; } catch (e) { console.warn('reward', e); } }
+  store.set(iceKey(), bal); toast('+2 \U0001f9ca icetokens', 2200); rcUi();
+}
+const RACE_EV = {
+  hi: d => { if (d.id) RACE.mem[d.id] = { n: d.n, at: Date.now() }; },
+  state: d => { if (d.from) RACE.mem[d.from] = Object.assign(RACE.mem[d.from] || {}, { at: Date.now() }); rcApply(d); },
+  vote: d => { const S = RACE.S; if (rcAmHost() && S && S.ph === 'vote' && S.opts.includes(d.opt)) { S.votes[d.id] = d.opt; rcBroadcast(); rcUi(); } },
+  fin: d => { const S = RACE.S; if (rcAmHost() && S && S.ph === 'race' && !S.res.some(r => r.id === d.id)) { S.res.push({ id: d.id, n: d.n, ms: d.ms }); S.res.sort((a, b) => a.ms - b.ms); rcBroadcast(); rcUi(); } },
+  chat: (d, topic) => chatRecv(d, topic === MP.trackTopic ? 'track' : 'lobby'),
+};
+function rcVote(o) { RACE.myVote = o; const d = { id: MP.myId(), opt: o }; rcSend('vote', d); if (rcAmHost()) RACE_EV.vote(d); else if (RACE.S) RACE.S.votes[d.id] = o; rcUi(); }
+function rcUi() {
+  const box = el('raceBox'); if (!box) return; const S = RACE.S, ice = el('rcIce');
+  if (ice) ice.textContent = '\U0001f9ca ' + iceBal() + ' icetokens · cosmetics shop coming soon';
+  if (!MP.joined) { box.classList.add('hide'); return; }
+  box.classList.remove('hide');
+  const left = S ? Math.max(0, Math.ceil((S.end - Date.now()) / 1000)) : 0, me = MP.myId(), n = rcMembers().length;
+  let h = '';
+  if (!S) h = '<div>Lobby · ' + n + ' player' + (n === 1 ? '' : 's') + '</div><div class="keys">Waiting for the next vote…</div>';
+  else if (S.ph === 'vote') {
+    const c = {}; for (const k in S.votes) c[S.votes[k]] = (c[S.votes[k]] || 0) + 1;
+    h = '<div><b>Vote for the next track</b> · ' + left + 's · ' + S.laps + ' lap' + (S.laps === 1 ? '' : 's') + '</div><div class="rv">' + S.opts.map(o => '<button data-o="' + escH(o) + '" class="' + (RACE.myVote === o ? 'on' : '') + '">' + escH(rcName(o)) + ' (' + (c[o] || 0) + ')</button>').join('') + '</div>';
+  }
+  else if (S.ph === 'count') h = '<div>' + escH(rcName(S.track)) + ' · ' + S.laps + ' lap' + (S.laps === 1 ? '' : 's') + '</div><div class="big">' + (S.ids.includes(me) ? 'Starting in ' + left : 'Race starting — you’ll join the next one') + '</div>';
+  else if (S.ph === 'race') {
+    const lap = race ? Math.min(S.laps, Math.max(1, race.lapNo - Math.max(RACE.lap0, 1) + 1)) : 1;
+    h = '<div>' + escH(rcName(S.track)) + '</div><div class="big">' + (S.ids.includes(me) ? (RACE.fin ? 'Finished' : 'Lap ' + lap + '/' + S.laps + ' · ' + rcFmt(performance.now() - RACE.t0)) : 'Spectating') + '</div>' + (S.res.length ? '<div class="keys">' + S.res.map((r, i) => (i + 1) + '. ' + escH(r.n) + ' ' + rcFmt(r.ms)).join(' · ') + (S.grace ? ' · ends in ' + left + 's' : '') + '</div>' : '');
+  }
+  else if (S.ph === 'res') h = '<div><b>Results — ' + escH(rcName(S.track)) + '</b></div>' + S.res.map((r, i) => '<div>' + (['\U0001f947', '\U0001f948', '\U0001f949'][i] || (i + 1) + '.') + ' ' + escH(r.n) + tagHtml(r.id) + ' · ' + rcFmt(r.ms) + '</div>').join('') + (S.res.length ? '' : '<div class="keys">Nobody finished</div>') + (S.ids.includes(me) ? '<div>+2 \U0001f9ca icetokens</div>' : '') + '<div class="keys">Next vote in ' + left + 's</div>';
+  box.innerHTML = h;
+  box.querySelectorAll('[data-o]').forEach(b => b.addEventListener('click', () => rcVote(b.dataset.o)));
+}
+setInterval(() => { try { rcHost(); } catch (e) { console.error(e); } }, 500);
+// dev race pool editor
+async function rcPoolRender() {
+  const box = el('rcPool'); if (!box) return; const L = await raceTracks(), c = rcCfg(), pool = rcPool(L);
+  el('rcLaps').value = c.laps; el('rcInter').value = c.inter;
+  box.innerHTML = L.length ? L.map(t => '<label style="display:flex;gap:6px;align-items:center"><input type="checkbox" data-id="' + escH(t.id) + '"' + (pool.includes(t.id) ? ' checked' : '') + '>' + (t.closed ? '\U0001f512 ' : '') + escH(t.name) + '</label>').join('') : '<div class="keys">No published tracks found (add a GitHub token + play repo, then Refresh). Default pool: Frozen Lake.</div>';
+  box.querySelectorAll('input').forEach(i => i.addEventListener('change', rcPoolSave));
+}
+function rcPoolSave() { const box = el('rcPool'), pool = [...box.querySelectorAll('input:checked')].map(i => i.dataset.id); MP.cfg.race = { pool, laps: Math.max(1, +el('rcLaps').value || 3), inter: Math.max(5, +el('rcInter').value || 20) }; MP.save(); MP.stat('Race settings saved — press Publish multiplayer settings to go live'); }
+if (el('rcPool')) { el('rcLaps').addEventListener('change', rcPoolSave); el('rcInter').addEventListener('change', rcPoolSave); el('rcPoolLoad').addEventListener('click', () => { RACE.tracks = []; rcPoolRender(); }); }
+
+// ---------- chat: lobby / track / whole-game, filtered ----------
+const CHAT = { log: { lobby: [], track: [], global: [] }, tab: 'lobby', g: null, gTopic: 'realtime:ibr-global' };
+const CHAT_SLUR = /n+[^\w\s]*[i1!|y]+[^\w\s]*[gq9]+[^\w\s]*[gq9]+[^\w\s]*(?:[e3]+[^\w\s]*r+|[a@4]+h?|u+h|[e3]+)?[sz]*/gi;
+const CHAT_WORDS = [[/f+[^\w\s]*[u*v]+[^\w\s]*c+[^\w\s]*k+/gi, 'oh dear'], [/p+[^\w\s]*[i1!]+[^\w\s]*[s$5]+[^\w\s]*[s$5]+/gi, 'peepee'], [/s+[^\w\s]*h+[^\w\s]*[i1!*]+[^\w\s]*t+/gi, 'poopoo']];
+function chatFilter(t) { let slur = false; t = String(t || '').slice(0, 200).replace(CHAT_SLUR, () => { slur = true; return 'neighbor'; }); for (const [re, w] of CHAT_WORDS) t = t.replace(re, w); return { t, slur }; }
+function chatMuted(id, name) { if ((+store.get('mute:' + id) || 0) > Date.now()) return true; const L = (MP_PUB && MP_PUB.muted) || []; return L.some(x => x === id || (name && String(x).toLowerCase() === String(name).toLowerCase())); }
+function chatMute(id) { store.set('mute:' + id, Date.now() + 24 * 3600 * 1000); }
+function chatPush(ch, m) { const L = CHAT.log[ch]; L.push(m); if (L.length > 80) L.shift(); if (ch === CHAT.tab) chatRender(); else { const b = document.querySelector('#chatBox [data-ch="' + ch + '"]'); if (b && !b.textContent.endsWith('•')) b.textContent += ' •'; } }
+function chatSys(ch, t) { try { chatPush(ch, { sys: 1, tx: t }); } catch (e) {} }
+function chatRecv(d, ch) {
+  if (!d || !d.id || !d.tx) return; if (chatMuted(d.id, d.n)) return;
+  const f = chatFilter(d.tx); if (f.slur || d.mut) chatMute(d.id);
+  chatPush(ch, { id: d.id, n: String(d.n || 'Guest').slice(0, 24), tx: f.t });
+  if (f.slur || d.mut) chatPush(ch, { sys: 1, tx: (d.n || 'Guest') + ' was muted' });
+}
+function chatRender() {
+  const box = el('chLog'); if (!box) return;
+  box.innerHTML = CHAT.log[CHAT.tab].map(m => m.sys ? '<div class="sys">' + escH(m.tx) + '</div>' : '<div><b>' + escH(m.n) + '</b>' + tagHtml(m.id) + ': ' + escH(m.tx) + '</div>').join('') || '<div class="sys">' + ({ lobby: MP.joined ? 'Lobby chat — only people in your race lobby see this' : 'Join a lobby to use lobby chat', track: MP.trackTopic ? 'Track chat for ' + escH((WEB_CUR && WEB_CUR.name) || 'this track') : 'Join a lobby and load a track to use track chat', global: 'Whole-game chat — everyone on ibronline' })[CHAT.tab] + '</div>';
+  box.scrollTop = box.scrollHeight;
+}
+function rtSocket(url, key, topic, onB) {
+  const ws = new WebSocket(url.replace(/^http/, 'ws').replace(/\/+$/, '') + '/realtime/v1/websocket?apikey=' + encodeURIComponent(key) + '&vsn=1.0.0'); let ref = 0, hb = 0;
+  const raw = o => { if (ws.readyState === 1) ws.send(JSON.stringify(Object.assign(o, { ref: String(++ref) }))); };
+  const o = { ws, send(ev, pl) { raw({ topic, event: 'broadcast', payload: { type: 'broadcast', event: ev, payload: pl } }); }, close() { clearInterval(hb); try { ws.close(); } catch (e) {} } };
+  ws.onopen = () => { const pl = { config: { broadcast: { self: false }, presence: { key: '' }, private: false } }; if (!/^sb_/.test(key)) pl.access_token = key; raw({ topic, event: 'phx_join', payload: pl }); hb = setInterval(() => raw({ topic: 'phoenix', event: 'heartbeat', payload: {} }), 25000); };
+  ws.onmessage = ev => { try { const m = JSON.parse(ev.data); if (m.event === 'broadcast' && m.payload) onB(m.payload.event, m.payload.payload || {}); } catch (e) {} };
+  ws.onclose = () => { clearInterval(hb); if (CHAT.g === o) { CHAT.g = null; setTimeout(chatGlobal, 5000); } };
+  return o;
+}
+function chatGlobal() { if (CHAT.g || el('chatBox').classList.contains('hide')) return; if (!MP.cfg) MP.load(); const S = MP.cfg.srv.eu; if (!S || !S.url || !S.key) return; try { CHAT.g = rtSocket(S.url, S.key, CHAT.gTopic, (ev, d) => { if (ev === 'chat') chatRecv(d, 'global'); }); } catch (e) {} }
+function rcTrackChat() {
+  const want = WEB_CUR ? 'realtime:ibr-' + MP.cfg.region + '-track-' + String(WEB_CUR.id).replace(/[^\w-]/g, '') : '';
+  if (want === MP.trackTopic) return;
+  if (MP.trackTopic) MP.send(MP.trackTopic, 'phx_leave', {});
+  MP.trackTopic = want; CHAT.log.track = [];
+  if (want) { const k = MP.cfg.srv[MP.cfg.region].key, pl = { config: { broadcast: { self: false }, presence: { key: MP.myId() + '-t' }, private: false } }; if (!/^sb_/.test(k)) pl.access_token = k; MP.send(want, 'phx_join', pl); }
+  if (CHAT.tab === 'track') chatRender();
+}
+function chatSend() {
+  const inp = el('chIn'), raw = inp.value.trim(); if (!raw) return; const me = MP.myId(), name = (ME && ME.name) || 'Guest';
+  if (chatMuted(me, name)) { toast('You are muted', 1500); return; }
+  const f = chatFilter(raw), d = { id: me, n: name, tx: f.t, mut: f.slur ? 1 : 0 }, ch = CHAT.tab;
+  if (ch === 'lobby') { if (!MP.joined) { toast('Join a lobby first', 1500); return; } MP.send(MP.topic, 'broadcast', { type: 'broadcast', event: 'chat', payload: d }); }
+  else if (ch === 'track') { if (!MP.trackTopic) { toast('Join a lobby and load a track first', 1500); return; } MP.send(MP.trackTopic, 'broadcast', { type: 'broadcast', event: 'chat', payload: d }); }
+  else { chatGlobal(); if (!CHAT.g) { toast('Global chat is not connected', 1500); return; } CHAT.g.send('chat', d); }
+  inp.value = ''; chatPush(ch, { id: me, n: name, tx: f.t });
+  if (f.slur) { chatMute(me); chatPush(ch, { sys: 1, tx: 'You have been muted for 24 hours' }); }
+}
+function chatShow(on) { const b = el('chatBox'); if (!b) return; b.classList.toggle('hide', !on); if (on) { chatRender(); setTimeout(chatGlobal, 600); } else if (CHAT.g) { const g = CHAT.g; CHAT.g = null; g.close(); } }
+if (el('chatBox')) {
+  document.querySelectorAll('#chatBox [data-ch]').forEach(b => b.addEventListener('click', () => { CHAT.tab = b.dataset.ch; document.querySelectorAll('#chatBox [data-ch]').forEach(x => { x.classList.toggle('on', x === b); x.textContent = x.textContent.replace(/ •$/, ''); }); el('chatBox').classList.remove('min'); chatRender(); }));
+  el('chMin').addEventListener('click', () => el('chatBox').classList.toggle('min'));
+  el('chIn').addEventListener('keydown', e => { e.stopPropagation(); if (e.key === 'Enter') { e.preventDefault(); chatSend(); } else if (e.key === 'Escape') el('chIn').blur(); });
+  el('chIn').addEventListener('keyup', e => e.stopPropagation());
+  addEventListener('keydown', e => { if (e.code !== 'KeyY' || el('chatBox').classList.contains('hide') || /INPUT|TEXTAREA|SELECT/.test((document.activeElement || {}).tagName || '')) return; e.preventDefault(); el('chatBox').classList.remove('min'); el('chIn').focus(); });
+}
+
+window.IceBoat = { MP, RACE, CHAT, chatFilter, runTests, step, makeState, env, _rawMap(m) { const o = map; map = m; return o; }, parseLitematic, buildLitMap, importFile, publishTrack, obuRunCommands, obuSetMode, obuChanged, regionsChanged, ghPublish, webHtml, applyUrlObu, gh, nameOk, keyNorm, newKey, skinFace, devGateHtml, get net() { return NET; }, get me() { return ME; }, setTab, get baseTexCount() { return baseTex.size; }, get map() { return map; }, get race() { return race; }, get st() { return st; } };
 
 /* ---------- boot ---------- */
 resize();
