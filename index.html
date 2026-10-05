@@ -2,7 +2,7 @@
 <html lang="en"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<title>ibronline</title>
+<title>ibr-online</title>
 <style>
 :root{--bg:#191919;--surf:#202020;--raise:#383836;--tx:#fff;--tx2:rgba(255,255,255,.65);--bd:rgba(255,255,255,.2);--blue:#5E9FE8;--green:#72BC8F;--orange:#DE9255;--red:#E97366}
 *{box-sizing:border-box}
@@ -133,7 +133,7 @@ table.wr tr.go{cursor:pointer}table.wr tr.go:hover td{background:rgba(255,255,25
 .pl{display:flex;align-items:center;gap:8px}.pl .av{width:22px;height:22px;border-radius:4px;font-size:11px}
 .rk1{color:#E8C25E}.rk2{color:#C9CDD3}.rk3{color:#D29A63}
 
-/* ===== ibronline UI v2: glass + ice accent ===== */
+/* ===== ibr-online UI v2: glass + ice accent ===== */
 :root{--g-bg:rgba(13,16,22,.66);--g-bd:rgba(255,255,255,.09);--acc1:#7dd3fc;--acc:linear-gradient(135deg,#7dd3fc 0%,#a5b4fc 100%);--mut:rgba(226,232,240,.6);--sh:0 10px 30px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.06)}
 html body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;letter-spacing:-.005em}
 html body .hud{text-shadow:none}
@@ -633,8 +633,37 @@ body:has(#devDash:not(.hide)) #home{visibility:hidden}
 #hmDevBR{position:fixed;right:44px;bottom:34px;z-index:5;background:none;border:0;padding:6px 0;font:500 14px/1 system-ui,-apple-system,'Segoe UI',sans-serif;color:rgba(232,238,245,.55);cursor:pointer;letter-spacing:.02em;transition:color .15s}
 #hmDevBR:hover{color:#7cc4ff}
 #menu:not(.hmHome) #hmDevBR,#menu.hide #hmDevBR{display:none}
+/* one sign-in only on the home screen */
+body:has(#menu.hmHome) #meChip{display:none!important}
+/* bigger, home-style chat */
+#chatBox{left:24px!important;bottom:24px!important;width:420px!important;max-width:90vw!important;font:14px/1.45 system-ui,-apple-system,'Segoe UI',sans-serif!important;border:0!important;border-radius:0 10px 10px 0!important;border-left:3px solid #7cc4ff!important;background:linear-gradient(90deg,rgba(6,8,11,.78),rgba(6,8,11,.55))!important;box-shadow:0 8px 30px rgba(0,0,0,.35)!important}
+#chatBox:not(.open){background:transparent!important;border-left:0!important;box-shadow:none!important;width:auto!important}
+#chatBox .chTabs button{padding:9px 0!important;font-size:13px!important;color:rgba(232,238,245,.6)!important;border-bottom:2px solid transparent!important}
+#chatBox .chTabs button.on{background:transparent!important;color:#fff!important;border-bottom-color:#7cc4ff!important}
+#chLog{height:220px!important;padding:8px 12px!important}
+#chIn{padding:10px 12px!important;font-size:14px!important;background:rgba(0,0,0,.3)!important}
+#chLog .pop{font-size:14px;padding:4px 10px!important;border-radius:6px!important;background:rgba(6,8,11,.6)!important;text-shadow:none!important}
+#chatBox:not(.open) #chBtn{font-size:14px!important;padding:6px 12px!important;border-radius:8px!important;background:rgba(6,8,11,.6)!important;opacity:.85!important;margin-top:6px!important}
+#menu.hmHome .hmHelp{padding-left:200px!important}
+#chatBox:not(.open) #chLog{height:auto!important;padding:0!important}
+/* top-right home column: one size, proper spacing */
+#home .hmProf{font:500 16px/1.2 system-ui,-apple-system,'Segoe UI',sans-serif!important;gap:12px!important;color:#fff}
+#home .hmProf .av{margin-left:2px}
+#home .hmFrH{font:500 16px/1.2 system-ui,-apple-system,'Segoe UI',sans-serif!important;color:#fff!important;margin-top:14px}
+#home .hmMute,#home .hmFr button,#home .hmAll{font:400 16px/1.3 system-ui,-apple-system,'Segoe UI',sans-serif!important}
+#home .hmMute{color:rgba(232,238,245,.5)!important}
+#home .hmAll{color:rgba(232,238,245,.65)!important}
+#home .hmBal,#home #hmOnl{font-size:13px!important}
+#home #hmProf .av{margin-left:12px!important}
+/* no icetokens for now */
+#hmBal,#cosBal,.cosBal,#rcIce,.cosNote{display:none!important}
+/* Discord icon bottom right, Developer to its left */
+#hmDisc{position:fixed;right:44px;bottom:30px;z-index:5;display:flex;color:rgba(232,238,245,.6);transition:color .15s,transform .15s}
+#hmDisc:hover{color:#5865f2;transform:translateY(-2px)}
+#menu:not(.hmHome) #hmDisc,#menu.hide #hmDisc{display:none}
+#hmDevBR{right:96px!important}
 </style>
-<meta name="ibr-build" content="2026-10-05T16:08:26.533Z">
+<meta name="ibr-build" content="2026-10-05T16:32:48.290Z">
 <script type="application/json" id="webSite">{"tracks":"tracks/index.json","sb":{"url":"https://dbyqswlvmequszujpwaj.supabase.co","key":"sb_publishable_-Av4-QPspUOMHAUtM5Jksw_amiBfwpy"}}</script>
 </head>
 <body>
@@ -665,10 +694,10 @@ body:has(#devDash:not(.hide)) #home{visibility:hidden}
 </div>
 <div id="drop" class="hide">Drop .litematic to load track</div>
 
-<div id="bootScr"><div class="bsIn"><div class="bsLogo">ibronline</div><div class="bsSub">ice boat racing</div><div class="bsBar"><i></i></div><div class="bsTip" id="bsTip">Waxing the ice…</div></div></div>
+<div id="bootScr"><div class="bsIn"><div class="bsLogo">ibr-online</div><div class="bsSub">ice boat racing</div><div class="bsBar"><i></i></div><div class="bsTip" id="bsTip">Waxing the ice…</div></div></div>
 <div id="menu">
   <div class="panel" role="dialog" aria-label="Game menu">
-    <h1>ibronline</h1>
+    <h1>ibr-online</h1>
     <div class="keys" id="verTag" style="opacity:.6;margin:-4px 0 6px"></div>
     <div class="sub">Minecraft-style ice boat physics · 20 ticks/s</div>
     <button id="meChip" class="hide" aria-label="Account"></button>
@@ -725,7 +754,7 @@ body:has(#devDash:not(.hide)) #home{visibility:hidden}
 
     <div id="devDash" class="dev hide" role="dialog" aria-label="Developer dashboard"><div class="ddWin">
      <nav class="ddSide">
-      <div class="ddBrand">ibronline <span class="ddPill">DEV</span></div>
+      <div class="ddBrand">ibr-online <span class="ddPill">DEV</span></div>
       <button type="button" data-p="players" class="on"><span>👤</span>Player moderation</button>
       <button type="button" data-p="tracks"><span>🧱</span>Track import &amp; regions</button>
       <button type="button" data-p="race"><span>🏁</span>Race settings</button>
@@ -3107,7 +3136,7 @@ async function publishTrack(asText) {
     const raw = new Uint8Array(out); data.vox = { sx: V.sx, sy: V.sy, sz: V.sz, y0: V.y0, pal: V.pal, d: b64(z ? await zipBytes(raw, true) : raw) }; }
   if (asText === 'data') return data;
   const tag = '<scr' + 'ipt type="application/json" id="publishedTrack">' + JSON.stringify(data).replace(/</g, '\\u003c') + '</scr' + 'ipt>';
-  const html = SRC_PUBLIC.replace('</head>', tag + '\n</head>').replace(/<title>[^<]*<\/title>/, '<title>' + name.replace(/[<&]/g, '') + ' · ibronline</title>');
+  const html = SRC_PUBLIC.replace('</head>', tag + '\n</head>').replace(/<title>[^<]*<\/title>/, '<title>ibr-online</title>');
   if (asText) return html;
   const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
   a.download = (name.replace(/[^\w\- ]+/g, '').trim().replace(/\s+/g, '-') || 'track') + '.html';
@@ -3165,7 +3194,7 @@ async function webLoad(t, base, quiet) {
   try {
     const r = await fetch(base + t.file + '?v=' + encodeURIComponent(t.updated || Date.now()));
     if (!r.ok) throw new Error('HTTP ' + r.status);
-    await loadPublished(await r.json()); WEB_CUR = t; document.title = t.name + ' · ibronline';
+    await loadPublished(await r.json()); WEB_CUR = t; document.title = 'ibr-online';
     el('webList').querySelectorAll('.b').forEach(b => b.classList.toggle('on', WEB_LIST[+b.dataset.i] === t));
     if (!quiet) { const q = new URLSearchParams(location.search); q.set('track', t.id); history.replaceState(null, '', '?' + q); }
   } catch (err) { console.error(err); setStatus('Could not load ' + t.name + ': ' + err.message, 'err'); }
@@ -3370,7 +3399,7 @@ el('acKeyReveal').addEventListener('click', () => { const sh = el('acKeyReveal')
 el('acKeyCopy').addEventListener('click', () => copyText(MY_KEY));
 el('acKeyNewCopy').addEventListener('click', () => copyText(el('acKeyNewT').textContent));
 el('acKeyNewDl').addEventListener('click', () => {
-  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['ibronline player key for ' + (ME ? ME.name : '') + '\n\n' + el('acKeyNewT').textContent + '\n\nPaste it into Account > Log in with key at https://ibronline.github.io/play/\n'], { type: 'text/plain' }));
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['ibr-online player key for ' + (ME ? ME.name : '') + '\n\n' + el('acKeyNewT').textContent + '\n\nPaste it into Account > Log in with key at https://ibronline.github.io/play/\n'], { type: 'text/plain' }));
   a.download = 'ibronline-player-key.txt'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
 });
 el('acLogout').addEventListener('click', () => { if (!confirm('Log out? You will need your player key to log back in.')) return; store.del('acct'); setMe(null); el('acKeyNew').classList.add('hide'); acStat('Logged out.'); });
@@ -3483,7 +3512,7 @@ async function ghPut(repo, file, text, msg) {
 function ghText(cur) { return cur && cur.content ? new TextDecoder().decode(unb64(cur.content.replace(/\s/g, ''))) : ''; }
 function webHtml() { const cfg = { tracks: 'tracks/index.json' }; if (gh.sbUrl && gh.sbKey) cfg.sb = { url: gh.sbUrl, key: gh.sbKey }; return SRC_PUBLIC.replace('</head>', '<meta name="ibr-build" content="' + new Date().toISOString() + '">\n<scr' + 'ipt type="application/json" id="webSite">' + JSON.stringify(cfg).replace(/</g, '\\u003c') + '</scr' + 'ipt>\n</head>'); }
 function siteUrl(repo) { const [o, r] = repo.split('/'); return r.toLowerCase() === o.toLowerCase() + '.github.io' ? 'https://' + r.toLowerCase() + '/' : 'https://' + o.toLowerCase() + '.github.io/' + r + '/'; }
-const WEB_README = '# ibronline\n\nMinecraft ice-boat racing in the browser with OpenBoatUtils physics, BoatCam and 2D/3D views.\n\nThis repository is the public website. It is updated automatically when a track is published from the private dev build.\n\n- `index.html` - the game (play mode)\n- `tracks/index.json` - published track list\n- `tracks/<id>.json` - track data (blocks, regions, OpenBoatUtils settings)\n\n## Link parameters\n\n- `?track=<id>` open a track\n- `&mode=RALLY_BLUE` apply an OpenBoatUtils mode (name or 0-24); repeatable\n- `&exclusive=BA` reset to vanilla, then apply a mode\n- `&obu=defaultslipperiness 0.98;blockslipperiness 0.989 packed_ice` run OpenBoatUtils commands\n- `&slip= &yaw= &fwd= &back= &turn= &lateral= &brake= &maxspeed= &maxres= &stack=1` set values\n- `&vanilla=1` ignore the track\'s OpenBoatUtils settings\n';
+const WEB_README = '# ibr-online\n\nMinecraft ice-boat racing in the browser with OpenBoatUtils physics, BoatCam and 2D/3D views.\n\nThis repository is the public website. It is updated automatically when a track is published from the private dev build.\n\n- `index.html` - the game (play mode)\n- `tracks/index.json` - published track list\n- `tracks/<id>.json` - track data (blocks, regions, OpenBoatUtils settings)\n\n## Link parameters\n\n- `?track=<id>` open a track\n- `&mode=RALLY_BLUE` apply an OpenBoatUtils mode (name or 0-24); repeatable\n- `&exclusive=BA` reset to vanilla, then apply a mode\n- `&obu=defaultslipperiness 0.98;blockslipperiness 0.989 packed_ice` run OpenBoatUtils commands\n- `&slip= &yaw= &fwd= &back= &turn= &lateral= &brake= &maxspeed= &maxres= &stack=1` set values\n- `&vanilla=1` ignore the track\'s OpenBoatUtils settings\n';
 async function ghPublish() {
   if (!gh.web) throw new Error('set the web repo');
   const d = await publishTrack('data'), json = JSON.stringify(d);
@@ -3519,12 +3548,12 @@ function devGateMain() {
   if (saved) { e.textContent = 'Unlocking…'; open(saved).catch(() => { try { sessionStorage.removeItem('ibr-devcode'); localStorage.removeItem('ibr-devcode'); } catch (x) {} e.textContent = ''; }); }
 }
 const DEV_ITER = 250000;
-const DEV_GATE = '<!DOCTYPE html>\n<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>ibronline dev · locked</title><style>'
+const DEV_GATE = '<!DOCTYPE html>\n<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>ibr-online dev · locked</title><style>'
   + 'html,body{margin:0;height:100%;background:#191919;color:#fff;font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}body{display:flex;align-items:center;justify-content:center;padding:16px;box-sizing:border-box}'
   + 'form{width:100%;max-width:360px;background:#202020;border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:24px}h1{margin:0 0 4px;font-size:24px}p{margin:0 0 14px;color:rgba(255,255,255,.65);font-size:14px}'
   + 'input[type=password]{width:100%;box-sizing:border-box;min-height:44px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:#191919;color:#fff;font:inherit;padding:0 12px;margin-bottom:10px}'
   + 'label{display:flex;gap:8px;align-items:center;font-size:14px;color:rgba(255,255,255,.75);margin-bottom:14px}button{width:100%;min-height:44px;border-radius:8px;border:0;background:#5E9FE8;color:#0b1a2b;font:600 15px inherit;font-family:inherit;cursor:pointer}#e{margin:10px 0 0;color:#E97366;min-height:21px}'
-  + '</style></head><body><form id="f"><h1>ibronline dev</h1><p>This page is locked. Enter the access code.</p><input type="password" id="c" autocomplete="current-password" autofocus aria-label="Access code"><label><input type="checkbox" id="r"> Remember on this device</label><button>Unlock</button><p id="e"></p></form>'
+  + '</style></head><body><form id="f"><h1>ibr-online dev</h1><p>This page is locked. Enter the access code.</p><input type="password" id="c" autocomplete="current-password" autofocus aria-label="Access code"><label><input type="checkbox" id="r"> Remember on this device</label><button>Unlock</button><p id="e"></p></form>'
   + '<scr' + 'ipt type="application/json" id="box">%BOX%</scr' + 'ipt><scr' + 'ipt>(' + devGateMain.toString() + ')();</scr' + 'ipt></body></html>\n';
 async function devGateHtml(html, code) {
   const salt = crypto.getRandomValues(new Uint8Array(16)), iv = crypto.getRandomValues(new Uint8Array(12));
@@ -3545,14 +3574,14 @@ async function ghSaveDev(slug, json) {
       store.set('devver', dv);
     }
     await ghPut(gh.dev, '.nojekyll', '', 'Add .nojekyll');
-    if (!(await ghGet(gh.dev, 'README.md'))) await ghPut(gh.dev, 'README.md', '# ibronline dev\n\nLocked dev build of ibronline. index.html is encrypted (AES-256-GCM); open the site and enter the access code.\n', 'Add README');
+    if (!(await ghGet(gh.dev, 'README.md'))) await ghPut(gh.dev, 'README.md', '# ibr-online dev\n\nLocked dev build of ibronline. index.html is encrypted (AES-256-GCM); open the site and enter the access code.\n', 'Add README');
     done.push('dev site');
   }
   if (gh.src) {
     ghStat('Backing up source…');
     await ghPut(gh.src, 'index.html', SRC_PUBLIC, 'Update dev source');
     if (slug) await ghPut(gh.src, 'tracks/' + slug + '.json', json, 'Track source: ' + slug);
-    if (!(await ghGet(gh.src, 'README.md'))) await ghPut(gh.src, 'README.md', '# ibronline - dev source (private)\n\nUnencrypted dev build and track sources. Open index.html locally, or use the locked site at /dev.\n', 'Add README');
+    if (!(await ghGet(gh.src, 'README.md'))) await ghPut(gh.src, 'README.md', '# ibr-online - dev source (private)\n\nUnencrypted dev build and track sources. Open index.html locally, or use the locked site at /dev.\n', 'Add README');
     done.push('private source');
   }
   return done.join(' + ') || 'nothing (no dev repos set)';
@@ -3996,7 +4025,7 @@ function iceBal() { return +store.get(iceKey()) || 0; }
 async function rcAward() {
   let bal = iceBal() + 2;
   if (NET.online && MY_KEY) { try { const v = await sbRpc('ibr_race_reward', { p_key: MY_KEY }); if (typeof v === 'number') bal = v; } catch (e) { console.warn('reward', e); } }
-  store.set(iceKey(), bal); toast('+2 \u{1F9CA} icetokens', 2200); rcUi();
+  store.set(iceKey(), bal);  rcUi();
 }
 const RACE_EV = {
   hi: d => { if (d.id) RACE.mem[d.id] = { n: d.n, at: Date.now() }; },
@@ -4023,7 +4052,7 @@ function rcUi() {
     const lap = race ? Math.min(S.laps, Math.max(1, race.lapNo - Math.max(RACE.lap0, 1) + 1)) : 1;
     h = '<div>' + escH(rcName(S.track)) + '</div><div class="big">' + (rcIn(S) ? (RACE.fin ? 'Finished' : 'Lap ' + lap + '/' + S.laps + ' · ' + rcFmt(performance.now() - RACE.t0)) : 'Spectating') + '</div>' + (S.res.length ? '<div class="keys">' + S.res.map((r, i) => (i + 1) + '. ' + escH(r.n) + ' ' + rcFmt(r.ms)).join(' · ') + (S.grace ? ' · ends in ' + left + 's' : '') + '</div>' : '');
   }
-  else if (S.ph === 'res') h = '<div><b>Results — ' + escH(rcName(S.track)) + '</b></div>' + S.res.map((r, i) => '<div>' + (['\U0001f947', '\U0001f948', '\U0001f949'][i] || (i + 1) + '.') + ' ' + escH(r.n) + tagHtml(r.id) + ' · ' + rcFmt(r.ms) + '</div>').join('') + (S.res.length ? '' : '<div class="keys">Nobody finished</div>') + (rcIn(S) ? '<div>+2 \u{1F9CA} icetokens</div>' : '') + '<div class="keys">Next vote in ' + left + 's</div>';
+  else if (S.ph === 'res') h = '<div><b>Results — ' + escH(rcName(S.track)) + '</b></div>' + S.res.map((r, i) => '<div>' + (['\U0001f947', '\U0001f948', '\U0001f949'][i] || (i + 1) + '.') + ' ' + escH(r.n) + tagHtml(r.id) + ' · ' + rcFmt(r.ms) + '</div>').join('') + (S.res.length ? '' : '<div class="keys">Nobody finished</div>') + '' + '<div class="keys">Next vote in ' + left + 's</div>';
   box.innerHTML = h;
   box.querySelectorAll('[data-o]').forEach(b => b.addEventListener('click', () => rcVote(b.dataset.o)));
 }
@@ -4337,8 +4366,8 @@ addEventListener('keydown', e => {
 kbApply();
 
 // ---- region visibility ----
-function regHidden() { return !!settings.regHide && placing !== 3; }
-function toggleRegions() { settings.regHide = !settings.regHide; saveSettings(); toast(settings.regHide ? 'Regions hidden' : 'Regions shown', 900); }
+function regHidden() { return settings.regHide !== false && placing !== 3; }
+function toggleRegions() { settings.regHide = settings.regHide === false; saveSettings(); toast(settings.regHide ? 'Regions hidden' : 'Regions shown', 900); }
 
 // ---- head follows the BoatCam camera ----
 function headYaw(b, cy) {
@@ -4902,7 +4931,7 @@ async function claimLogin() {
   try {
     if (W.srv) wSet(await sbRpc('ibr_w_login', { p_key: MY_KEY }), true);
     else { const amt = LOGIN_RW[L.next - 1]; W.streak = L.next; W.last_login = wDay(); W.bal += amt; W.claimed.push('login'); wSaveLocal(); cosUi(); }
-    toast('+' + LOGIN_RW[L.next - 1] + ' \u{1F9CA} day ' + L.next + ' login reward', 2400); cosDraw();
+    toast('\u2705 Day ' + L.next + ' login streak', 2400); cosDraw();
   } catch (e) { toast(wErr(e), 2400); }
 }
 // ---- daily quests
@@ -4926,7 +4955,7 @@ async function claimQuest(id) {
   try {
     if (W.srv) wSet(await sbRpc('ibr_w_quest', { p_key: MY_KEY, p_quest: id }), true);
     else { if (W.claimed.includes('q:' + id)) throw new Error('already_claimed'); W.claimed.push('q:' + id); W.bal += q.rw; wSaveLocal(); cosUi(); }
-    toast('+' + q.rw + ' \u{1F9CA} ' + q.t, 2200); cosDraw();
+    toast('\u2705 ' + q.t, 2200); cosDraw();
   } catch (e) { toast(wErr(e), 2400); }
 }
 // ---- shop
@@ -5068,12 +5097,12 @@ function cosDraw() {
   const tab = (m.querySelector('[data-ct].on') || {}).dataset.ct || 'daily', body = el('cosBody');
   if (tab === 'daily') {
     const L = loginState(), p = qProg(), cl = W.claimed || [];
-    const days = LOGIN_RW.map((r, i) => { const d = i + 1, got = d <= L.cur, nxt = L.can && d === L.next; return '<div class="cosDay' + (got ? ' got' : '') + (nxt ? ' nxt' : '') + '"><span>Day ' + d + '</span><b>\u{1F9CA} ' + r + '</b>' + (got ? '<i>\u2713</i>' : '') + '</div>'; }).join('');
-    const qs = qToday().map(q => { const v = Math.min(q.goal, Math.floor(p[q.m] || 0)), done = v >= q.goal, c = cl.includes('q:' + q.id); return '<div class="cosQ' + (c ? ' got' : '') + '"><div class="cosQt"><b>' + escH(q.t) + '</b><span class="keys">' + (q.m === 'dist' ? v.toLocaleString() + ' / ' + q.goal.toLocaleString() : v + ' / ' + q.goal) + '</span><div class="cosBar"><i style="width:' + (100 * v / q.goal) + '%"></i></div></div><button class="b' + (done && !c ? ' primary' : '') + '" data-cq="' + q.id + '"' + (done && !c ? '' : ' disabled') + '>' + (c ? 'Claimed' : '\u{1F9CA} ' + q.rw) + '</button></div>'; }).join('');
+    const days = LOGIN_RW.map((r, i) => { const d = i + 1, got = d <= L.cur, nxt = L.can && d === L.next; return '<div class="cosDay' + (got ? ' got' : '') + (nxt ? ' nxt' : '') + '"><span>Day ' + d + '</span>' + (got ? '<i>\u2713</i>' : '') + '</div>'; }).join('');
+    const qs = qToday().map(q => { const v = Math.min(q.goal, Math.floor(p[q.m] || 0)), done = v >= q.goal, c = cl.includes('q:' + q.id); return '<div class="cosQ' + (c ? ' got' : '') + '"><div class="cosQt"><b>' + escH(q.t) + '</b><span class="keys">' + (q.m === 'dist' ? v.toLocaleString() + ' / ' + q.goal.toLocaleString() : v + ' / ' + q.goal) + '</span><div class="cosBar"><i style="width:' + (100 * v / q.goal) + '%"></i></div></div><button class="b' + (done && !c ? ' primary' : '') + '" data-cq="' + q.id + '"' + (done && !c ? '' : ' disabled') + '>' + (c ? 'Claimed' : 'Claim') + '</button></div>'; }).join('');
     const ms = Date.parse(wDay() + 'T00:00:00Z') + 864e5 - Date.now(), hh = Math.floor(ms / 36e5), mm = Math.floor(ms / 6e4) % 60;
     body.innerHTML = '<div class="cosSec"><div class="cosSh"><b>Login reward</b><span class="keys">' + (L.cur ? L.cur + '-day streak' : 'Log in each day to build a streak') + '</span></div><div class="cosDays">' + days + '</div><button class="b' + (L.can ? ' primary' : '') + ' cosClaim" id="cosLogin"' + (L.can ? '' : ' disabled') + '>' + (L.can ? 'Claim day ' + L.next + ' reward' : 'Come back tomorrow') + '</button></div>'
       + '<div class="cosSec"><div class="cosSh"><b>Daily quests</b><span class="keys">New quests in ' + hh + 'h ' + mm + 'm</span></div>' + qs + '</div>'
-      + (W.srv ? '' : '<div class="keys cosNote">Sign in to sync your icetokens and cosmetics across devices.</div>');
+      + (W.srv ? '' : '<div class="keys cosNote">Sign in to sync your quests across devices.</div>');
     const lb = el('cosLogin'); if (lb) lb.onclick = claimLogin;
     body.querySelectorAll('[data-cq]').forEach(b => b.onclick = () => claimQuest(b.dataset.cq));
   } else {
@@ -5298,8 +5327,8 @@ function hmBuild() {
   h.innerHTML = '<div class="hmL"><div class="hmLogo">ibr-online<span id="hmVer"></span></div>'
     + '<nav class="hmNav" aria-label="Main menu"><button data-hm="tt">Time Trial</button><button data-hm="mp">Multiplayer</button><button data-hm="quests">Quests<span class="hmBadge" id="hmQB"></span></button><button data-hm="cos">Cosmetics</button><button data-hm="set">Settings</button></nav>'
     + '<div class="hmSmall"><button data-hm="rp">Replays</button><button data-hm="wrs">World records</button><button data-hm="dev" id="hmDev">Developer</button></div>'
-    + '<div class="hmHelp">Need help? Message <b>particle0325</b> on Discord</div></div>'
-    + '<div class="hmR"><button class="hmProf" id="hmProf" data-hm="prof"></button><div class="hmBal" id="hmBal"></div><div class="hmFrH">friends online:</div><div class="hmFr" id="hmFr"></div><button class="hmAll" data-hm="friends">All friends &amp; requests</button><div id="hmOnl"></div></div>';
+    + '</div>'
+    + '<div class="hmR"><button class="hmProf" id="hmProf" data-hm="prof"></button><div class="hmBal" id="hmBal"></div><div class="hmFrH">Friends online</div><div class="hmFr" id="hmFr"></div><button class="hmAll" data-hm="friends">All friends &amp; requests</button><div id="hmOnl"></div></div>';
   menu.appendChild(h);
   const back = document.createElement('div'); back.className = 'hmBackRow';
   back.innerHTML = '<button class="b" id="hmBack">\u2190 Back</button><b id="hmTitle"></b>';
@@ -5331,11 +5360,11 @@ function hmShow(m) {
 }
 function hmDraw() {
   if (!el('home')) return;
-  el('hmProf').innerHTML = ME ? '<span class="n">profile</span>' + avHtml(ME) + '<span class="nm">' + escH(ME.name) + '</span>' : '<span class="n">sign in</span><span class="av">+</span>';
+  el('hmProf').innerHTML = ME ? '<span class="n">Profile</span>' + avHtml(ME) + '<span class="nm">' + escH(ME.name) + '</span>' : '<span class="n">Sign in</span><span class="av">+</span>';
   el('hmProf').title = ME ? 'View your profile' : 'Create an account or sign in';
   try { el('hmBal').textContent = W ? '\u{1F9CA} ' + W.bal + ' icetokens' : ''; } catch (e) { }
   const F = (SOC.fr || []).filter(f => f.kind === 'friend'), on = F.filter(f => f.online), inc = (SOC.fr || []).filter(f => f.kind === 'in').length;
-  el('hmFr').innerHTML = !ME ? '<span class="hmMute">sign in to see friends</span>' : on.length ? on.slice(0, 8).map(f => '<button data-pf="' + escH(f.id) + '" title="' + escH(f.status || 'Online') + '"><i class="frDot on"></i>' + escH(f.name) + '</button>').join('') + (on.length > 8 ? '<span class="hmMute">+' + (on.length - 8) + ' more</span>' : '') : '<span class="hmMute">' + (F.length ? 'none right now' : 'no friends yet') + '</span>';
+  el('hmFr').innerHTML = !ME ? '<span class="hmMute">Sign in to see friends</span>' : on.length ? on.slice(0, 8).map(f => '<button data-pf="' + escH(f.id) + '" title="' + escH(f.status || 'Online') + '"><i class="frDot on"></i>' + escH(f.name) + '</button>').join('') + (on.length > 8 ? '<span class="hmMute">+' + (on.length - 8) + ' more</span>' : '') : '<span class="hmMute">' + (F.length ? 'none right now' : 'No friends yet') + '</span>';
   const all = document.querySelector('#home .hmAll'); if (all) all.innerHTML = inc ? 'Friend requests <span class="frN">' + inc + '</span>' : 'All friends &amp; requests';
   const o = el('onl'), ho = el('hmOnl'); if (o && ho && o.parentNode !== ho) ho.appendChild(o);
   const v = el('verTag'); if (v) el('hmVer').textContent = v.textContent ? ' ' + v.textContent : '';
@@ -5402,6 +5431,18 @@ trDraw = function () {};
   add(); setInterval(add, 1000);
 })();
 
+// ---------- Discord link, bottom right of the main menu ----------
+(function discCorner() {
+  function add() {
+    const h = el('home'); if (!h || el('hmDisc')) return;
+    const a = document.createElement('a'); a.id = 'hmDisc'; a.href = 'https://discord.gg/tCAQPB8nfX'; a.target = '_blank'; a.rel = 'noopener'; a.title = 'Join the ibr-online Discord';
+    a.innerHTML = '<svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.74 19.74 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.1 13.1 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.009c.12.1.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>';
+    a.onclick = e => e.stopPropagation();
+    h.appendChild(a);
+  }
+  add(); setInterval(add, 1000);
+})();
+
 // ---------- chat: lobby / track / whole-game, filtered ----------
 const CHAT = { log: { lobby: [], track: [], global: [] }, tab: 'lobby', feed: [], open: false, g: null, gTopic: 'realtime:ibr-global' };
 const CHAT_SLUR = /n+[^\w\s]*[i1!|y]+[^\w\s]*[gq9]+[^\w\s]*[gq9]+[^\w\s]*(?:[e3]+[^\w\s]*r+|[a@4]+h?|u+h|[e3]+)?[sz]*/gi;
@@ -5424,7 +5465,7 @@ function chatRender() {
     box.innerHTML = CHAT.feed.filter(m => now - m.at < 10000).slice(-8).map(m => '<div class="pop" style="opacity:' + Math.min(1, (10000 - (now - m.at)) / 1500).toFixed(2) + '"><span class="chc">[' + tag[m.ch] + ']</span> ' + (m.sys ? '<i>' + escH(m.tx) + '</i>' : '<b>' + escH(m.n) + '</b>' + tagHtml(m.id) + ': ' + escH(m.tx)) + '</div>').join('') || '<div class="pop" style="opacity:.5">Press T to chat</div>';
     return;
   }
-  box.innerHTML = CHAT.log[CHAT.tab].map(m => m.sys ? '<div class="sys">' + escH(m.tx) + '</div>' : '<div><b>' + escH(m.n) + '</b>' + tagHtml(m.id) + ': ' + escH(m.tx) + '</div>').join('') || '<div class="sys">' + ({ lobby: MP.joined ? 'Lobby chat — only people in your race lobby see this' : 'Join a lobby to use lobby chat', track: MP.trackTopic ? 'Track chat for ' + escH((WEB_CUR && WEB_CUR.name) || 'this track') : 'Join a lobby and load a track to use track chat', global: 'Whole-game chat — everyone on ibronline' })[CHAT.tab] + '</div>';
+  box.innerHTML = CHAT.log[CHAT.tab].map(m => m.sys ? '<div class="sys">' + escH(m.tx) + '</div>' : '<div><b>' + escH(m.n) + '</b>' + tagHtml(m.id) + ': ' + escH(m.tx) + '</div>').join('') || '<div class="sys">' + ({ lobby: MP.joined ? 'Lobby chat — only people in your race lobby see this' : 'Join a lobby to use lobby chat', track: MP.trackTopic ? 'Track chat for ' + escH((WEB_CUR && WEB_CUR.name) || 'this track') : 'Join a lobby and load a track to use track chat', global: 'Whole-game chat — everyone on ibr-online' })[CHAT.tab] + '</div>';
   box.scrollTop = box.scrollHeight;
 }
 function rtSocket(url, key, topic, onB) {
