@@ -1,5 +1,5 @@
 {
- "open": "testers",
+ "open": "all",
  "coll": false,
  "srv": {
   "eu": {
@@ -23,5 +23,5 @@
   "inter": 20
  },
  "muted": [],
- "updated": "2026-10-05T09:43:14.385Z"
+ "updated": "2026-10-05T09:44:24.175Z"
 }
