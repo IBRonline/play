@@ -662,8 +662,11 @@ body:has(#menu.hmHome) #meChip{display:none!important}
 #hmDisc:hover{color:#5865f2;transform:translateY(-2px)}
 #menu:not(.hmHome) #hmDisc,#menu.hide #hmDisc{display:none}
 #hmDevBR{right:96px!important}
+body:not(.isDev) #hmDevBR{display:none!important}
+/* quests removed for now; physics merged into Create a new track */
+#home [data-hm=quests],#devDash .ddSide [data-p=cos],#devDash .ddSide [data-p=phys],#devDash .ddPane[data-p=cos],#devDash .ddPane[data-p=phys]{display:none!important}
 </style>
-<meta name="ibr-build" content="2026-10-05T16:44:38.032Z">
+<meta name="ibr-build" content="2026-10-05T17:16:00.201Z">
 <script type="application/json" id="webSite">{"tracks":"tracks/index.json","sb":{"url":"https://dbyqswlvmequszujpwaj.supabase.co","key":"sb_publishable_-Av4-QPspUOMHAUtM5Jksw_amiBfwpy"}}</script>
 </head>
 <body>
@@ -3169,7 +3172,7 @@ async function loadPublished(d0, keepDev) {
 
 // ---------- OpenBoatUtils from URL parameters: ?mode=RALLY_BLUE&slip=0.985&obu=cmd;cmd ----------
 function applyUrlObu(m) {
-  if (!m || ![...QP.keys()].length) return;
+  return; // URL physics disabled
   const c = m.obu; let ch = false;
   const modeId = v => { const n = /^\d+$/.test(v) ? +v : OBU_MODES.indexOf(String(v).toUpperCase()); if (!(n >= 0 && n < OBU_MODES.length)) throw new Error('unknown mode ' + v); return n; };
   try {
@@ -3214,7 +3217,7 @@ async function webBoot() {
 }
 
 // ---------- accounts + world records (website) ----------
-const URL_TWEAK = ['vanilla', 'exclusive', 'mode', 'slip', 'yaw', 'fwd', 'back', 'turn', 'lateral', 'brake', 'maxspeed', 'maxres', 'stack', 'obu', 'step'].some(k => QP.has(k));
+const URL_TWEAK = false && ['vanilla', 'exclusive', 'mode', 'slip', 'yaw', 'fwd', 'back', 'turn', 'lateral', 'brake', 'maxspeed', 'maxres', 'stack', 'obu', 'step'].some(k => QP.has(k));
 let WEB_CUR = null, ME = null, MY_KEY = '';
 // keep in sync with ibr_name_ok() in supabase-setup.sql
 const BAD_WORDS = ['fuck', 'fuk', 'fck', 'shit', 'cunt', 'nigg', 'niga', 'fag', 'retard', 'rapist', 'nazi', 'hitler', 'whore', 'slut', 'dick', 'pussy', 'penis', 'vagina', 'porn', 'bitch', 'bastard', 'wank', 'twat', 'kike', 'chink', 'tranny', 'dildo', 'jizz', 'nonce', 'pedophile', 'paedo', 'kys', 'kkk', 'asshole', 'molest', 'cumshot', 'blowjob', 'boob', 'tits', 'heil', 'kms'];
@@ -4946,7 +4949,7 @@ function qAdd(m, n) {
   const k = 'qp:' + wDay(), p = qProg(), before = qToday().filter(q => q.m === m && p[m] >= q.goal).length;
   p[m] = (p[m] || 0) + n; store.set(k, p);
   const done = qToday().filter(q => q.m === m && p[m] >= q.goal && !(W && (W.claimed || []).includes('q:' + q.id)));
-  if (done.length > before && m !== 'dist') toast('\u2705 Quest complete: ' + done[0].t + ' \u2014 claim it in Quests', 2600);
+  if (done.length > before && m !== 'dist') void 0;
   else if (m === 'dist' && done.length && p.dist - n < done[0].goal) toast('\u2705 Quest complete: ' + done[0].t, 2600);
   cosBadge(); if (!el('cosModal') || !el('cosModal').classList.contains('hide')) cosDraw();
 }
@@ -5441,6 +5444,40 @@ trDraw = function () {};
     h.appendChild(a);
   }
   add(); setInterval(add, 1000);
+})();
+
+// hidden dev shortcut: Ctrl+Shift+D opens the developer dashboard
+addEventListener('keydown', e => { if (IS_DEV && e.ctrlKey && e.shiftKey && e.code === 'KeyD') { e.preventDefault(); const b = el('ddOpen'); if (b) b.click(); } }, true);
+
+// Developer button only on the locked dev build
+if (IS_DEV) document.body.classList.add('isDev');
+
+// ---------- dev dashboard: Create a new track (import + regions + OpenBoatUtils), Edit tracks ----------
+(function ddRestructure() {
+  const dd = el('devDash'); if (!dd || dd.dataset.r9) return; dd.dataset.r9 = '1';
+  const side = b => dd.querySelector('.ddSide [data-p=' + b + ']'), pane = p => dd.querySelector('.ddPane[data-p=' + p + ']');
+  const setBtn = (b, ic, t) => { const x = side(b); if (x) x.innerHTML = '<span>' + ic + '</span>' + t; };
+  setBtn('tracks', '\u2795', 'Create a new track'); setBtn('tset', '\u270F\uFE0F', 'Edit tracks');
+  const T = pane('tracks'), P = pane('phys'), S = pane('tset');
+  if (T) { const h = T.querySelector('header'); if (h) h.innerHTML = '<h2>Create a new track</h2><p>Import a litematic, set regions and grid, choose the physics, then upload it straight to the website.</p>'; }
+  if (S) { const h = S.querySelector('header'); if (h) h.innerHTML = '<h2>Edit tracks</h2><p>Pick an uploaded track to edit grids, image, laps, times and replays, or close it.</p>'; }
+  if (T && P) {
+    const up = [...T.querySelectorAll('.ddCard h3')].find(h => /Upload/.test(h.textContent)); const upCard = up && up.closest('.ddCard');
+    if (up) up.textContent = '4 \u00b7 Upload';
+    const cards = [...P.querySelectorAll('.ddCard')];
+    cards.forEach((c, i) => { const h = c.querySelector('h3'); if (h) h.textContent = i === 0 ? '3 \u00b7 Physics (OpenBoatUtils)' : 'Physics \u00b7 ' + h.textContent; if (upCard) upCard.parentNode.insertBefore(c, upCard); else (T.querySelector('.ddGrid') || T).appendChild(c); });
+    const note = document.createElement('div'); note.className = 'keys'; note.textContent = 'These physics are saved with this track when you upload it.'; if (cards[0]) cards[0].appendChild(note);
+  }
+  // upload goes straight to the website, never downloads a file
+  const pb = el('pubBtn');
+  if (pb) { const nb = pb.cloneNode(true); pb.replaceWith(nb);
+    nb.addEventListener('click', async () => {
+      if (!gh.tok || !gh.web) { setStatus('Add your GitHub token in Website & servers, then upload', 'err'); toast('Add a GitHub token first (Website & servers)', 2600); return; }
+      try { nb.disabled = true; setStatus('Uploading track to the website\u2026'); await ghPublish(); setStatus('Uploaded \u2014 the track is live on the website', 'ok'); toast('\u2705 Track uploaded to the website', 2200);
+        try { const r = el('tkReload'); if (r) r.click(); } catch (e) { } }
+      catch (e) { console.error(e); setStatus('Upload failed: ' + e.message, 'err'); toast('Upload failed: ' + e.message, 3000); }
+      finally { nb.disabled = false; }
+    }); }
 })();
 
 // ---------- chat: lobby / track / whole-game, filtered ----------
