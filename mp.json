@@ -16,18 +16,17 @@
   }
  },
  "off": [
-  "asia"
+  "asia",
+  "us"
  ],
  "race": {
   "pool": [
-   "frozen-lake"
+   "salmon-circuit"
   ],
   "laps": 3,
-  "inter": 20,
-  "lapsBy": {
-   "salmon-circuit": 1
-  }
+  "inter": 15,
+  "lapsBy": {}
  },
  "muted": [],
- "updated": "2026-10-05T21:42:46.942Z"
+ "updated": "2026-10-05T21:43:02.203Z"
 }
